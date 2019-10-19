@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+    //weeeeeeeeee testing
     private FirebaseAuth mAuth;
     private final String TAG = "hello";
     Button myButton;
