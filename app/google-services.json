@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "822564262494",
+    "firebase_url": "https://lend-7958f.firebaseio.com",
+    "project_id": "lend-7958f",
+    "storage_bucket": "lend-7958f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822564262494:android:7452b4b595a60e7bf81acf",
+        "android_client_info": {
+          "package_name": "com.example.lend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822564262494-voe262r48a18svm5d3uu3sbf6mmojdfv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lend",
+            "certificate_hash": "989c618c4061b000db7872c8634267a7374f723c"
+          }
+        },
+        {
+          "client_id": "822564262494-1h9pe5grsl1p4cmvvtf8r8ev3rnkjlfe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgCcikwQtGBx4K4wc3g3KuqwMYhLYfLCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822564262494-1h9pe5grsl1p4cmvvtf8r8ev3rnkjlfe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
