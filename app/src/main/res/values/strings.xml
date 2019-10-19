@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Lend</string>
+    <string-array name="category">
+        <item>Electronic Appliances</item>
+        <item>Apparels</item>
+        <item>Jewelery</item>
+        <item>Toiletries</item>
+        <item>Cosmetics</item>
+        <item>Footwear</item>
+        <item>Sportswear</item>
+        <item>Women's Apparel</item>
+        <item>Men's Apparel</item>
+        <item>Kids</item>
+        <item>Books</item>
+        <item>CDs, DVDs</item>
+        <item>Stationary</item>
+        <item>Hobbies</item>
+    </string-array>
 </resources>
