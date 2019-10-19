@@ -71,19 +71,16 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
 
-                progressBar.setVisibility(View.VISIBLE);
                 new CloudStorage().upload(imageUri, new OnSuccessListener<String>() {
                     @Override
                     public void onSuccess(String s) {
-                        image.setImageBitmap(selectedImage);
-                        uploadedImageURL = s;
-                        progressBar.setVisibility(View.INVISIBLE);
+//                        image.setImageBitmap(selectedImage);
+//                        uploadedImageURL = s;
                     }
                 }, new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(AddNewActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
                 });
