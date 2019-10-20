@@ -53,6 +53,10 @@ public class Item {
 
     public String ending_date;
     public int price;
+<<<<<<< HEAD
+=======
+//    public CalendarView item_calendar;
+>>>>>>> b945a32e6328d71b7bf15c248725b08ec72aff75
     public Place location;
     public String photoURL;
     public String category;
@@ -127,6 +131,20 @@ public class Item {
         this.price = price;
     }
 
+<<<<<<< HEAD
+=======
+
+/*    public CalendarView getItem_calendar() {
+        return item_calendar;
+    }
+
+    public void setItem_calendar(CalendarView item_calendar) {
+        this.item_calendar = item_calendar;
+    }
+
+ */
+
+>>>>>>> b945a32e6328d71b7bf15c248725b08ec72aff75
     public Place getLocation() {
         return location;
     }

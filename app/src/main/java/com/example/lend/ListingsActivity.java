@@ -31,6 +31,7 @@ public class ListingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listings);
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        items = new ArrayList();
 
         Query ref = database.child("items");
         ref.addValueEventListener(new ValueEventListener() {
@@ -49,7 +50,7 @@ public class ListingsActivity extends AppCompatActivity {
 
             }
         });
-
+        fabAdd = findViewById(R.id.fabAdd);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
