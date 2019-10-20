@@ -5,11 +5,14 @@ import android.widget.CalendarView;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.parceler.Parcel;
+
 import java.util.HashMap;
 
+@Parcel
 public class Item {
     //keeps track of number of bookings made on this item
-    private int booking_number = 0;
+    public int booking_number = 0;
 
     public FirebaseUser lender;
     public String itemName;
@@ -20,6 +23,10 @@ public class Item {
     public String photoURL;
     public String category;
     public HashMap<Integer, Booking> bookingList;
+
+    public Item() {
+
+    }
 
     public void addBooking(Booking booking) {
         booking_number++;

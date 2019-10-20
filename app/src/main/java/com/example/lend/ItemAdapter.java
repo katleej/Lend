@@ -1,6 +1,7 @@
 package com.example.lend;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -57,6 +60,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
             tvLenderName = itemView.findViewById(R.id.tvLenderName);
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvItemPrice = itemView.findViewById(R.id.tvItemPrice);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Item item = items.get(position);
+                        Intent intent = new Intent(context, BorrowItemActivity.class);
+                        intent.putExtra("item", Parcels.wrap(item));
+                        context.startActivity(intent);
+                    }
+                }
+            });
 
         }
     }
