@@ -24,8 +24,8 @@
 
         <Spinner
             android:id="@+id/category"
-            android:prompt="Choose Item Category"
-            android:context="category"
+            tools:listitem="@layout/support_simple_spinner_dropdown_item"
+            android:entries="@array/category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ></Spinner>
