@@ -18,7 +18,7 @@ public class Item {
     public String itemName;
     public String itemDescription;
     public int price;
-    public CalendarView item_calendar;
+//    public CalendarView item_calendar;
     public Place location;
     public String photoURL;
     public String category;
@@ -94,13 +94,15 @@ public class Item {
     }
 
 
-    public CalendarView getItem_calendar() {
+/*    public CalendarView getItem_calendar() {
         return item_calendar;
     }
 
     public void setItem_calendar(CalendarView item_calendar) {
         this.item_calendar = item_calendar;
     }
+
+ */
 
     public Place getLocation() {
         return location;
