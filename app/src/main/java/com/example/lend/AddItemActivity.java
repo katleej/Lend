@@ -65,8 +65,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         String name = view_name.getText().toString();
         String description = view_description.getText().toString();
         String category = view_category.getSelectedItem().toString();
-<<<<<<< HEAD
-=======
 
         Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
         PlacesClient placesCLient = Places.createClient(this);
@@ -90,7 +88,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
->>>>>>> 2307c5e96a5c823bc0128f9eb30bedecd2b7086c
         item.setItemName(name);
         item.setItemDescription(description);
         item.setItemCategory(category);
