@@ -7,10 +7,11 @@
     tools:context=".AddItemActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_margin="16dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,17 +25,16 @@
 
         <Spinner
             android:id="@+id/category"
-            tools:listitem="@layout/support_simple_spinner_dropdown_item"
-            android:entries="@array/category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            ></Spinner>
+            android:entries="@array/category"
+            tools:listitem="@layout/support_simple_spinner_dropdown_item"></Spinner>
 
         <Button
+            android:id="@+id/add_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/add_image"
-            android:text="image"/>
+            android:text="image" />
 
         <EditText
             android:id="@+id/description"
@@ -50,5 +50,18 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/save_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="153dp"
+        android:layout_marginEnd="323dp"
+        android:layout_marginBottom="49dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
