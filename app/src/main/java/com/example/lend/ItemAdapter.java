@@ -35,9 +35,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
     public void onBindViewHolder(@NonNull ItemAdapter.CustomViewHolder holder, int position) {
         Item item = items.get(position);
         holder.tvLenderName.setText(item.getLender().getDisplayName());
-        holder.tvItemName.setText(item.getName());
-        holder.tvItemDesc.setText(item.getDesc());
-        Glide.with(context).load(item.photoURL()).into(holder.photo);
+        holder.tvItemName.setText(item.getItemName());
+        holder.tvItemPrice.setText(item.getPrice());
+        Glide.with(context).load(item.getPhotoURL()).into(holder.photo);
     }
 
     @Override
@@ -49,14 +49,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
         ImageView photo;
         TextView tvLenderName;
         TextView tvItemName;
-        TextView tvItemDesc;
+        TextView tvItemPrice;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
             photo = itemView.findViewById(R.id.ivPhoto);
             tvLenderName = itemView.findViewById(R.id.tvLenderName);
             tvItemName = itemView.findViewById(R.id.tvItemName);
-            tvItemDesc = itemView.findViewById(R.id.tvItemDesc);
+            tvItemPrice = itemView.findViewById(R.id.tvItemPrice);
 
         }
     }
