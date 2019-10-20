@@ -2,7 +2,6 @@ package com.example.lend;
 
 import android.widget.CalendarView;
 
-
 import com.google.android.libraries.places.api.model.Place;
 import com.google.firebase.auth.FirebaseUser;
 

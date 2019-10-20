@@ -27,6 +27,12 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener{
@@ -75,6 +81,9 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
+        item.setItemName(name);
+        item.setItemDescription(description);
+        item.setItemCategory(category);
     }
 
     @Override
