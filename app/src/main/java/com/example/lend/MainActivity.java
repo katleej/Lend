@@ -128,12 +128,39 @@ public class MainActivity extends AppCompatActivity {
                                                     Log.w(TAG, "Error writing document", e);
                                                 }
                                             });
-                                    db.collection("users").document(m_Text)
-
                                     Map<String, Object> lendData = new HashMap<>();
                                     lendData.put("item", "LendItem");
                                     Map<String, Object> borrowData = new HashMap<>();
                                     borrowData.put("item", "LendItem");
+                                    db.collection("users").document(m_Text).collection("Lender").document("item")
+                                        .set(lendData)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error writing document", e);
+                                                }
+                                            });
+                                    db.collection("users").document(m_Text).collection("Borrower").document("item")
+                                            .set(borrowData)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error writing document", e);
+                                                }
+                                            });
+
                                 }
                             });
 
