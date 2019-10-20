@@ -56,23 +56,10 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
-        EditText view_price = (EditText) findViewById(R.id.price);
-        EditText view_name = (EditText) findViewById(R.id.name);
-        EditText view_description = (EditText) findViewById(R.id.description);
-        Spinner view_category = (Spinner) findViewById(R.id.category);
-
-        int price = Integer.parseInt(view_price.getText().toString());
-        String name = view_name.getText().toString();
-        String description = view_description.getText().toString();
-        String category = view_category.getSelectedItem().toString();
-
-        Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
-        PlacesClient placesCLient = Places.createClient(this);
-
-
-        item.setItemName(name);
-        item.setItemDescription(description);
-        item.setItemCategory(category);
+        view_price = (EditText) findViewById(R.id.price);
+        view_name = (EditText) findViewById(R.id.name);
+        view_description = (EditText) findViewById(R.id.description);
+        view_category = (Spinner) findViewById(R.id.category);
 
         AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
@@ -88,10 +75,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        item.setItemName(name);
-        item.setItemDescription(description);
-        item.setItemCategory(category);
-
     }
 
     @Override
@@ -104,6 +87,20 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
                 break;
             case R.id.save_item:
+                int price = Integer.parseInt(view_price.getText().toString());
+                String name = view_name.getText().toString();
+                String description = view_description.getText().toString();
+                String category = view_category.getSelectedItem().toString();
+
+                Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
+                PlacesClient placesCLient = Places.createClient(this);
+
+
+                item.setItemName(name);
+                item.setItemDescription(description);
+                item.setItemCategory(category);
+                item.setPrice(price);
+
                 Map<String, Object> lendData = new HashMap<>();
                 lendData.put(item.getItemName() , item);
                 db.collection("users").document(item.getLender().getDisplayName()).collection("Lender").document("item")
