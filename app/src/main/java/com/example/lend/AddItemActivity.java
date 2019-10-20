@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -30,10 +31,13 @@ import java.util.Arrays;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -43,6 +47,9 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     private Item item;
     private String name, description, category;
     public static final int PICK_IMAGE = 1;
+    private final String TAG = "Hello";
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +91,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         item.setItemName(name);
         item.setItemDescription(description);
         item.setItemCategory(category);
+
     }
 
     @Override
@@ -95,6 +103,24 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
                 break;
+            case R.id.save_item:
+                Map<String, Object> lendData = new HashMap<>();
+                lendData.put(item.getItemName() , item);
+                db.collection("users").document(item.getLender().getDisplayName()).collection("Lender").document("item")
+                        .set(lendData)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error writing document", e);
+                            }
+                        });
+
         }
     }
 
