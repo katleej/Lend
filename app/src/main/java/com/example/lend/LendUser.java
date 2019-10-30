@@ -11,11 +11,27 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.HashMap;
 
-public class User {
+public class LendUser {
     private FusedLocationProviderClient fusedLocationClient;
     private String email, username, password;
     private double lat, lng;
     private HashMap<Integer, Booking> mLendedItemList;
+
+    public LendUser(Context context) {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
+        fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location == null) {
+                    lat = 37.8;
+                    lng = 122.2;
+                } else {
+                    lat = location.getLatitude();
+                    lng = location.getLongitude();
+                }
+            }
+        });
+    }
 
     public FusedLocationProviderClient getFusedLocationClient() {
         return fusedLocationClient;
@@ -101,19 +117,5 @@ public class User {
 
     private int num_borrowed, num_lended;
 
-    public User(Context context) {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
-        fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location == null) {
-                    lat = 37.8;
-                    lng = 122.2;
-                } else {
-                    lat = location.getLatitude();
-                    lng = location.getLongitude();
-                }
-            }
-        });
-    }
+
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/my_bookings_button"
+        android:orderInCategory="300"
+        android:title="My Bookings"
+        android:icon="@drawable/ele"></item>
+
+    <item
+        android:id="@+id/my_items"
+        android:orderInCategory="300"
+        android:title="My Items"
+        android:background="@color/white"
+        android:icon="@drawable/ele"></item>
+
+    <item
+        android:id="@+id/my_settings"
+        android:orderInCategory="300"
+        android:title="Settings"
+        android:icon="@drawable/ele"></item>
+
+</menu>
