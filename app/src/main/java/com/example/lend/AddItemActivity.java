@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -39,6 +40,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.lend.Utils.itemWrite;
+
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText view_price, view_name, view_description;
@@ -46,10 +49,11 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     private int price;
     private Item item;
     private String name, description, category;
+    private Button image;
+    private Button save;
     public static final int PICK_IMAGE = 1;
     private final String TAG = "Hello";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,10 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         view_name = (EditText) findViewById(R.id.name);
         view_description = (EditText) findViewById(R.id.description);
         view_category = (Spinner) findViewById(R.id.category);
-
+        image = findViewById(R.id.add_image);
+        save = findViewById(R.id.save_item);
+        image.setOnClickListener(this);
+        save.setOnClickListener(this);
         AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
         autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
@@ -93,30 +100,20 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 String category = view_category.getSelectedItem().toString();
 
                 Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
-                PlacesClient placesCLient = Places.createClient(this);
+                PlacesClient placesClient = Places.createClient(this);
+
+                try {
+                    item.setItemName(name);
+                    item.setItemDescription(description);
+                    item.setItemCategory(category);
+                    item.setPrice(price);
+                    itemWrite(item.getLender().getUid() , item.getItemName() , item.getItemDescription() , item.getStarting_date());
+                }
+                catch (NullPointerException e)  {
+                    Log.d("henlo" , "some nullpointerexception");
+                }
 
 
-                item.setItemName(name);
-                item.setItemDescription(description);
-                item.setItemCategory(category);
-                item.setPrice(price);
-
-                Map<String, Object> lendData = new HashMap<>();
-                lendData.put(item.getItemName() , item);
-                db.collection("users").document(item.getLender().getDisplayName()).collection("Lender").document("item")
-                        .set(lendData)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "DocumentSnapshot successfully written!");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error writing document", e);
-                            }
-                        });
 
         }
     }

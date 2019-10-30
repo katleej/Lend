@@ -32,6 +32,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.lend.Utils.userWrite;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FusedLocationProviderClient fusedLocationClient;
@@ -111,23 +113,8 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     m_Text = input.getText().toString();
-                                    Map<String, Object> username = new HashMap<>();
-                                    username.put("username" , m_Text);
-                                    db.collection("users").document()
-                                            .set(username)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.w(TAG, "Error writing document", e);
-                                                }
-                                            });
-                                     }
+                                    userWrite(m_Text);
+                                }
                             });
 
                             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
