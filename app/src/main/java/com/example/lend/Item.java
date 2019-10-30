@@ -17,8 +17,43 @@ public class Item {
     public FirebaseUser lender;
     public String itemName;
     public String itemDescription;
+    public String starting_date;
+
+    public int getBooking_number() {
+        return booking_number;
+    }
+
+    public void setBooking_number(int booking_number) {
+        this.booking_number = booking_number;
+    }
+
+    public String getStarting_date() {
+        return starting_date;
+    }
+
+    public void setStarting_date(String starting_date) {
+        this.starting_date = starting_date;
+    }
+
+    public String getEnding_date() {
+        return ending_date;
+    }
+
+    public void setEnding_date(String ending_date) {
+        this.ending_date = ending_date;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String ending_date;
     public int price;
-//    public CalendarView item_calendar;
+
     public Place location;
     public String photoURL;
     public String category;
