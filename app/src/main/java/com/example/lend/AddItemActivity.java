@@ -61,12 +61,15 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         view_description = (EditText) findViewById(R.id.description);
         view_category = (Spinner) findViewById(R.id.category);
 
+        Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
+        PlacesClient placesClient = Places.createClient(this);
+
         AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
         autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-                item.setLocation(place);
+                Log.i("XYZ", "yeet");
             }
 
             @Override
@@ -91,10 +94,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 String name = view_name.getText().toString();
                 String description = view_description.getText().toString();
                 String category = view_category.getSelectedItem().toString();
-
-                Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
-                PlacesClient placesCLient = Places.createClient(this);
-
 
                 item.setItemName(name);
                 item.setItemDescription(description);
