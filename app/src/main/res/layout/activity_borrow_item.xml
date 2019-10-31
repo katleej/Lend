@@ -91,21 +91,13 @@
             android:fontFamily="sans-serif-condensed-light"
             ></TextView>
 
-        <TextView
+        <Button
+            android:id="@+id/btnBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textStyle="bold"
-            android:text="Check Availability:"
-            android:textSize="18dp"
-            android:fontFamily="sans-serif-condensed-light"></TextView>
+            android:text="Book!" />
 
 
-        <CalendarView
-            android:id="@+id/availability_calendar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"></CalendarView>
     </LinearLayout>
 
 
