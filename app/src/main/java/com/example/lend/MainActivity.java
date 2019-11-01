@@ -32,6 +32,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.lend.Utils.userWrite;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FusedLocationProviderClient fusedLocationClient;
@@ -52,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
     }
+
 
     @Override
     public void onStart() {
@@ -98,12 +100,12 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Account created!",
                                     Toast.LENGTH_SHORT).show();
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setTitle("Title");
+                            builder.setTitle("Set username BITCH");
 
 // Set up the input
                             final EditText input = new EditText(context);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-                            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+// Specify the type of input expected
+                            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
                             builder.setView(input);
 
 // Set up the buttons
@@ -111,55 +113,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     m_Text = input.getText().toString();
-                                    Map<String, Object> username = new HashMap<>();
-                                    username.put("username" , m_Text);
-                                    db.collection("users").document(m_Text)
-                                            .set(username)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.w(TAG, "Error writing document", e);
-                                                }
-                                            });
-                                    Map<String, Object> lendData = new HashMap<>();
-                                    lendData.put("item", "LendItem");
-                                    Map<String, Object> borrowData = new HashMap<>();
-                                    borrowData.put("item", "LendItem");
-                                    db.collection("users").document(m_Text).collection("Lender").document("item")
-                                        .set(lendData)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.w(TAG, "Error writing document", e);
-                                                }
-                                            });
-                                    db.collection("users").document(m_Text).collection("Borrower").document("item")
-                                            .set(borrowData)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.w(TAG, "Error writing document", e);
-                                                }
-                                            });
-
+                                    userWrite(m_Text);
                                 }
                             });
 
@@ -171,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                             builder.show();
-
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
