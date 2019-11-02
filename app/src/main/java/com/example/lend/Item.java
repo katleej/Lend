@@ -61,6 +61,7 @@ public class Item {
 
     public Item() {
 
+
     }
 
     public void addBooking(Booking booking) {
