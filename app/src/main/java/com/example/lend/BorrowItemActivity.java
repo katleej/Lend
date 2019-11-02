@@ -9,7 +9,6 @@ import org.parceler.Parcels;
 
 public class BorrowItemActivity extends AppCompatActivity {
 
-    CalendarView mCalendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +17,5 @@ public class BorrowItemActivity extends AppCompatActivity {
 
         Item item = (Item) Parcels.unwrap(getIntent().getParcelableExtra("item"));
 
-        mCalendar = (CalendarView) findViewById(R.id.availability_calendar);
-        mCalendar.setDate(System.currentTimeMillis(), false, true);
     }
 }
