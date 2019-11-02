@@ -12,33 +12,13 @@ import com.google.android.gms.tasks.Task;
 import java.util.HashMap;
 
 public class LendUser {
-    private FusedLocationProviderClient fusedLocationClient;
     private String email, username, password;
-    private double lat, lng;
-    private HashMap<Integer, Booking> mLendedItemList;
+    private String latLocation;
+    private String lngLocation;
+    private HashMap<String, String> mLendedItemList;
 
     public LendUser(Context context) {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
-        fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location == null) {
-                    lat = 37.8;
-                    lng = 122.2;
-                } else {
-                    lat = location.getLatitude();
-                    lng = location.getLongitude();
-                }
-            }
-        });
-    }
 
-    public FusedLocationProviderClient getFusedLocationClient() {
-        return fusedLocationClient;
-    }
-
-    public void setFusedLocationClient(FusedLocationProviderClient fusedLocationClient) {
-        this.fusedLocationClient = fusedLocationClient;
     }
 
     public String getEmail() {
@@ -65,27 +45,27 @@ public class LendUser {
         this.password = password;
     }
 
-    public double getLat() {
-        return lat;
+    public String getLat() {
+        return latLocation;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
+    public void setLat(String lat) {
+        this.latLocation = lat;
     }
 
-    public double getLng() {
-        return lng;
+    public String getLng() {
+        return lngLocation;
     }
 
-    public void setLng(double lng) {
-        this.lng = lng;
+    public void setLng(String lng) {
+        this.lngLocation = lng;
     }
 
-    public HashMap<Integer, Booking> getmLendedItemList() {
+    public HashMap<String, String> getmLendedItemList() {
         return mLendedItemList;
     }
 
-    public void setmLendedItemList(HashMap<Integer, Booking> mLendedItemList) {
+    public void setmLendedItemList(HashMap<String, String> mLendedItemList) {
         this.mLendedItemList = mLendedItemList;
     }
 
