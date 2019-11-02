@@ -17,7 +17,24 @@ public class Item {
     public FirebaseUser lender;
     public String itemName;
     public String itemDescription;
-    public String starting_date;
+    public int price;
+    public boolean booked;
+
+    public Place location;
+    public String photoURL;
+    public String category;
+    public HashMap<Integer, Booking> bookingList;
+
+    public Item() {
+    }
+
+    public boolean isBooked() {
+        return booked;
+    }
+
+    public void setBooked(boolean booked) {
+        this.booked = booked;
+    }
 
     public int getBooking_number() {
         return booking_number;
@@ -27,40 +44,12 @@ public class Item {
         this.booking_number = booking_number;
     }
 
-    public String getStarting_date() {
-        return starting_date;
-    }
-
-    public void setStarting_date(String starting_date) {
-        this.starting_date = starting_date;
-    }
-
-    public String getEnding_date() {
-        return ending_date;
-    }
-
-    public void setEnding_date(String ending_date) {
-        this.ending_date = ending_date;
-    }
-
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String ending_date;
-    public int price;
-
-    public Place location;
-    public String photoURL;
-    public String category;
-    public HashMap<Integer, Booking> bookingList;
-
-    public Item() {
-
     }
 
     public void addBooking(Booking booking) {
@@ -128,23 +117,16 @@ public class Item {
         this.price = price;
     }
 
-
-/*    public CalendarView getItem_calendar() {
-        return item_calendar;
-    }
-
-    public void setItem_calendar(CalendarView item_calendar) {
-        this.item_calendar = item_calendar;
-    }
-
- */
-
     public Place getLocation() {
         return location;
     }
 
     public void setLocation(Place location) {
         this.location = location;
+    }
+
+    public String getStarting_date() {
+        return null;
     }
 
 }
