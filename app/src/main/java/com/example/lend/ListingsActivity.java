@@ -2,6 +2,7 @@ package com.example.lend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,6 +28,7 @@ public class ListingsActivity extends AppCompatActivity {
     ItemAdapter adapter;
     FloatingActionButton fabAdd;
     DatabaseReference database;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,9 @@ public class ListingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listings);
         database = FirebaseDatabase.getInstance().getReference();
         items = new ArrayList();
+
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
 
         Query ref = database.child("items");
         ref.addValueEventListener(new ValueEventListener() {
@@ -60,6 +66,13 @@ public class ListingsActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
 
     public void setUpRV() {
         final RecyclerView recList = (RecyclerView) findViewById(R.id.recyclerView);
