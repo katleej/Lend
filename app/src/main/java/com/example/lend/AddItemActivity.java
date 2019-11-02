@@ -94,7 +94,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
                 break;
             case R.id.save_item:
-                int price = Integer.parseInt(view_price.getText().toString());
+                int price = Integer.parseInt(view_price.getText().toString().trim());
                 String name = view_name.getText().toString();
                 String description = view_description.getText().toString();
                 String category = view_category.getSelectedItem().toString();
