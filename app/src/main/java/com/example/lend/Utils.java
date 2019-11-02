@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -16,9 +17,11 @@ import java.util.Map;
 public final class Utils {
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
     final String TAG = "henlo";
-    public static void userWrite(String input)  {
+    public static void userWrite(String input, Place location)  {
         Map<String, Object> username = new HashMap<>();
         username.put("username" , input);
+        username.put("lat", ((Double) location.getLatLng().latitude).toString());
+        username.put("long", ((Double) location.getLatLng().longitude).toString());
         db.collection("users").document()
                 .set(username)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -34,6 +37,7 @@ public final class Utils {
                     }
                 });
     }
+
 
     public static void itemWrite(String lenderIDToken, String itemName, String itemDescription, String starting_date)  {
         Map<String, Object> item = new HashMap<>();

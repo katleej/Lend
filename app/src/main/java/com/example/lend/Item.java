@@ -125,4 +125,8 @@ public class Item {
         this.location = location;
     }
 
+    public String getStarting_date() {
+        return null;
+    }
+
 }
