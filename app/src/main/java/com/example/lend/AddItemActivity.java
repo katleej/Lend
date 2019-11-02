@@ -64,16 +64,19 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         view_name = (EditText) findViewById(R.id.name);
         view_description = (EditText) findViewById(R.id.description);
         view_category = (Spinner) findViewById(R.id.category);
+        Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
+        PlacesClient placesClient = Places.createClient(this);
         image = findViewById(R.id.add_image);
         save = findViewById(R.id.save_item);
         image.setOnClickListener(this);
         save.setOnClickListener(this);
+
         AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
         autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-                item.setLocation(place);
+                Log.i("XYZ", "yeet");
             }
 
             @Override
@@ -98,9 +101,22 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 String name = view_name.getText().toString();
                 String description = view_description.getText().toString();
                 String category = view_category.getSelectedItem().toString();
-
-                Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
-                PlacesClient placesClient = Places.createClient(this);
+                Map<String, Object> lendData = new HashMap<>();
+                lendData.put(item.getItemName() , item);
+                db.collection("users").document(item.getLender().getDisplayName()).collection("Lender").document("item")
+                        .set(lendData)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error writing document", e);
+                            }
+                        });
 
                 try {
                     item.setItemName(name);
@@ -112,7 +128,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 catch (NullPointerException e)  {
                     Log.d("henlo" , "some nullpointerexception");
                 }
-
 
 
         }
