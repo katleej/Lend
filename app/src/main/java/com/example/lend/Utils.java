@@ -64,7 +64,7 @@ public final class Utils {
     public static void bookingWrite(String itemID, String lenderID, String borrowerID)  {
         Map<String, Object> booking = new HashMap<>();
         booking.put("Item ID" , itemID);
-        booking.put("Lender ID" , lenderID);
+        booking.put("Lender ID", lenderID);
         booking.put("Borrower ID" , borrowerID);
         db.collection("bookings").document()
                 .set(booking)

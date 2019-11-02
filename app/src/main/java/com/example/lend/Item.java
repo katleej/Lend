@@ -14,26 +14,19 @@ public class Item {
     //keeps track of number of bookings made on this item
     public int booking_number = 0;
 
-    public FirebaseUser lender;
+    public String lenderID;
     public String itemName;
     public String itemDescription;
-    public int price;
-    public boolean booked;
+    public String price;
+    public String booked;
 
-    public Place location;
+    public String latLocation;
+    public String longLocation;
     public String photoURL;
     public String category;
-    public HashMap<Integer, Booking> bookingList;
+    public HashMap<String, String> bookingList;
 
     public Item() {
-    }
-
-    public boolean isBooked() {
-        return booked;
-    }
-
-    public void setBooked(boolean booked) {
-        this.booked = booked;
     }
 
     public int getBooking_number() {
@@ -52,20 +45,20 @@ public class Item {
         this.category = category;
     }
 
-    public void addBooking(Booking booking) {
-        booking_number++;
-        bookingList.put(booking_number, booking);
-    }
+//    public void addBooking(Booking booking) {
+//        booking_number++;
+//        bookingList.put(booking_number, booking);
+//    }
+//
+//    public Booking getBooking(int index) {
+//        return bookingList.get(index);
+//    }
 
-    public Booking getBooking(int index) {
-        return bookingList.get(index);
-    }
-
-    public HashMap<Integer, Booking> getBookingList() {
+    public HashMap<String, String> getBookingList() {
         return bookingList;
     }
 
-    public void setBookingList(HashMap<Integer, Booking> bookingList) {
+    public void setBookingList(HashMap<String, String> bookingList) {
         this.bookingList = bookingList;
     }
 
@@ -85,12 +78,12 @@ public class Item {
         this.photoURL = photoURL;
     }
 
-    public FirebaseUser getLender() {
-        return lender;
+    public String getLender() {
+        return lenderID;
     }
 
-    public void setLender(FirebaseUser lender) {
-        this.lender = lender;
+    public void setLender(String lender) {
+        this.lenderID = lender;
     }
 
     public String getItemName() {
@@ -109,24 +102,35 @@ public class Item {
         this.itemDescription = itemDescription;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public Place getLocation() {
-        return location;
+    public String getBooked() {
+        return booked;
     }
 
-    public void setLocation(Place location) {
-        this.location = location;
+    public void setBooked(String booked) {
+        this.booked = booked;
     }
 
-    public String getStarting_date() {
-        return null;
+    public String getLatLocation() {
+        return latLocation;
     }
 
+    public void setLatLocation(String latLocation) {
+        this.latLocation = latLocation;
+    }
+
+    public String getLongLocation() {
+        return longLocation;
+    }
+
+    public void setLongLocation(String longLocation) {
+        this.longLocation = longLocation;
+    }
 }
