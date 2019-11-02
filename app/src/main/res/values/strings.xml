@@ -17,4 +17,15 @@
         <item>Stationary</item>
         <item>Hobbies</item>
     </string-array>
+    <string-array name="days">
+        <item>1 day</item>
+        <item>2 days</item>
+        <item>3 days</item>
+        <item>4 days</item>
+        <item>5 days</item>
+        <item>6 days</item>
+        <item>7 days</item>
+        <item>9 days</item>
+        <item>10 days</item>
+    </string-array>
 </resources>
