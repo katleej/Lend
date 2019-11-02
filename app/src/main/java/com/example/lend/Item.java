@@ -25,6 +25,8 @@ public class Item {
     public String category;
     public HashMap<Integer, Booking> bookingList;
 
+    public Item() {
+    }
 
     public boolean isBooked() {
         return booked;
@@ -48,15 +50,6 @@ public class Item {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-
-    public String ending_date;
-
-
-    public Item() {
-
-
     }
 
     public void addBooking(Booking booking) {
