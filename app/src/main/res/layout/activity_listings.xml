@@ -6,16 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ListingsActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        style="@style/AppTheme"
-        app:theme="@style/AppTheme"
+        style="@style/BarTheme"
+        app:theme="@style/BarTheme"
         app:popupTheme="@style/AppTheme"
         app:layout_constraintTop_toTopOf="parent"
-        android:elevation="4dp"
-        />
+        android:background="@color/white"
+        app:title="Lend"
+        app:logo="@drawable/ele_white"
+        android:elevation="4dp">
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
