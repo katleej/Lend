@@ -74,12 +74,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createAccount(etEmail.getText().toString(), etPassword.getText().toString());
-            }
-        });
 
 
         updateUI(currentUser);
@@ -87,59 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateUI(FirebaseUser user){}
 
-    public void createAccount(String email, String password){
-        //validate whether or not they are emails and passwords
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            Toast.makeText(MainActivity.this, "Account created!",
-                                    Toast.LENGTH_SHORT).show();
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setTitle("Set username BITCH");
-
-// Set up the input
-                            final EditText input = new EditText(context);
-// Specify the type of input expected
-                            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
-                            builder.setView(input);
-
-// Set up the buttons
-                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    m_Text = input.getText().toString();
-                                    userWrite(m_Text);
-                                }
-                            });
-
-                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-
-                            builder.show();
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Exception e = task.getException();
-                            Log.w(TAG, "createUserWithEmail:failure", e);
-                            Toast.makeText(MainActivity.this, e.getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                        // ...
-                    }
-                });
-
-    }
 
     public void signIn(String email, String password){
         //validate email and password
