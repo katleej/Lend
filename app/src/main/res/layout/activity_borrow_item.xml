@@ -55,30 +55,18 @@
                 android:layout_marginStart="10dp"/>
 
             <TextView
-                android:id="@+id/user_type"
-                android:text="Superseller"
-                android:fontFamily="sans-serif-condensed-light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:layout_below="@id/user_name"
-                android:layout_toRightOf="@id/user_image"
-                android:layout_toEndOf="@id/user_image"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"/>
-
-            <TextView
                 android:id="@+id/user_location"
-                android:text="Berkeley, CA"
-                android:fontFamily="sans-serif-condensed-light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:layout_below="@id/user_type"
-                android:layout_toRightOf="@id/user_image"
-                android:layout_toEndOf="@id/user_image"
+                android:layout_below="@+id/user_name"
+                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginTop="-1dp"
+                android:layout_toEndOf="@id/user_image"
+                android:layout_toRightOf="@id/user_image"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="Berkeley, CA"
+                android:textSize="14dp" />
         </RelativeLayout>
 
         <TextView
@@ -90,6 +78,18 @@
             android:textSize="18dp"
             android:fontFamily="sans-serif-condensed-light"
             ></TextView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Booking Length:" />
+
+        <Spinner
+            android:id="@+id/viewDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/days" />
 
         <Button
             android:id="@+id/btnBook"

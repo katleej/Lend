@@ -27,13 +27,14 @@ public class ListingsActivity extends AppCompatActivity {
     ArrayList<Item> items;
     ItemAdapter adapter;
     FloatingActionButton fabAdd;
+    DatabaseReference database;
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listings);
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance().getReference();
         items = new ArrayList();
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -86,4 +87,6 @@ public class ListingsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         Log.d("XYZ", ((Integer) items.size()).toString());
     }
+
+
 }
