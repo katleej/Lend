@@ -68,7 +68,7 @@
             android:ems="10"
             android:textColorHint="@color/cardview_light_background"
             android:fontFamily="sans-serif-condensed-light"
-            android:hint="   type in email"
+            android:hint=" type in email"
             android:layout_gravity="center"
             android:inputType="textEmailAddress"></EditText>
 
@@ -82,7 +82,7 @@
             android:layout_gravity="center"
             android:textColorHint="@color/cardview_light_background"
             android:fontFamily="sans-serif-condensed-light"
-            android:hint="   type in password"
+            android:hint=" type in password"
             android:inputType="textPassword" ></EditText>
     </LinearLayout>
 
