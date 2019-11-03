@@ -3,6 +3,7 @@ package com.example.lend;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -68,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn(etEmail.getText().toString(), etPassword.getText().toString());
+                Intent intent = new Intent(MainActivity.this, ListingsActivity.class);
+                startActivity(intent);
+//                signIn(etEmail.getText().toString(), etPassword.getText().toString());
             }
         });
 
