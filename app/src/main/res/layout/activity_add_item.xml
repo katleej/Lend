@@ -4,7 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".AddItemActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/BarTheme"
+        app:theme="@style/BarTheme"
+        app:popupTheme="@style/AppTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
+        app:title="Lend"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:textSize="15dp"
+                android:fontFamily="sans-serif-condensed-light"
+                android:background="@null"
+                android:textColor="@color/grey"
+                android:text="CANCEL"></Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed-light"
+                android:layout_gravity="bottom"
+                android:textStyle="bold"
+                android:gravity="center|center_vertical"
+                android:textSize="30dp"
+                android:text="NEW ITEM"></TextView>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textSize="15dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/themeBlue"
+                android:textStyle="bold"
+                android:text="POST"></Button>
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -17,11 +75,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Item Name"></EditText>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                tools:srcCompat="@tools:sample/avatars"></ImageView>
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Item Name"></EditText>
+
+
+        </LinearLayout>
 
         <Spinner
             android:layout_width="match_parent"
@@ -59,7 +130,8 @@
         android:id="@+id/save_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="  POST MY ITEM  "
+        android:background="@drawable/round_button_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
