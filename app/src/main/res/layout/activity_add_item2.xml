@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".AddItemActivity">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -119,47 +123,114 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="What is the price of this item?"
+                android:textSize="16dp"></TextView>
+
+            <EditText
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:hint="Your daily price of this item"
+                android:textSize="16dp"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="16dp"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-condensed-light"
-                android:text="Would you like to upload an image? \n(Posting an image of the item increases your chances of being selected by your local borrowers.) "
+                android:text="Would you like to upload an image? \n(Posting an image of the item increases your chances of being selected by your local borrowers.)"
                 android:textSize="16dp"></TextView>
 
             <Button
                 android:id="@+id/add_image"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/round_button_blue"
                 android:fontFamily="sans-serif-condensed-light"
                 android:text="  UPLOAD AN IMAGE  "
                 android:textSize="16dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="Give a brief description of this item."
+                android:textSize="16dp"></TextView>
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:hint="Description, rules, location, etc"
+                android:textSize="16dp"
+                android:layout_marginBottom="16dp"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="Where is this item located?"
+                android:textSize="16dp"></TextView>
+
+            <fragment
+                android:id="@+id/autocomplete_fragment"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="Delivery/Pickup"
+                android:textSize="16dp"></TextView>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton android:id="@+id/radio_delivery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery"
+                    android:theme="@style/AppTheme"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:onClick="onRadioButtonClicked"/>
+
+                <RadioButton android:id="@+id/radio_pickup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="Pickup"
+                    android:theme="@style/AppTheme"
+                    android:onClick="onRadioButtonClicked"/>
+
+                <RadioButton android:id="@+id/radio_both"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="Both"
+                    android:theme="@style/AppTheme"
+                    android:onClick="onRadioButtonClicked"/>
+
+
+            </RadioGroup>
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-light"
-            android:hint="Brief Description of the Item"
-            android:textSize="16dp"></EditText>
-
-        <EditText
-            android:id="@+id/price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-light"
-            android:hint="Price"
-            android:textSize="16dp"></EditText>
-
-        <fragment
-            android:id="@+id/autocomplete_fragment"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-light" />
-    </LinearLayout>
 
 <!--    <Button-->
 <!--        android:id="@+id/save_item"-->
@@ -172,3 +243,4 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/content_linearLayout" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
