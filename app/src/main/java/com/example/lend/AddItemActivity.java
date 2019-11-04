@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -55,7 +56,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_item);
+        setContentView(R.layout.activity_add_item2);
 
         view_price = (EditText) findViewById(R.id.price);
         view_name = (EditText) findViewById(R.id.name);
@@ -93,7 +94,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
                 break;
-            case R.id.save_item:
+            case R.id.add_item_post:
                 int price = Integer.parseInt(view_price.getText().toString());
                 String name = view_name.getText().toString();
                 String description = view_description.getText().toString();
@@ -124,7 +125,25 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                                 Log.w(TAG, "Error writing document", e);
                             }
                         });
+            case R.id.add_item_cancel:
+                Intent goBackIntent = new Intent(AddItemActivity.this, ListingsActivity.class);
+                startActivity(goBackIntent);
 
+        }
+    }
+
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        switch (view.getId()) {
+            case R.id.radio_delivery:
+                if (checked)
+                    break;
+            case R.id.radio_pickup:
+                if (checked)
+                    break;
+            case R.id.radio_both:
+                if (checked)
+                    break;
         }
     }
 
