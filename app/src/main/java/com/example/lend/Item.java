@@ -14,7 +14,8 @@ public class Item {
     //keeps track of number of bookings made on this item
     public int booking_number = 0;
 
-    public FirebaseUser lender;
+    public String lender;
+    public FirebaseUser lender2;
     public String itemName;
     public String itemDescription;
     public int price;
@@ -31,6 +32,8 @@ public class Item {
     public boolean isBooked() {
         return booked;
     }
+
+
 
     public void setBooked(boolean booked) {
         this.booked = booked;
@@ -85,12 +88,20 @@ public class Item {
         this.photoURL = photoURL;
     }
 
-    public FirebaseUser getLender() {
+    public String getLender() {
         return lender;
     }
 
-    public void setLender(FirebaseUser lender) {
+    public void setLender(String lender) {
         this.lender = lender;
+    }
+
+    public FirebaseUser getLender2()    {
+        return lender2;
+    }
+
+    public void setLender2(FirebaseUser lender2)    {
+        this.lender2 = lender2;
     }
 
     public String getItemName() {
