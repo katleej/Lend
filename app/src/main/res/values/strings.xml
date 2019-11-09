@@ -28,4 +28,5 @@
         <item>9 days</item>
         <item>10 days</item>
     </string-array>
+    <string name="demo_user_name">Katniss Lee</string>
 </resources>

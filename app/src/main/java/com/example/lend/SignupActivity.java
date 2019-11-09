@@ -2,11 +2,13 @@ package com.example.lend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -45,6 +47,7 @@ public class SignupActivity extends AppCompatActivity {
     public EditText etPassword;
     public Button btnSave;
     public Place userPlace;
+    public Fragment placeAutoComplete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,7 @@
 
 package com.example.lend;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -52,6 +53,7 @@ public final class Utils {
 
     public static void itemWrite(String lenderIDToken, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL) {
         Map<String, Object> item = new HashMap<>();
+        item.put("ID", item.hashCode());
         item.put("Lender ID", lenderIDToken);
         item.put("Item Name", itemName);
         item.put("Item Description", itemDescription);
@@ -74,11 +76,14 @@ public final class Utils {
                 });
     }
 
-    public static void bookingWrite(String itemID, String lenderID, String borrowerID) {
+    public static void bookingWrite(String itemID, String lenderID, String borrowerID, String active, String days)  {
         Map<String, Object> booking = new HashMap<>();
+        booking.put("ID", booking.hashCode());
         booking.put("Item ID", itemID);
         booking.put("Lender ID", lenderID);
-        booking.put("Borrower ID", borrowerID);
+        booking.put("Borrower ID" , borrowerID);
+        booking.put("Active", active);
+        booking.put("Booking Days", days);
         db.collection("bookings").document()
                 .set(booking)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -109,12 +114,13 @@ public final class Utils {
                                 Log.d("henlo", document.getId() + " => " + document.getData());
                                 Map<String, Object> itemMap = document.getData();
                                 Item temp = new Item();
-                                temp.setItemCategory(itemMap.get("Item Category").toString());
+                                temp.setID(itemMap.get("ID").toString());
+                                temp.setCategory(itemMap.get("Item Category").toString());
                                 temp.setItemDescription(itemMap.get("Item Description").toString());
                                 temp.setItemName(itemMap.get("Item Name").toString());
                                 temp.setPhotoURL(itemMap.get("Photo URL").toString());
                                 temp.setLender(itemMap.get("Lender ID").toString());
-                                temp.setPrice(Integer.parseInt(itemMap.get("Item Price").toString()));
+                                temp.setPrice((itemMap.get("Item Price").toString()));
                                 items.add(temp);
                                 Log.d("EEEEEEEEEEE", items.toString());
                             }
