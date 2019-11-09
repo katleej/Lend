@@ -81,13 +81,13 @@
                 android:fontFamily="sans-serif-condensed-light"
                 android:ems="10"
                 android:hint="Password"
-                android:inputType="textPersonName" />
+                android:inputType="textPassword" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-condensed-light"
                 android:text="Choose your location"></TextView>
