@@ -24,15 +24,20 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,6 +74,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         save = findViewById(R.id.save_item);
         image.setOnClickListener(this);
         save.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -97,7 +104,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     item.setPrice(price);
                     Log.d("henlo" , Integer.toString(price));
                     item.setPhotoURL(photoURL);
-                    itemWrite(user.getUid() , item.getItemName() , item.getItemDescription(), Integer.toString(item.getPrice()).trim(), item.getCategory(), item.getPhotoURL());
+                    itemWrite(user.getUid() , item.getItemName() , item.getItemDescription(), Integer.toString(item.getPrice()), item.getCategory(), item.getPhotoURL());
                     Log.d("henlo" , user.getUid());
                 }
                 catch (NullPointerException e)  {
