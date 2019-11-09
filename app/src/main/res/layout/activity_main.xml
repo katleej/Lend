@@ -64,10 +64,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
+            android:textColor="@color/white"
             android:ems="10"
             android:textColorHint="@color/cardview_light_background"
             android:fontFamily="sans-serif-condensed-light"
-            android:hint="   type in email"
+            android:hint=" type in email"
             android:layout_gravity="center"
             android:inputType="textEmailAddress"></EditText>
 
@@ -76,11 +77,12 @@
             android:backgroundTint="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:ems="10"
             android:layout_gravity="center"
             android:textColorHint="@color/cardview_light_background"
             android:fontFamily="sans-serif-condensed-light"
-            android:hint="   type in password"
+            android:hint=" type in password"
             android:inputType="textPassword" ></EditText>
     </LinearLayout>
 
