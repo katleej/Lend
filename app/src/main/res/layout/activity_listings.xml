@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ListingsActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -16,8 +17,23 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
         app:title="Lend"
-        app:logo="@drawable/ele_white"
         android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_marginLeft="20dp"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ele_white"></ImageView>
+
+        </LinearLayout>
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -37,7 +53,9 @@
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="56dp"
         android:clickable="true"
+        android:backgroundTint="@color/themeBlue"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:srcCompat="@drawable/pencil" />
 </androidx.constraintlayout.widget.ConstraintLayout>

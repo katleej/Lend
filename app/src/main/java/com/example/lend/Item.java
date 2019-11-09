@@ -14,19 +14,29 @@ public class Item {
     //keeps track of number of bookings made on this item
     public int booking_number = 0;
 
-    public String lenderID;
+    public String lender;
+    public FirebaseUser lender2;
     public String itemName;
     public String itemDescription;
-    public String price;
-    public String booked;
+    public int price;
+    public boolean booked;
 
-    public String latLocation;
-    public String longLocation;
+    public Place location;
     public String photoURL;
     public String category;
-    public HashMap<String, String> bookingList;
+    public HashMap<Integer, Booking> bookingList;
 
     public Item() {
+    }
+
+    public boolean isBooked() {
+        return booked;
+    }
+
+
+
+    public void setBooked(boolean booked) {
+        this.booked = booked;
     }
 
     public int getBooking_number() {
@@ -45,20 +55,20 @@ public class Item {
         this.category = category;
     }
 
-//    public void addBooking(Booking booking) {
-//        booking_number++;
-//        bookingList.put(booking_number, booking);
-//    }
-//
-//    public Booking getBooking(int index) {
-//        return bookingList.get(index);
-//    }
+    public void addBooking(Booking booking) {
+        booking_number++;
+        bookingList.put(booking_number, booking);
+    }
 
-    public HashMap<String, String> getBookingList() {
+    public Booking getBooking(int index) {
+        return bookingList.get(index);
+    }
+
+    public HashMap<Integer, Booking> getBookingList() {
         return bookingList;
     }
 
-    public void setBookingList(HashMap<String, String> bookingList) {
+    public void setBookingList(HashMap<Integer, Booking> bookingList) {
         this.bookingList = bookingList;
     }
 
@@ -79,11 +89,19 @@ public class Item {
     }
 
     public String getLender() {
-        return lenderID;
+        return lender;
     }
 
     public void setLender(String lender) {
-        this.lenderID = lender;
+        this.lender = lender;
+    }
+
+    public FirebaseUser getLender2()    {
+        return lender2;
+    }
+
+    public void setLender2(FirebaseUser lender2)    {
+        this.lender2 = lender2;
     }
 
     public String getItemName() {
@@ -102,35 +120,20 @@ public class Item {
         this.itemDescription = itemDescription;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public String getBooked() {
-        return booked;
+    public Place getLocation() {
+        return location;
     }
 
-    public void setBooked(String booked) {
-        this.booked = booked;
+    public void setLocation(Place location) {
+        this.location = location;
     }
 
-    public String getLatLocation() {
-        return latLocation;
-    }
-
-    public void setLatLocation(String latLocation) {
-        this.latLocation = latLocation;
-    }
-
-    public String getLongLocation() {
-        return longLocation;
-    }
-
-    public void setLongLocation(String longLocation) {
-        this.longLocation = longLocation;
-    }
 }
