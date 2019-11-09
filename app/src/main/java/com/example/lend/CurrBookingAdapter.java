@@ -66,15 +66,21 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
             }
         });
 
-        DocumentReference docRef = db.collection("items").document(booking.getItem());
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                item = documentSnapshot.toObject(Item.class);
-                holder.tvItemName.setText(item.getItemName());
-                holder.tvPrice.setText(item.getPrice());
-            }
-        });
+        db.collection("items")
+                .whereEqualTo("ID", booking.getItem())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                item = document.toObject(Item.class);
+                                holder.tvItemName.setText(item.getItemName());
+                                holder.tvPrice.setText(item.getPrice());
+                            }
+                        }
+                    }
+                });
     }
 
     @Override

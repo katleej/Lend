@@ -3,6 +3,7 @@ package com.example.lend;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Booking {
+    public String ID;
     public String itemID;
     public String borrowerID;
     public String lenderID;
@@ -11,6 +12,14 @@ public class Booking {
 
     public Booking() {
 
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getItem() {

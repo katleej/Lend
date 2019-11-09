@@ -50,22 +50,8 @@ public class BorrowItemActivity extends AppCompatActivity {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bookMethod();
+                Utils.bookingWrite(item.getID(), item.getLender(), FirebaseAuth.getInstance().getCurrentUser().getUid(), ((Boolean) true).toString(), days.getSelectedItem().toString());
             }
         });
     }
-
-    public void bookMethod() {
-        Booking newBooking = new Booking();
-        newBooking.setBorrower(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        newBooking.setItem(((Integer) item.hashCode()).toString());
-        newBooking.setLenderID(item.getLender());
-        newBooking.setActive(((Boolean) true).toString());
-        newBooking.setDaysBooked(days.getSelectedItem().toString());
-        Utils.bookingWrite(newBooking.getItem(), newBooking.getLenderID(), newBooking.getBorrower(), newBooking.getActive(), newBooking.getDaysBooked());
-    }
-
-
-
-
 }

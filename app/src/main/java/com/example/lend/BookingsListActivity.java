@@ -45,6 +45,7 @@ public class BookingsListActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document: task.getResult()) {
                                 Map<String, Object> bookingMap = document.getData();
                                 Booking booking  = new Booking();
+                                booking.setID(bookingMap.get("ID").toString());
                                 booking.setLenderID(bookingMap.get("Lender ID").toString());
                                 booking.setBorrower(bookingMap.get("Borrower ID").toString());
                                 booking.setItem(bookingMap.get("Item ID").toString());
