@@ -50,7 +50,7 @@ public class BorrowItemActivity extends AppCompatActivity {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                bookMethod();
             }
         });
     }
@@ -59,6 +59,8 @@ public class BorrowItemActivity extends AppCompatActivity {
         Booking newBooking = new Booking();
         newBooking.setBorrower(FirebaseAuth.getInstance().getCurrentUser().getUid());
         newBooking.setItem(((Integer) item.hashCode()).toString());
+        newBooking.setLenderID(item.getLender());
+        Utils.bookingWrite(newBooking.getItem(), newBooking.getLenderID(), newBooking.getBorrower());
 
     }
 
