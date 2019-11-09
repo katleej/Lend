@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Arrays;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -47,11 +50,14 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     public static final int PICK_IMAGE = 1;
     private final String TAG = "Hello";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         view_price = (EditText) findViewById(R.id.price);
         view_name = (EditText) findViewById(R.id.name);
@@ -69,39 +75,30 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.add_image:
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                if (intent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
+                    startActivityForResult(intent, 1046);
+                }
                 break;
             case R.id.save_item:
-                int price = Integer.parseInt(view_price.getText().toString());
+                Item item = new Item();
+                int price = Integer.parseInt(view_price.getText().toString().trim());
                 String name = view_name.getText().toString();
                 String description = view_description.getText().toString();
                 String category = view_category.getSelectedItem().toString();
-                Map<String, Object> lendData = new HashMap<>();
-                lendData.put(item.getItemName() , item);
-                db.collection("users").document(item.getLender().getDisplayName()).collection("Lender").document("item")
-                        .set(lendData)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "DocumentSnapshot successfully written!");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error writing document", e);
-                            }
-                        });
-
+                String photoURL = imageUri.toString();
                 try {
                     item.setItemName(name);
+                    Log.d("henlo" , name);
                     item.setItemDescription(description);
+                    Log.d("henlo" , description);
                     item.setItemCategory(category);
+                    Log.d("henlo" , category);
                     item.setPrice(price);
-                    itemWrite(item.getLender().getUid() , item.getItemName() , item.getItemDescription() , item.getStarting_date());
+                    Log.d("henlo" , Integer.toString(price));
+                    item.setPhotoURL(photoURL);
+                    itemWrite(user.getUid() , item.getItemName() , item.getItemDescription(), Integer.toString(item.getPrice()).trim(), item.getCategory(), item.getPhotoURL());
+                    Log.d("henlo" , user.getUid());
                 }
                 catch (NullPointerException e)  {
                     Log.d("henlo" , "some nullpointerexception");
@@ -114,9 +111,9 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == 1046) {
             try {
-                final Uri imageUri = data.getData();
+                imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
 
