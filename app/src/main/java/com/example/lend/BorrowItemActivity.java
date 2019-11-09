@@ -60,8 +60,9 @@ public class BorrowItemActivity extends AppCompatActivity {
         newBooking.setBorrower(FirebaseAuth.getInstance().getCurrentUser().getUid());
         newBooking.setItem(((Integer) item.hashCode()).toString());
         newBooking.setLenderID(item.getLender());
-        Utils.bookingWrite(newBooking.getItem(), newBooking.getLenderID(), newBooking.getBorrower());
-
+        newBooking.setActive(((Boolean) true).toString());
+        newBooking.setDaysBooked(days.getSelectedItem().toString());
+        Utils.bookingWrite(newBooking.getItem(), newBooking.getLenderID(), newBooking.getBorrower(), newBooking.getActive(), newBooking.getDaysBooked());
     }
 
 

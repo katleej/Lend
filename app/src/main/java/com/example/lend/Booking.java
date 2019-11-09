@@ -6,6 +6,8 @@ public class Booking {
     public String itemID;
     public String borrowerID;
     public String lenderID;
+    public String active;
+    public String daysBooked;
 
     public Booking() {
 
@@ -33,5 +35,21 @@ public class Booking {
 
     public void setLenderID(String lenderID) {
         this.lenderID = lenderID;
+    }
+
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
+    }
+
+    public String getDaysBooked() {
+        return daysBooked;
+    }
+
+    public void setDaysBooked(String daysBooked) {
+        this.daysBooked = daysBooked;
     }
 }
