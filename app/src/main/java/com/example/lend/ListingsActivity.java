@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -86,6 +87,20 @@ public class ListingsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.my_bookings_button:
+                Intent intent = new Intent(ListingsActivity.this, BookingsListActivity.class);
+                startActivity(intent); 
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void setUpRV() {
