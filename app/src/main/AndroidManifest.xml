@@ -7,13 +7,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-<<<<<<< HEAD
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-=======
-        android:theme="@style/AppTheme"
-        android:supportsRtl="true">
->>>>>>> 0e0f6d02283fa11c789c713daef73ccbcbf1520f
         <activity android:name=".BorrowItemActivity"></activity>
         <activity android:name=".SignupActivity"></activity>
         android:supportsRtl="true"
@@ -31,11 +26,5 @@
     </application>
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-<<<<<<< HEAD
-</manifest>
-=======
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
 </manifest>
->>>>>>> 0e0f6d02283fa11c789c713daef73ccbcbf1520f
