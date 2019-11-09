@@ -74,7 +74,7 @@ public final class Utils {
                     }
                 });
     }
-    
+
     public static void bookingWrite(String itemID, String lenderID, String borrowerID, String active, String days)  {
         Map<String, Object> booking = new HashMap<>();
         booking.put("Item ID", itemID);
