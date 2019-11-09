@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AddItemActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            style="@style/BarTheme"
+            app:theme="@style/BarTheme"
+            app:popupTheme="@style/AppTheme"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/white"
+            app:title="Lend"
+            android:elevation="4dp">
+
+            <LinearLayout
+                android:id="@+id/toolbar_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/add_item_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:textSize="15dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:background="@null"
+                    android:textColor="@color/grey"
+                    android:text="CANCEL"></Button>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:layout_gravity="bottom"
+                    android:textStyle="bold"
+                    android:gravity="center|center_vertical"
+                    android:textSize="30dp"
+                    android:text="NEW ITEM"></TextView>
+
+
+                <Button
+                    android:id="@+id/add_item_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:textSize="15dp"
+                    android:layout_marginRight="16dp"
+                    android:textColor="@color/themeBlue"
+                    android:textStyle="bold"
+                    android:text="POST"></Button>
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/content_linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_toolbar">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="What is the name of this item?"
+                    android:textSize="16dp"></TextView>
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:hint="Item Name"
+                    android:textSize="16dp"></EditText>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="What is the category of this item?"
+                    android:textSize="16dp"></TextView>
+
+                <Spinner
+                    android:id="@+id/category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:entries="@array/category"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:textSize="16dp"
+                    tools:listitem="@layout/support_simple_spinner_dropdown_item"></Spinner>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="What is the price of this item?"
+                    android:textSize="16dp"></TextView>
+
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:hint="Your daily price of this item"
+                    android:textSize="16dp"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="16dp"></EditText>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="Would you like to upload an image? \n(Posting an image of the item increases your chances of being selected by your local borrowers.)"
+                    android:textSize="16dp"></TextView>
+
+                <Button
+                    android:id="@+id/add_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/round_button_blue"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="  UPLOAD AN IMAGE  "
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="Give a brief description of this item."
+                    android:textSize="16dp"></TextView>
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:hint="Description, rules, location, etc"
+                    android:textSize="16dp"
+                    android:layout_marginBottom="16dp"></EditText>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="Where is this item located?"
+                    android:textSize="16dp"></TextView>
+
+                <fragment
+                    android:id="@+id/autocomplete_fragment"
+                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="Delivery/Pickup"
+                    android:textSize="16dp"></TextView>
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton android:id="@+id/radio_delivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Delivery"
+                        android:theme="@style/AppTheme"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:onClick="onRadioButtonClicked"/>
+
+                    <RadioButton android:id="@+id/radio_pickup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:text="Pickup"
+                        android:theme="@style/AppTheme"
+                        android:onClick="onRadioButtonClicked"/>
+
+                    <RadioButton android:id="@+id/radio_both"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:text="Both"
+                        android:theme="@style/AppTheme"
+                        android:onClick="onRadioButtonClicked"/>
+
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <!--    <Button-->
+        <!--        android:id="@+id/save_item"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="  POST MY ITEM  "-->
+        <!--        android:background="@drawable/round_button_blue"-->
+        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/content_linearLayout" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
