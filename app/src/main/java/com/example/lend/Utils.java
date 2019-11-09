@@ -1,6 +1,7 @@
 
 package com.example.lend;
 
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,8 @@ public final class Utils {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("Henlo", "DocumentSnapshot successfully written!");
+
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

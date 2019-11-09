@@ -73,9 +73,9 @@ public class MainActivity extends Activity {
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListingsActivity.class);
-                startActivity(intent);
-//                signIn(etEmail.getText().toString(), etPassword.getText().toString());
+
+                    signIn(etEmail.getText().toString(), etPassword.getText().toString());
+
             }
         });
 
@@ -98,7 +98,11 @@ public class MainActivity extends Activity {
 
     public void signIn(String email, String password){
         //validate email and password
-
+        if ((email.isEmpty() || (password.isEmpty())))  {
+            Toast.makeText(MainActivity.this, "Please enter a username and password!",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else   {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -120,7 +124,7 @@ public class MainActivity extends Activity {
 
                         // ...
                     }
-                });
+                }); }
     }
 
     public void getCurrentUser(){

@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -26,9 +28,12 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.lend.Utils.userWrite;
 
@@ -66,18 +71,19 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.acLocation);
-        autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
         autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 userPlace = place;
+                Log.d("henlo" , userPlace.getLatLng().toString());
+
             }
             @Override
             public void onError(@NonNull Status status) {
 
             }
         });
-
     }
 
 
@@ -94,20 +100,35 @@ public class SignupActivity extends AppCompatActivity {
                             user.setUsername(etName.getText().toString());
                             user.setLat(((Double) userPlace.getLatLng().latitude).toString());
                             user.setLat(((Double) userPlace.getLatLng().longitude).toString());
-                            userWrite(etName.getText().toString(), userPlace);
+                            Map<String, Object> username = new HashMap<>();
+                            username.put("username", etName.getText().toString());
+                            username.put("lat", ((Double) userPlace.getLatLng().latitude).toString());
+                            username.put("long", ((Double) userPlace.getLatLng().longitude).toString());
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            db.collection("users").document()
+                                    .set(username)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("Henlo", "DocumentSnapshot successfully written!");
+                                            Intent mainIntent = new Intent(SignupActivity.this, ListingsActivity.class);
+                                            startActivity(mainIntent);
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w("Henlo", "Error writing document", e);
+                                        }
+                                    });
                         } else {
                             // If sign in fails, display a message to the user.
                             Exception e = task.getException();
                             Toast.makeText(SignupActivity.this, e.getMessage(),
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
                         }
                     }
                 });
     }
 
-    public void updateUI(FirebaseUser user) {
-        Intent mainIntent = new Intent(SignupActivity.this, ListingsActivity.class);
-        startActivity(mainIntent);
-    }
 }
