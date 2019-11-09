@@ -9,9 +9,11 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Arrays;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -47,11 +50,13 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     public static final int PICK_IMAGE = 1;
     private final String TAG = "Hello";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_item);
+        setContentView(R.layout.activity_add_item2);
 
         view_price = (EditText) findViewById(R.id.price);
         view_name = (EditText) findViewById(R.id.name);
@@ -60,9 +65,15 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
         PlacesClient placesClient = Places.createClient(this);
         image = findViewById(R.id.add_image);
-        save = findViewById(R.id.save_item);
+        save = findViewById(R.id.add_item_post);
         image.setOnClickListener(this);
         save.setOnClickListener(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.writing_menu, menu);
+        return true;
     }
 
     @Override
@@ -74,40 +85,49 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
                 break;
-            case R.id.save_item:
-                int price = Integer.parseInt(view_price.getText().toString());
+            case R.id.add_item_post:
+                Item item = new Item();
+                int price = Integer.parseInt(view_price.getText().toString().trim());
                 String name = view_name.getText().toString();
                 String description = view_description.getText().toString();
                 String category = view_category.getSelectedItem().toString();
-                Map<String, Object> lendData = new HashMap<>();
-                lendData.put(item.getItemName() , item);
-                db.collection("users").document(item.getLender().getDisplayName()).collection("Lender").document("item")
-                        .set(lendData)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "DocumentSnapshot successfully written!");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error writing document", e);
-                            }
-                        });
-
+                String photoURL = imageUri.toString();
                 try {
                     item.setItemName(name);
+                    Log.d("henlo" , name);
                     item.setItemDescription(description);
+                    Log.d("henlo" , description);
                     item.setItemCategory(category);
+                    Log.d("henlo" , category);
                     item.setPrice(price);
-                    itemWrite(item.getLender().getUid() , item.getItemName() , item.getItemDescription() , item.getStarting_date());
+                    Log.d("henlo" , Integer.toString(price));
+                    item.setPhotoURL(photoURL);
+                    itemWrite(user.getUid() , item.getItemName() , item.getItemDescription(), Integer.toString(item.getPrice()), item.getCategory(), item.getPhotoURL());
+                    Log.d("henlo" , user.getUid());
                 }
                 catch (NullPointerException e)  {
                     Log.d("henlo" , "some nullpointerexception");
                 }
+            case R.id.add_item_cancel:
+                Intent goBackIntent = new Intent(AddItemActivity.this, ListingsActivity.class);
+                startActivity(goBackIntent);
+
+        }
+    }
 
 
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        switch (view.getId()) {
+            case R.id.radio_delivery:
+                if (checked)
+                    break;
+            case R.id.radio_pickup:
+                if (checked)
+                    break;
+            case R.id.radio_both:
+                if (checked)
+                    break;
         }
     }
 
