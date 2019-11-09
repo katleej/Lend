@@ -84,6 +84,7 @@ public final class Utils {
         booking.put("Borrower ID" , borrowerID);
         booking.put("Active", active);
         booking.put("Booking Days", days);
+        booking.put("User Returned", ((Boolean) false).toString());
         db.collection("bookings").document()
                 .set(booking)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
