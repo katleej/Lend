@@ -87,8 +87,8 @@ public class SignupActivity extends AppCompatActivity {
                             Toast.makeText(SignupActivity.this, "Success! Welcome to Lend", Toast.LENGTH_SHORT).show();
                             LendUser user = new LendUser(getApplicationContext());
                             user.setUsername(etName.getText().toString());
-                            user.setLat(userPlace.getLatLng().latitude);
-                            user.setLat(userPlace.getLatLng().longitude);
+//                            user.setLat(userPlace.getLatLng().latitude);
+//                            user.setLat(userPlace.getLatLng().longitude);
                             userWrite(etName.getText().toString(), userPlace);
                         } else {
                             // If sign in fails, display a message to the user.

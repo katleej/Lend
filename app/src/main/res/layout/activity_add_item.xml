@@ -27,7 +27,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/add_item_cancel"
+                android:id="@+id/add_item_cancel_dummy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -39,7 +39,7 @@
                 android:text="CANCEL"></Button>
 
             <TextView
-                android:id="@+id/add_item_post"
+                android:id="@+id/add_item_post_dummy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
