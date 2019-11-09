@@ -1,3 +1,4 @@
+
 package com.example.lend;
 
 import android.util.Log;
@@ -24,9 +25,10 @@ public final class Utils {
     final String TAG = "henlo";
     static ArrayList<Item> items;
     static ArrayList<Item> currentItems;
-    public static void userWrite(String input, Place location)  {
+
+    public static void userWrite(String input, Place location) {
         Map<String, Object> username = new HashMap<>();
-        username.put("username" , input);
+        username.put("username", input);
         username.put("lat", ((Double) location.getLatLng().latitude).toString());
         username.put("long", ((Double) location.getLatLng().longitude).toString());
         db.collection("users").document()
@@ -45,14 +47,14 @@ public final class Utils {
                 });
     }
 
-    public static void itemWrite(String lenderIDToken, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL)  {
+    public static void itemWrite(String lenderIDToken, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL) {
         Map<String, Object> item = new HashMap<>();
-        item.put("Lender ID" , lenderIDToken);
-        item.put("Item Name" , itemName);
-        item.put("Item Description" , itemDescription);
-        item.put("Item Price" , itemPrice);
-        item.put("Item Category" , itemCategory);
-        item.put("Photo URL" , photoURL);
+        item.put("Lender ID", lenderIDToken);
+        item.put("Item Name", itemName);
+        item.put("Item Description", itemDescription);
+        item.put("Item Price", itemPrice);
+        item.put("Item Category", itemCategory);
+        item.put("Photo URL", photoURL);
         db.collection("items").document()
                 .set(item)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -69,11 +71,11 @@ public final class Utils {
                 });
     }
 
-    public static void bookingWrite(String itemID, String lenderID, String borrowerID)  {
+    public static void bookingWrite(String itemID, String lenderID, String borrowerID) {
         Map<String, Object> booking = new HashMap<>();
-        booking.put("Item ID" , itemID);
-        booking.put("Lender ID" , lenderID);
-        booking.put("Borrower ID" , borrowerID);
+        booking.put("Item ID", itemID);
+        booking.put("Lender ID", lenderID);
+        booking.put("Borrower ID", borrowerID);
         db.collection("bookings").document()
                 .set(booking)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -91,7 +93,7 @@ public final class Utils {
 
     }
 
-    public static void itemRead(String category)   {
+    public static void itemRead(String category) {
         items = new ArrayList<>();
         db.collection("items")
                 .whereEqualTo("Item Category", category)
@@ -111,7 +113,7 @@ public final class Utils {
                                 temp.setLender(itemMap.get("Lender ID").toString());
                                 temp.setPrice(Integer.parseInt(itemMap.get("Item Price").toString()));
                                 items.add(temp);
-                                Log.d("EEEEEEEEEEE" , items.toString());
+                                Log.d("EEEEEEEEEEE", items.toString());
                             }
                             helper(items);
                         } else {
@@ -123,11 +125,11 @@ public final class Utils {
 
     public static void helper(ArrayList<Item> a) {
         currentItems = a;
-        Log.d("helper" , currentItems.toString());
+        Log.d("helper", currentItems.toString());
     }
 
     public static ArrayList<Item> getCurrentItems() {
-        Log.d("getCurrentItems" , currentItems.toString());
+        Log.d("getCurrentItems", currentItems.toString());
         return currentItems;
     }
 }

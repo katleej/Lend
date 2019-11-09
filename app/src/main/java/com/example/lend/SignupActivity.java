@@ -3,6 +3,7 @@ package com.example.lend;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +18,9 @@ import android.widget.Toast;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.auth.AuthResult;
@@ -42,6 +45,8 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
+        PlacesClient placesClient = Places.createClient(this);
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -87,8 +92,8 @@ public class SignupActivity extends AppCompatActivity {
                             Toast.makeText(SignupActivity.this, "Success! Welcome to Lend", Toast.LENGTH_SHORT).show();
                             LendUser user = new LendUser(getApplicationContext());
                             user.setUsername(etName.getText().toString());
-//                            user.setLat(userPlace.getLatLng().latitude);
-//                            user.setLat(userPlace.getLatLng().longitude);
+                            user.setLat(((Double) userPlace.getLatLng().latitude).toString());
+                            user.setLat(((Double) userPlace.getLatLng().longitude).toString());
                             userWrite(etName.getText().toString(), userPlace);
                         } else {
                             // If sign in fails, display a message to the user.

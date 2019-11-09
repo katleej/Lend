@@ -26,14 +26,20 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
-
 import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +65,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item2);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         view_price = (EditText) findViewById(R.id.price);
         view_name = (EditText) findViewById(R.id.name);
@@ -70,6 +77,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         save = findViewById(R.id.add_item_post);
         image.setOnClickListener(this);
         save.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -135,9 +144,9 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == 1046) {
             try {
-                final Uri imageUri = data.getData();
+                imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
 

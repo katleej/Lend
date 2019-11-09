@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.parceler.Parcels;
 
@@ -39,7 +40,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
         Item item = items.get(position);
         holder.tvLenderName.setText(item.getLender());
         holder.tvItemName.setText(item.getItemName());
-        holder.tvItemPrice.setText(item.getPrice());
+        holder.tvItemPrice.setText(item.getPrice() +"");
         Glide.with(context).load(item.getPhotoURL()).into(holder.photo);
     }
 
