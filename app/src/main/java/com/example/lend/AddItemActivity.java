@@ -100,8 +100,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     item.setItemName(name);
                     item.setItemDescription(description);
                     item.setItemCategory(category);
-                    item.setPrice(price);
-                    itemWrite(item.getLender().getUid() , item.getItemName() , item.getItemDescription() , item.getStarting_date());
+                    item.setPrice(((Integer) price).toString());
+                    itemWrite(item.getLender() , item.getItemName() , item.getItemDescription() , item.getStarting_date());
                 }
                 catch (NullPointerException e)  {
                     Log.d("henlo" , "some nullpointerexception");
