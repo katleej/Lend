@@ -2,6 +2,7 @@ package com.example.lend;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -34,7 +36,7 @@ import java.util.Map;
 
 import static com.example.lend.Utils.userWrite;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private FirebaseAuth mAuth;
     private FusedLocationProviderClient fusedLocationClient;
     private final String TAG = "hello";
@@ -71,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signIn(etEmail.getText().toString(), etPassword.getText().toString());
+            }
+        });
+
+        TextView signup = findViewById(R.id.cab);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                startActivity(intent);
             }
         });
 
