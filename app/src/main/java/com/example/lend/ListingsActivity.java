@@ -2,6 +2,7 @@ package com.example.lend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,8 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +34,7 @@ public class ListingsActivity extends AppCompatActivity {
     ArrayList<Item> items;
     ItemAdapter adapter;
     FloatingActionButton fabAdd;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,10 @@ public class ListingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listings);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         items = new ArrayList();
+
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
         db.collection("items")
                 .whereEqualTo("Item Category", "Electronic Appliances")
                 .get()
@@ -49,12 +57,12 @@ public class ListingsActivity extends AppCompatActivity {
                                 Log.d("henlo", document.getId() + " => " + document.getData());
                                 Map<String, Object> itemMap = document.getData();
                                 Item temp = new Item();
-                                temp.setItemCategory(itemMap.get("Item Category").toString());
+                                temp.setCategory(itemMap.get("Item Category").toString());
                                 temp.setItemDescription(itemMap.get("Item Description").toString());
                                 temp.setItemName(itemMap.get("Item Name").toString());
                                 temp.setPhotoURL(itemMap.get("Photo URL").toString());
                                 temp.setLender(itemMap.get("Lender ID").toString());
-                                temp.setPrice(Integer.parseInt(itemMap.get("Item Price").toString()));
+                                temp.setPrice(itemMap.get("Item Price").toString());
                                 items.add(temp);
                             }
                             setUpRV();
@@ -73,6 +81,26 @@ public class ListingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.my_bookings_button:
+                Intent intent = new Intent(ListingsActivity.this, BookingsListActivity.class);
+                startActivity(intent); 
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void setUpRV() {

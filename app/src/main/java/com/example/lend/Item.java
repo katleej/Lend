@@ -12,80 +12,29 @@ import java.util.HashMap;
 @Parcel
 public class Item {
     //keeps track of number of bookings made on this item
-    public int booking_number = 0;
 
+    public String ID;
     public String lender;
-    public FirebaseUser lender2;
     public String itemName;
     public String itemDescription;
-    public int price;
-    public boolean booked;
+    public String price;
+    public String booked;
 
-    public Place location;
+    public String lat;
+    public String lng;
     public String photoURL;
     public String category;
-    public HashMap<Integer, Booking> bookingList;
+    public HashMap<String, String> bookingList;
 
     public Item() {
     }
 
-    public boolean isBooked() {
-        return booked;
+    public String getID() {
+        return ID;
     }
 
-
-
-    public void setBooked(boolean booked) {
-        this.booked = booked;
-    }
-
-    public int getBooking_number() {
-        return booking_number;
-    }
-
-    public void setBooking_number(int booking_number) {
-        this.booking_number = booking_number;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void addBooking(Booking booking) {
-        booking_number++;
-        bookingList.put(booking_number, booking);
-    }
-
-    public Booking getBooking(int index) {
-        return bookingList.get(index);
-    }
-
-    public HashMap<Integer, Booking> getBookingList() {
-        return bookingList;
-    }
-
-    public void setBookingList(HashMap<Integer, Booking> bookingList) {
-        this.bookingList = bookingList;
-    }
-
-    public String getItemCategory() {
-        return category;
-    }
-
-    public void setItemCategory(String category) {
-        this.category = category;
-    }
-
-    public String getPhotoURL() {
-        return photoURL;
-    }
-
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getLender() {
@@ -94,14 +43,6 @@ public class Item {
 
     public void setLender(String lender) {
         this.lender = lender;
-    }
-
-    public FirebaseUser getLender2()    {
-        return lender2;
-    }
-
-    public void setLender2(FirebaseUser lender2)    {
-        this.lender2 = lender2;
     }
 
     public String getItemName() {
@@ -120,20 +61,59 @@ public class Item {
         this.itemDescription = itemDescription;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public Place getLocation() {
-        return location;
+    public String getBooked() {
+        return booked;
     }
 
-    public void setLocation(Place location) {
-        this.location = location;
+    public void setBooked(String booked) {
+        this.booked = booked;
     }
 
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public HashMap<String, String> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(HashMap<String, String> bookingList) {
+        this.bookingList = bookingList;
+    }
 }
