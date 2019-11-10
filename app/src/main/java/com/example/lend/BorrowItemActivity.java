@@ -3,6 +3,7 @@ package com.example.lend;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,11 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.parceler.Parcels;
 
@@ -40,6 +46,7 @@ public class BorrowItemActivity extends AppCompatActivity {
     public Item item;
     FirebaseAuth auth;
     FirebaseFirestore db;
+    LendUser user;
 
 
     @Override
@@ -47,7 +54,6 @@ public class BorrowItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_item);
         item = (Item) Parcels.unwrap(getIntent().getParcelableExtra("item"));
-        Log.d("XYZ", item.getItemName());
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
@@ -62,9 +68,20 @@ public class BorrowItemActivity extends AppCompatActivity {
 
         itemName.setText(item.getItemName());
         itemDescription.setText(item.getItemDescription());
-        lenderName.setText(item.getLender());
         Glide.with(getApplicationContext()).load(item.getPhotoURL()).into(itemImage);
         tvPrice.setText("Current Price: " + item.getPrice());
+
+        db.collection("users").whereEqualTo("ID", item.getLender()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        user = document.toObject(LendUser.class);
+                        lenderName.setText(user.getUsername());
+                    }
+                }
+            }
+        });
 
         days.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -75,6 +92,16 @@ public class BorrowItemActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        lenderImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BorrowItemActivity.this, ProfileActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("user", Parcels.wrap(user));
+                startActivity(intent);
             }
         });
 
