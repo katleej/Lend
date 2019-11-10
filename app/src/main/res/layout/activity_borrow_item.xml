@@ -90,12 +90,14 @@
             android:id="@+id/viewDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:entries="@array/days" />
 
         <TextView
             android:id="@+id/tvPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Current Price: "
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -103,6 +105,7 @@
             android:id="@+id/btnBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Book!" />
 
 
