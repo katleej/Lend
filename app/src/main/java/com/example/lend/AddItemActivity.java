@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -28,6 +30,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -54,11 +57,13 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     private String name, description, category;
     private Button image;
     private Button save;
+    private Button cancel;
     public static final int PICK_IMAGE = 1;
     private final String TAG = "Hello";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user;
     private Uri imageUri;
+    public String uploadedImageURL;
 
 
     @Override
@@ -66,7 +71,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item2);
         user = FirebaseAuth.getInstance().getCurrentUser();
-
         view_price = (EditText) findViewById(R.id.price);
         view_name = (EditText) findViewById(R.id.name);
         view_description = (EditText) findViewById(R.id.description);
@@ -75,10 +79,10 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         PlacesClient placesClient = Places.createClient(this);
         image = findViewById(R.id.add_image);
         save = findViewById(R.id.add_item_post);
+        cancel = findViewById(R.id.add_item_cancel);
         image.setOnClickListener(this);
         save.setOnClickListener(this);
-
-
+        cancel.setOnClickListener(this);
     }
 
     @Override
@@ -96,13 +100,21 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                         startActivityForResult(intent, 1046);
                     }
                     break;
+                case R.id.add_item_cancel:
+                    Intent i = new Intent(AddItemActivity.this, ListingsActivity.class);
+                    startActivityForResult(i , 1);
+                    break;
                 case R.id.add_item_post:
                     Item item = new Item();
                     int price = Integer.parseInt(view_price.getText().toString().trim());
                     String name = view_name.getText().toString();
                     String description = view_description.getText().toString();
                     String category = view_category.getSelectedItem().toString();
-                    String photoURL = imageUri.toString();
+
+                    String photoURL = uploadedImageURL;
+                    //int start = 3 + photoURL.indexOf("%");
+                    //int end = photoURL.indexOf("?");
+                    //photoURL = uploadedImageURL.substring(start, end);
                     try {
                         item.setItemName(name);
                         Log.d("henlo" , name);
@@ -119,8 +131,9 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     catch (NullPointerException e)  {
                         Log.d("henlo" , "some nullpointerexception");
                     }
-
-
+                    Intent j = new Intent(AddItemActivity.this, ListingsActivity.class);
+                    startActivityForResult(j , 1);
+                    break;
             }
         }
 
@@ -149,12 +162,12 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-
                 new CloudStorage().upload(imageUri, new OnSuccessListener<String>() {
                     @Override
                     public void onSuccess(String s) {
 //                        image.setImageBitmap(selectedImage);
-//                        uploadedImageURL = s;
+                        Log.d("HHHHHHHHHHH", s);
+                        uploadedImageURL = s;
                     }
                 }, new OnFailureListener() {
                     @Override
@@ -168,8 +181,33 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
             }
 
-        } else {
+        }
+
+        else {
             Toast.makeText(this, "Incorrect requestcode", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
 }

@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".BorrowItemActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".BookingsListActivity" />
+        <activity android:name=".BorrowItemActivity"></activity>
+        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".BookingsListActivity"></activity>
         <activity android:name=".AddItemActivity" />
         <activity android:name=".ListingsActivity" />
         <activity android:name=".MainActivity">
@@ -27,5 +27,9 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
+
