@@ -10,13 +10,18 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import org.parceler.Parcel;
+
 import java.util.HashMap;
 
+@Parcel
 public class LendUser {
-    private String email, username, password;
-    private String latLocation;
-    private String lngLocation;
-    private HashMap<String, String> mLendedItemList;
+    public String email, username, password;
+    public String latLocation;
+    public String lngLocation;
+    public String ID;
+    public HashMap<String, String> mLendedItemList;
+    public HashMap<String, String> mBorrowedItemList;
 
     public LendUser() {
 
@@ -74,33 +79,19 @@ public class LendUser {
         this.mLendedItemList = mLendedItemList;
     }
 
-    public HashMap<Integer, Booking> getmBorrowedItemList() {
+    public HashMap<String, String> getmBorrowedItemList() {
         return mBorrowedItemList;
     }
 
-    public void setmBorrowedItemList(HashMap<Integer, Booking> mBorrowedItemList) {
+    public void setmBorrowedItemList(HashMap<String, String> mBorrowedItemList) {
         this.mBorrowedItemList = mBorrowedItemList;
     }
 
-    public int getNum_borrowed() {
-        return num_borrowed;
+    public String getID() {
+        return ID;
     }
 
-    public void setNum_borrowed(int num_borrowed) {
-        this.num_borrowed = num_borrowed;
+    public void setID(String ID) {
+        this.ID = ID;
     }
-
-    public int getNum_lended() {
-        return num_lended;
-    }
-
-    public void setNum_lended(int num_lended) {
-        this.num_lended = num_lended;
-    }
-
-    private HashMap<Integer, Booking> mBorrowedItemList;
-
-    private int num_borrowed, num_lended;
-
-
 }
