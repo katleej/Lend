@@ -7,6 +7,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ public class BorrowItemActivity extends AppCompatActivity {
     public ImageView itemImage;
     public TextView itemDescription;
     public ImageView lenderImage;
+    public TextView tvPrice;
     public TextView lenderName;
     public Button book;
     public Item item;
@@ -45,6 +47,7 @@ public class BorrowItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_item);
         item = (Item) Parcels.unwrap(getIntent().getParcelableExtra("item"));
+        Log.d("XYZ", item.getItemName());
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
@@ -55,11 +58,25 @@ public class BorrowItemActivity extends AppCompatActivity {
         lenderImage = findViewById(R.id.user_image);
         lenderName = findViewById(R.id.user_name);
         book = findViewById(R.id.btnBook);
+        tvPrice = findViewById(R.id.tvPrice);
 
         itemName.setText(item.getItemName());
         itemDescription.setText(item.getItemDescription());
         lenderName.setText(item.getLender());
         Glide.with(getApplicationContext()).load(item.getPhotoURL()).into(itemImage);
+        tvPrice.setText("Current Price: " + item.getPrice());
+
+        days.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tvPrice.setText("Current Price: " + ((Integer) Integer.parseInt(item.getPrice()) * Integer.parseInt(days.getSelectedItem().toString())));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         book.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +100,11 @@ public class BorrowItemActivity extends AppCompatActivity {
                                 book.setTextColor(getResources().getColor(R.color.quantum_googgreen500));
                                 book.setBackgroundColor(getResources().getColor(R.color.quantum_googgreen200));
                                 DocumentReference rf = db.collection("items").document(item.getID());
-                                rf.update("Booked", false);
+                                Log.d("item", item.getID());
+                                Log.d("rf", rf.getId());
+                                HashMap<String, Object> map = new HashMap();
+                                map.put("Booked", true);
+                                rf.update(map);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
