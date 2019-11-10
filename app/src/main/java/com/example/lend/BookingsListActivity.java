@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class BookingsListActivity extends AppCompatActivity {
-    ArrayList<Booking> currBookings;
-    ArrayList<Booking> pastBookings;
-    RecyclerView currBook;
-    RecyclerView pastBook;
+    ArrayList<Booking> lendBookings;
+    ArrayList<Booking> borrowBookings;
+    RecyclerView lendBook;
+    RecyclerView borrowBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,13 @@ public class BookingsListActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        currBookings = new ArrayList();
-        pastBookings = new ArrayList();
-        currBook = findViewById(R.id.rvCurr);
-        pastBook = findViewById(R.id.rvPast);
+        lendBookings = new ArrayList();
+        borrowBookings = new ArrayList();
+        lendBook = findViewById(R.id.rvLend);
+        borrowBook = findViewById(R.id.rvBorrow);
         db.collection("bookings")
-                .whereEqualTo("Borrower ID", user.getUid()).get()
+                .whereEqualTo("Borrower ID", user.getUid())
+                .whereEqualTo("Active", true).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -50,27 +51,49 @@ public class BookingsListActivity extends AppCompatActivity {
                                 booking.setBorrower(bookingMap.get("Borrower ID").toString());
                                 booking.setItem(bookingMap.get("Item ID").toString());
                                 booking.setActive(bookingMap.get("Active").toString());
-                                if (booking.getActive().equals("true")) {
-                                    currBookings.add(booking);
-                                    setUpRV(currBook, currBookings);
-                                } else {
-                                    pastBookings.add(booking);
-                                    setUpRV(pastBook, pastBookings);
-                                }
+                                booking.setDaysBooked(bookingMap.get("Days Booked").toString());
+                                booking.setUserReturned(bookingMap.get("User Returned").toString());
+                                lendBookings.add(booking);
+                                CurrLendedAdapter adapter = new CurrLendedAdapter(getApplicationContext(), lendBookings);
+                                setUpRV(lendBook, lendBookings, adapter);
+                            }
+                        }
+                    }
+                });
+
+        db.collection("bookings")
+                .whereEqualTo("Lender ID", user.getUid())
+                .whereEqualTo("Active", true).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document: task.getResult()) {
+                                Map<String, Object> bookingMap = document.getData();
+                                Booking booking  = new Booking();
+                                booking.setID(bookingMap.get("ID").toString());
+                                booking.setLenderID(bookingMap.get("Lender ID").toString());
+                                booking.setBorrower(bookingMap.get("Borrower ID").toString());
+                                booking.setItem(bookingMap.get("Item ID").toString());
+                                booking.setActive(bookingMap.get("Active").toString());
+                                booking.setDaysBooked(bookingMap.get("Days Booked").toString());
+                                booking.setUserReturned(bookingMap.get("User Returned").toString());
+                                borrowBookings.add(booking);
+                                CurrBookingAdapter adapter = new CurrBookingAdapter(getApplicationContext(), borrowBookings);
+                                setUpRV(borrowBook, borrowBookings, adapter);
                             }
                         }
                     }
                 });
     }
 
-    public void setUpRV(RecyclerView recList, ArrayList<Booking> bookings) {
+    public void setUpRV(RecyclerView recList, ArrayList<Booking> bookings, RecyclerView.Adapter adapter) {
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(BookingsListActivity.this);
         llm.setReverseLayout(true);
         llm.setStackFromEnd(true);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-        CurrBookingAdapter adapter = new CurrBookingAdapter(getApplicationContext(), bookings);
         recList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         Log.d("XYZ", ((Integer) bookings.size()).toString());

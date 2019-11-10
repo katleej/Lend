@@ -99,6 +99,10 @@ public class ListingsActivity extends AppCompatActivity {
                 Intent intent = new Intent(ListingsActivity.this, BookingsListActivity.class);
                 startActivity(intent); 
                 return true;
+            case R.id.my_settings:
+                Intent intent2 = new Intent(ListingsActivity.this,ProfileActivity.class);
+                startActivity(intent2);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
