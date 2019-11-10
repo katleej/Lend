@@ -66,14 +66,14 @@ public class BorrowItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Map<String, Object> booking = new HashMap<>();
-                booking.put("ID", booking.hashCode());
                 booking.put("Item ID", item.getID());
                 booking.put("Lender ID", item.getLender());
                 booking.put("Borrower ID", auth.getCurrentUser().getUid());
                 booking.put("Active", true);
                 booking.put("Booking Days", days.getSelectedItem());
                 booking.put("User Returned", false);
-                db.collection("bookings").document(((Integer) booking.hashCode()).toString())
+                booking.put("ID", booking.hashCode());
+                db.collection("bookings").document(booking.get("ID").toString())
                         .set(booking)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
