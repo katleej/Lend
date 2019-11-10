@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +37,8 @@ public class ListingsActivity extends AppCompatActivity {
     ItemAdapter adapter;
     FloatingActionButton fabAdd;
     Toolbar toolbar;
+    FloatingActionButton categoryFilter;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,21 @@ public class ListingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                String selectedCategory = spinner.getSelectedItem().toString();
+                items.clear();
+                filterCategory(selectedCategory);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
     }
 
     @Override
@@ -122,7 +141,7 @@ public class ListingsActivity extends AppCompatActivity {
         Log.d("XYZ", ((Integer) items.size()).toString());
     }
 
-    public void filter(String slatt)    {
+    public void filterCategory(String slatt)    {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("items")
                 .whereEqualTo("Item Category", slatt)
