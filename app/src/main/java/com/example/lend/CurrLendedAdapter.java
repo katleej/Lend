@@ -26,32 +26,39 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.CustomViewHolder> {
+public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.CustomViewHolder> {
     Context context;
     ArrayList<Booking> bookings;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     LendUser user;
     Item item;
 
-    public CurrBookingAdapter(Context context, ArrayList<Booking> bookings) {
+
+    public CurrLendedAdapter(Context context, ArrayList<Booking> bookings) {
         this.context = context;
         this.bookings = bookings;
     }
 
     @NonNull
     @Override
-    public CurrBookingAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.curr_booking_row, parent, false);
+    public CurrLendedAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lended_booking_row, parent, false);
         return new CustomViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CurrBookingAdapter.CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CurrLendedAdapter.CustomViewHolder holder, int position) {
         final Booking booking = bookings.get(position);
-        if (booking.getUserReturned().equals(true)) {
-            holder.btnReturn.setText("Pending Confirmation");
-            DocumentReference rf = db.collection("bookings").document(booking.getID());
-            rf.update("User Returned", true);
+        holder.btnReturn.setClickable(false);
+        if (booking.getUserReturned().equals("true")) {
+            holder.btnReturn.setText("Confirm Returned");
+            holder.btnReturn.setClickable(true);
+            holder.btnReturn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
         db.collection("users").whereEqualTo("uid", booking.getLenderID()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -86,7 +93,6 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
             @Override
             public void onClick(View view) {
                 booking.setUserReturned(((Boolean) true).toString());
-                holder.btnReturn.setText("Pending Confirmation");
 
             }
         });

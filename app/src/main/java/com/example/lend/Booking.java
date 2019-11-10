@@ -9,6 +9,7 @@ public class Booking {
     public String lenderID;
     public String active;
     public String daysBooked;
+    public String userReturned;
 
     public Booking() {
 
@@ -60,5 +61,13 @@ public class Booking {
 
     public void setDaysBooked(String daysBooked) {
         this.daysBooked = daysBooked;
+    }
+
+    public String getUserReturned() {
+        return userReturned;
+    }
+
+    public void setUserReturned(String userReturned) {
+        this.userReturned = userReturned;
     }
 }
