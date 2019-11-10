@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 public final class Utils {
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    static FirebaseAuth auth = FirebaseAuth.getInstance();
     final String TAG = "henlo";
     static ArrayList<Item> items;
     static ArrayList<Item> currentItems;
@@ -33,7 +35,8 @@ public final class Utils {
         username.put("username", input);
         username.put("lat", ((Double) location.getLatLng().latitude).toString());
         username.put("long", ((Double) location.getLatLng().longitude).toString());
-        db.collection("users").document()
+        username.put("ID", auth.getCurrentUser().getUid());
+        db.collection("users").document(auth.getCurrentUser().getUid())
                 .set(username)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -60,7 +63,7 @@ public final class Utils {
         item.put("Item Price", itemPrice);
         item.put("Item Category", itemCategory);
         item.put("Photo URL", photoURL);
-        db.collection("items").document()
+        db.collection("items").document(((Integer) item.hashCode()).toString())
                 .set(item)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -84,8 +87,8 @@ public final class Utils {
         booking.put("Borrower ID" , borrowerID);
         booking.put("Active", active);
         booking.put("Booking Days", days);
-        booking.put("User Returned", ((Boolean) false).toString());
-        db.collection("bookings").document()
+        booking.put("User Returned", false);
+        db.collection("bookings").document(((Integer) booking.hashCode()).toString())
                 .set(booking)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
