@@ -57,6 +57,12 @@ public class MainActivity extends Activity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(MainActivity.this, ListingsActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
 
