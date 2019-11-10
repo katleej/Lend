@@ -15,4 +15,9 @@
         <item name="colorAccent">@color/themeBlue</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="colorControlActivated">@color/themeBlue</item>
+    </style>
+
 </resources>

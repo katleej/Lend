@@ -47,7 +47,7 @@ public class ListingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         db.collection("items")
-                .whereEqualTo("Item Category", "Electronic Appliances")
+//                .whereEqualTo("Item Category", "Electronic Appliances")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -65,6 +65,7 @@ public class ListingsActivity extends AppCompatActivity {
                                 temp.setPrice(itemMap.get("Item Price").toString());
                                 items.add(temp);
                             }
+                            Log.d("henlo" , items.toString());
                             setUpRV();
                         } else {
                             Log.d("henlo", "Error getting documents: ", task.getException());
@@ -98,6 +99,10 @@ public class ListingsActivity extends AppCompatActivity {
                 Intent intent = new Intent(ListingsActivity.this, BookingsListActivity.class);
                 startActivity(intent); 
                 return true;
+            case R.id.my_settings:
+                Intent intent2 = new Intent(ListingsActivity.this,ProfileActivity.class);
+                startActivity(intent2);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -115,5 +120,37 @@ public class ListingsActivity extends AppCompatActivity {
         recList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         Log.d("XYZ", ((Integer) items.size()).toString());
+    }
+
+    public void filter(String slatt)    {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("items")
+                .whereEqualTo("Item Category", slatt)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("henlo", document.getId() + " => " + document.getData());
+                                Map<String, Object> itemMap = document.getData();
+                                Item temp = new Item();
+                                temp.setCategory(itemMap.get("Item Category").toString());
+                                temp.setItemDescription(itemMap.get("Item Description").toString());
+                                temp.setItemName(itemMap.get("Item Name").toString());
+                                temp.setPhotoURL(itemMap.get("Photo URL").toString());
+                                temp.setLender(itemMap.get("Lender ID").toString());
+                                temp.setPrice(itemMap.get("Item Price").toString());
+                                items.add(temp);
+                            }
+                            Log.d("henlo" , items.toString());
+                            setUpRV();
+                        } else {
+                            Log.d("henlo", "Error getting documents: ", task.getException());
+                        }
+
+                    }
+                });
+
     }
 }
