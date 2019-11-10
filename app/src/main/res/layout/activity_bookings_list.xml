@@ -81,8 +81,5 @@
                 android:text="MY BOOKINGS"></TextView>
         </LinearLayout>
 
-    </androidx.appcompat.widget.Toolbar><![CDATA[
-
-    >>>>>>> 1556f82e41cc37359be6823ca3ae607ba1a85adc
-]]>
+    </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>
