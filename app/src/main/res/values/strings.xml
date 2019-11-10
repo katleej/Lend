@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Lend</string>
     <string name="sample_description">Hail to California. Alma Mater dear. Sing the joyful chorus. Sound it far and near. Rallying round her banner, we will never fail! California, Alma Mater, Hail! Hail! Hail!I live on Southside, so I can drop the item off anywhere that is walking distance.Pickups are available 10am-10pm and feel free to message me at 510-203-4444 for more information.</string>
+    <string name="sample_aboutme">Hail to California. Alma Mater dear. Sing the joyful chorus. Sound it far and near. I live on Southside, so I can drop the item off anywhere that is walking distance.</string>
+    <string name="sample_address">Berkeley, CA </string>
     <string-array name="category">
         <item>Electronic Appliances</item>
         <item>Apparels</item>
