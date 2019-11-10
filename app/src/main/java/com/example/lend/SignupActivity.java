@@ -108,6 +108,7 @@ public class SignupActivity extends AppCompatActivity {
                             username.put("lat", ((Double) userPlace.getLatLng().latitude).toString());
                             username.put("long", ((Double) userPlace.getLatLng().longitude).toString());
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            username.put("ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
                             db.collection("users").document(mAuth.getCurrentUser().getUid())
                                     .set(username)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
