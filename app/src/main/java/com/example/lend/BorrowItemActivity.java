@@ -54,6 +54,9 @@ public class BorrowItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_item);
         item = (Item) Parcels.unwrap(getIntent().getParcelableExtra("item"));
+        if (item == null) {
+            Log.d("XYZ", item.getID());
+        }
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 

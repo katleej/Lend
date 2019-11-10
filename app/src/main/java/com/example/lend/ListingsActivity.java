@@ -62,13 +62,13 @@ public class ListingsActivity extends AppCompatActivity {
                                 Log.d("henlo", document.getId() + " => " + document.getData());
                                 Map<String, Object> itemMap = document.getData();
                                 Item temp = new Item();
-                                temp.setID(itemMap.get("ID").toString());
                                 temp.setCategory(itemMap.get("Item Category").toString());
                                 temp.setItemDescription(itemMap.get("Item Description").toString());
                                 temp.setItemName(itemMap.get("Item Name").toString());
                                 temp.setPhotoURL(itemMap.get("Photo URL").toString());
                                 temp.setLender(itemMap.get("Lender ID").toString());
                                 temp.setPrice(itemMap.get("Item Price").toString());
+                                temp.setID(itemMap.get("ID").toString());
                                 items.add(temp);
                             }
                             Log.d("henlo" , items.toString());
