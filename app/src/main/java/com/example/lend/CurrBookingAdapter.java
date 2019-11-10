@@ -50,6 +50,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         final Booking booking = bookings.get(position);
         if (booking.getUserReturned().equals(true)) {
             holder.btnReturn.setText("Pending Confirmation");
+            DocumentReference rf = db.collection("bookings").document(booking.getID());
+            rf.update("User Returned", true);
         }
         db.collection("users").whereEqualTo("uid", booking.getLenderID()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
