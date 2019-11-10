@@ -56,14 +56,14 @@ public final class Utils {
 
     public static void itemWrite(String lenderIDToken, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL) {
         Map<String, Object> item = new HashMap<>();
-        item.put("ID", item.hashCode());
         item.put("Lender ID", lenderIDToken);
         item.put("Item Name", itemName);
         item.put("Item Description", itemDescription);
         item.put("Item Price", itemPrice);
         item.put("Item Category", itemCategory);
         item.put("Photo URL", photoURL);
-        db.collection("items").document(((Integer) item.hashCode()).toString())
+        item.put("ID", item.hashCode());
+        db.collection("items").document(item.get("ID").toString())
                 .set(item)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -81,14 +81,14 @@ public final class Utils {
 
     public static void bookingWrite(String itemID, String lenderID, String borrowerID, String active, String days)  {
         Map<String, Object> booking = new HashMap<>();
-        booking.put("ID", booking.hashCode());
         booking.put("Item ID", itemID);
         booking.put("Lender ID", lenderID);
         booking.put("Borrower ID" , borrowerID);
         booking.put("Active", active);
         booking.put("Booking Days", days);
         booking.put("User Returned", false);
-        db.collection("bookings").document(((Integer) booking.hashCode()).toString())
+        booking.put("ID", booking.hashCode());
+        db.collection("bookings").document(booking.get("ID").toString())
                 .set(booking)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
