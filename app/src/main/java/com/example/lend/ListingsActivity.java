@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +37,8 @@ public class ListingsActivity extends AppCompatActivity {
     ItemAdapter adapter;
     FloatingActionButton fabAdd;
     Toolbar toolbar;
+    FloatingActionButton categoryFilter;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class ListingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         db.collection("items")
+                .whereEqualTo("Booked", false)
 //                .whereEqualTo("Item Category", "Electronic Appliances")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -57,6 +62,7 @@ public class ListingsActivity extends AppCompatActivity {
                                 Log.d("henlo", document.getId() + " => " + document.getData());
                                 Map<String, Object> itemMap = document.getData();
                                 Item temp = new Item();
+                                temp.setID(itemMap.get("ID").toString());
                                 temp.setCategory(itemMap.get("Item Category").toString());
                                 temp.setItemDescription(itemMap.get("Item Description").toString());
                                 temp.setItemName(itemMap.get("Item Name").toString());
@@ -80,6 +86,21 @@ public class ListingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ListingsActivity.this, AddItemActivity.class);
                 startActivity(intent);
+            }
+        });
+        spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                String selectedCategory = spinner.getSelectedItem().toString();
+                items.clear();
+                filterCategory(selectedCategory);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
             }
         });
     }
@@ -122,7 +143,7 @@ public class ListingsActivity extends AppCompatActivity {
         Log.d("XYZ", ((Integer) items.size()).toString());
     }
 
-    public void filter(String slatt)    {
+    public void filterCategory(String slatt)    {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("items")
                 .whereEqualTo("Item Category", slatt)

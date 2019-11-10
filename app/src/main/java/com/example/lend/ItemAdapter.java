@@ -14,7 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -26,6 +30,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
     Context context;
     ArrayList<Item> items;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
 
     public ItemAdapter(Context context, ArrayList<Item> items) {
@@ -42,9 +48,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemAdapter.CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ItemAdapter.CustomViewHolder holder, int position) {
         Item item = items.get(position);
-        holder.tvLenderName.setText(item.getLender());
+        db.collection("users").whereEqualTo("ID", item.getLender()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        LendUser user = document.toObject(LendUser.class);
+                        holder.tvLenderName.setText(user.getUsername());
+                    }
+                }
+            }
+        });
         holder.tvItemName.setText(item.getItemName());
         holder.tvItemPrice.setText(item.getPrice() +"");
         Log.d("ITEM URL" , item.getPhotoURL());
