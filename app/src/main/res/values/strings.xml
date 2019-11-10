@@ -20,15 +20,15 @@
         <item>Hobbies</item>
     </string-array>
     <string-array name="days">
-        <item>1 day</item>
-        <item>2 days</item>
-        <item>3 days</item>
-        <item>4 days</item>
-        <item>5 days</item>
-        <item>6 days</item>
-        <item>7 days</item>
-        <item>9 days</item>
-        <item>10 days</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
     <string name="demo_user_name">Katniss Lee</string>
 </resources>

@@ -18,6 +18,10 @@ public class LendUser {
     private String lngLocation;
     private HashMap<String, String> mLendedItemList;
 
+    public LendUser() {
+
+    }
+
     public LendUser(Context context) {
 
     }

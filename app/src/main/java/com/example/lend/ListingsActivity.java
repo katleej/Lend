@@ -47,6 +47,7 @@ public class ListingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         db.collection("items")
+                .whereEqualTo("Booked", false)
 //                .whereEqualTo("Item Category", "Electronic Appliances")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -57,6 +58,7 @@ public class ListingsActivity extends AppCompatActivity {
                                 Log.d("henlo", document.getId() + " => " + document.getData());
                                 Map<String, Object> itemMap = document.getData();
                                 Item temp = new Item();
+                                temp.setID(itemMap.get("ID").toString());
                                 temp.setCategory(itemMap.get("Item Category").toString());
                                 temp.setItemDescription(itemMap.get("Item Description").toString());
                                 temp.setItemName(itemMap.get("Item Name").toString());
