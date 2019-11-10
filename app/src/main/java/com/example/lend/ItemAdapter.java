@@ -79,6 +79,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
                     if (position != RecyclerView.NO_POSITION) {
                         Item item = items.get(position);
                         Intent intent = new Intent(context, BorrowItemActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("item", Parcels.wrap(item));
                         context.startActivity(intent);
                     }
