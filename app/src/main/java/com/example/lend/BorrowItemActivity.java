@@ -130,6 +130,8 @@ public class BorrowItemActivity extends AppCompatActivity {
                                 book.setTextColor(getResources().getColor(R.color.quantum_googgreen500));
                                 book.setBackgroundColor(getResources().getColor(R.color.quantum_googgreen200));
                                 DocumentReference rf = db.collection("items").document(item.getID());
+                                Log.d("item", item.getID());
+                                Log.d("rf", rf.getId());
                                 HashMap<String, Object> map = new HashMap();
                                 map.put("Booked", true);
                                 rf.update(map);
