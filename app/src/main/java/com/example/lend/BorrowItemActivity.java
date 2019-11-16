@@ -135,7 +135,7 @@ public class BorrowItemActivity extends AppCompatActivity {
 
                                 DocumentReference rf = db.collection("items").document(itemID);
                                 HashMap<String, Object> map = new HashMap();
-                                map.put("Booked", true);
+                                map.put("Booked", "true");
                                 rf.update(map);
                                 days.setClickable(false);
                             }
