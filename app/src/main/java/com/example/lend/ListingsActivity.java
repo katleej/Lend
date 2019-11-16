@@ -45,8 +45,10 @@ public class ListingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listings);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         items = new ArrayList();
+
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+/*
         db.collection("items")
                 .whereEqualTo("Booked", "false")
 //                .whereEqualTo("Item Category", "Electronic Appliances")
@@ -66,7 +68,6 @@ public class ListingsActivity extends AppCompatActivity {
                                 temp.setLender(itemMap.get("Lender ID").toString());
                                 temp.setPrice(itemMap.get("Item Price").toString());
                                 temp.setID(itemMap.get("ID").toString());
-                                temp.setBooked(itemMap.get("Booked").toString());
                                 items.add(temp);
                             }
                             Log.d("henlo" , items.toString());
@@ -77,7 +78,7 @@ public class ListingsActivity extends AppCompatActivity {
 
                     }
                 });
-
+*/
         fabAdd = findViewById(R.id.fabAdd);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +164,6 @@ public class ListingsActivity extends AppCompatActivity {
                                     temp.setLender(itemMap.get("Lender ID").toString());
                                     temp.setPrice(itemMap.get("Item Price").toString());
                                     temp.setID(itemMap.get("ID").toString());
-                                    temp.setBooked(itemMap.get("Booked").toString());
                                     items.add(temp);
                                 }
                                 Log.d("henlo" , items.toString());
@@ -196,7 +196,7 @@ public class ListingsActivity extends AppCompatActivity {
                                     temp.setPhotoURL(itemMap.get("Photo URL").toString());
                                     temp.setLender(itemMap.get("Lender ID").toString());
                                     temp.setPrice(itemMap.get("Item Price").toString());
-                                    temp.setBooked(itemMap.get("Booked").toString());
+                                    temp.setID(itemMap.get("ID").toString());
                                     items.add(temp);
                                 }
                                 Log.d("henlo" , items.toString());
@@ -210,10 +210,8 @@ public class ListingsActivity extends AppCompatActivity {
         }
 
     }
-
     @Override
     public void onBackPressed() {
         adapter.notifyDataSetChanged();
     }
 }
-
