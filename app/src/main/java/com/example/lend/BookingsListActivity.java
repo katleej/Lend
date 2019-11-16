@@ -51,7 +51,7 @@ public class BookingsListActivity extends AppCompatActivity {
                                 booking.setBorrower(bookingMap.get("Borrower ID").toString());
                                 booking.setItem(bookingMap.get("Item ID").toString());
                                 booking.setActive(bookingMap.get("Active").toString());
-                                booking.setDaysBooked(bookingMap.get("Days Booked").toString());
+                                booking.setDaysBooked(bookingMap.get("Booking Days").toString());
                                 booking.setUserReturned(bookingMap.get("User Returned").toString());
                                 lendBookings.add(booking);
                                 CurrLendedAdapter adapter = new CurrLendedAdapter(getApplicationContext(), lendBookings);
@@ -76,7 +76,7 @@ public class BookingsListActivity extends AppCompatActivity {
                                 booking.setBorrower(bookingMap.get("Borrower ID").toString());
                                 booking.setItem(bookingMap.get("Item ID").toString());
                                 booking.setActive(bookingMap.get("Active").toString());
-                                booking.setDaysBooked(bookingMap.get("Days Booked").toString());
+                                booking.setDaysBooked(bookingMap.get("Booking Days").toString());
                                 booking.setUserReturned(bookingMap.get("User Returned").toString());
                                 borrowBookings.add(booking);
                                 CurrBookingAdapter adapter = new CurrBookingAdapter(getApplicationContext(), borrowBookings);
@@ -85,6 +85,7 @@ public class BookingsListActivity extends AppCompatActivity {
                         }
                     }
                 });
+
     }
 
     public void setUpRV(RecyclerView recList, ArrayList<Booking> bookings, RecyclerView.Adapter adapter) {
