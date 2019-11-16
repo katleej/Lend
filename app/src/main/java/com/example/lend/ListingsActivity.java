@@ -51,7 +51,7 @@ public class ListingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         db.collection("items")
-                .whereEqualTo("Booked", false)
+//                .whereEqualTo("Booked", false)
 //                .whereEqualTo("Item Category", "Electronic Appliances")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
