@@ -13,14 +13,14 @@
         android:padding="32dp"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/borrow_item_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-light"
-        android:textStyle="bold"
-        android:text="Item Name"
-        android:textSize="40dp"></TextView>
+        <TextView
+            android:id="@+id/borrow_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textStyle="bold"
+            android:text="Item Name"
+            android:textSize="40dp"></TextView>
 
         <ImageView
             android:id="@+id/borrow_item_image"
@@ -90,12 +90,14 @@
             android:id="@+id/viewDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:entries="@array/days" />
 
         <TextView
             android:id="@+id/tvPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Current Price: "
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -103,6 +105,7 @@
             android:id="@+id/btnBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Book!" />
 
 

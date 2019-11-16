@@ -1,4 +1,3 @@
-
 package com.example.lend;
 
 import android.content.Context;
@@ -18,8 +17,8 @@ import java.util.HashMap;
 public class LendUser {
     public String email, username, password;
     public String latLocation;
-    public String lngLocation;
-    public String ID;
+    public String longLocation;
+    public String id;
     public HashMap<String, String> mLendedItemList;
     public HashMap<String, String> mBorrowedItemList;
 
@@ -64,11 +63,11 @@ public class LendUser {
     }
 
     public String getLng() {
-        return lngLocation;
+        return longLocation;
     }
 
     public void setLng(String lng) {
-        this.lngLocation = lng;
+        this.longLocation = lng;
     }
 
     public HashMap<String, String> getmLendedItemList() {
@@ -87,11 +86,11 @@ public class LendUser {
         this.mBorrowedItemList = mBorrowedItemList;
     }
 
-    public String getID() {
-        return ID;
+    public String getid() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setid(String id) {
+        this.id = id;
     }
 }
