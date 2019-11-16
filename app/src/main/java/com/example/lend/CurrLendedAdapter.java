@@ -38,7 +38,7 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
     public CurrLendedAdapter(Context context, ArrayList<Booking> bookings) {
         this.context = context;
         this.bookings = bookings;
-        Log.d("ABC", bookings.toString());
+        Log.d("ABC", "lend" + bookings.toString());
     }
 
     @NonNull

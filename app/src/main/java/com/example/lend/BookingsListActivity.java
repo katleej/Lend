@@ -32,6 +32,7 @@ public class BookingsListActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("XYZ", user.getUid());
         lendBookings = new ArrayList();
         borrowBookings = new ArrayList();
         lendBook = findViewById(R.id.rvLend);
@@ -54,8 +55,8 @@ public class BookingsListActivity extends AppCompatActivity {
                                 booking.setDaysBooked(bookingMap.get("Booking Days").toString());
                                 booking.setUserReturned(bookingMap.get("User Returned").toString());
                                 lendBookings.add(booking);
-                                CurrLendedAdapter adapter = new CurrLendedAdapter(getApplicationContext(), lendBookings);
-                                setUpRV(lendBook, lendBookings, adapter);
+                                CurrLendedAdapter adapter1 = new CurrLendedAdapter(getApplicationContext(), lendBookings);
+                                setUpRV(lendBook, lendBookings, adapter1);
                             }
                         }
                     }
@@ -79,8 +80,8 @@ public class BookingsListActivity extends AppCompatActivity {
                                 booking.setDaysBooked(bookingMap.get("Booking Days").toString());
                                 booking.setUserReturned(bookingMap.get("User Returned").toString());
                                 borrowBookings.add(booking);
-                                CurrBookingAdapter adapter = new CurrBookingAdapter(getApplicationContext(), borrowBookings);
-                                setUpRV(borrowBook, borrowBookings, adapter);
+                                CurrBookingAdapter adapter2 = new CurrBookingAdapter(getApplicationContext(), borrowBookings);
+                                setUpRV(borrowBook, borrowBookings, adapter2);
                             }
                         }
                     }
@@ -97,7 +98,7 @@ public class BookingsListActivity extends AppCompatActivity {
         recList.setLayoutManager(llm);
         recList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        Log.d("XYZ", ((Integer) bookings.size()).toString());
+        Log.d("ABC", ((Integer) bookings.size()).toString());
     }
 
 

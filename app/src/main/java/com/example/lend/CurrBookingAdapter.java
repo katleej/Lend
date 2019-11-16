@@ -37,7 +37,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
     public CurrBookingAdapter(Context context, ArrayList<Booking> bookings) {
         this.context = context;
         this.bookings = bookings;
-        Log.d("ABC", bookings.toString());
+        Log.d("ABC", "book" + bookings.toString());
     }
 
     @NonNull
