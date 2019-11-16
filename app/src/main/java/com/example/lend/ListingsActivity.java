@@ -45,12 +45,10 @@ public class ListingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listings);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         items = new ArrayList();
-
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-
         db.collection("items")
-                .whereEqualTo("Booked", false)
+                .whereEqualTo("Booked", "false")
 //                .whereEqualTo("Item Category", "Electronic Appliances")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -68,6 +66,7 @@ public class ListingsActivity extends AppCompatActivity {
                                 temp.setLender(itemMap.get("Lender ID").toString());
                                 temp.setPrice(itemMap.get("Item Price").toString());
                                 temp.setID(itemMap.get("ID").toString());
+                                temp.setBooked(itemMap.get("Booked").toString());
                                 items.add(temp);
                             }
                             Log.d("henlo" , items.toString());
@@ -146,7 +145,7 @@ public class ListingsActivity extends AppCompatActivity {
         if (slatt.equals("Show All"))   {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
-                    .whereEqualTo("Booked", false)
+                    .whereEqualTo("Booked", "false")
 //                .whereEqualTo("Item Category", "Electronic Appliances")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -164,6 +163,7 @@ public class ListingsActivity extends AppCompatActivity {
                                     temp.setLender(itemMap.get("Lender ID").toString());
                                     temp.setPrice(itemMap.get("Item Price").toString());
                                     temp.setID(itemMap.get("ID").toString());
+                                    temp.setBooked(itemMap.get("Booked").toString());
                                     items.add(temp);
                                 }
                                 Log.d("henlo" , items.toString());
@@ -179,7 +179,7 @@ public class ListingsActivity extends AppCompatActivity {
         else    {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
-                    .whereEqualTo("Booked", false)
+                    .whereEqualTo("Booked", "false")
                     .whereEqualTo("Item Category", slatt)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -196,6 +196,7 @@ public class ListingsActivity extends AppCompatActivity {
                                     temp.setPhotoURL(itemMap.get("Photo URL").toString());
                                     temp.setLender(itemMap.get("Lender ID").toString());
                                     temp.setPrice(itemMap.get("Item Price").toString());
+                                    temp.setBooked(itemMap.get("Booked").toString());
                                     items.add(temp);
                                 }
                                 Log.d("henlo" , items.toString());
