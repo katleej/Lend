@@ -97,13 +97,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
                         Item item = items.get(position);
                         if (item == null) {
                             Log.d("XYZ", "null item");
-                        } else if (item.getID() == null) {
+                        } else if (item.getid() == null) {
                             Log.d("XYZ", "Print null");
                         }
                         Intent intent = new Intent(context, BorrowItemActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("item", Parcels.wrap(item));
-                        intent.putExtra("itemID", item.getID());
+                        intent.putExtra("itemID", item.getid());
                         context.startActivity(intent);
                     }
                 }

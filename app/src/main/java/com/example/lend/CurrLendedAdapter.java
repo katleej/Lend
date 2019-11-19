@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.CustomViewHolder> {
     Context context;
@@ -38,6 +39,7 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
     public CurrLendedAdapter(Context context, ArrayList<Booking> bookings) {
         this.context = context;
         this.bookings = bookings;
+        item = new Item();
         Log.d("ABC", "lend" + bookings.toString());
     }
 
@@ -62,7 +64,7 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
                 }
             });
         }
-        db.collection("users").whereEqualTo("uid", booking.getLenderID()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("users").whereEqualTo("ID", booking.getBorrower()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
@@ -76,16 +78,18 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
         });
 
         db.collection("items")
-                .whereEqualTo("ID", booking.getItem())
+                .whereEqualTo("ID", Integer.parseInt(booking.getItem()))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                item = document.toObject(Item.class);
+                                Map<String, Object> itemMap = document.getData();
+                                item.setItemName(itemMap.get("Item Name").toString());
+                                item.setPrice(itemMap.get("Item Price").toString());
                                 holder.tvItemName.setText(item.getItemName());
-                                holder.tvPrice.setText(Integer.parseInt(item.getPrice()) * Integer.parseInt(booking.getDaysBooked()));
+                                holder.tvPrice.setText("$" + Integer.parseInt(item.getPrice()) * Integer.parseInt(booking.getDaysBooked()));
                             }
                         }
                     }

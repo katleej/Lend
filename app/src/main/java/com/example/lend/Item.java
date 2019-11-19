@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Item {
     //keeps track of number of bookings made on this item
 
-    public String ID;
+    public String id;
     public String lender;
     public String itemName;
     public String itemDescription;
@@ -29,12 +29,12 @@ public class Item {
     public Item() {
     }
 
-    public String getID() {
-        return ID;
+    public String getid() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setid(String ID) {
+        this.id = ID;
     }
 
     public String getLender() {
