@@ -6,6 +6,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -45,6 +46,5 @@ public class ViewProfileActivity extends AppCompatActivity {
         yearJoined.setText(lendUser.getYearJoined());
         profileDescription.setText(lendUser.getDescription());
         numReviews = findViewById(lendUser.getNum_reviews());
-
     }
 }

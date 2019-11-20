@@ -4,6 +4,7 @@
     <string name="sample_aboutme">Hail to California. Alma Mater dear. Sing the joyful chorus. Sound it far and near. I live on Southside, so I can drop the item off anywhere that is walking distance.</string>
     <string name="sample_address">Berkeley, CA </string>
     <string-array name="category">
+        <item>Show All</item>
         <item>Electronic Appliances</item>
         <item>Apparels</item>
         <item>Jewelery</item>

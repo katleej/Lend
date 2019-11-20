@@ -125,7 +125,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                         item.setPrice(((Integer) price).toString());
                         Log.d("henlo" , Integer.toString(price));
                         item.setPhotoURL(photoURL);
-                        itemWrite(user.getUid() , item.getItemName() , item.getItemDescription(), item.getPrice(), item.getCategory(), item.getPhotoURL());
+                        itemWrite(user.getUid() , item.getItemName() , item.getItemDescription(), item.getPrice(), item.getCategory(), item.getPhotoURL(), "false");
                         Log.d("henlo" , user.getUid());
                     }
                     catch (NullPointerException e)  {

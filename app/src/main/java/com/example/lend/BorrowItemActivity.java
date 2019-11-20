@@ -41,6 +41,7 @@ public class BorrowItemActivity extends AppCompatActivity {
     public TextView lenderName;
     public Button book;
     public Item item;
+    public String itemID;
     FirebaseAuth auth;
     FirebaseFirestore db;
     LendUser user;
@@ -51,6 +52,8 @@ public class BorrowItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_item);
         item = (Item) Parcels.unwrap(getIntent().getParcelableExtra("item"));
+        itemID = getIntent().getStringExtra("itemID");
+        Log.d("XYZ", itemID);
         if (item == null) {
             Log.d("XYZ", item.getID());
         }
@@ -110,7 +113,7 @@ public class BorrowItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Map<String, Object> booking = new HashMap<>();
-                booking.put("Item ID", item.getID());
+                booking.put("Item ID", itemID);
                 booking.put("Lender ID", item.getLender());
                 booking.put("Borrower ID", auth.getCurrentUser().getUid());
                 booking.put("Active", true);
@@ -126,10 +129,12 @@ public class BorrowItemActivity extends AppCompatActivity {
                                 book.setText("Booked!");
                                 book.setTextColor(getResources().getColor(R.color.quantum_googgreen500));
                                 book.setBackgroundColor(getResources().getColor(R.color.quantum_googgreen200));
-                                DocumentReference rf = db.collection("items").document(item.getID());
+
+                                DocumentReference rf = db.collection("items").document(itemID);
                                 HashMap<String, Object> map = new HashMap();
-                                map.put("Booked", true);
+                                map.put("Booked", "true");
                                 rf.update(map);
+                                days.setClickable(false);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

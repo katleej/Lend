@@ -54,7 +54,7 @@ public final class Utils {
                 });
     }
 
-    public static void itemWrite(String lenderIDToken, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL) {
+    public static void itemWrite(String lenderIDToken, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL, String murder) {
         Map<String, Object> item = new HashMap<>();
         item.put("Lender ID", lenderIDToken);
         item.put("Item Name", itemName);
@@ -63,6 +63,7 @@ public final class Utils {
         item.put("Item Category", itemCategory);
         item.put("Photo URL", photoURL);
         item.put("ID", item.hashCode());
+        item.put("booked" , murder);
         db.collection("items").document(item.get("ID").toString())
                 .set(item)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

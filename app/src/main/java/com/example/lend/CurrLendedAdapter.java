@@ -2,6 +2,7 @@ package com.example.lend;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
     public CurrLendedAdapter(Context context, ArrayList<Booking> bookings) {
         this.context = context;
         this.bookings = bookings;
+        Log.d("ABC", bookings.toString());
     }
 
     @NonNull

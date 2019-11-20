@@ -32,7 +32,6 @@ public class ListingsActivity extends AppCompatActivity {
     Toolbar toolbar;
     FloatingActionButton categoryFilter;
     Spinner spinner;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +41,13 @@ public class ListingsActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-
+/*
         db.collection("items")
+<<<<<<< HEAD
 //                .whereEqualTo("Booked", false)
+=======
+                .whereEqualTo("Booked", "false")
+>>>>>>> 5e5d1bf0cdba6773942003e3da76939bf0afb215
 //                .whereEqualTo("Item Category", "Electronic Appliances")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -72,7 +75,7 @@ public class ListingsActivity extends AppCompatActivity {
 
                     }
                 });
-
+*/
         fabAdd = findViewById(R.id.fabAdd);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +114,7 @@ public class ListingsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.my_bookings_button:
                 Intent intent = new Intent(ListingsActivity.this, BookingsListActivity.class);
-                startActivity(intent); 
+                startActivity(intent);
                 return true;
             case R.id.my_settings:
                 Intent intent2 = new Intent(ListingsActivity.this, ViewProfileActivity.class);
@@ -137,34 +140,75 @@ public class ListingsActivity extends AppCompatActivity {
     }
 
     public void filterCategory(String slatt)    {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("items")
-                .whereEqualTo("Item Category", slatt)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("henlo", document.getId() + " => " + document.getData());
-                                Map<String, Object> itemMap = document.getData();
-                                Item temp = new Item();
-                                temp.setCategory(itemMap.get("Item Category").toString());
-                                temp.setItemDescription(itemMap.get("Item Description").toString());
-                                temp.setItemName(itemMap.get("Item Name").toString());
-                                temp.setPhotoURL(itemMap.get("Photo URL").toString());
-                                temp.setLender(itemMap.get("Lender ID").toString());
-                                temp.setPrice(itemMap.get("Item Price").toString());
-                                items.add(temp);
+        if (slatt.equals("Show All"))   {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("items")
+                    .whereEqualTo("Booked", "false")
+//                .whereEqualTo("Item Category", "Electronic Appliances")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d("henlo", document.getId() + " => " + document.getData());
+                                    Map<String, Object> itemMap = document.getData();
+                                    Item temp = new Item();
+                                    temp.setCategory(itemMap.get("Item Category").toString());
+                                    temp.setItemDescription(itemMap.get("Item Description").toString());
+                                    temp.setItemName(itemMap.get("Item Name").toString());
+                                    temp.setPhotoURL(itemMap.get("Photo URL").toString());
+                                    temp.setLender(itemMap.get("Lender ID").toString());
+                                    temp.setPrice(itemMap.get("Item Price").toString());
+                                    temp.setID(itemMap.get("ID").toString());
+                                    items.add(temp);
+                                }
+                                Log.d("henlo" , items.toString());
+                                setUpRV();
+                            } else {
+                                Log.d("henlo", "Error getting documents: ", task.getException());
                             }
-                            Log.d("henlo" , items.toString());
-                            setUpRV();
-                        } else {
-                            Log.d("henlo", "Error getting documents: ", task.getException());
+
                         }
+                    });
 
-                    }
-                });
+        }
+        else    {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("items")
+                    .whereEqualTo("Booked", "false")
+                    .whereEqualTo("Item Category", slatt)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d("henlo", document.getId() + " => " + document.getData());
+                                    Map<String, Object> itemMap = document.getData();
+                                    Item temp = new Item();
+                                    temp.setCategory(itemMap.get("Item Category").toString());
+                                    temp.setItemDescription(itemMap.get("Item Description").toString());
+                                    temp.setItemName(itemMap.get("Item Name").toString());
+                                    temp.setPhotoURL(itemMap.get("Photo URL").toString());
+                                    temp.setLender(itemMap.get("Lender ID").toString());
+                                    temp.setPrice(itemMap.get("Item Price").toString());
+                                    temp.setID(itemMap.get("ID").toString());
+                                    items.add(temp);
+                                }
+                                Log.d("henlo" , items.toString());
+                                setUpRV();
+                            } else {
+                                Log.d("henlo", "Error getting documents: ", task.getException());
+                            }
 
+                        }
+                    });
+        }
+
+    }
+    @Override
+    public void onBackPressed() {
+        adapter.notifyDataSetChanged();
     }
 }
