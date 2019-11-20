@@ -40,11 +40,12 @@ public class ViewProfileActivity extends AppCompatActivity {
         profileDescription = findViewById(R.id.profile_description);
         profileLocation = findViewById(R.id.profile_location);
         numReviews = findViewById(R.id.review_number);
-
-        ratingBar.setRating(lendUser.getRating());
+//
+//        ratingBar.setRating(lendUser.getRating());
         profileName.setText(lendUser.getUsername());
         yearJoined.setText(lendUser.getYearJoined());
         profileDescription.setText(lendUser.getDescription());
         numReviews = findViewById(lendUser.getNum_reviews());
+
     }
 }

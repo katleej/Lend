@@ -113,6 +113,9 @@ public class SignupActivity extends AppCompatActivity {
                             username.put("ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
                             int year = Calendar.getInstance().get(Calendar.YEAR);
                             username.put("year joined", Integer.toString(year));
+                            username.put("average rating", user.getRating());
+                            username.put("number of reviews", user.getNum_reviews());
+
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("users").document(mAuth.getCurrentUser().getUid())
                                     .set(username)
