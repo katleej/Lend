@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +50,11 @@ public class ListingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 /*
         db.collection("items")
+<<<<<<< HEAD
+//                .whereEqualTo("Booked", false)
+=======
                 .whereEqualTo("Booked", "false")
+>>>>>>> 5e5d1bf0cdba6773942003e3da76939bf0afb215
 //                .whereEqualTo("Item Category", "Electronic Appliances")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -127,7 +130,7 @@ public class ListingsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.my_settings:
-                Intent intent2 = new Intent(ListingsActivity.this,ProfileActivity.class);
+                Intent intent2 = new Intent(ListingsActivity.this, ViewProfileActivity.class);
                 startActivity(intent2);
                 return true;
             default:

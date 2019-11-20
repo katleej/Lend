@@ -38,7 +38,7 @@
 
         <TextView
             android:id="@+id/tvLenderName"
-            android:text="User Id"
+            android:text="Lender Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16dp"

@@ -34,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,11 +104,15 @@ public class SignupActivity extends AppCompatActivity {
                             user.setUsername(etName.getText().toString());
                             user.setLat(((Double) userPlace.getLatLng().latitude).toString());
                             user.setLat(((Double) userPlace.getLatLng().longitude).toString());
+                            user.setYearJoined(Calendar.getInstance().get(Calendar.YEAR));
+
                             Map<String, Object> username = new HashMap<>();
                             username.put("username", etName.getText().toString());
                             username.put("lat", ((Double) userPlace.getLatLng().latitude).toString());
                             username.put("long", ((Double) userPlace.getLatLng().longitude).toString());
                             username.put("ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            int year = Calendar.getInstance().get(Calendar.YEAR);
+                            username.put("year joined", Integer.toString(year));
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("users").document(mAuth.getCurrentUser().getUid())
                                     .set(username)
