@@ -59,11 +59,13 @@
                 app:srcCompat="@drawable/search"></ImageView>
 
             <EditText
+                android:id="@+id/searchbar"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:hint="Keyword"></EditText>
 
             <Button
+                android:id="@+id/search"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="@drawable/round_button_blue"
