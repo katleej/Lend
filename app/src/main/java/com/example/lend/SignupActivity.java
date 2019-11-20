@@ -9,6 +9,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -33,9 +35,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.example.lend.Utils.userWrite;
@@ -80,7 +85,15 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 userPlace = place;
-                Log.d("henlo" , userPlace.getLatLng().toString());
+                String cityName = "";
+                Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
+                try {
+                    List<Address> addresses = geo.getFromLocation(userPlace.getLatLng().latitude, userPlace.getLatLng().longitude, 1);
+                    cityName = addresses.get(0).getLocality();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Log.d("henlo" , cityName);
 
             }
             @Override

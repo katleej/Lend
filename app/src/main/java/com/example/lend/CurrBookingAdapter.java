@@ -66,7 +66,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                 if (task.isSuccessful()){
                     Log.d("ABC", "user" + task.getResult().size());
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        user = document.toObject(LendUser.class);
+                        Map<String, Object> userMap = document.getData();
+                        user.setUsername(userMap.get("username").toString());
                         holder.tvLenderName.setText(user.getUsername());
                     }
                 }
