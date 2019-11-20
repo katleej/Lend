@@ -18,15 +18,17 @@
         android:icon="@drawable/ele"></item>
 
     <item
+        android:id="@+id/my_logout"
+        android:orderInCategory="300"
+        android:title="Logout"
+        android:icon="@drawable/ele"></item>
+
+    <item
         android:id="@+id/my_settings"
         android:orderInCategory="300"
         android:title="Settings"
         android:icon="@drawable/ele"></item>
 
-    <item
-        android:id="@+id/my_logout"
-        android:orderInCategory="300"
-        android:title="Logout"
-        android:icon="@drawable/ele"></item>
+
 
 </menu>
