@@ -32,7 +32,6 @@ public class BookingsListActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("XYZ", user.getUid());
         lendBookings = new ArrayList();
         borrowBookings = new ArrayList();
         lendBook = findViewById(R.id.rvLend);

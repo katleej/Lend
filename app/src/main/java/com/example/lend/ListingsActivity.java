@@ -121,6 +121,7 @@ public class ListingsActivity extends AppCompatActivity {
                 Intent intent3 = new Intent(ListingsActivity.this, MainActivity.class);
                 startActivity(intent3);
                 finish();
+                return true;
             case R.id.my_bookings_button:
                 Intent intent = new Intent(ListingsActivity.this, BookingsListActivity.class);
                 startActivity(intent);

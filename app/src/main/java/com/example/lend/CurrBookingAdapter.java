@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.CustomViewHolder> {
@@ -52,10 +53,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
     @Override
     public void onBindViewHolder(@NonNull final CurrBookingAdapter.CustomViewHolder holder, int position) {
         final Booking booking = bookings.get(position);
-        if (booking.getUserReturned().equals(true)) {
+        if (booking.getUserReturned().equals("true")) {
             holder.btnReturn.setText("Pending Confirmation");
-            DocumentReference rf = db.collection("bookings").document(booking.getID());
-            rf.update("User Returned", true);
         }
 
         db.collection("users")
@@ -99,7 +98,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
             public void onClick(View view) {
                 booking.setUserReturned(((Boolean) true).toString());
                 holder.btnReturn.setText("Pending Confirmation");
-
+                DocumentReference rf = db.collection("bookings").document(booking.getID());
+                rf.update("User Returned", true);
             }
         });
     }
