@@ -44,7 +44,7 @@ public class BorrowItemActivity extends AppCompatActivity {
     public String itemID;
     FirebaseAuth auth;
     FirebaseFirestore db;
-    LendUser user;
+    LendUser owner;
 
 
     @Override
@@ -60,6 +60,8 @@ public class BorrowItemActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
+
+
         days = findViewById(R.id.viewDays);
         itemName = findViewById(R.id.borrow_item_name);
         itemImage = findViewById(R.id.borrow_item_image);
@@ -73,18 +75,6 @@ public class BorrowItemActivity extends AppCompatActivity {
         itemDescription.setText(item.getItemDescription());
         Glide.with(getApplicationContext()).load(item.getPhotoURL()).into(itemImage);
         tvPrice.setText("Current Price: " + item.getPrice());
-
-        db.collection("users").whereEqualTo("ID", item.getLender()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        user = document.toObject(LendUser.class);
-                        lenderName.setText(user.getUsername());
-                    }
-                }
-            }
-        });
 
         days.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -103,7 +93,22 @@ public class BorrowItemActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(BorrowItemActivity.this, ViewProfileActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("user", Parcels.wrap(user));
+                String lenderName = item.getLender();
+                db.collection("users")
+                        .whereEqualTo("ID", lenderName)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()){
+                                    Log.d("ABC", "user" + task.getResult().size());
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        owner = document.toObject(LendUser.class);
+                                    }
+                                }
+                            }
+                        });
+                intent.putExtra("user", Parcels.wrap(owner));
                 startActivity(intent);
             }
         });

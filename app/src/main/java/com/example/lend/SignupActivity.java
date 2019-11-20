@@ -106,15 +106,20 @@ public class SignupActivity extends AppCompatActivity {
                             user.setLat(((Double) userPlace.getLatLng().longitude).toString());
                             user.setYearJoined(Calendar.getInstance().get(Calendar.YEAR));
 
+
                             Map<String, Object> username = new HashMap<>();
                             username.put("username", etName.getText().toString());
                             username.put("lat", ((Double) userPlace.getLatLng().latitude).toString());
                             username.put("long", ((Double) userPlace.getLatLng().longitude).toString());
                             username.put("ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
                             int year = Calendar.getInstance().get(Calendar.YEAR);
+
                             username.put("year joined", Integer.toString(year));
-                            username.put("average rating", user.getRating());
-                            username.put("number of reviews", user.getNum_reviews());
+                            username.put("average rating", 0);
+                            username.put("number of reviews", 0);
+                            username.put("profile description", "No Description");
+                            username.put("number of items", 0);
+                            username.put("number of bookings", 0);
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("users").document(mAuth.getCurrentUser().getUid())

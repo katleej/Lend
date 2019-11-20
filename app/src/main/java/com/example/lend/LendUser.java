@@ -8,15 +8,11 @@ import java.util.HashMap;
 
 @Parcel
 public class LendUser {
-    public String email, username, password;
+    public String id, email, username, password, profileDescription, profileImageURL, city;
     public String latLocation;
     public String longLocation;
-    public String id;
-    public HashMap<String, String> mLendedItemList;
-    public HashMap<String, String> mBorrowedItemList;
-    public int num_reviews = 0;
-    public int rating = 0;
-    public int yearJoined;
+    public int numberOfBookings, yearJoined, num_reviews, rating;
+    public HashMap<String, String> mLendedItemList, mBorrowedItemList;
     public String description = "No Description";
 
     public String getDescription() {
