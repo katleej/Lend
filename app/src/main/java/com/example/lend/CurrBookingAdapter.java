@@ -26,6 +26,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.CustomViewHolder> {
     Context context;
@@ -37,7 +39,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
     public CurrBookingAdapter(Context context, ArrayList<Booking> bookings) {
         this.context = context;
         this.bookings = bookings;
-        Log.d("ABC", bookings.toString());
+        item = new Item();
+        Log.d("ABC", "book" + bookings.toString());
     }
 
     @NonNull
@@ -50,35 +53,41 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
     @Override
     public void onBindViewHolder(@NonNull final CurrBookingAdapter.CustomViewHolder holder, int position) {
         final Booking booking = bookings.get(position);
-        if (booking.getUserReturned().equals(true)) {
+        if (booking.getUserReturned().equals("true")) {
             holder.btnReturn.setText("Pending Confirmation");
-            DocumentReference rf = db.collection("bookings").document(booking.getID());
-            rf.update("User Returned", true);
         }
-        db.collection("users").whereEqualTo("uid", booking.getLenderID()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+        db.collection("users")
+                .whereEqualTo("ID", booking.getLenderID())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
+                    Log.d("ABC", "user" + task.getResult().size());
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         user = document.toObject(LendUser.class);
                         holder.tvLenderName.setText(user.getUsername());
-
                     }
                 }
             }
         });
 
+
         db.collection("items")
-                .whereEqualTo("ID", booking.getItem())
+                .whereEqualTo("ID", Integer.parseInt(booking.getItem()))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            Log.d("ABC", "items" + task.getResult().size());
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                item = document.toObject(Item.class);
+                                Map<String, Object> itemMap = document.getData();
+                                item.setItemName(itemMap.get("Item Name").toString());
+                                item.setPrice(itemMap.get("Item Price").toString());
                                 holder.tvItemName.setText(item.getItemName());
-                                holder.tvPrice.setText(Integer.parseInt(item.getPrice()) * Integer.parseInt(booking.getDaysBooked()));
+                                holder.tvPrice.setText("$" + Integer.parseInt(item.getPrice()) * Integer.parseInt(booking.getDaysBooked()));
                             }
                         }
                     }
@@ -89,7 +98,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
             public void onClick(View view) {
                 booking.setUserReturned(((Boolean) true).toString());
                 holder.btnReturn.setText("Pending Confirmation");
-
+                DocumentReference rf = db.collection("bookings").document(booking.getID());
+                rf.update("User Returned", true);
             }
         });
     }

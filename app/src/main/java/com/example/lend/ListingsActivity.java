@@ -18,6 +18,13 @@ import android.widget.Spinner;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -112,6 +119,12 @@ public class ListingsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
+            case R.id.my_logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent3 = new Intent(ListingsActivity.this, MainActivity.class);
+                startActivity(intent3);
+                finish();
+                return true;
             case R.id.my_bookings_button:
                 Intent intent = new Intent(ListingsActivity.this, BookingsListActivity.class);
                 startActivity(intent);
@@ -160,7 +173,7 @@ public class ListingsActivity extends AppCompatActivity {
                                     temp.setPhotoURL(itemMap.get("Photo URL").toString());
                                     temp.setLender(itemMap.get("Lender ID").toString());
                                     temp.setPrice(itemMap.get("Item Price").toString());
-                                    temp.setID(itemMap.get("ID").toString());
+                                    temp.setid(itemMap.get("ID").toString());
                                     items.add(temp);
                                 }
                                 Log.d("henlo" , items.toString());
@@ -193,7 +206,7 @@ public class ListingsActivity extends AppCompatActivity {
                                     temp.setPhotoURL(itemMap.get("Photo URL").toString());
                                     temp.setLender(itemMap.get("Lender ID").toString());
                                     temp.setPrice(itemMap.get("Item Price").toString());
-                                    temp.setID(itemMap.get("ID").toString());
+                                    temp.setid(itemMap.get("ID").toString());
                                     items.add(temp);
                                 }
                                 Log.d("henlo" , items.toString());

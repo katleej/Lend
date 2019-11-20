@@ -63,7 +63,7 @@ public final class Utils {
         item.put("Item Category", itemCategory);
         item.put("Photo URL", photoURL);
         item.put("ID", item.hashCode());
-        item.put("booked" , murder);
+        item.put("Booked" , murder);
         db.collection("items").document(item.get("ID").toString())
                 .set(item)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -119,7 +119,7 @@ public final class Utils {
                                 Log.d("henlo", document.getId() + " => " + document.getData());
                                 Map<String, Object> itemMap = document.getData();
                                 Item temp = new Item();
-                                temp.setID(itemMap.get("ID").toString());
+                                temp.setid(itemMap.get("ID").toString());
                                 temp.setCategory(itemMap.get("Item Category").toString());
                                 temp.setItemDescription(itemMap.get("Item Description").toString());
                                 temp.setItemName(itemMap.get("Item Name").toString());
