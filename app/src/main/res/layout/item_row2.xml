@@ -24,7 +24,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/tvLenderName"
+            android:id="@+id/tvItemName"
             android:text="Item Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,12 +37,12 @@
             android:layout_marginStart="10dp"/>
 
         <TextView
-            android:id="@+id/tvItemName"
-            android:text="Purchased Location"
+            android:id="@+id/tvLenderName"
+            android:text="Lender Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16dp"
-            android:layout_below="@id/tvLenderName"
+            android:layout_below="@id/tvItemName"
             android:layout_toRightOf="@id/ivPhoto"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp" />
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16dp"
-            android:layout_below="@id/tvItemName"
+            android:layout_below="@id/tvLenderName"
             android:layout_toRightOf="@id/ivPhoto"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp" />

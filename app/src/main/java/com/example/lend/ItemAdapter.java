@@ -62,7 +62,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
             }
         });
         holder.tvItemName.setText(item.getItemName());
-        holder.tvItemPrice.setText(item.getPrice() +"");
+        holder.tvItemPrice.setText("$" + item.getPrice() +"");
         Log.d("ITEM URL" , item.getPhotoURL());
         Glide.with(holder.photo.getContext())
                 .load(item.getPhotoURL())

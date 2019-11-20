@@ -2,13 +2,6 @@
 package com.example.lend;
 
 import android.content.Context;
-import android.location.Location;
-import android.view.View;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
 import org.parceler.Parcel;
 
@@ -22,6 +15,26 @@ public class LendUser {
     public String id;
     public HashMap<String, String> mLendedItemList;
     public HashMap<String, String> mBorrowedItemList;
+    public int num_reviews = 0;
+    public int rating = 5;
+    public int yearJoined;
+    public String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getYearJoined() {
+        return yearJoined;
+    }
+
+    public void setYearJoined(int year_joined) {
+        this.yearJoined = yearJoined;
+    }
 
     public LendUser() {
 
@@ -93,5 +106,21 @@ public class LendUser {
 
     public void setid(String id) {
         this.id = id;
+    }
+
+    public int getNum_reviews() {
+        return num_reviews;
+    }
+
+    public void setNum_reviews(int num_reviews) {
+        this.num_reviews = num_reviews;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }
