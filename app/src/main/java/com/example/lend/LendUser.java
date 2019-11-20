@@ -15,9 +15,9 @@ public class LendUser {
     public HashMap<String, String> mLendedItemList;
     public HashMap<String, String> mBorrowedItemList;
     public int num_reviews = 0;
-    public int rating = 5;
+    public int rating = 0;
     public int yearJoined;
-    public String description;
+    public String description = "No Description";
 
     public String getDescription() {
         return description;
