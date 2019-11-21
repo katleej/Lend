@@ -143,7 +143,7 @@ public class ListingsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.my_settings:
-                Intent intent2 = new Intent(ListingsActivity.this, ViewProfileActivity.class);
+                Intent intent2 = new Intent(ListingsActivity.this, EditProfileActivity.class);
                 startActivity(intent2);
                 return true;
             default:
