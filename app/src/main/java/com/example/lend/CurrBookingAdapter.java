@@ -1,5 +1,6 @@
 package com.example.lend;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,6 +57,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         final Booking booking = bookings.get(position);
         if (booking.getUserReturned().equals("true")) {
             holder.btnReturn.setText("Pending Confirmation");
+
         }
 
         db.collection("users")
@@ -98,6 +101,23 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
             public void onClick(View view) {
                 booking.setUserReturned(((Boolean) true).toString());
                 holder.btnReturn.setText("Pending Confirmation");
+                final Dialog rankDialog = new Dialog(context, R.style.FullHeightDialog);
+                rankDialog.setContentView(R.layout.rank_dialog);
+                rankDialog.setCancelable(true);
+                RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
+                ratingBar.setRating(4);
+
+                Button updateButton = (Button) rankDialog.findViewById(R.id.rank_dialog_button);
+                updateButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rankDialog.dismiss();
+                    }
+                });
+                //now that the dialog is set up, it's time to show it
+                rankDialog.show();
+                Log.d("henlo3" , "going into dialog");
+
                 DocumentReference rf = db.collection("bookings").document(booking.getID());
                 rf.update("User Returned", true);
             }

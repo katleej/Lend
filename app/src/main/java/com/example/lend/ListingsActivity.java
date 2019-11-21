@@ -29,13 +29,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ListingsActivity extends AppCompatActivity {
@@ -49,13 +51,14 @@ public class ListingsActivity extends AppCompatActivity {
     Spinner spinner;
     Button search;
     EditText searchbar;
+    RecyclerView mList;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference reference = db.collection("items");
     private TextWatcher text = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listings);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         items = new ArrayList();
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
@@ -84,63 +87,40 @@ public class ListingsActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-        appendItems();
         Log.d("henlo2" , items.toString());
-        searchbar = findViewById(R.id.searchbar);
-        search = findViewById(R.id.search);
+        searchbar = (EditText) findViewById(R.id.searchbar);
+        if (searchbar == null) {
+            Log.d("henlo3" , "null searchbar");
+        }
         setUpRV();
         Log.d("henlo2" , "outside textwatcher");
-        text = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+        CollectionReference q = db.collection("items");
+        searchbar.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d("henlo2" , "inside textwatcher");
-                String user_input = searchbar.getText().toString();
-                for (int i = 0; i < items.size(); i++) {
-                    if (!items.get(i).getItemName().contains(s)) {
-                        items.remove(i);
-                        Log.d("henlo2" , items.get(i).getItemName());
-                    }
-                    setUpRV();
+
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (searchbar == null) {
+                    Log.d("henlo3" , "null searchbar");
                 }
             }
             @Override
-            public void afterTextChanged(Editable s) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().length() == 0) {
+                    Query q = db.collection("items").whereEqualTo("Booked", "false");
+                    showAdapter(q , 0);
+                } // This is used as if user erases the characters in the search field.
+                else {
+                     // name - the field for which you want to make search
+                    showAdapter(reference.orderBy("Item Name").startAt(charSequence.toString().trim()).endAt(charSequence.toString().trim() + "\uf8ff") , 1);
+                }
+//                adapter.notifyDataSetChanged();
             }
-        };
-        searchbar.addTextChangedListener(text);
-
-//        search.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (searchbar.getText().toString().isEmpty())   {
-//                    Toast.makeText(getApplication(), "Please enter a keyword!", Toast.LENGTH_SHORT).show();
-//
-//                }
-//                else    {
-//                    filterName(searchbar.getText().toString());
-//                }
-//            }
-//        });
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
-
-//    public void filter(String text){
-//        ArrayList<String> temp = new ArrayList<String>();
-//        for(String d: names){
-//            //or use .equal(text) with you want equal match
-//            //use .toLowerCase() for better matches
-//            if(d.toLowerCase().contains(text.toLowerCase())){
-//                temp.add(d);
-//            }
-//        }
-//        //update recyclerview
-//        adapter.updateList(temp);
-//    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -171,7 +151,69 @@ public class ListingsActivity extends AppCompatActivity {
         }
     }
 
-    public void setUpRV() {
+    void showAdapter(Query q1 , int i) {
+        if (i == 0)   {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("items")
+                    .whereEqualTo("Booked", "false")
+//                .whereEqualTo("Item Category", "Electronic Appliances")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d("henlo", document.getId() + " => " + document.getData());
+                                    Map<String, Object> itemMap = document.getData();
+                                    Item temp = new Item();
+                                    temp.setCategory(itemMap.get("Item Category").toString());
+                                    temp.setItemDescription(itemMap.get("Item Description").toString());
+                                    temp.setItemName(itemMap.get("Item Name").toString());
+                                    temp.setPhotoURL(itemMap.get("Photo URL").toString());
+                                    temp.setLender(itemMap.get("Lender ID").toString());
+                                    temp.setPrice(itemMap.get("Item Price").toString());
+                                    temp.setid(itemMap.get("ID").toString());
+                                    items.add(temp);
+                                }
+                                Log.d("henlo" , items.toString());
+                                setUpRV();
+                            } else {
+                                Log.d("henlo", "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+
+        }
+        else {
+            q1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        items.clear();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d("henlo", document.getId() + " => " + document.getData());
+                            Map<String, Object> itemMap = document.getData();
+                            Item temp = new Item();
+                            temp.setCategory(itemMap.get("Item Category").toString());
+                            temp.setItemDescription(itemMap.get("Item Description").toString());
+                            temp.setItemName(itemMap.get("Item Name").toString());
+                            temp.setPhotoURL(itemMap.get("Photo URL").toString());
+                            temp.setLender(itemMap.get("Lender ID").toString());
+                            temp.setPrice(itemMap.get("Item Price").toString());
+                            temp.setid(itemMap.get("ID").toString());
+                            items.add(temp);
+                        }
+                        Log.d("henlo" , items.toString());
+                        setUpRV();
+                    } else {
+                        Log.d("henlo", "Error getting documents: ", task.getException());
+                    }
+                }
+            });
+        }
+    }
+
+    public ArrayList<Item> setUpRV() {
         final RecyclerView recList = (RecyclerView) findViewById(R.id.recyclerView);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(ListingsActivity.this);
@@ -180,12 +222,14 @@ public class ListingsActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
         adapter = new ItemAdapter(getApplicationContext(), items);
+        Log.d("inside RV" , items.toString());
         recList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
         Log.d("XYZ", ((Integer) items.size()).toString());
+        return items;
     }
 
-    public ArrayList<Item> filterCategory(String slatt)    {
+    public void filterCategory(String slatt)    {
         if (slatt.equals("Show All"))   {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
@@ -249,7 +293,6 @@ public class ListingsActivity extends AppCompatActivity {
                         }
                     });
         }
-    return items;
     }
 
     public void appendItems()   {
@@ -318,3 +361,51 @@ public class ListingsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 }
+
+
+//        text = new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                Log.d("henlo2" , "inside textwatcher");
+//                String user_input = searchbar.getText().toString();
+//                for (int i = 0; i < items.size(); i++) {
+//                    if (!items.get(i).getItemName().contains(s)) {
+//                        items.remove(i);
+//                        Log.d("henlo2" , items.get(i).getItemName());
+//                    }
+//                    setUpRV();
+//                }
+//            }
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//            }
+//        };
+//        search.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (searchbar.getText().toString().isEmpty())   {
+//                    Toast.makeText(getApplication(), "Please enter a keyword!", Toast.LENGTH_SHORT).show();
+//
+//                }
+//                else    {
+//                    filterName(searchbar.getText().toString());
+//                }
+//            }
+//        });
+
+//    public void filter(String text){
+//        ArrayList<String> temp = new ArrayList<String>();
+//        for(String d: names){
+//            //or use .equal(text) with you want equal match
+//            //use .toLowerCase() for better matches
+//            if(d.toLowerCase().contains(text.toLowerCase())){
+//                temp.add(d);
+//            }
+//        }
+//        //update recyclerview
+//        adapter.updateList(temp);
+//    }
