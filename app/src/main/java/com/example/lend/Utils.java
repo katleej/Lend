@@ -54,9 +54,10 @@ public final class Utils {
                 });
     }
 
-    public static void itemWrite(String lenderIDToken, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL, String murder) {
+    public static void itemWrite(String lenderIDToken, String lenderName, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL, String murder) {
         Map<String, Object> item = new HashMap<>();
         item.put("Lender ID", lenderIDToken);
+        item.put("Lender Name", lenderName);
         item.put("Item Name", itemName);
         item.put("Item Description", itemDescription);
         item.put("Item Price", itemPrice);

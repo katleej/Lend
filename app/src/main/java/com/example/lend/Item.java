@@ -15,6 +15,7 @@ public class Item {
 
     public String id;
     public String lender;
+    public String lenderName;
     public String itemName;
     public String itemDescription;
     public String price;
@@ -27,6 +28,23 @@ public class Item {
     public HashMap<String, String> bookingList;
 
     public Item() {
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLenderName() {
+        return lenderName;
+    }
+
+    public void setLenderName(String lenderName) {
+        this.lenderName = lenderName;
     }
 
     public String getid() {

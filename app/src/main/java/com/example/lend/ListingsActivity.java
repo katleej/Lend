@@ -35,8 +35,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.Map;
+
+import static com.example.lend.Utils.db;
 
 public class ListingsActivity extends AppCompatActivity {
     public ArrayList<Item> items;
@@ -48,12 +52,31 @@ public class ListingsActivity extends AppCompatActivity {
     FloatingActionButton categoryFilter;
     Spinner spinner;
     Button search;
+    LendUser user;
     EditText searchbar;
+    FirebaseFirestore db;
     private TextWatcher text = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        //retrieve information of current user here
+        db = FirebaseFirestore.getInstance();
+        db.collection("users")
+                .whereEqualTo("ID", FirebaseAuth.getInstance().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            Log.d("ABC", "user" + task.getResult().size());
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                user = document.toObject(LendUser.class);
+                            }
+                        }
+                    }
+                });
+
         setContentView(R.layout.activity_listings);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         items = new ArrayList();
@@ -84,7 +107,6 @@ public class ListingsActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-        appendItems();
         Log.d("henlo2" , items.toString());
         searchbar = findViewById(R.id.searchbar);
         search = findViewById(R.id.search);
@@ -163,8 +185,9 @@ public class ListingsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.my_settings:
-                Intent intent2 = new Intent(ListingsActivity.this, ViewProfileActivity.class);
-                startActivity(intent2);
+                //user sent to settings
+                Intent settingsIntent = new Intent(ListingsActivity.this, EditProfileActivity.class);
+                startActivity(settingsIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -252,38 +275,6 @@ public class ListingsActivity extends AppCompatActivity {
     return items;
     }
 
-    public void appendItems()   {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("items")
-                .whereEqualTo("Booked", "false")
-//                .whereEqualTo("Item Category", "Electronic Appliances")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("henlo", document.getId() + " => " + document.getData());
-                                Map<String, Object> itemMap = document.getData();
-                                Item temp = new Item();
-                                temp.setCategory(itemMap.get("Item Category").toString());
-                                temp.setItemDescription(itemMap.get("Item Description").toString());
-                                temp.setItemName(itemMap.get("Item Name").toString());
-                                temp.setPhotoURL(itemMap.get("Photo URL").toString());
-                                temp.setLender(itemMap.get("Lender ID").toString());
-                                temp.setPrice(itemMap.get("Item Price").toString());
-                                temp.setid(itemMap.get("ID").toString());
-                                items.add(temp);
-                            }
-                            Log.d("henlo" , items.toString());
-                            setUpRV();
-                        } else {
-                            Log.d("henlo", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-
-    }
 
     public void filterName(String slatt)    {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

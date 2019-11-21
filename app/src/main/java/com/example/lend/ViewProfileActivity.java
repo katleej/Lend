@@ -43,7 +43,8 @@ public class ViewProfileActivity extends AppCompatActivity {
 //
 //        ratingBar.setRating(lendUser.getRating());
         profileName.setText(lendUser.getUsername());
-        yearJoined.setText(lendUser.getYearJoined());
+        int yearJoined = lendUser.getYearJoined();
+//        yearJoined.setText();
         profileDescription.setText(lendUser.getDescription());
         numReviews = findViewById(lendUser.getNum_reviews());
 
