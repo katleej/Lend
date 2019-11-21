@@ -17,20 +17,31 @@
         <ImageView
             android:id="@+id/ivPhoto"
             android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
+            android:id="@+id/tvItemCategory"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Item Category"
+            android:layout_toEndOf="@id/ivPhoto"
+            android:layout_toRightOf="@id/ivPhoto"
+            ></TextView>
+
+
+        <TextView
             android:id="@+id/tvItemName"
+            android:layout_below="@id/tvItemCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:fontFamily="sans-serif-condensed-light"
-            android:layout_marginTop="4dp"
-            android:layout_toEndOf="@id/ivPhoto"
             android:layout_toRightOf="@id/ivPhoto"
+            android:fontFamily="sans-serif-condensed-light"
             android:text="Item Name"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -41,24 +52,24 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvItemName"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/ivPhoto"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-light"
                 android:layout_marginRight="4dp"
+                android:fontFamily="sans-serif-condensed-light"
                 android:text="posted by "></TextView>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/lender_profile_image"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
                 android:layout_marginRight="3dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ele"></de.hdodenhof.circleimageview.CircleImageView>
 
             <TextView
@@ -72,16 +83,15 @@
 
         </LinearLayout>
 
-
         <TextView
             android:id="@+id/tvItemPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/postedby_layout"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="1dp"
-            android:fontFamily="sans-serif-condensed-light"
+            android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/ivPhoto"
+            android:fontFamily="sans-serif-condensed-light"
             android:text="$0.00"
             android:textSize="16dp" />
 
