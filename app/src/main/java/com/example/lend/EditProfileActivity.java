@@ -69,6 +69,6 @@ public class EditProfileActivity extends AppCompatActivity {
         profileName.setText(lendUser.getUsername());
         yearJoined.setText(lendUser.getYearJoined());
         profileDescription.setText(lendUser.getDescription());
-        numReviews = findViewById(lendUser.getNum_reviews());
+        numReviews = findViewById(lendUser.getNumReviews());
     }
 }

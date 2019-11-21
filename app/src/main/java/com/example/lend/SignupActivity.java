@@ -103,7 +103,7 @@ public class SignupActivity extends AppCompatActivity {
                             LendUser user = new LendUser(getApplicationContext());
                             user.setUsername(etName.getText().toString());
                             user.setLat(((Double) userPlace.getLatLng().latitude).toString());
-                            user.setLat(((Double) userPlace.getLatLng().longitude).toString());
+                            user.setLng(((Double) userPlace.getLatLng().longitude).toString());
                             int year = Calendar.getInstance().get(Calendar.YEAR);
                             user.setYearJoined(year);
                             user.setDescription("No description ");

@@ -1,5 +1,6 @@
 package com.example.lend;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.DrawableCompat;
 
@@ -10,7 +11,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.parceler.Parcels;
 
@@ -27,11 +33,13 @@ public class ViewProfileActivity extends AppCompatActivity {
     public TextView profileDescription;
     public TextView profileLocation;
     public TextView numReviews;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        db = FirebaseFirestore.getInstance();
         lendUser = (LendUser) Parcels.unwrap(getIntent().getParcelableExtra("user"));
         ratingBar = findViewById(R.id.ratingBar);
         profileName = findViewById(R.id.profile_name);
@@ -43,10 +51,21 @@ public class ViewProfileActivity extends AppCompatActivity {
 //
 //        ratingBar.setRating(lendUser.getRating());
         profileName.setText(lendUser.getUsername());
-        int yearJoined = lendUser.getYearJoined();
-//        yearJoined.setText();
+        int yearJoinedNum = lendUser.getYearJoined();
+        yearJoined.setText(Integer.toString(yearJoinedNum));
+//        db.collection("users").whereEqualTo("users", lendUser.getUsername()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()){
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        LendUser lendUser = document.toObject(LendUser.class);
+//                        yearJoined.setText(lendUser.getUsername());
+//                    }
+//                }
+//            }
+//        });
         profileDescription.setText(lendUser.getDescription());
-        numReviews = findViewById(lendUser.getNum_reviews());
-
+        numReviews.setText(Integer.toString(lendUser.getNumReviews()));
+        ratingBar.setRating(lendUser.getRating()); 
     }
 }
