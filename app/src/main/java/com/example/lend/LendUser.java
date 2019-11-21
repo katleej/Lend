@@ -11,7 +11,7 @@ public class LendUser {
     public String id, email, username, password, profileDescription, profileImageURL, city;
     public String latLocation;
     public String longLocation;
-    public int numberOfBookings, yearJoined, num_reviews, rating;
+    public int numberOfBookings, numReviews, rating, yearJoined;
     public HashMap<String, String> mLendedItemList, mBorrowedItemList;
     public String description = "No Description";
 
@@ -104,11 +104,11 @@ public class LendUser {
     }
 
     public int getNum_reviews() {
-        return num_reviews;
+        return numReviews;
     }
 
-    public void setNum_reviews(int num_reviews) {
-        this.num_reviews = num_reviews;
+    public void setNumReviews(int numReviews) {
+        this.numReviews = numReviews;
     }
 
     public int getRating() {
@@ -118,4 +118,13 @@ public class LendUser {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
+    public String getPhotoURL() {
+        return profileImageURL;
+    }
+
+    public void setPhotoURL(String profileImageURL) {
+        this.profileImageURL = profileImageURL;
+    }
+
 }

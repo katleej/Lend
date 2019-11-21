@@ -8,8 +8,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +39,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -49,6 +57,9 @@ public class SignupActivity extends AppCompatActivity {
     public Button btnSave;
     public Place userPlace;
     public Fragment placeAutoComplete;
+    public Button image;
+    private Uri imageUri;
+    public String uploadedImageURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +73,20 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        image = findViewById(R.id.add_image);
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnSave = findViewById(R.id.btnSave);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                if (intent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
+                    startActivityForResult(intent, 1046);
+                }
+            }
+        });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +94,6 @@ public class SignupActivity extends AppCompatActivity {
                 createAccount(etEmail.getText().toString(), etPassword.getText().toString());
             }
         });
-
         AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.acLocation);
         autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
         autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
@@ -88,6 +108,61 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1046) {
+            try {
+                imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                new CloudStorage().upload(imageUri, new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+//                        image.setImageBitmap(selectedImage);
+                        Log.d("HHHHHHHHHHH", s);
+                        uploadedImageURL = s;
+                    }
+                }, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                });
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        else {
+            Toast.makeText(this, "Incorrect requestcode", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
     }
 
 
@@ -105,39 +180,30 @@ public class SignupActivity extends AppCompatActivity {
                             user.setLat(((Double) userPlace.getLatLng().latitude).toString());
                             user.setLat(((Double) userPlace.getLatLng().longitude).toString());
                             user.setYearJoined(Calendar.getInstance().get(Calendar.YEAR));
-
-
-                            Map<String, Object> username = new HashMap<>();
-                            username.put("username", etName.getText().toString());
-                            username.put("lat", ((Double) userPlace.getLatLng().latitude).toString());
-                            username.put("long", ((Double) userPlace.getLatLng().longitude).toString());
-                            username.put("ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            int year = Calendar.getInstance().get(Calendar.YEAR);
-
-                            username.put("year joined", Integer.toString(year));
-                            username.put("average rating", 0);
-                            username.put("number of reviews", 0);
-                            username.put("profile description", "No Description");
-                            username.put("number of items", 0);
-                            username.put("number of bookings", 0);
+                            user.setDescription("No description ");
+                            user.setid(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            user.setRating(0);
+                            user.setNumReviews(0);
+                            user.setPhotoURL(uploadedImageURL);
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            db.collection("users").document(mAuth.getCurrentUser().getUid())
-                                    .set(username)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d("Henlo", "DocumentSnapshot successfully written!");
-                                            Intent mainIntent = new Intent(SignupActivity.this, ListingsActivity.class);
-                                            startActivity(mainIntent);
-                                        }
-                                    })
+                            db.collection("users").document(user.getUsername()).set(user)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("Henlo", "DocumentSnapshot successfully written!");
+                                    Intent mainIntent = new Intent(SignupActivity.this, ListingsActivity.class);
+                                    startActivity(mainIntent);
+                                }
+                            })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             Log.w("Henlo", "Error writing document", e);
                                         }
                                     });
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Exception e = task.getException();
