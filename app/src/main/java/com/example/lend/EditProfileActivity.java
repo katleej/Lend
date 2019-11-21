@@ -23,10 +23,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfileActivity extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseAuth auth;
-    LendUser user;
     private RatingBar ratingBar;
     public TextView profileName;
     public LendUser lendUser;
+    public String uid;
     public FirebaseUser fbUser;
     public CircleImageView profileImage;
     public TextView yearJoined;
@@ -38,24 +38,27 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db.collection("users")
-                .whereEqualTo("ID", FirebaseAuth.getInstance().getUid())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            Log.d("ABC", "user" + task.getResult().size());
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                user = document.toObject(LendUser.class);
-                            }
-                        }
-                    }
-                });
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        lendUser = (LendUser) Parcels.unwrap(getIntent().getParcelableExtra("user"));
+
+//        db.collection("users")
+//                .whereEqualTo("username", username)
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()){
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                lendUser = document.toObject(LendUser.class);
+//
+//                            }
+//                        }
+//                    }
+//                });
         setContentView(R.layout.activity_edit_profile);
 
         //Bring all the UI items
-        lendUser = (LendUser) Parcels.unwrap(getIntent().getParcelableExtra("user"));
         ratingBar = findViewById(R.id.ratingBar);
         profileName = findViewById(R.id.edit_profile_name);
         profileImage = findViewById(R.id.edit_profile_image);
@@ -65,10 +68,10 @@ public class EditProfileActivity extends AppCompatActivity {
         profileLocation = findViewById(R.id.profile_location);
         numReviews = findViewById(R.id.review_number);
 
-//        profileLocation.setText(lendUser.getUserLocation())  --> this line must be written
         profileName.setText(lendUser.getUsername());
-        yearJoined.setText(lendUser.getYearJoined());
+        yearJoined.setText(Integer.toString(lendUser.getYearJoined()));
         profileDescription.setText(lendUser.getDescription());
-        numReviews = findViewById(lendUser.getNumReviews());
+        numReviews.setText(Integer.toString(lendUser.getNumReviews()));
+        ratingBar.setRating(lendUser.getRating());
     }
 }

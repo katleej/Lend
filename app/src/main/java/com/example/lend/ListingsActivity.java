@@ -63,7 +63,7 @@ public class ListingsActivity extends AppCompatActivity {
         //retrieve information of current user here
         db = FirebaseFirestore.getInstance();
         db.collection("users")
-                .whereEqualTo("ID", FirebaseAuth.getInstance().getUid())
+                .whereEqualTo("id", FirebaseAuth.getInstance().getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -186,8 +186,10 @@ public class ListingsActivity extends AppCompatActivity {
                 return true;
             case R.id.my_settings:
                 //user sent to settings
-                Intent settingsIntent = new Intent(ListingsActivity.this, EditProfileActivity.class);
-                startActivity(settingsIntent);
+                Intent intent2 = new Intent(ListingsActivity.this, EditProfileActivity.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent2.putExtra("user", Parcels.wrap(user));
+                startActivity(intent2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

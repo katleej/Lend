@@ -48,24 +48,13 @@ public class ViewProfileActivity extends AppCompatActivity {
         profileDescription = findViewById(R.id.profile_description);
         profileLocation = findViewById(R.id.profile_location);
         numReviews = findViewById(R.id.review_number);
-//
-//        ratingBar.setRating(lendUser.getRating());
+
         profileName.setText(lendUser.getUsername());
         int yearJoinedNum = lendUser.getYearJoined();
         yearJoined.setText(Integer.toString(yearJoinedNum));
-//        db.collection("users").whereEqualTo("users", lendUser.getUsername()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()){
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        LendUser lendUser = document.toObject(LendUser.class);
-//                        yearJoined.setText(lendUser.getUsername());
-//                    }
-//                }
-//            }
-//        });
+
         profileDescription.setText(lendUser.getDescription());
         numReviews.setText(Integer.toString(lendUser.getNumReviews()));
-        ratingBar.setRating(lendUser.getRating()); 
+        ratingBar.setRating(lendUser.getRating());
     }
 }
