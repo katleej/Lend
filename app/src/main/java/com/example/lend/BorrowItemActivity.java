@@ -38,6 +38,7 @@ public class BorrowItemActivity extends AppCompatActivity {
     public TextView itemDescription;
     public ImageView lenderImage;
     public TextView tvPrice;
+    public TextView tvPriceBreakdown;
     public TextView lenderName;
     public Button book;
     public Item item;
@@ -62,8 +63,6 @@ public class BorrowItemActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-
-
         days = findViewById(R.id.viewDays);
         itemName = findViewById(R.id.borrow_item_name);
         itemImage = findViewById(R.id.borrow_item_image);
@@ -72,6 +71,7 @@ public class BorrowItemActivity extends AppCompatActivity {
         lenderName = findViewById(R.id.user_name);
         book = findViewById(R.id.btnBook);
         tvPrice = findViewById(R.id.tvPrice);
+        tvPriceBreakdown = findViewById(R.id.tvPriceBreakdown);
 
         lenderID = item.getLender();
         db.collection("users").whereEqualTo("id", lenderID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -109,7 +109,11 @@ public class BorrowItemActivity extends AppCompatActivity {
         days.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                tvPrice.setText("Current Price: " + ((Integer) Integer.parseInt(item.getPrice()) * Integer.parseInt(days.getSelectedItem().toString())));
+                tvPrice.setText("Your Total Price: $" + ((Integer) Integer.parseInt(item.getPrice()) * Integer.parseInt(days.getSelectedItem().toString())));
+                tvPriceBreakdown.setText("$" + item.getPrice() + " * "
+                        + days.getSelectedItem().toString() + " days = $" + ((Integer) Integer.parseInt(item.getPrice())
+                        * Integer.parseInt(days.getSelectedItem().toString())));
+
             }
 
             @Override

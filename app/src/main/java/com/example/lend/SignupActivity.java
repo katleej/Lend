@@ -113,6 +113,8 @@ public class SignupActivity extends AppCompatActivity {
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("users").document(user.getUsername()).set(user);
+                            Intent i = new Intent(SignupActivity.this , ListingsActivity.class);
+                            startActivityForResult(i , 1);
                         } else {
                             // If sign in fails, display a message to the user.
                             Exception e = task.getException();

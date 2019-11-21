@@ -81,7 +81,7 @@ public class BookingsListActivity extends AppCompatActivity {
                                 booking.setUserReturned(bookingMap.get("User Returned").toString());
                                 borrowBookings.add(booking);
                                 Log.d("ABC", "booking here");
-                                CurrBookingAdapter adapter2 = new CurrBookingAdapter(getApplicationContext(), borrowBookings);
+                                CurrBookingAdapter adapter2 = new CurrBookingAdapter(BookingsListActivity.this, borrowBookings);
                                 setUpRV(borrowBook, borrowBookings, adapter2);
                             }
                         }

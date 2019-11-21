@@ -100,6 +100,7 @@
             <TextView
                 android:id="@+id/profile_description"
                 android:layout_width="300dp"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:layout_marginTop="8dp"

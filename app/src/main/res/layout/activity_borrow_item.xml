@@ -10,10 +10,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="32dp"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/borrow_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/puppy"></ImageView>
+
         <TextView
+            android:layout_marginTop="16dp"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
             android:id="@+id/borrow_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,15 +31,9 @@
             android:text="Item Name"
             android:textSize="40dp"></TextView>
 
-        <ImageView
-            android:id="@+id/borrow_item_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/puppy"></ImageView>
-
         <RelativeLayout
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -70,7 +73,16 @@
                 android:textSize="14dp" />
         </RelativeLayout>
 
+        <View
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray"/>
+
         <TextView
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
             android:id="@+id/borrow_item_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,32 +92,71 @@
             android:fontFamily="sans-serif-condensed-light"
             ></TextView>
 
+        <View
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:background="@android:color/darker_gray"/>
+
         <TextView
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
             android:id="@+id/textView"
             android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
             android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:fontFamily="sans-serif-condensed-light"
             android:text="Booking Length:" />
 
         <Spinner
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
             android:id="@+id/viewDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:entries="@array/days" />
 
+        <View
+            android:layout_width="370dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray"/>
+
         <TextView
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:id="@+id/tvPriceBreakdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif-condensed-light" />
+
+        <TextView
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
             android:id="@+id/tvPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Current Price: "
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:text="Your total price: "
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed-light"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <Button
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
             android:id="@+id/btnBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:backgroundTint="@color/themeBlue"
+            android:fontFamily="sans-serif-condensed-light"
             android:text="Book!" />
 
 

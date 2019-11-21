@@ -24,6 +24,7 @@
 
     <EditText
         android:id="@+id/edit_profile_name"
+        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -104,10 +105,12 @@
             <EditText
                 android:id="@+id/edit_profile_description"
                 android:layout_width="300dp"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed-light"
                 android:layout_marginTop="8dp"
                 android:textSize="14dp"
+                android:background="@null"
                 android:text="@string/sample_aboutme">
             </EditText>
 
@@ -225,7 +228,27 @@
                 android:theme="@style/RatingBar"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_height="wrap_content"></RatingBar>
+
+            <Button
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/themeBlue"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="SAVE CHANGES"
+                ></Button>
+
         </LinearLayout>
+
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:textSize="@color/white"-->
+<!--            android:fontFamily="sans-serif-condensed-light"-->
+<!--            android:text="save">-->
+<!--        </Button>-->
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
