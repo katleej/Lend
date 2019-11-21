@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/puppy"></ImageView>
+            android:src="@drawable/puppy"></ImageView>
 
         <TextView
             android:layout_marginTop="16dp"
@@ -42,7 +42,7 @@
                 android:id="@+id/user_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:src="@drawable/ele" />
 
             <TextView
                 android:id="@+id/user_name"

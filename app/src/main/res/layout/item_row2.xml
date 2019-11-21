@@ -11,8 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_height="wrap_content">
 
 
         <ImageView
@@ -20,43 +19,71 @@
             android:layout_width="150dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:layout_marginTop="5dp"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tvItemName"
-            android:text="Item Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@id/ivPhoto"
+            android:layout_toRightOf="@id/ivPhoto"
+            android:text="Item Name"
             android:textSize="20dp"
-            android:textStyle="bold"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/postedby_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvItemName"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@id/ivPhoto"
-            android:layout_toEndOf="@id/ivPhoto"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvLenderName"
-            android:text="Lender Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:layout_below="@id/tvItemName"
-            android:layout_toRightOf="@id/ivPhoto"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="4dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:layout_marginRight="4dp"
+                android:text="posted by "></TextView>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/lender_profile_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
+                android:layout_marginRight="3dp"
+                android:src="@drawable/ele"></de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/tvLenderName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Lender Name"
+                android:textSize="16dp" />
+
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tvItemPrice"
-            android:text="$0.00"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:layout_below="@id/tvLenderName"
-            android:layout_toRightOf="@id/ivPhoto"
+            android:layout_below="@id/postedby_layout"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="1dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:layout_toRightOf="@id/ivPhoto"
+            android:text="$0.00"
+            android:textSize="16dp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
