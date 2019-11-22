@@ -58,7 +58,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         final Booking booking = bookings.get(position);
         if (booking.getUserReturned().equals("true")) {
             holder.btnReturn.setText("Pending Confirmation");
-
+            holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
         }
 
         db.collection("users")
