@@ -144,64 +144,16 @@ public class ListingsActivity extends AppCompatActivity {
             }
         });
 
-//        swipeContainer = findViewById(R.id.swipeContainer);
-//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                Log.d("ABC", "onR");
-//                fetchTimelineAsync(0);
-//            }
-//        });
-//        swipeContainer.setColorSchemeResources(R.color.themeBlue);
-
-        Button filterButton = findViewById(R.id.filterButton);
-        filterButton.setOnClickListener(new View.OnClickListener() {
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View v) {
-                System.out.println("ONCLICKLISTENER AHAHAHAHA");
+            public void onRefresh() {
+                Log.d("ABC", "onR");
+                fetchTimelineAsync(0);
             }
         });
-//
-//        filterButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                items.clear();
-//                filteredCategories.clear();
-//
-//                final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getApplicationContext());
-//                dialogBuilder.setTitle("Choose Category");
-//                dialogBuilder.setMultiChoiceItems(itemsChar, booleans, new DialogInterface.OnMultiChoiceClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-//                            CharSequence chosen = itemsChar[which];
-//                            booleans[which] = isChecked;
-//                    }
-//                }).setPositiveButton("filter", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        for (int i = 0; i < booleans.length; i++) {
-//                            if (booleans[i]) {
-//                                filteredCategories.add(itemsChar[i]);
-//                            }
-//                        }
-//
-//                        for (int i = 0; i < filteredCategories.size(); i++) {
-//                            String item = (String) filteredCategories.get(i);
-//                            filterCategory(item);
-//
-//                        }
-//                        dialog.dismiss();
-//
-//                    }
-//                })
-//                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int whichButton) {
-//                                dialog.dismiss();
-//                            }
-//                        });
-//                dialogBuilder.show();
-//
-//                    }
-//                });
+        swipeContainer.setColorSchemeResources(R.color.themeBlue);
+
     }
 
     public void fetchTimelineAsync(int page) {
@@ -298,7 +250,7 @@ public class ListingsActivity extends AppCompatActivity {
                         Log.d("ABC" , items.toString());
                         if (i == 12) {
                             adapter.addAll(items);
-//                            swipeContainer.setRefreshing(false);
+                            swipeContainer.setRefreshing(false);
                             Log.d("ABC", ((Integer) items.size()).toString());
                         }
                         setUpRV();
@@ -399,44 +351,42 @@ public class ListingsActivity extends AppCompatActivity {
 
 
     public void onClickFilter(View view) {
-        Toast.makeText(getApplication(), "This item has been booked for you!", Toast.LENGTH_SHORT).show();
+        items.clear();
+        filteredCategories.clear();
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle("Choose Category");
+        dialogBuilder.setMultiChoiceItems(itemsChar, booleans, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    CharSequence chosen = itemsChar[which];
+                    booleans[which] = isChecked;
+            }
+        }).setPositiveButton("filter", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                for (int i = 0; i < booleans.length; i++) {
+                    if (booleans[i]) {
+                        filteredCategories.add(itemsChar[i]);
+                    }
+                }
+
+                for (int i = 0; i < filteredCategories.size(); i++) {
+                    String item = (String) filteredCategories.get(i);
+                    filterCategory(item);
+
+                }
+                dialog.dismiss();
+
+            }
+        })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+        dialogBuilder.show();
+
     }
-//        items.clear();
-//        filteredCategories.clear();
-//
-//        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-//        dialogBuilder.setTitle("Choose Category");
-//        dialogBuilder.setMultiChoiceItems(itemsChar, booleans, new DialogInterface.OnMultiChoiceClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-//                    CharSequence chosen = itemsChar[which];
-//                    booleans[which] = isChecked;
-//            }
-//        }).setPositiveButton("filter", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int whichButton) {
-//                for (int i = 0; i < booleans.length; i++) {
-//                    if (booleans[i]) {
-//                        filteredCategories.add(itemsChar[i]);
-//                    }
-//                }
-//
-//                for (int i = 0; i < filteredCategories.size(); i++) {
-//                    String item = (String) filteredCategories.get(i);
-//                    filterCategory(item);
-//
-//                }
-//                dialog.dismiss();
-//
-//            }
-//        })
-//                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//        dialogBuilder.show();
-//
-//    }
 
 
 }
