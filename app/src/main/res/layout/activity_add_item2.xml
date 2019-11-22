@@ -152,7 +152,11 @@
                     android:layout_marginBottom="32dp"
                     android:background="@drawable/round_button_blue"
                     android:fontFamily="sans-serif-condensed-light"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:text="  UPLOAD AN IMAGE  "
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
                     android:textSize="16dp" />
 
                 <TextView

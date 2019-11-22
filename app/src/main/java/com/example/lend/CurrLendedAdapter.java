@@ -75,6 +75,8 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
 
         if (booking.getUserReturned().equals("true")) {
             holder.btnReturn.setText("Confirm Returned");
+            holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
+            holder.btnReturn.setTextColor(context.getResources().getColor(R.color.white));
             holder.btnReturn.setClickable(true);
             holder.btnReturn.setOnClickListener(new View.OnClickListener() {
                 @Override

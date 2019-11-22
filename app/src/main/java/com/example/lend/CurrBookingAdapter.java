@@ -57,6 +57,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         final Booking booking = bookings.get(position);
         if (booking.getUserReturned().equals("true")) {
             holder.btnReturn.setText("Pending Confirmation");
+            holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
+            holder.btnReturn.setTextColor(context.getResources().getColor(R.color.white));
 
         }
 
@@ -101,6 +103,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
             public void onClick(View view) {
                 booking.setUserReturned(((Boolean) true).toString());
                 holder.btnReturn.setText("Pending Confirmation");
+                holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
+                holder.btnReturn.setTextColor(context.getResources().getColor(R.color.white));
                 final Dialog rankDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
                 rankDialog.setContentView(R.layout.rank_dialog);
                 rankDialog.setCancelable(true);

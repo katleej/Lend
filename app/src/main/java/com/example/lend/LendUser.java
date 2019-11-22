@@ -102,4 +102,12 @@ public class LendUser {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }
