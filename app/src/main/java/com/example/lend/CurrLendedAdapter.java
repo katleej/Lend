@@ -75,6 +75,8 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
 
         if (booking.getUserReturned().equals("true")) {
             holder.btnReturn.setText("Confirm Returned");
+            holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
+            holder.btnReturn.setTextColor(context.getResources().getColor(R.color.white));
             holder.btnReturn.setClickable(true);
             holder.btnReturn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,14 +90,14 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
                 }
             });
         }
-        db.collection("users").whereEqualTo("ID", booking.getBorrower()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("users").whereEqualTo("id", booking.getBorrower()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         user = document.toObject(LendUser.class);
+                        Log.d("wah", user.username);
                         holder.tvLenderName.setText(user.getUsername());
-
                     }
                 }
             }

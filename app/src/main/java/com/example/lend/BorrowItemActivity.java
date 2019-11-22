@@ -40,11 +40,13 @@ public class BorrowItemActivity extends AppCompatActivity {
     public TextView tvPrice;
     public TextView tvPriceBreakdown;
     public TextView lenderName;
+    public TextView lenderLocation;
     public Button book;
     public Item item;
     public String itemID;
     public String lenderID;
     public String lenderNameString;
+
     FirebaseAuth auth;
     FirebaseFirestore db;
     LendUser owner;
@@ -69,6 +71,7 @@ public class BorrowItemActivity extends AppCompatActivity {
         itemDescription = findViewById(R.id.borrow_item_description);
         lenderImage = findViewById(R.id.user_image);
         lenderName = findViewById(R.id.user_name);
+        lenderLocation = findViewById(R.id.user_location);
         book = findViewById(R.id.btnBook);
         tvPrice = findViewById(R.id.tvPrice);
         tvPriceBreakdown = findViewById(R.id.tvPriceBreakdown);
@@ -81,6 +84,7 @@ public class BorrowItemActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         owner = document.toObject(LendUser.class);
                         lenderName.setText(owner.getUsername());
+                        lenderLocation.setText(owner.getCity());
                     }
                 }
             }

@@ -58,11 +58,13 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         final Booking booking = bookings.get(position);
         if (booking.getUserReturned().equals("true")) {
             holder.btnReturn.setText("Pending Confirmation");
+            holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
+            holder.btnReturn.setTextColor(context.getResources().getColor(R.color.white));
 
         }
 
         db.collection("users")
-                .whereEqualTo("ID", booking.getLenderID())
+                .whereEqualTo("id", booking.getLenderID())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -71,6 +73,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                     Log.d("ABC", "user" + task.getResult().size());
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         user = document.toObject(LendUser.class);
+                        Log.d("wah", user.username);
                         holder.tvLenderName.setText(user.getUsername());
                     }
                 }
@@ -104,6 +107,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
             public void onClick(View view) {
                 booking.setUserReturned(((Boolean) true).toString());
                 holder.btnReturn.setText("Pending Confirmation");
+                holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
+                holder.btnReturn.setTextColor(context.getResources().getColor(R.color.white));
                 final Dialog rankDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
                 rankDialog.setContentView(R.layout.rank_dialog);
                 rankDialog.setCancelable(true);
