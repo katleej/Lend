@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -48,7 +49,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
     @NonNull
     @Override
     public CurrBookingAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.curr_booking_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.curr_booking_row_card, parent, false);
         return new CustomViewHolder(view);
     }
 
@@ -86,6 +87,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                         if (task.isSuccessful()) {
                             Log.d("ABC", "items" + task.getResult().size());
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                item = document.toObject(Item.class);
                                 Map<String, Object> itemMap = document.getData();
                                 item.setItemName(itemMap.get("Item Name").toString());
                                 item.setPrice(itemMap.get("Item Price").toString());
@@ -95,6 +97,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                         }
                     }
                 });
+
 
         holder.btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +136,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         TextView tvLenderName;
         TextView tvItemName;
         TextView tvPrice;
+        TextView tvItemCategory;
+        ImageView tvPhoto;
         Button btnReturn;
 
         public CustomViewHolder(View itemView) {
@@ -141,6 +146,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             btnReturn = itemView.findViewById(R.id.btnReturn);
+            tvPhoto = itemView.findViewById(R.id.tvPhoto);
+            tvItemCategory = itemView.findViewById(R.id.tvItemCategory);
 
         }
     }
