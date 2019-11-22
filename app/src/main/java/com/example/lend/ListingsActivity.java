@@ -70,8 +70,8 @@ public class ListingsActivity extends AppCompatActivity {
             "Kids", "Books", "CDs, DVDS", "Stationary", "Hobbies", "Other"};
     final boolean[] booleans = {true, false, false, false, false, false, false, false, false, false,
             false, false, false, false};
-    ArrayList<CharSequence> filteredCategories = new ArrayList<CharSequence>();
     SwipeRefreshLayout swipeContainer;
+    ArrayList<CharSequence> filteredCategories = new ArrayList<CharSequence>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference reference = db.collection("items");
     private TextWatcher text = null;
