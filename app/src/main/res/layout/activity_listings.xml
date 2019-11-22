@@ -36,6 +36,27 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:id="@+id/swipeContainer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:layout_editor_absoluteX="0dp"-->
+<!--        tools:layout_editor_absoluteY="0dp">-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="140dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="150dp"
+            android:paddingRight="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+
     <LinearLayout
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
@@ -63,57 +84,47 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:scaleType="centerCrop"
                     android:layout_marginLeft="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/quantum_ic_search_grey600_24"></ImageView>
 
                 <EditText
-                    android:layout_weight="5"
-                    android:layout_marginLeft="8dp"
                     android:id="@+id/searchbar"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="150dp"
-                    android:background="@null"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="5"
+                    android:background="@null"
                     android:hint="Keyword"></EditText>
 
             </LinearLayout>
 
-            <ImageButton
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/filterButton"-->
+            <!--                android:layout_width="20dp"-->
+            <!--                android:onClick="onClickFilter"-->
+            <!--                android:layout_height="20dp"-->
+            <!--                android:scaleType="centerCrop"-->
+            <!--                android:layout_gravity="center_vertical"-->
+            <!--                android:layout_marginRight="8dp"-->
+            <!--                android:layout_marginLeft="8dp"-->
+            <!--                android:clickable="true"-->
+            <!--                android:background="@drawable/filter_button"></ImageButton>-->
+
+            <Button
                 android:id="@+id/filterButton"
                 android:layout_width="20dp"
-                android:onClick="onClickFilter"
                 android:layout_height="20dp"
-                android:scaleType="centerCrop"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
-                android:clickable="true"
-                android:background="@drawable/filter_button"></ImageButton>
+                android:layout_marginRight="8dp"
+                android:background="@drawable/filter_button"
+                android:scaleType="centerCrop"></Button>
+
         </LinearLayout>
 
     </LinearLayout>
-
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="140dp"
-            android:paddingLeft="8dp"
-            android:paddingTop="150dp"
-            android:paddingRight="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
