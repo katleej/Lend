@@ -49,14 +49,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:orientation="horizontal">
 
-            <EditText
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
                 android:layout_weight="5"
-                android:id="@+id/searchbar"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:hint="Keyword"></EditText>
+                android:background="@drawable/search_bar_shape"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="centerCrop"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/quantum_ic_search_grey600_24"></ImageView>
+
+                <EditText
+                    android:layout_weight="5"
+                    android:layout_marginLeft="8dp"
+                    android:id="@+id/searchbar"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="150dp"
+                    android:background="@null"
+                    android:layout_height="wrap_content"
+                    android:hint="Keyword"></EditText>
+
+            </LinearLayout>
+
 
             <ImageButton
                 android:id="@+id/filterButton"
@@ -71,11 +93,12 @@
                 android:background="@drawable/filter_button"></ImageButton>
         </LinearLayout>
 
+
+
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:entries="@array/category"
             android:spinnerMode="dialog"
             app:layout_constraintBottom_toBottomOf="parent"
