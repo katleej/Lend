@@ -8,12 +8,14 @@ import java.util.HashMap;
 
 @Parcel
 public class LendUser {
-    public String id, username, profileImageURL, city;
+    public String id, username,  city;
+    public String photoURL;
     public String latLocation;
     public String longLocation;
     public int numberOfBookings, numReviews, rating, yearJoined;
     public HashMap<String, String> mLendedItemList, mBorrowedItemList;
     public String description = "No Description";
+
 
     public String getDescription() {
         return description;
@@ -102,4 +104,12 @@ public class LendUser {
     public void setRating(int rating) {
         this.rating = rating;
     }
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
 }
