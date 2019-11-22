@@ -248,7 +248,7 @@ public class ListingsActivity extends AppCompatActivity {
                         }
                         Log.d("ABC" , items.toString());
                         if (i == 12) {
-                            adapter.addAll(items);
+                            adapter = new ItemAdapter(getApplicationContext(), items);
                             swipeContainer.setRefreshing(false);
                             Log.d("ABC", ((Integer) items.size()).toString());
                         }

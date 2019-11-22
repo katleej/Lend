@@ -50,7 +50,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final ItemAdapter.CustomViewHolder holder, int position) {
-        Item item = items.get(position);
+        final Item item = items.get(position);
         db.collection("users").whereEqualTo("id", item.getLender()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
