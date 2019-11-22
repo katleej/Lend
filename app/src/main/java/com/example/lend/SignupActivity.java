@@ -73,6 +73,9 @@ public class SignupActivity extends AppCompatActivity {
     private Uri imageUri;
     public String uploadedImageURL;
 
+    public String cityName;
+    public String countryName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,8 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
         PlacesClient placesClient = Places.createClient(this);
+        String cityName = "";
+        String countryName = "";
         mAuth = FirebaseAuth.getInstance();
 
         states = new HashMap<String, String>();
@@ -186,8 +191,6 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 userPlace = place;
-                String cityName = "";
-                String countryName = "";
                 Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
                 try {
                     List<Address> addresses = geo.getFromLocation(userPlace.getLatLng().latitude, userPlace.getLatLng().longitude, 1);
@@ -283,6 +286,7 @@ public class SignupActivity extends AppCompatActivity {
                             user.setRating(0);
                             user.setNumReviews(0);
                             user.setPhotoURL(uploadedImageURL);
+                            user.setCity(cityName + ", " + countryName);
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("users").document(user.getUsername()).set(user)

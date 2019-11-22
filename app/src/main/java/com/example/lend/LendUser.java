@@ -112,4 +112,12 @@ public class LendUser {
         this.photoURL = photoURL;
     }
 
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }
