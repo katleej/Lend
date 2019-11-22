@@ -166,7 +166,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onSuccess(String s) {
 //                        image.setImageBitmap(selectedImage);
-                        Log.d("HHHHHHHHHHH", s);
+                        image.setText("Image Uploaded!");
+                        image.setClickable(false);
                         uploadedImageURL = s;
                     }
                 }, new OnFailureListener() {
