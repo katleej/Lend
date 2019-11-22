@@ -64,6 +64,12 @@ public class ListingsActivity extends AppCompatActivity {
     LendUser user;
     EditText searchbar;
     RecyclerView mList;
+    final CharSequence[] itemsChar = {"All", "Electronic Appliances", "Apparels", "Jewelery", "Toiletries",
+            "Cosmetics", "Footwear", "Sportswear", "Women\'s Apparel", "Men\'s Apparel",
+            "Kids", "Books", "CDs, DVDS", "Stationary", "Hobbies", "Other"};
+    final boolean[] booleans = {true, false, false, false, false, false, false, false, false, false,
+            false, false, false, false};
+    ArrayList<CharSequence> filteredCategories = new ArrayList<CharSequence>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference reference = db.collection("items");
     private TextWatcher text = null;
@@ -99,23 +105,8 @@ public class ListingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        spinner = findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3) {
-                // TODO Auto-generated method stub
-                String selectedCategory = spinner.getSelectedItem().toString();
-                items.clear();
-                filterCategory(selectedCategory);
-                Log.d("henlo2" , items.toString());
+        filterCategory("All");
 
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-            }
-        });
         Log.d("henlo2" , items.toString());
         searchbar = (EditText) findViewById(R.id.searchbar);
         if (searchbar == null) {
@@ -188,7 +179,6 @@ public class ListingsActivity extends AppCompatActivity {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
                     .whereEqualTo("Booked", "false")
-//                .whereEqualTo("Item Category", "Electronic Appliances")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -262,11 +252,10 @@ public class ListingsActivity extends AppCompatActivity {
     }
 
     public void filterCategory(String slatt)    {
-        if (slatt.equals("Show All"))   {
+        if (slatt.equals("All"))   {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
                     .whereEqualTo("Booked", "false")
-//                .whereEqualTo("Item Category", "Electronic Appliances")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -328,34 +317,6 @@ public class ListingsActivity extends AppCompatActivity {
     }
 
 
-    public void filterName(String slatt)    {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("items")
-                .whereEqualTo("Booked", "false")
-                .whereEqualTo("Item Name", slatt)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            items.clear();
-                            names = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("henlo", document.getId() + " => " + document.getData());
-                                Map<String, Object> itemMap = document.getData();
-                                String tempName = itemMap.get("Item Name").toString();
-                                names.add(tempName);
-                            }
-                            Log.d("henlo" , items.toString());
-                            setUpRV();
-                        } else {
-                            Log.d("henlo", "Error getting documents: ", task.getException());
-                        }
-
-                    }
-                });
-
-    }
     @Override
     public void onBackPressed() {
         adapter.notifyDataSetChanged();
@@ -363,19 +324,32 @@ public class ListingsActivity extends AppCompatActivity {
 
 
     public void onClickFilter(View view) {
-        final CharSequence[] items = {"All", "Electronic Appliances", "Apparels", "Jewelery", "Toiletries"};
-        final boolean[] booleans = {true, false, false, false, false};
+        items.clear();
+        filteredCategories.clear();
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setTitle("Pick a color");
-        dialogBuilder.setMultiChoiceItems(items, booleans, new DialogInterface.OnMultiChoiceClickListener() {
+        dialogBuilder.setTitle("Choose Category");
+        dialogBuilder.setMultiChoiceItems(itemsChar, booleans, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-
+                    CharSequence chosen = itemsChar[which];
+                    booleans[which] = isChecked;
             }
         }).setPositiveButton("filter", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+                for (int i = 0; i < booleans.length; i++) {
+                    if (booleans[i]) {
+                        filteredCategories.add(itemsChar[i]);
+                    }
+                }
+
+                for (int i = 0; i < filteredCategories.size(); i++) {
+                    String item = (String) filteredCategories.get(i);
+                    filterCategory(item);
+
+                }
                 dialog.dismiss();
+
             }
         })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -387,52 +361,3 @@ public class ListingsActivity extends AppCompatActivity {
 
     }
 }
-
-
-
-//        text = new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                Log.d("henlo2" , "inside textwatcher");
-//                String user_input = searchbar.getText().toString();
-//                for (int i = 0; i < items.size(); i++) {
-//                    if (!items.get(i).getItemName().contains(s)) {
-//                        items.remove(i);
-//                        Log.d("henlo2" , items.get(i).getItemName());
-//                    }
-//                    setUpRV();
-//                }
-//            }
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//            }
-//        };
-//        search.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (searchbar.getText().toString().isEmpty())   {
-//                    Toast.makeText(getApplication(), "Please enter a keyword!", Toast.LENGTH_SHORT).show();
-//
-//                }
-//                else    {
-//                    filterName(searchbar.getText().toString());
-//                }
-//            }
-//        });
-
-//    public void filter(String text){
-//        ArrayList<String> temp = new ArrayList<String>();
-//        for(String d: names){
-//            //or use .equal(text) with you want equal match
-//            //use .toLowerCase() for better matches
-//            if(d.toLowerCase().contains(text.toLowerCase())){
-//                temp.add(d);
-//            }
-//        }
-//        //update recyclerview
-//        adapter.updateList(temp);
-//    }
