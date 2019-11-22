@@ -46,7 +46,7 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
     @NonNull
     @Override
     public CurrLendedAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lended_booking_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lended_booking_row_card, parent, false);
         return new CustomViewHolder(view);
     }
 

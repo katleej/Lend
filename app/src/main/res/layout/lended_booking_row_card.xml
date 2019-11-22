@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="3dp"
+    android:padding="16dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/tvPhoto"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/puppy" />
+
+        <TextView
+            android:id="@+id/tvLenderName"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mufasa's"
+            android:layout_toEndOf="@id/tvPhoto"
+            android:layout_toRightOf="@id/tvPhoto"
+            ></TextView>
+
+
+        <TextView
+            android:id="@+id/tvItemName"
+            android:layout_below="@id/tvLenderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tvPhoto"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="Item Name"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_below="@id/tvItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tvPhoto"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="$10.00"
+            android:textSize="10dp" />
+
+
+        <Button
+            android:id="@+id/btnReturn"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="lended"
+            android:textSize="12dp" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
