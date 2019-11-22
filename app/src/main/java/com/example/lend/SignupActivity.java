@@ -102,6 +102,7 @@ public class SignupActivity extends AppCompatActivity {
                 userPlace = place;
                 Log.d("henlo" , userPlace.getLatLng().toString());
 
+
             }
             @Override
             public void onError(@NonNull Status status) {
