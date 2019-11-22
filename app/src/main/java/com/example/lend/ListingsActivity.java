@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -70,6 +71,7 @@ public class ListingsActivity extends AppCompatActivity {
     final boolean[] booleans = {true, false, false, false, false, false, false, false, false, false,
             false, false, false, false};
     ArrayList<CharSequence> filteredCategories = new ArrayList<CharSequence>();
+    SwipeRefreshLayout swipeContainer;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference reference = db.collection("items");
     private TextWatcher text = null;
