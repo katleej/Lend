@@ -33,6 +33,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
 import java.io.IOException;
@@ -47,6 +48,7 @@ import static com.example.lend.Utils.userWrite;
 
 public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    FirebaseFirestore db;
 
     public EditText etName;
     public EditText etEmail;
@@ -64,6 +66,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
         PlacesClient placesClient = Places.createClient(this);
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
         states = new HashMap<String, String>();
@@ -182,7 +185,6 @@ public class SignupActivity extends AppCompatActivity {
 
     public void createAccount(String email, String password){
         //validate whether or not they are emails and passwords
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

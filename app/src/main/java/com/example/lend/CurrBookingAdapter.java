@@ -63,7 +63,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         }
 
         db.collection("users")
-                .whereEqualTo("ID", booking.getLenderID())
+                .whereEqualTo("id", booking.getLenderID())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -72,6 +72,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                     Log.d("ABC", "user" + task.getResult().size());
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         user = document.toObject(LendUser.class);
+                        Log.d("wah", user.username);
                         holder.tvLenderName.setText(user.getUsername());
                     }
                 }
