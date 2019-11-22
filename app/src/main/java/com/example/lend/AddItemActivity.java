@@ -21,8 +21,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -40,6 +42,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -62,6 +66,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     private final String TAG = "Hello";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user;
+    private LendUser currUser;
     private Uri imageUri;
     public String uploadedImageURL;
 
@@ -83,6 +88,21 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         image.setOnClickListener(this);
         save.setOnClickListener(this);
         cancel.setOnClickListener(this);
+
+        db.collection("users")
+                .whereEqualTo("id", FirebaseAuth.getInstance().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            Log.d("ABC", "user" + task.getResult().size());
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                currUser = document.toObject(LendUser.class);
+                            }
+                        }
+                    }
+                });
     }
 
     @Override
@@ -117,16 +137,12 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     //photoURL = uploadedImageURL.substring(start, end);
                     try {
                         item.setItemName(name);
-                        Log.d("henlo" , name);
+                        item.setLenderName(currUser.getUsername());
                         item.setItemDescription(description);
-                        Log.d("henlo" , description);
                         item.setCategory(category);
-                        Log.d("henlo" , category);
                         item.setPrice(((Integer) price).toString());
-                        Log.d("henlo" , Integer.toString(price));
                         item.setPhotoURL(photoURL);
-                        itemWrite(user.getUid() , item.getItemName() , item.getItemDescription(), item.getPrice(), item.getCategory(), item.getPhotoURL(), "false");
-                        Log.d("henlo" , user.getUid());
+                        itemWrite(user.getUid(), item.getLenderName(), item.getItemName() , item.getItemDescription(), item.getPrice(), item.getCategory(), item.getPhotoURL(), "false");
                     }
                     catch (NullPointerException e)  {
                         Log.d("henlo" , "some nullpointerexception");

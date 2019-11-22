@@ -103,41 +103,18 @@ public class SignupActivity extends AppCompatActivity {
                             LendUser user = new LendUser(getApplicationContext());
                             user.setUsername(etName.getText().toString());
                             user.setLat(((Double) userPlace.getLatLng().latitude).toString());
-                            user.setLat(((Double) userPlace.getLatLng().longitude).toString());
-                            user.setYearJoined(Calendar.getInstance().get(Calendar.YEAR));
-
-
-                            Map<String, Object> username = new HashMap<>();
-                            username.put("username", etName.getText().toString());
-                            username.put("lat", ((Double) userPlace.getLatLng().latitude).toString());
-                            username.put("long", ((Double) userPlace.getLatLng().longitude).toString());
-                            username.put("ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            user.setLng(((Double) userPlace.getLatLng().longitude).toString());
                             int year = Calendar.getInstance().get(Calendar.YEAR);
-
-                            username.put("year joined", Integer.toString(year));
-                            username.put("average rating", 0);
-                            username.put("number of reviews", 0);
-                            username.put("profile description", "No Description");
-                            username.put("number of items", 0);
-                            username.put("number of bookings", 0);
+                            user.setYearJoined(year);
+                            user.setDescription("No description ");
+                            user.setid(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            user.setRating(0);
+                            user.setNumReviews(0);
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            db.collection("users").document(mAuth.getCurrentUser().getUid())
-                                    .set(username)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d("Henlo", "DocumentSnapshot successfully written!");
-                                            Intent mainIntent = new Intent(SignupActivity.this, ListingsActivity.class);
-                                            startActivity(mainIntent);
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w("Henlo", "Error writing document", e);
-                                        }
-                                    });
+                            db.collection("users").document(user.getUsername()).set(user);
+                            Intent i = new Intent(SignupActivity.this , ListingsActivity.class);
+                            startActivityForResult(i , 1);
                         } else {
                             // If sign in fails, display a message to the user.
                             Exception e = task.getException();

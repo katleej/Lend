@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:backgroundTint="@color/white"
+    android:padding="2dip">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:text="How would you rate this user?"></TextView>
+
+    <RatingBar
+        android:id="@+id/dialog_ratingbar"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:theme="@style/RatingBar"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:stepSize="1.0"
+        android:rating="0"
+        android:isIndicator="false"/>
+
+    <Button android:id="@+id/rank_dialog_button"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="submit"
+        android:focusable="false"
+        android:layout_margin="5dip"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/themeBlue"
+        android:textSize="20dip"
+        android:layout_width="fill_parent" />
+
+</LinearLayout>

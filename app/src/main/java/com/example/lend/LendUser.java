@@ -8,10 +8,10 @@ import java.util.HashMap;
 
 @Parcel
 public class LendUser {
-    public String id, email, username, password, profileDescription, profileImageURL, city;
+    public String id, username, profileImageURL, city;
     public String latLocation;
     public String longLocation;
-    public int numberOfBookings, yearJoined, num_reviews, rating;
+    public int numberOfBookings, numReviews, rating, yearJoined;
     public HashMap<String, String> mLendedItemList, mBorrowedItemList;
     public String description = "No Description";
 
@@ -27,7 +27,7 @@ public class LendUser {
         return yearJoined;
     }
 
-    public void setYearJoined(int year_joined) {
+    public void setYearJoined(int yearJoined) {
         this.yearJoined = yearJoined;
     }
 
@@ -39,28 +39,12 @@ public class LendUser {
 
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getLat() {
@@ -103,12 +87,12 @@ public class LendUser {
         this.id = id;
     }
 
-    public int getNum_reviews() {
-        return num_reviews;
+    public int getNumReviews() {
+        return numReviews;
     }
 
-    public void setNum_reviews(int num_reviews) {
-        this.num_reviews = num_reviews;
+    public void setNumReviews(int numReviews) {
+        this.numReviews = numReviews;
     }
 
     public int getRating() {
