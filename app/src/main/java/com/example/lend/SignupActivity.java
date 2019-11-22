@@ -8,8 +8,18 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+
+import android.location.Address;
+import android.location.Geocoder;
+import android.net.Uri;
+
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -33,9 +43,17 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
+
+import java.io.IOException;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.example.lend.Utils.userWrite;
@@ -50,22 +68,116 @@ public class SignupActivity extends AppCompatActivity {
     public Place userPlace;
     public Fragment placeAutoComplete;
 
+    Map<String, String> states;
+    public Button image;
+    private Uri imageUri;
+    public String uploadedImageURL;
+
+    public String cityName;
+    public String countryName;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
         PlacesClient placesClient = Places.createClient(this);
+        String cityName = "";
+        String countryName = "";
         mAuth = FirebaseAuth.getInstance();
+
+        states = new HashMap<String, String>();
+        states.put("Alabama","AL");
+        states.put("Alaska","AK");
+        states.put("Alberta","AB");
+        states.put("American Samoa","AS");
+        states.put("Arizona","AZ");
+        states.put("Arkansas","AR");
+        states.put("Armed Forces (AE)","AE");
+        states.put("Armed Forces Americas","AA");
+        states.put("Armed Forces Pacific","AP");
+        states.put("British Columbia","BC");
+        states.put("California","CA");
+        states.put("Colorado","CO");
+        states.put("Connecticut","CT");
+        states.put("Delaware","DE");
+        states.put("District Of Columbia","DC");
+        states.put("Florida","FL");
+        states.put("Georgia","GA");
+        states.put("Guam","GU");
+        states.put("Hawaii","HI");
+        states.put("Idaho","ID");
+        states.put("Illinois","IL");
+        states.put("Indiana","IN");
+        states.put("Iowa","IA");
+        states.put("Kansas","KS");
+        states.put("Kentucky","KY");
+        states.put("Louisiana","LA");
+        states.put("Maine","ME");
+        states.put("Manitoba","MB");
+        states.put("Maryland","MD");
+        states.put("Massachusetts","MA");
+        states.put("Michigan","MI");
+        states.put("Minnesota","MN");
+        states.put("Mississippi","MS");
+        states.put("Missouri","MO");
+        states.put("Montana","MT");
+        states.put("Nebraska","NE");
+        states.put("Nevada","NV");
+        states.put("New Brunswick","NB");
+        states.put("New Hampshire","NH");
+        states.put("New Jersey","NJ");
+        states.put("New Mexico","NM");
+        states.put("New York","NY");
+        states.put("Newfoundland","NF");
+        states.put("North Carolina","NC");
+        states.put("North Dakota","ND");
+        states.put("Northwest Territories","NT");
+        states.put("Nova Scotia","NS");
+        states.put("Nunavut","NU");
+        states.put("Ohio","OH");
+        states.put("Oklahoma","OK");
+        states.put("Ontario","ON");
+        states.put("Oregon","OR");
+        states.put("Pennsylvania","PA");
+        states.put("Prince Edward Island","PE");
+        states.put("Puerto Rico","PR");
+        states.put("Quebec","PQ");
+        states.put("Rhode Island","RI");
+        states.put("Saskatchewan","SK");
+        states.put("South Carolina","SC");
+        states.put("South Dakota","SD");
+        states.put("Tennessee","TN");
+        states.put("Texas","TX");
+        states.put("Utah","UT");
+        states.put("Vermont","VT");
+        states.put("Virgin Islands","VI");
+        states.put("Virginia","VA");
+        states.put("Washington","WA");
+        states.put("West Virginia","WV");
+        states.put("Wisconsin","WI");
+        states.put("Wyoming","WY");
+        states.put("Yukon Territory","YT");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        image = findViewById(R.id.add_image);
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnSave = findViewById(R.id.btnSave);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                if (intent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
+                    startActivityForResult(intent, 1046);
+                }
+            }
+        });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,14 +185,23 @@ public class SignupActivity extends AppCompatActivity {
                 createAccount(etEmail.getText().toString(), etPassword.getText().toString());
             }
         });
-
         AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.acLocation);
         autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
         autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
                 userPlace = place;
-                Log.d("henlo" , userPlace.getLatLng().toString());
+                Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
+                try {
+                    List<Address> addresses = geo.getFromLocation(userPlace.getLatLng().latitude, userPlace.getLatLng().longitude, 1);
+                    cityName = addresses.get(0).getLocality();
+                    countryName = states.get(addresses.get(0).getAdminArea());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Log.d("henlo" , cityName + ", " + countryName);
+
 
             }
             @Override
@@ -88,6 +209,61 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1046) {
+            try {
+                imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                new CloudStorage().upload(imageUri, new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+//                        image.setImageBitmap(selectedImage);
+                        Log.d("HHHHHHHHHHH", s);
+                        uploadedImageURL = s;
+                    }
+                }, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                });
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        else {
+            Toast.makeText(this, "Incorrect requestcode", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
     }
 
 
@@ -110,11 +286,27 @@ public class SignupActivity extends AppCompatActivity {
                             user.setid(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             user.setRating(0);
                             user.setNumReviews(0);
+                            user.setPhotoURL(uploadedImageURL);
+                            user.setCity(cityName + ", " + countryName);
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            db.collection("users").document(user.getUsername()).set(user);
-                            Intent i = new Intent(SignupActivity.this , ListingsActivity.class);
-                            startActivityForResult(i , 1);
+                            db.collection("users").document(user.getUsername()).set(user)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("Henlo", "DocumentSnapshot successfully written!");
+                                    Intent mainIntent = new Intent(SignupActivity.this, ListingsActivity.class);
+                                    startActivity(mainIntent);
+                                }
+                            })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w("Henlo", "Error writing document", e);
+                                        }
+                                    });
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Exception e = task.getException();

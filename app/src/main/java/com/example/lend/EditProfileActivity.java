@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,12 +23,12 @@ import org.parceler.Parcels;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfileActivity extends AppCompatActivity {
-    FirebaseFirestore db;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth auth;
+    LendUser user;
     private RatingBar ratingBar;
     public TextView profileName;
     public LendUser lendUser;
-    public String uid;
     public FirebaseUser fbUser;
     public CircleImageView profileImage;
     public TextView yearJoined;
@@ -41,17 +43,16 @@ public class EditProfileActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         lendUser = (LendUser) Parcels.unwrap(getIntent().getParcelableExtra("user"));
-
 //        db.collection("users")
-//                .whereEqualTo("username", username)
+//                .whereEqualTo("ID", FirebaseAuth.getInstance().getUid())
 //                .get()
 //                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //                    @Override
 //                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
 //                        if (task.isSuccessful()){
+//                            Log.d("ABC", "user" + task.getResult().size());
 //                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                lendUser = document.toObject(LendUser.class);
-//
+//                                user = document.toObject(LendUser.class);
 //                            }
 //                        }
 //                    }
@@ -73,5 +74,9 @@ public class EditProfileActivity extends AppCompatActivity {
         profileDescription.setText(lendUser.getDescription());
         numReviews.setText(Integer.toString(lendUser.getNumReviews()));
         ratingBar.setRating(lendUser.getRating());
+        Log.d("henlo4" , lendUser.getPhotoURL());
+        Glide.with(getApplicationContext()).load(lendUser.getPhotoURL()).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(profileImage);
+
     }
 }

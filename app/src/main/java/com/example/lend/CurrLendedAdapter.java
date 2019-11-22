@@ -55,7 +55,7 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
         final Booking booking = bookings.get(position);
         holder.btnReturn.setClickable(false);
         db.collection("items")
-                .whereEqualTo("ID", Integer.parseInt(booking.getItem()))
+                .whereEqualTo("id", Integer.parseInt(booking.getItem()))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

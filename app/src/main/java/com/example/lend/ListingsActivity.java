@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -70,9 +71,11 @@ public class ListingsActivity extends AppCompatActivity {
     final boolean[] booleans = {true, false, false, false, false, false, false, false, false, false,
             false, false, false, false};
     ArrayList<CharSequence> filteredCategories = new ArrayList<CharSequence>();
+    SwipeRefreshLayout swipeContainer;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference reference = db.collection("items");
     private TextWatcher text = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +143,22 @@ public class ListingsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
             }
         });
+
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("ABC", "onR");
+                fetchTimelineAsync(0);
+            }
+        });
+        swipeContainer.setColorSchemeResources(R.color.themeBlue);
+    }
+
+    public void fetchTimelineAsync(int page) {
+        Query query = db.collection("items").whereEqualTo("Booked", "false");
+        showAdapter(query, 12);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -174,7 +193,8 @@ public class ListingsActivity extends AppCompatActivity {
         }
     }
 
-    void showAdapter(Query q1 , int i) {
+    void showAdapter(Query q1 , final int i) {
+        Log.d("ABC", "im sad");
         if (i == 0)   {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
@@ -207,6 +227,7 @@ public class ListingsActivity extends AppCompatActivity {
 
         }
         else {
+            Log.d("ABC", "inside");
             q1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -225,7 +246,12 @@ public class ListingsActivity extends AppCompatActivity {
                             temp.setid(itemMap.get("ID").toString());
                             items.add(temp);
                         }
-                        Log.d("henlo" , items.toString());
+                        Log.d("ABC" , items.toString());
+                        if (i == 12) {
+                            adapter.addAll(items);
+                            swipeContainer.setRefreshing(false);
+                            Log.d("ABC", ((Integer) items.size()).toString());
+                        }
                         setUpRV();
                     } else {
                         Log.d("henlo", "Error getting documents: ", task.getException());
@@ -324,40 +350,44 @@ public class ListingsActivity extends AppCompatActivity {
 
 
     public void onClickFilter(View view) {
-        items.clear();
-        filteredCategories.clear();
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setTitle("Choose Category");
-        dialogBuilder.setMultiChoiceItems(itemsChar, booleans, new DialogInterface.OnMultiChoiceClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                    CharSequence chosen = itemsChar[which];
-                    booleans[which] = isChecked;
-            }
-        }).setPositiveButton("filter", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                for (int i = 0; i < booleans.length; i++) {
-                    if (booleans[i]) {
-                        filteredCategories.add(itemsChar[i]);
-                    }
-                }
-
-                for (int i = 0; i < filteredCategories.size(); i++) {
-                    String item = (String) filteredCategories.get(i);
-                    filterCategory(item);
-
-                }
-                dialog.dismiss();
-
-            }
-        })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        dialog.dismiss();
-                    }
-                });
-        dialogBuilder.show();
-
+        Toast.makeText(getApplication(), "This item has been booked for you!", Toast.LENGTH_SHORT).show();
     }
+//        items.clear();
+//        filteredCategories.clear();
+//
+//        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+//        dialogBuilder.setTitle("Choose Category");
+//        dialogBuilder.setMultiChoiceItems(itemsChar, booleans, new DialogInterface.OnMultiChoiceClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+//                    CharSequence chosen = itemsChar[which];
+//                    booleans[which] = isChecked;
+//            }
+//        }).setPositiveButton("filter", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                for (int i = 0; i < booleans.length; i++) {
+//                    if (booleans[i]) {
+//                        filteredCategories.add(itemsChar[i]);
+//                    }
+//                }
+//
+//                for (int i = 0; i < filteredCategories.size(); i++) {
+//                    String item = (String) filteredCategories.get(i);
+//                    filterCategory(item);
+//
+//                }
+//                dialog.dismiss();
+//
+//            }
+//        })
+//                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//        dialogBuilder.show();
+//
+//    }
+
+
 }

@@ -42,6 +42,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         this.context = context;
         this.bookings = bookings;
         item = new Item();
+        user = new LendUser();
         Log.d("ABC", "book" + bookings.toString());
     }
 
@@ -57,11 +58,11 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         final Booking booking = bookings.get(position);
         if (booking.getUserReturned().equals("true")) {
             holder.btnReturn.setText("Pending Confirmation");
-
+            holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
         }
 
         db.collection("users")
-                .whereEqualTo("ID", booking.getLenderID())
+                .whereEqualTo("id", booking.getLenderID())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -69,7 +70,8 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                 if (task.isSuccessful()){
                     Log.d("ABC", "user" + task.getResult().size());
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        user = document.toObject(LendUser.class);
+                        Map<String, Object> userMap = document.getData();
+                        user.setUsername(userMap.get("username").toString());
                         holder.tvLenderName.setText(user.getUsername());
                     }
                 }
