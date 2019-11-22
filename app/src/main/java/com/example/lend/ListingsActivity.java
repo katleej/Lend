@@ -1,6 +1,7 @@
 package com.example.lend;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -387,16 +389,28 @@ public class ListingsActivity extends AppCompatActivity {
 
 
     public void onClickFilter(View view) {
-        final Dialog rankDialog = new Dialog(getApplicationContext(), R.style.Theme_AppCompat_Light_Dialog);
-        rankDialog.setContentView(R.layout.filter_dialog);
-        rankDialog.setCancelable(true);
-        Button updateButton = (Button) rankDialog.findViewById(R.id.filter);
-        updateButton.setOnClickListener(new View.OnClickListener() {
+        final CharSequence[] items = {"All", "Electronic Appliances", "Apparels", "Jewelery", "Toiletries"};
+        final boolean[] booleans = {true, false, false, false, false};
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle("Pick a color");
+        dialogBuilder.setMultiChoiceItems(items, booleans, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
-            public void onClick(View v) {
-                rankDialog.dismiss();
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
             }
-        });
+        }).setPositiveButton("filter", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+            }
+        })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+        dialogBuilder.show();
+
     }
 
 
