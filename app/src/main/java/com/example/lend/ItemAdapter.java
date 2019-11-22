@@ -25,6 +25,7 @@ import com.google.firebase.storage.StorageReference;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHolder> {
     Context context;
@@ -69,6 +70,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
                 .load(item.getPhotoURL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.photo);
+    }
+
+    public void clear() {
+        items.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Item> items) {
+        items.addAll(items);
+        notifyDataSetChanged();
     }
 
 

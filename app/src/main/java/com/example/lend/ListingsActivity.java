@@ -142,7 +142,24 @@ public class ListingsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
             }
         });
+
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("ABC", "onR");
+                fetchTimelineAsync(0);
+            }
+        });
+        swipeContainer.setColorSchemeResources(R.color.themeBlue);
     }
+
+    public void fetchTimelineAsync(int page) {
+        Query query = db.collection("items").whereEqualTo("Booked", "false");
+        showAdapter(query, 12);
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -176,7 +193,8 @@ public class ListingsActivity extends AppCompatActivity {
         }
     }
 
-    void showAdapter(Query q1 , int i) {
+    void showAdapter(Query q1 , final int i) {
+        Log.d("ABC", "im sad");
         if (i == 0)   {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
@@ -209,6 +227,7 @@ public class ListingsActivity extends AppCompatActivity {
 
         }
         else {
+            Log.d("ABC", "inside");
             q1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -227,7 +246,12 @@ public class ListingsActivity extends AppCompatActivity {
                             temp.setid(itemMap.get("ID").toString());
                             items.add(temp);
                         }
-                        Log.d("henlo" , items.toString());
+                        Log.d("ABC" , items.toString());
+                        if (i == 12) {
+                            adapter.addAll(items);
+                            swipeContainer.setRefreshing(false);
+                            Log.d("ABC", ((Integer) items.size()).toString());
+                        }
                         setUpRV();
                     } else {
                         Log.d("henlo", "Error getting documents: ", task.getException());
