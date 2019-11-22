@@ -1,11 +1,15 @@
 package com.example.lend;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +21,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -29,6 +35,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -353,7 +360,34 @@ public class ListingsActivity extends AppCompatActivity {
     public void onBackPressed() {
         adapter.notifyDataSetChanged();
     }
+
+
+    public void onClickFilter(View view) {
+        final CharSequence[] items = {"All", "Electronic Appliances", "Apparels", "Jewelery", "Toiletries"};
+        final boolean[] booleans = {true, false, false, false, false};
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle("Pick a color");
+        dialogBuilder.setMultiChoiceItems(items, booleans, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+            }
+        }).setPositiveButton("filter", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+            }
+        })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+        dialogBuilder.show();
+
+    }
 }
+
 
 
 //        text = new TextWatcher() {
