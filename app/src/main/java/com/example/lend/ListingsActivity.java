@@ -72,6 +72,7 @@ public class ListingsActivity extends AppCompatActivity {
             false, false, false, false};
     SwipeRefreshLayout swipeContainer;
     ArrayList<CharSequence> filteredCategories = new ArrayList<CharSequence>();
+    SwipeRefreshLayout swipeContainer;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference reference = db.collection("items");
     private TextWatcher text = null;
