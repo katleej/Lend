@@ -104,6 +104,18 @@
                 android:layout_marginBottom="16dp"/>
 
             <Button
+                android:id="@+id/add_image"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/round_button"
+                android:textStyle="bold"
+                android:textColor="@color/themeBlue"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="UPLOAD AN IMAGE"/>
+
+            <Button
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="8dp"
