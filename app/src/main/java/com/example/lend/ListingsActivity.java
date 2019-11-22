@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +19,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -29,6 +33,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -353,7 +358,22 @@ public class ListingsActivity extends AppCompatActivity {
     public void onBackPressed() {
         adapter.notifyDataSetChanged();
     }
+
+
+    public void onClickFilter(View view) {
+        final Dialog rankDialog = new Dialog(getApplicationContext(), R.style.Theme_AppCompat_Light_Dialog);
+        rankDialog.setContentView(R.layout.filter_dialog);
+        rankDialog.setCancelable(true);
+        Button updateButton = (Button) rankDialog.findViewById(R.id.filter);
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rankDialog.dismiss();
+            }
+        });
+    }
 }
+
 
 
 //        text = new TextWatcher() {

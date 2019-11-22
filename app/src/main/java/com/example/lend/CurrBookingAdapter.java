@@ -105,7 +105,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                 rankDialog.setContentView(R.layout.rank_dialog);
                 rankDialog.setCancelable(true);
                 RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
-                ratingBar.setRating(4);
+                ratingBar.setRating(0);
 
                 Button updateButton = (Button) rankDialog.findViewById(R.id.rank_dialog_button);
                 updateButton.setOnClickListener(new View.OnClickListener() {

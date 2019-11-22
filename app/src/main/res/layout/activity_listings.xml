@@ -58,12 +58,17 @@
                 android:layout_height="wrap_content"
                 android:hint="Keyword"></EditText>
 
-            <Button
-                android:id="@+id/search"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:background="@drawable/round_button_blue"
-                android:text="search"></Button>
+            <ImageButton
+                android:id="@+id/filterButton"
+                android:layout_width="20dp"
+                android:onClick="onClickFilter"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:clickable="true"
+                android:background="@drawable/filter_button"></ImageButton>
         </LinearLayout>
 
         <Spinner
