@@ -79,7 +79,6 @@ public class MainActivity extends Activity {
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                     signIn(etEmail.getText().toString(), etPassword.getText().toString());
 
             }

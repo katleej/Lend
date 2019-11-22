@@ -50,7 +50,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
     @Override
     public void onBindViewHolder(@NonNull final ItemAdapter.CustomViewHolder holder, int position) {
         Item item = items.get(position);
-        db.collection("users").whereEqualTo("ID", item.getLender()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("users").whereEqualTo("id", item.getLender()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
@@ -63,7 +63,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
         });
         holder.tvItemName.setText(item.getItemName());
         holder.tvItemPrice.setText("$" + item.getPrice() +"");
-        Log.d("ITEM URL" , item.getPhotoURL());
+        holder.tvItemCategory.setText(item.getCategory());
+//        Log.d("ITEM URL" , item.getPhotoURL());
         Glide.with(holder.photo.getContext())
                 .load(item.getPhotoURL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -81,6 +82,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
         TextView tvLenderName;
         TextView tvItemName;
         TextView tvItemPrice;
+        TextView tvItemCategory;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
@@ -88,6 +90,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
             tvLenderName = itemView.findViewById(R.id.tvLenderName);
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvItemPrice = itemView.findViewById(R.id.tvItemPrice);
+            tvItemCategory = itemView.findViewById(R.id.tvItemCategory);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

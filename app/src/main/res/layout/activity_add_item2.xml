@@ -83,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@id/my_toolbar">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed-light"
-                    android:text="What is the price of this item?"
+                    android:text="What is the price you are charging?"
                     android:textSize="16dp"></TextView>
 
                 <EditText
@@ -140,9 +140,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif-condensed-light"
-                    android:text="Would you like to upload an image? \n(Posting an image of the item increases your chances of being selected by your local borrowers.)"
+                    android:text="Please upload an image"
                     android:textSize="16dp"></TextView>
 
                 <Button

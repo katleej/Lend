@@ -54,9 +54,10 @@ public final class Utils {
                 });
     }
 
-    public static void itemWrite(String lenderIDToken, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL, String murder) {
+    public static void itemWrite(String lenderIDToken, String lenderName, String itemName, String itemDescription, String itemPrice, String itemCategory, String photoURL, String murder) {
         Map<String, Object> item = new HashMap<>();
         item.put("Lender ID", lenderIDToken);
+        item.put("Lender Name", lenderName);
         item.put("Item Name", itemName);
         item.put("Item Description", itemDescription);
         item.put("Item Price", itemPrice);
@@ -64,7 +65,7 @@ public final class Utils {
         item.put("Photo URL", photoURL);
         item.put("ID", item.hashCode());
         item.put("Booked" , murder);
-        db.collection("items").document(item.get("ID").toString())
+        db.collection("items").document(item.get("Item Name").toString())
                 .set(item)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -78,6 +79,20 @@ public final class Utils {
                         Log.w("Henlo", "Error writing document", e);
                     }
                 });
+//        db.collection("items").document(item.get("ID").toString())
+//                .set(item)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Log.d("Henlo", "DocumentSnapshot successfully written!");
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w("Henlo", "Error writing document", e);
+//                    }
+//                });
     }
 
     public static void bookingWrite(String itemID, String lenderID, String borrowerID, String active, String days)  {
