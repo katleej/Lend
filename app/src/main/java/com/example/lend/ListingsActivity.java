@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -62,9 +63,11 @@ public class ListingsActivity extends AppCompatActivity {
     LendUser user;
     EditText searchbar;
     RecyclerView mList;
+    SwipeRefreshLayout swipeContainer;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference reference = db.collection("items");
     private TextWatcher text = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +150,22 @@ public class ListingsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
             }
         });
+
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("ABC", "onR");
+                fetchTimelineAsync(0);
+            }
+        });
+        swipeContainer.setColorSchemeResources(R.color.themeBlue);
+    }
+
+    public void fetchTimelineAsync(int page) {
+        Query query = db.collection("items").whereEqualTo("Booked", "false");
+        showAdapter(query, 12);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -181,7 +200,8 @@ public class ListingsActivity extends AppCompatActivity {
         }
     }
 
-    void showAdapter(Query q1 , int i) {
+    void showAdapter(Query q1 , final int i) {
+        Log.d("ABC", "im sad");
         if (i == 0)   {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
@@ -215,6 +235,7 @@ public class ListingsActivity extends AppCompatActivity {
 
         }
         else {
+            Log.d("ABC", "inside");
             q1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -233,7 +254,12 @@ public class ListingsActivity extends AppCompatActivity {
                             temp.setid(itemMap.get("ID").toString());
                             items.add(temp);
                         }
-                        Log.d("henlo" , items.toString());
+                        Log.d("ABC" , items.toString());
+                        if (i == 12) {
+                            adapter.addAll(items);
+                            swipeContainer.setRefreshing(false);
+                            Log.d("ABC", ((Integer) items.size()).toString());
+                        }
                         setUpRV();
                     } else {
                         Log.d("henlo", "Error getting documents: ", task.getException());
@@ -372,6 +398,8 @@ public class ListingsActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
 
 

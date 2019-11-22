@@ -42,6 +42,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         this.context = context;
         this.bookings = bookings;
         item = new Item();
+        user = new LendUser();
         Log.d("ABC", "book" + bookings.toString());
     }
 
@@ -61,7 +62,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         }
 
         db.collection("users")
-                .whereEqualTo("ID", booking.getLenderID())
+                .whereEqualTo("id", booking.getLenderID())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
