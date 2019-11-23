@@ -58,6 +58,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         LendUser user = document.toObject(LendUser.class);
                         holder.tvLenderName.setText(user.getUsername());
+                        Glide.with(holder.lenderPhoto.getContext())
+                                .load(user.getPhotoURL())
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(holder.lenderPhoto);
                     }
                 }
             }
@@ -94,6 +98,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
         TextView tvItemName;
         TextView tvItemPrice;
         TextView tvItemCategory;
+        ImageView lenderPhoto;
+
 
         public CustomViewHolder(View itemView) {
             super(itemView);
@@ -102,6 +108,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.CustomViewHold
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvItemPrice = itemView.findViewById(R.id.tvItemPrice);
             tvItemCategory = itemView.findViewById(R.id.tvItemCategory);
+            lenderPhoto = itemView.findViewById(R.id.lender_profile_image);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
