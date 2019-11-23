@@ -90,12 +90,17 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                         if (task.isSuccessful()) {
                             Log.d("ABC", "items" + task.getResult().size());
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("INCREDIBLE", document.getId() + " => " + document.getData());
                                 item = document.toObject(Item.class);
                                 Map<String, Object> itemMap = document.getData();
                                 item.setItemName(itemMap.get("Item Name").toString());
                                 item.setPrice(itemMap.get("Item Price").toString());
                                 holder.tvItemName.setText(item.getItemName());
                                 holder.tvPrice.setText("$" + Integer.parseInt(item.getPrice()) * Integer.parseInt(booking.getDaysBooked()));
+                                Glide.with(holder.tvPhoto.getContext())
+                                        .load(itemMap.get("Photo URL"))
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(holder.tvPhoto);
                             }
                         }
                     }
