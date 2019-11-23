@@ -178,6 +178,8 @@ public class EditProfileActivity extends AppCompatActivity {
                         lendUser.setCity(lendUser.getCity());
                         lendUser.setPhotoURL(uploadedImageURL);
                         db.collection("users").document(lendUser.getUsername()).set(lendUser);
+                        Glide.with(getApplicationContext()).load(uploadedImageURL).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(profileImage);
                     }
                 }, new OnFailureListener() {
                     @Override
