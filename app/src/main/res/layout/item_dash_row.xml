@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
-    android:layout_height="200dp"
+    android:layout_height="210dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
     app:cardElevation="3dp"
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:text="Item Name"
             android:textStyle="bold"
             android:fontFamily="sans-serif-condensed-light"
@@ -43,7 +43,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -53,7 +53,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginRight="3dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ele"></de.hdodenhof.circleimageview.CircleImageView>
+                android:src="@drawable/sample"></de.hdodenhof.circleimageview.CircleImageView>
 
             <TextView
                 android:id="@+id/tvLenderName"
@@ -70,8 +70,10 @@
             android:layout_height="wrap_content"
             android:textSize="12dp"
             android:text="$10.00"
-            android:fontFamily="sans-serif-condensed-light"
-            android:layout_marginLeft="8dp"></TextView>
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="sans-serif-condensed-normal"
+            android:layout_marginLeft="10dp"></TextView>
 
 
     </LinearLayout>

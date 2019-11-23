@@ -3,10 +3,16 @@ package com.example.lend;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +23,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.parceler.Parcels;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -33,6 +42,9 @@ public class EditProfileActivity extends AppCompatActivity {
     public TextView profileDescription;
     public TextView profileLocation;
     public TextView numReviews;
+    public Button saveButton;
+    public EditText changeName;
+    public EditText changeDescription;
 
 
     @Override
@@ -42,21 +54,10 @@ public class EditProfileActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         lendUser = (LendUser) Parcels.unwrap(getIntent().getParcelableExtra("user"));
 
-//        db.collection("users")
-//                .whereEqualTo("username", username)
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()){
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                lendUser = document.toObject(LendUser.class);
-//
-//                            }
-//                        }
-//                    }
-//                });
         setContentView(R.layout.activity_edit_profile);
+
+        final int grey = getResources().getColor(R.color.light_grey);
+        final int white = getResources().getColor(R.color.white);
 
         //Bring all the UI items
         ratingBar = findViewById(R.id.ratingBar);
@@ -64,6 +65,10 @@ public class EditProfileActivity extends AppCompatActivity {
         profileImage = findViewById(R.id.edit_profile_image);
         profileDescription = findViewById(R.id.edit_profile_description);
         yearJoined = findViewById(R.id.profile_year_joined);
+        changeName = findViewById(R.id.edit_profile_name);
+        changeDescription = findViewById(R.id.edit_profile_description);
+        changeName.setFocusable(true);
+        changeDescription.setFocusable(true);
 
         profileLocation = findViewById(R.id.profile_location);
         numReviews = findViewById(R.id.review_number);
@@ -74,5 +79,52 @@ public class EditProfileActivity extends AppCompatActivity {
         numReviews.setText(Integer.toString(lendUser.getNumReviews()));
         ratingBar.setRating(lendUser.getRating());
         profileLocation.setText(lendUser.getCity());
+
+        saveButton = findViewById(R.id.saveButton);
+        String description = "description";
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lendUser.setDescription(changeDescription.getText().toString());
+                lendUser.setUsername(changeName.getText().toString());
+                Map<String,Object> userMap = new HashMap<>();
+                userMap.put("description",changeDescription.getText().toString());
+                userMap.put("username", changeName.getText().toString());
+                db.collection("users").document(lendUser.getUsername()).update(userMap);
+                changeName.setBackgroundColor(white);
+                changeDescription.setBackgroundColor(white);
+                changeName.setFocusable(false);
+                changeDescription.setFocusable(false);
+                Toast.makeText(getApplication(), "Your changes have been saved.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        changeName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    v.setBackgroundColor(grey);
+                } else {// Instead of your Toast
+                    v.setBackgroundColor(white);
+                }
+            }
+        });
+
+        changeDescription.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    v.setBackgroundColor(grey);
+                } else {// Instead of your Toast
+                    v.setBackgroundColor(white);
+                }
+            }
+        });
+
+
+
+
+
+
     }
 }

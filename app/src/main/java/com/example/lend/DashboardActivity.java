@@ -31,9 +31,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -249,6 +252,36 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.my_logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent3 = new Intent(DashboardActivity.this, MainActivity.class);
+                startActivity(intent3);
+                finish();
+                return true;
+            case R.id.my_bookings_button:
+                Intent intent = new Intent(DashboardActivity.this, BookingsListActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.my_settings:
+                //user sent to settings
+                Intent intent2 = new Intent(DashboardActivity.this, EditProfileActivity.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent2.putExtra("user", Parcels.wrap(user));
+                startActivity(intent2);
+                return true;
+            case R.id.my_postings:
+                Intent intent4 = new Intent(DashboardActivity.this, DashboardActivity.class);
+                startActivity(intent4);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

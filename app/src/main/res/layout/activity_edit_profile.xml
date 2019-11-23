@@ -230,6 +230,7 @@
                 android:layout_height="wrap_content"></RatingBar>
 
             <Button
+                android:id="@+id/saveButton"
                 android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -239,14 +240,6 @@
                 ></Button>
 
         </LinearLayout>
-
-<!--        <Button-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="35dp"-->
-<!--            android:textSize="@color/white"-->
-<!--            android:fontFamily="sans-serif-condensed-light"-->
-<!--            android:text="save">-->
-<!--        </Button>-->
 
 
     </LinearLayout>

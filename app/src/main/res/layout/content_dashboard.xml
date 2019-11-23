@@ -28,8 +28,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_dash"
         android:layout_width="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -56,7 +56,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="@dimen/text_margin"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:textSize="25dp"
         android:textColor="@color/black"
         android:text="Items Near Me" />
@@ -64,10 +64,10 @@
         <fragment
             android:id="@+id/map_fragment"
             android:innerRadius="5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_marginLeft="19dp"
-            android:layout_marginRight="19dp"
             android:layout_height="200dp"
             tools:context=".MapsActivity" />
 
