@@ -8,10 +8,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +42,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -61,7 +67,9 @@ public class SignupActivity extends AppCompatActivity {
     Map<String, String> states;
     public String cityName;
     public String countryName;
-
+    private Uri imageUri;
+    public String uploadedImageURL;
+    public Button image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,10 +156,20 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        image = findViewById(R.id.add_image);
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnSave = findViewById(R.id.btnSave);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                if (intent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
+                    startActivityForResult(intent, 1046);
+                }
+            }
+        });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,16 +205,16 @@ public class SignupActivity extends AppCompatActivity {
 
     public void createAccount(String email, String password){
         //validate whether or not they are emails and passwords
-        db.collection("users").whereEqualTo("username", "Mufasa").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        if (document.exists()) {
-                            Toast.makeText(getApplicationContext(), "This username is already being used, please choose a different one!", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
+//                    for (QueryDocumentSnapshot document: task.getResult()) {
+//                        if (document.exists()) {
+//                            Toast.makeText(getApplicationContext(), "This username is already being used, please choose a different one!", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+//                    }
                     firebaseMethod(etEmail.getText().toString(), etPassword.getText().toString());
                 }
             }
@@ -221,6 +239,10 @@ public class SignupActivity extends AppCompatActivity {
                             user.setRating(0);
                             user.setNumReviews(0);
                             user.setCity(cityName + ", " + countryName);
+                            Log.d("henlo69" , uploadedImageURL);
+                            user.setPhotoURL(uploadedImageURL);
+
+
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("users").document(user.getUsername()).set(user);
@@ -235,5 +257,39 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1046) {
+            try {
+                imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                new CloudStorage().upload(imageUri, new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+//                        image.setImageBitmap(selectedImage);
+                        Log.d("HHHHHHHHHHH", s);
+                        uploadedImageURL = s;
+                    }
+                }, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                });
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        else {
+            Toast.makeText(this, "Incorrect requestcode", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }

@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 @Parcel
 public class LendUser {
-    public String id, username, profileImageURL, city;
+    public String id, username, photoURL, city;
     public String latLocation;
     public String longLocation;
     public int numberOfBookings, numReviews, rating, yearJoined;
@@ -110,4 +110,14 @@ public class LendUser {
     public void setCity(String city) {
         this.city = city;
     }
+
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
 }
