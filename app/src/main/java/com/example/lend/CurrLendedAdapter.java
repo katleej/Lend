@@ -97,7 +97,7 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         user = document.toObject(LendUser.class);
                         Log.d("wah", user.username);
-                        holder.tvLenderName.setText(user.getUsername());
+                        holder.tvLenderName.setText(user.getUsername() + "'s");
                     }
                 }
             }
