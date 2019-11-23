@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -27,13 +28,14 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.lend.Utils.auth;
+
 public class DashAdapter extends RecyclerView.Adapter<DashAdapter.CustomViewHolder> {
     Context context;
     ArrayList<Item> items;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
+//    String id = FirebaseAuth.getInstance().getUid();
 
     public DashAdapter(Context context, ArrayList<Item> items) {
         this.context = context;
@@ -70,6 +72,11 @@ public class DashAdapter extends RecyclerView.Adapter<DashAdapter.CustomViewHold
                 .load(item.getPhotoURL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.photo);
+        Glide.with(holder.lenderPhoto.getContext())
+                .load(item.getPhotoURL())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.lenderPhoto);
+
     }
 
     public void clear() {
@@ -94,6 +101,7 @@ public class DashAdapter extends RecyclerView.Adapter<DashAdapter.CustomViewHold
         TextView tvItemName;
         TextView tvItemPrice;
         TextView tvItemCategory;
+        ImageView lenderPhoto;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
@@ -102,6 +110,7 @@ public class DashAdapter extends RecyclerView.Adapter<DashAdapter.CustomViewHold
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvItemPrice = itemView.findViewById(R.id.tvItemPrice);
             tvItemCategory = itemView.findViewById(R.id.tvItemCategory);
+            lenderPhoto = itemView.findViewById(R.id.lender_profile_image);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
