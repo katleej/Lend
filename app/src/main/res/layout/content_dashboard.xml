@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".DashboardActivity"
+    tools:showIn="@layout/activity_dashboard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_marginBottom="8dp"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Featured Items" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_dash"
+        android:layout_width="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/viewMoreFeaturedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="View More  >"
+        android:elevation="0dp"
+        android:layout_gravity="end"
+        android:background="@null"></Button>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-light"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:text="Items Near Me" />
+
+        <fragment
+            android:id="@+id/map_fragment"
+            android:innerRadius="5dp"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="200dp"
+            tools:context=".MapsActivity" />
+
+        <Button
+            android:id="@+id/viewMoreLocButton"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="View More  >"
+            android:elevation="0dp"
+            android:layout_gravity="end"
+            android:background="@null"></Button>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-light"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:text="Our Favorite Lenders" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_dash_lenders"
+            android:layout_width="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:scrollbarAlwaysDrawHorizontalTrack="true"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="this feature will be implemented by Aady, our image master"></TextView>
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

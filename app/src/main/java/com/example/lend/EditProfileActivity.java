@@ -73,5 +73,6 @@ public class EditProfileActivity extends AppCompatActivity {
         profileDescription.setText(lendUser.getDescription());
         numReviews.setText(Integer.toString(lendUser.getNumReviews()));
         ratingBar.setRating(lendUser.getRating());
+        profileLocation.setText(lendUser.getCity());
     }
 }

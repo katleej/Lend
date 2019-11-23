@@ -16,7 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".EditProfileActivity"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDae3x6wSzo7PaXAjHpciWqkgN56g0UZWw" />
+        <activity
+            android:name=".DashboardActivity"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".EditProfileActivity" />
         <activity android:name=".ViewProfileActivity" />
         <activity android:name=".BorrowItemActivity" />
         <activity android:name=".SignupActivity" />
