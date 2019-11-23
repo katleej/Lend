@@ -34,6 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
@@ -186,17 +187,20 @@ public class SignupActivity extends AppCompatActivity {
 
     public void createAccount(String email, String password){
         //validate whether or not they are emails and passwords
-        db.collection("users").document(etName.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("users").whereEqualTo("username", "Mufasa").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.getResult() == null) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document: task.getResult()) {
+                        if (document.exists()) {
+                            Toast.makeText(getApplicationContext(), "This username is already being used, please choose a different one!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
                     firebaseMethod(etEmail.getText().toString(), etPassword.getText().toString());
-                } else {
-                    Toast.makeText(getApplicationContext(), "This username is already being used, please choose a different one!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 
     private void firebaseMethod(String email, String password) {
