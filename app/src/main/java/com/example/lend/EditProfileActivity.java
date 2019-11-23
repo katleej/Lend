@@ -74,10 +74,10 @@ public class EditProfileActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         profileName = findViewById(R.id.edit_profile_name);
         profileImage = findViewById(R.id.edit_profile_image);
-        image = findViewById(R.id.add_image);
+//        image = findViewById(R.id.add_image);
         Glide.with(getApplicationContext()).load(lendUser.getPhotoURL()).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(profileImage);
-        image.setOnClickListener(new View.OnClickListener() {
+        profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -86,6 +86,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
         profileDescription = findViewById(R.id.edit_profile_description);
         yearJoined = findViewById(R.id.profile_year_joined);
         changeName = findViewById(R.id.edit_profile_name);
