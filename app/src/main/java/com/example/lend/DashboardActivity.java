@@ -182,7 +182,6 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                String id = FirebaseAuth.getInstance().getUid();
                                 user = document.toObject(LendUser.class);
                                 double userLat = Double.parseDouble(user.getLat());
                                 double userLng = Double.parseDouble(user.getLng());
@@ -193,27 +192,24 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                         }
                     }
                 });
-        // Add all other user markers
         setOtherLocations();
     }
 
 
     public void setOtherLocations() {
-        db.collection("cities")
-                .whereEqualTo("capital", true)
+        db.collection("users")
+                .whereGreaterThan("yearJoined", 2018)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful()){
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 user = document.toObject(LendUser.class);
-                                if (user.getid() != FirebaseAuth.getInstance().getUid()) {
-                                    double userLat = Double.parseDouble(user.getLat());
-                                    double userLng = Double.parseDouble(user.getLng());
-                                    LatLng userLocation = new LatLng(userLat, userLng);
-                                    mMap.addMarker(new MarkerOptions().position(userLocation).title(user.getUsername()));
-                                }
+                                double userLat = Double.parseDouble(user.getLat());
+                                double userLng = Double.parseDouble(user.getLng());
+                                LatLng userLocation = new LatLng(userLat, userLng);
+                                mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location"));
                             }
                         }
                     }
