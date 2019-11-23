@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:fitsSystemWindows="true"
         android:theme="@style/DashTheme"
         android:backgroundTint="@color/themeBlue">
@@ -34,23 +34,23 @@
                 android:id="@+id/my_dash_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/DashTheme"
                 android:title="Title"
-                app:layout_collapseMode="pin">
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/DashTheme">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_gravity="center"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/logo"
-                        android:visibility="invisible"
-                        android:layout_marginLeft="20dp"
                         android:layout_width="330dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:visibility="invisible"
                         app:srcCompat="@drawable/ele_white"></ImageView>
 
                 </LinearLayout>

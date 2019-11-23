@@ -64,7 +64,7 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
             public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
                 Log.d("offset value", Integer.toString(i));
                 ImageView logo = findViewById(R.id.logo);
-                if (i == -332) {
+                if (i == -507) {
                     logo.setVisibility(View.VISIBLE);
                 } else {
                     logo.setVisibility(View.INVISIBLE);
