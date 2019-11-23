@@ -60,6 +60,10 @@ public class DashAdapter extends RecyclerView.Adapter<DashAdapter.CustomViewHold
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         LendUser user = document.toObject(LendUser.class);
                         holder.tvLenderName.setText(user.getUsername());
+                        Glide.with(holder.lenderPhoto.getContext())
+                                .load(user.getPhotoURL())
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(holder.lenderPhoto);
                     }
                 }
             }
@@ -72,10 +76,8 @@ public class DashAdapter extends RecyclerView.Adapter<DashAdapter.CustomViewHold
                 .load(item.getPhotoURL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.photo);
-        Glide.with(holder.lenderPhoto.getContext())
-                .load(item.getPhotoURL())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.lenderPhoto);
+
+
 
     }
 
