@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -68,6 +69,10 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
                                 item.setid(itemMap.get("ID").toString());
                                 holder.tvItemName.setText(item.getItemName());
                                 holder.tvPrice.setText("$" + Integer.parseInt(item.getPrice()) * Integer.parseInt(booking.getDaysBooked()));
+                                Glide.with(holder.tvPhoto.getContext())
+                                        .load(itemMap.get("Photo URL"))
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(holder.tvPhoto);
                             }
                         }
                     }
@@ -115,6 +120,7 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
         TextView tvItemName;
         TextView tvPrice;
         Button btnReturn;
+        ImageView tvPhoto;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
@@ -122,6 +128,7 @@ public class CurrLendedAdapter extends RecyclerView.Adapter<CurrLendedAdapter.Cu
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             btnReturn = itemView.findViewById(R.id.btnReturn);
+            tvPhoto = itemView.findViewById(R.id.tvPhoto);
 
         }
     }

@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -90,12 +91,17 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                         if (task.isSuccessful()) {
                             Log.d("ABC", "items" + task.getResult().size());
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("INCREDIBLE", document.getId() + " => " + document.getData());
                                 item = document.toObject(Item.class);
                                 Map<String, Object> itemMap = document.getData();
                                 item.setItemName(itemMap.get("Item Name").toString());
                                 item.setPrice(itemMap.get("Item Price").toString());
                                 holder.tvItemName.setText(item.getItemName());
                                 holder.tvPrice.setText("$" + Integer.parseInt(item.getPrice()) * Integer.parseInt(booking.getDaysBooked()));
+                                Glide.with(holder.tvPhoto.getContext())
+                                        .load(itemMap.get("Photo URL"))
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(holder.tvPhoto);
                             }
                         }
                     }
@@ -112,13 +118,16 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                 final Dialog rankDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
                 rankDialog.setContentView(R.layout.rank_dialog);
                 rankDialog.setCancelable(true);
-                RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
+                final RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
                 ratingBar.setRating(0);
 
                 Button updateButton = (Button) rankDialog.findViewById(R.id.rank_dialog_button);
                 updateButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int rating = ratingBar.getNumStars();
+                        String lender = booking.getLenderID();
+                        updateRating(rating , lender);
                         rankDialog.dismiss();
                     }
                 });
@@ -135,6 +144,35 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
     @Override
     public int getItemCount() {
         return bookings.size();
+    }
+
+    public void updateRating(final int rating , String lenderID)  {
+        db.collection("users").whereEqualTo("id", lenderID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Map<String, Object> userMap = document.getData();
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        LendUser lendUser = new LendUser();
+                        lendUser.setUsername(userMap.get("username").toString());
+                        lendUser.setLat(userMap.get("lat").toString());
+                        lendUser.setLng(userMap.get("lng").toString());
+//                        lendUser.setmBorrowedItemList(userMap.get("mBorrowedItemList"));
+//                        lendUser.setmLendedItemList(userMap.get("mLendedItemList"));
+                        lendUser.setYearJoined(Integer.parseInt(userMap.get("yearJoined").toString()));
+                        lendUser.setDescription(userMap.get("description").toString());
+                        lendUser.setid(userMap.get("id").toString());
+                        lendUser.setNumReviews(Integer.parseInt(userMap.get("numReviews").toString()) + 1);
+                        lendUser.setRating(Integer.parseInt(userMap.get("rating").toString()) + (rating / lendUser.getNumReviews()));
+                        lendUser.setCity(userMap.get("city").toString());
+                        lendUser.setPhotoURL(userMap.get("photoURL").toString());
+                        db.collection("users").document(lendUser.getUsername()).set(lendUser);
+                    }
+                }
+            }
+        });
+
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
