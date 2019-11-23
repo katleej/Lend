@@ -105,6 +105,7 @@ public class EditProfileActivity extends AppCompatActivity {
         profileDescription.setText(lendUser.getDescription());
         numReviews.setText(Integer.toString(lendUser.getNumReviews()));
         ratingBar.setRating(lendUser.getRating());
+        profileLocation.setText(lendUser.getCity());
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

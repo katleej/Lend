@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (mAuth.getCurrentUser() != null) {
-            Intent intent = new Intent(MainActivity.this, ListingsActivity.class);
+            Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
             startActivity(intent);
             finish();
         }

@@ -28,6 +28,7 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -188,6 +189,10 @@ public class ListingsActivity extends AppCompatActivity {
                 intent2.putExtra("user", Parcels.wrap(user));
                 startActivity(intent2);
                 return true;
+            case R.id.my_postings:
+                Intent intent4 = new Intent(ListingsActivity.this, DashboardActivity.class);
+                startActivity(intent4);
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -346,6 +351,8 @@ public class ListingsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         adapter.notifyDataSetChanged();
+        Intent intent = new Intent(ListingsActivity.this, DashboardActivity.class);
+        startActivity(intent);
     }
 
 
