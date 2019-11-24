@@ -93,7 +93,7 @@
             android:layout_gravity="center"
             android:fontFamily="sans-serif-condensed-light"
             android:ems="10"
-            android:hint="Password"
+            android:hint="Confirm Password"
             android:inputType="textPassword" />
 
 
