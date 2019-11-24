@@ -1,15 +1,20 @@
 package com.example.lend;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,16 +25,30 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.parceler.Parcels;
 
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import java.io.FileNotFoundException;
@@ -55,6 +74,11 @@ public class EditProfileActivity extends AppCompatActivity {
     public EditText changeName;
     public EditText changeDescription;
     public ImageView editImage;
+    public HashMap states;
+    public String city;
+    public String state;
+    public Place newPlace;
+
 
     private Uri imageUri;
     public String uploadedImageURL;
@@ -67,6 +91,7 @@ public class EditProfileActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         lendUser = (LendUser) Parcels.unwrap(getIntent().getParcelableExtra("user"));
 
+
         setContentView(R.layout.activity_edit_profile);
 
         final int grey = getResources().getColor(R.color.light_grey);
@@ -76,7 +101,7 @@ public class EditProfileActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         profileName = findViewById(R.id.edit_profile_name);
         profileImage = findViewById(R.id.edit_profile_image);
-        editImage = findViewById(R.id.edit_image);
+        editImage = findViewById(R.id.edit_profile_image);
         Glide.with(getApplicationContext()).load(lendUser.getPhotoURL()).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(profileImage);
         editImage.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +149,20 @@ public class EditProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplication(), "Your changes have been saved.", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
+        profileLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("ABC", "i have been clicked");
+                Intent intent = new Intent(EditProfileActivity.this, ChangeLocationActivity.class);
+                intent.putExtra("user", Parcels.wrap(lendUser));
+                startActivityForResult(intent, 1200);
+            }
+        });
+
+
 
         changeName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -183,6 +222,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
             }
 
+        }
+        if (requestCode == 1200 && resultCode == 200) {
+            profileLocation.setText(data.getExtras().getString("city"));
         }
 
         else {
