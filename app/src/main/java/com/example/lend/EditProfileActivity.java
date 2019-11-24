@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class EditProfileActivity extends AppCompatActivity {
     public Button saveButton;
     public EditText changeName;
     public EditText changeDescription;
+    public ImageView editImage;
 
     private Uri imageUri;
     public String uploadedImageURL;
@@ -74,9 +76,10 @@ public class EditProfileActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         profileName = findViewById(R.id.edit_profile_name);
         profileImage = findViewById(R.id.edit_profile_image);
+        editImage = findViewById(R.id.edit_image);
         Glide.with(getApplicationContext()).load(lendUser.getPhotoURL()).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(profileImage);
-        profileImage.setOnClickListener(new View.OnClickListener() {
+        editImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
