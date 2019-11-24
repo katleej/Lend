@@ -3,34 +3,6 @@
     <string name="sample_description">Hail to California. Alma Mater dear. Sing the joyful chorus. Sound it far and near. Rallying round her banner, we will never fail! California, Alma Mater, Hail! Hail! Hail!I live on Southside, so I can drop the item off anywhere that is walking distance.Pickups are available 10am-10pm and feel free to message me at 510-203-4444 for more information.</string>
     <string name="sample_aboutme">Hail to California. Alma Mater dear. Sing the joyful chorus. Sound it far and near. I live on Southside, so I can drop the item off anywhere that is walking distance.</string>
     <string name="sample_address">Berkeley, CA </string>
-    <string-array name="category">
-        <item>Show All</item>
-        <item>Electronic Appliances</item>
-        <item>Apparels</item>
-        <item>Jewelery</item>
-        <item>Toiletries</item>
-        <item>Cosmetics</item>
-        <item>Footwear</item>
-        <item>Sportswear</item>
-        <item>Women\'s Apparel</item>
-        <item>Men\'s Apparel</item>
-        <item>Kids</item>
-        <item>Books</item>
-        <item>CDs, DVDs</item>
-        <item>Stationary</item>
-        <item>Hobbies</item>
-    </string-array>
-    <string-array name="days">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>9</item>
-        <item>10</item>
-    </string-array>
     <string name="demo_user_name">Katniss Lee</string>
     <string name="title_activity_dashboard"></string>
     <string name="large_text">
@@ -123,4 +95,32 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string-array name="category">
+        <item>Show All</item>
+        <item>Electronic Appliances</item>
+        <item>Apparels</item>
+        <item>Jewelery</item>
+        <item>Toiletries</item>
+        <item>Cosmetics</item>
+        <item>Footwear</item>
+        <item>Sportswear</item>
+        <item>Women\'s Apparel</item>
+        <item>Men\'s Apparel</item>
+        <item>Kids</item>
+        <item>Books</item>
+        <item>CDs, DVDs</item>
+        <item>Stationary</item>
+        <item>Hobbies</item>
+    </string-array>
+    <string-array name="days">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
 </resources>

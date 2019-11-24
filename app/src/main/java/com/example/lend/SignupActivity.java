@@ -240,7 +240,7 @@ public class SignupActivity extends AppCompatActivity {
                             user.setEmail(emailString);
                             user.setCity(cityName + ", " + countryName);
                             Log.d("henlo69" , uploadedImageURL);
-//                            user.setPhotoURL(uploadedImageURL);
+                            user.setPhotoURL(uploadedImageURL);
 
 
 

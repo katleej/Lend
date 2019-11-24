@@ -87,81 +87,7 @@ public class EditProfileActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         lendUser = (LendUser) Parcels.unwrap(getIntent().getParcelableExtra("user"));
-        Places.initialize(getApplicationContext(), "AIzaSyB7PN4NZcXwmlTvJ1K_NV6g4md9nGoKV30");
-        PlacesClient placesClient = Places.createClient(this);
 
-        states = new HashMap<String, String>();
-        states.put("Alabama","AL");
-        states.put("Alaska","AK");
-        states.put("Alberta","AB");
-        states.put("American Samoa","AS");
-        states.put("Arizona","AZ");
-        states.put("Arkansas","AR");
-        states.put("Armed Forces (AE)","AE");
-        states.put("Armed Forces Americas","AA");
-        states.put("Armed Forces Pacific","AP");
-        states.put("British Columbia","BC");
-        states.put("California","CA");
-        states.put("Colorado","CO");
-        states.put("Connecticut","CT");
-        states.put("Delaware","DE");
-        states.put("District Of Columbia","DC");
-        states.put("Florida","FL");
-        states.put("Georgia","GA");
-        states.put("Guam","GU");
-        states.put("Hawaii","HI");
-        states.put("Idaho","ID");
-        states.put("Illinois","IL");
-        states.put("Indiana","IN");
-        states.put("Iowa","IA");
-        states.put("Kansas","KS");
-        states.put("Kentucky","KY");
-        states.put("Louisiana","LA");
-        states.put("Maine","ME");
-        states.put("Manitoba","MB");
-        states.put("Maryland","MD");
-        states.put("Massachusetts","MA");
-        states.put("Michigan","MI");
-        states.put("Minnesota","MN");
-        states.put("Mississippi","MS");
-        states.put("Missouri","MO");
-        states.put("Montana","MT");
-        states.put("Nebraska","NE");
-        states.put("Nevada","NV");
-        states.put("New Brunswick","NB");
-        states.put("New Hampshire","NH");
-        states.put("New Jersey","NJ");
-        states.put("New Mexico","NM");
-        states.put("New York","NY");
-        states.put("Newfoundland","NF");
-        states.put("North Carolina","NC");
-        states.put("North Dakota","ND");
-        states.put("Northwest Territories","NT");
-        states.put("Nova Scotia","NS");
-        states.put("Nunavut","NU");
-        states.put("Ohio","OH");
-        states.put("Oklahoma","OK");
-        states.put("Ontario","ON");
-        states.put("Oregon","OR");
-        states.put("Pennsylvania","PA");
-        states.put("Prince Edward Island","PE");
-        states.put("Puerto Rico","PR");
-        states.put("Quebec","PQ");
-        states.put("Rhode Island","RI");
-        states.put("Saskatchewan","SK");
-        states.put("South Carolina","SC");
-        states.put("South Dakota","SD");
-        states.put("Tennessee","TN");
-        states.put("Texas","TX");
-        states.put("Utah","UT");
-        states.put("Vermont","VT");
-        states.put("Virgin Islands","VI");
-        states.put("Virginia","VA");
-        states.put("Washington","WA");
-        states.put("West Virginia","WV");
-        states.put("Wisconsin","WI");
-        states.put("Wyoming","WY");
-        states.put("Yukon Territory","YT");
 
         setContentView(R.layout.activity_edit_profile);
 
@@ -223,71 +149,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
 
-
-
         profileLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(EditProfileActivity.this);
-                LayoutInflater inflater = EditProfileActivity.this.getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.custom_dialog, null);
-                dialogBuilder.setView(dialogView);
-                dialogBuilder.setPositiveButton("update", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        db.collection("users").whereEqualTo("id", lendUser.getid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (newPlace == null) {
-                                    Toast.makeText(EditProfileActivity.this, "Make sure to select a place first!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot ds: task.getResult()) {
-                                            Map<String, Object> userMap = new HashMap<>();
-                                            userMap.put("lat", newPlace.getLatLng().latitude);
-                                            userMap.put("latLocation", newPlace.getLatLng().latitude);
-                                            userMap.put("long", newPlace.getLatLng().longitude);
-                                            userMap.put("longLocation", newPlace.getLatLng().longitude);
-                                            userMap.put("city", city + ", " + states.get(state));
-
-                                            db.collection("users").document(lendUser.getUsername()).update(userMap);
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    }
-                });
-
-                dialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                dialog.dismiss();
-                            }
-                        });
-                dialogBuilder.show();
-
-
-                AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.acLocation);
-                autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
-                autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-                    @Override
-                    public void onPlaceSelected(@NonNull Place place) {
-                        newPlace = place;
-                        Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
-                        try {
-                            List<Address> addresses = geo.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 1);
-                            city = addresses.get(0).getLocality();
-                            state = addresses.get(0).getAdminArea();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    @Override
-                    public void onError(@NonNull Status status) {
-
-                    }
-                });
-
+                Log.d("ABC", "i have been clicked");
+                Intent intent = new Intent(EditProfileActivity.this, ChangeLocationActivity.class);
+                intent.putExtra("user", Parcels.wrap(lendUser));
+                startActivityForResult(intent, 1200);
             }
         });
 
@@ -351,6 +219,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
             }
 
+        }
+        if (requestCode == 1200 && resultCode == 200) {
+            profileLocation.setText(data.getExtras().getString("city"));
         }
 
         else {
