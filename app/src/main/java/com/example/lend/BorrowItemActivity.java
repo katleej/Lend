@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -85,11 +86,15 @@ public class BorrowItemActivity extends AppCompatActivity {
                         owner = document.toObject(LendUser.class);
                         lenderName.setText(owner.getUsername());
                         lenderLocation.setText(owner.getCity());
+                        Glide.with(lenderImage.getContext())
+                                .load(owner.getPhotoURL())
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(lenderImage);
+
                     }
                 }
             }
         });
-
 //        db.collection("users")
 //                .whereEqualTo("id", FirebaseAuth.getInstance().getUid())
 //                .get()
