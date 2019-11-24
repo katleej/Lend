@@ -8,4 +8,4 @@
 6. Featured items/ lenders: find top-rated items and lenders near you
 
 
-![Screen Shot](Lend-MDB/description-images/five.png)
+![Image Description](https://github.com/katleej/Lend/blob/master/description-images/one.png)
