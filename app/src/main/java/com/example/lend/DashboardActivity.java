@@ -149,7 +149,7 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                                 lendUser.setDescription(userMap.get("description").toString());
                                 lendUser.setid(userMap.get("id").toString());
                                 lendUser.setNumReviews(Integer.parseInt(userMap.get("numReviews").toString()));
-                                lendUser.setRating(Integer.parseInt(userMap.get("rating").toString()));
+//                                lendUser.setRating(Integer.parseInt(userMap.get("rating").toString()));
                                 lendUser.setCity(userMap.get("city").toString());
                                 lendUser.setPhotoURL(userMap.get("photoURL").toString());
                                 users.add(lendUser);

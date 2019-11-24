@@ -54,8 +54,9 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     annotationProcessor 'org.parceler:parceler:1.1.12'
     implementation 'org.parceler:parceler-api:1.1.12'
-    annotationProcessor 'org.parceler:parceler:1.1.12'
     implementation 'com.google.firebase:firebase-firestore:21.2.0'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
+
 
 
 //    implementation 'com.google.android.libraries.places:places-compat:2.0.0'
