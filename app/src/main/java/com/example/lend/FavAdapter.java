@@ -52,7 +52,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.CustomViewHolder
     @Override
     public void onBindViewHolder(@NonNull final FavAdapter.CustomViewHolder holder, int position) {
         final LendUser user = users.get(position);
-        db.collection("users").whereEqualTo("id", user.getid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("users").whereEqualTo("id", user.getId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
@@ -111,7 +111,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.CustomViewHolder
                         LendUser user = users.get(position);
                         if (user == null) {
                             Log.d("XYZ", "null item");
-                        } else if (user.getid() == null) {
+                        } else if (user.getId() == null) {
                             Log.d("XYZ", "Print null");
                         }
                         Intent intent = new Intent(context, ViewProfileActivity.class);

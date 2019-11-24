@@ -8,29 +8,11 @@ import java.util.HashMap;
 
 @Parcel
 public class LendUser {
-    public String id, username, photoURL, city;
-    public String latLocation;
-    public String longLocation;
-    public double rating;
+    public String id, username, photoURL, city, email;
+    public double rating, latitude, longitude;
     public int numberOfBookings, numReviews, yearJoined;
-    public HashMap<String, String> mLendedItemList, mBorrowedItemList;
     public String description = "No Description";
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getYearJoined() {
-        return yearJoined;
-    }
-
-    public void setYearJoined(int yearJoined) {
-        this.yearJoined = yearJoined;
-    }
 
     public LendUser() {
 
@@ -38,6 +20,14 @@ public class LendUser {
 
     public LendUser(Context context) {
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -48,60 +38,12 @@ public class LendUser {
         this.username = username;
     }
 
-    public String getLat() {
-        return latLocation;
+    public String getPhotoURL() {
+        return photoURL;
     }
 
-    public void setLat(String lat) {
-        this.latLocation = lat;
-    }
-
-    public String getLng() {
-        return longLocation;
-    }
-
-    public void setLng(String lng) {
-        this.longLocation = lng;
-    }
-
-    public HashMap<String, String> getmLendedItemList() {
-        return mLendedItemList;
-    }
-
-    public void setmLendedItemList(HashMap<String, String> mLendedItemList) {
-        this.mLendedItemList = mLendedItemList;
-    }
-
-    public HashMap<String, String> getmBorrowedItemList() {
-        return mBorrowedItemList;
-    }
-
-    public void setmBorrowedItemList(HashMap<String, String> mBorrowedItemList) {
-        this.mBorrowedItemList = mBorrowedItemList;
-    }
-
-    public String getid() {
-        return id;
-    }
-
-    public void setid(String id) {
-        this.id = id;
-    }
-
-    public int getNumReviews() {
-        return numReviews;
-    }
-
-    public void setNumReviews(int numReviews) {
-        this.numReviews = numReviews;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 
     public String getCity() {
@@ -112,13 +54,67 @@ public class LendUser {
         this.city = city;
     }
 
-
-    public String getPhotoURL() {
-        return photoURL;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getNumberOfBookings() {
+        return numberOfBookings;
+    }
+
+    public void setNumberOfBookings(int numberOfBookings) {
+        this.numberOfBookings = numberOfBookings;
+    }
+
+    public int getNumReviews() {
+        return numReviews;
+    }
+
+    public void setNumReviews(int numReviews) {
+        this.numReviews = numReviews;
+    }
+
+    public int getYearJoined() {
+        return yearJoined;
+    }
+
+    public void setYearJoined(int yearJoined) {
+        this.yearJoined = yearJoined;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
