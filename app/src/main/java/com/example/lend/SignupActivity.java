@@ -70,6 +70,7 @@ public class SignupActivity extends AppCompatActivity {
     private Uri imageUri;
     public String uploadedImageURL;
     public Button image;
+    public EditText etConfirmPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,6 +161,7 @@ public class SignupActivity extends AppCompatActivity {
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
+        etConfirmPassword = findViewById(R.id.etConfirmPassword);
         btnSave = findViewById(R.id.btnSave);
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +176,7 @@ public class SignupActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createAccount();
+                createAccount(etPassword.getText().toString() , etConfirmPassword.getText().toString());
             }
         });
 
@@ -203,7 +205,15 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    public void createAccount() {
+    public void createAccount(String pass, String pass2) {
+        //validate if passwords are same
+        if (pass.equals(pass2)) {
+
+        }
+        else    {
+            Toast.makeText(getApplicationContext(), "Make sure your passwords match!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //validate whether or not they are emails and passwords
         db.collection("users").document(etName.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

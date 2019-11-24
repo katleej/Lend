@@ -83,7 +83,21 @@
                 android:hint="Password"
                 android:inputType="textPassword" />
 
-            <TextView
+        <EditText
+            android:id="@+id/etConfirmPassword"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed-light"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
