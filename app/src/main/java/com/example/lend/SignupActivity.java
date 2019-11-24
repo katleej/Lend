@@ -220,6 +220,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void firebaseMethod(String email, String password) {
+        final String emailString = email;
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -228,14 +229,15 @@ public class SignupActivity extends AppCompatActivity {
                             Toast.makeText(SignupActivity.this, "Success! Welcome to Lend", Toast.LENGTH_SHORT).show();
                             LendUser user = new LendUser(getApplicationContext());
                             user.setUsername(etName.getText().toString());
-                            user.setLat(((Double) userPlace.getLatLng().latitude).toString());
-                            user.setLng(((Double) userPlace.getLatLng().longitude).toString());
+                            user.setLatitude( userPlace.getLatLng().latitude);
+                            user.setLongitude(userPlace.getLatLng().longitude);
                             int year = Calendar.getInstance().get(Calendar.YEAR);
                             user.setYearJoined(year);
                             user.setDescription("No description ");
-                            user.setid(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            user.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             user.setRating(0);
                             user.setNumReviews(0);
+                            user.setEmail(emailString);
                             user.setCity(cityName + ", " + countryName);
                             Log.d("henlo69" , uploadedImageURL);
 //                            user.setPhotoURL(uploadedImageURL);

@@ -144,8 +144,10 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                                 LendUser lendUser = document.toObject(LendUser.class);
                                 users.add(lendUser);
                             }
-                            Log.d("henlo", users.toString());
-                            setUpUserRV();
+//                          setUpUserRV();
+                            final RecyclerView recList = (RecyclerView) findViewById(R.id.recyclerview_dash_lenders);
+                            fAdapter = new FavAdapter(getApplicationContext(), users);
+                            recList.setAdapter(fAdapter);
                         }
                         else {
                             Log.d("henlo", "Error getting documents: ", task.getException());
@@ -237,8 +239,8 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                         if (task.isSuccessful()){
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 user = document.toObject(LendUser.class);
-                                double userLat = Double.parseDouble(user.getLat());
-                                double userLng = Double.parseDouble(user.getLng());
+                                double userLat = user.getLatitude();
+                                double userLng = user.getLongitude();
                                 LatLng userLocation = new LatLng(userLat, userLng);
                                 mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location"));
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 11));
@@ -260,8 +262,8 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                         if (task.isSuccessful()){
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 user = document.toObject(LendUser.class);
-                                double userLat = Double.parseDouble(user.getLat());
-                                double userLng = Double.parseDouble(user.getLng());
+                                double userLat = user.getLatitude();
+                                double userLng = user.getLongitude();
                                 LatLng userLocation = new LatLng(userLat, userLng);
                                 mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location"));
                             }

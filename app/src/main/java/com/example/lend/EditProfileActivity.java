@@ -165,21 +165,9 @@ public class EditProfileActivity extends AppCompatActivity {
                         Log.d("HHHHHHHHHHH", s);
                         uploadedImageURL = s;
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
-                        lendUser.setUsername(lendUser.getUsername());
-                        lendUser.setLat(lendUser.getLat());
-                        lendUser.setLng(lendUser.getLng());
-                        lendUser.setmBorrowedItemList(lendUser.getmBorrowedItemList());
-                        lendUser.setmLendedItemList(lendUser.getmLendedItemList());
-                        lendUser.setYearJoined(lendUser.getYearJoined());
-                        lendUser.setDescription(lendUser.getDescription());
-                        lendUser.setid(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        lendUser.setRating(lendUser.getRating());
-                        lendUser.setNumReviews(lendUser.getNumReviews());
-                        lendUser.setCity(lendUser.getCity());
-                        lendUser.setPhotoURL(uploadedImageURL);
-                        db.collection("users").document(lendUser.getUsername()).set(lendUser);
                         Glide.with(getApplicationContext()).load(uploadedImageURL).diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(profileImage);
+                        db.collection("users").document(lendUser.getUsername()).set(lendUser);
                     }
                 }, new OnFailureListener() {
                     @Override
