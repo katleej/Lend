@@ -8,4 +8,4 @@
 6. Featured items/ lenders: find top-rated items and lenders near you
 
 
-![Screen Shot](Lend-MDB/description-images/Screen Shot 2019-11-24 at 12.15.13 AM.png)
+![Screen Shot](Lend-MDB/description-images/five.png)
