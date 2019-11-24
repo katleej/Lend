@@ -104,7 +104,7 @@ public class MyPostingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        filterCategory("All");
+        filterMine();
 
         Log.d("henlo2" , items.toString());
         searchbar = (EditText) findViewById(R.id.searchbar);
@@ -199,7 +199,7 @@ public class MyPostingsActivity extends AppCompatActivity {
         if (i == 0)   {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
-                    .whereEqualTo("Lender Name", user.getUsername())
+                    .whereEqualTo("Lender ID", FirebaseAuth.getInstance().getUid())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -341,6 +341,36 @@ public class MyPostingsActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    public void filterMine() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("items")
+                .whereEqualTo("Lender ID", FirebaseAuth.getInstance().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> itemMap = document.getData();
+                                Item temp = new Item();
+                                temp.setCategory(itemMap.get("Item Category").toString());
+                                temp.setItemDescription(itemMap.get("Item Description").toString());
+                                temp.setItemName(itemMap.get("Item Name").toString());
+                                temp.setPhotoURL(itemMap.get("Photo URL").toString());
+                                temp.setLender(itemMap.get("Lender ID").toString());
+                                temp.setPrice(itemMap.get("Item Price").toString());
+                                temp.setid(itemMap.get("ID").toString());
+                                items.add(temp);
+                            }
+                            Log.d("henlo", items.toString());
+                            setUpRV();
+                        } else {
+                            Log.d("henlo", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
 
