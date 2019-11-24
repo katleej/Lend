@@ -135,7 +135,7 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
     public void displayUsers()  {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users")
-                .whereGreaterThan("rating" , 0)
+                .whereGreaterThan("rating" , 4)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

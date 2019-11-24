@@ -95,20 +95,7 @@ public class BorrowItemActivity extends AppCompatActivity {
                 }
             }
         });
-//        db.collection("users")
-//                .whereEqualTo("id", FirebaseAuth.getInstance().getUid())
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()){
-//                            Log.d("ABC", "user" + task.getResult().size());
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                owner = document.toObject(LendUser.class);
-//                            }
-//                        }
-//                    }
-//                });
+
         itemName.setText(item.getItemName());
         lenderName.setText(lenderNameString);
         itemDescription.setText(item.getItemDescription());
@@ -160,8 +147,8 @@ public class BorrowItemActivity extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(getApplication(), "This item has been booked for you!", Toast.LENGTH_SHORT).show();
                                 book.setText("Booked!");
-                                book.setTextColor(getResources().getColor(R.color.quantum_googgreen500));
-                                book.setBackgroundColor(getResources().getColor(R.color.quantum_googgreen200));
+                                book.setTextColor(getResources().getColor(R.color.themeBlue));
+                                book.setBackgroundColor(getResources().getColor(R.color.themeBlue));
 
                                 DocumentReference rf = db.collection("items").document(itemID);
                                 HashMap<String, Object> map = new HashMap();

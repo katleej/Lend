@@ -149,7 +149,6 @@
                     android:id="@+id/add_image"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="32dp"
                     android:background="@drawable/round_button_blue"
                     android:fontFamily="sans-serif-condensed-light"
                     android:paddingLeft="5dp"
@@ -158,6 +157,14 @@
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
                     android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/imageResource"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text=""></TextView>
 
                 <TextView
                     android:layout_width="wrap_content"
