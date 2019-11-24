@@ -8,9 +8,4 @@
 6. Featured items/ lenders: find top-rated items and lenders near you
 
 
-![alt text](/Users/kis/Desktop/Screen Shot 2019-11-24 at 12.15.13 AM.png)
-![alt text](/Users/kis/Desktop/Screen Shot 2019-11-24 at 12.17.13 AM.png)
-![alt text](/Users/kis/Desktop/Screen Shot 2019-11-24 at 12.17.01 AM.png)
-![alt text](/Users/kis/Desktop/Screen Shot 2019-11-24 at 12.16.52 AM.png)
-![alt text](/Users/kis/Desktop/Screen Shot 2019-11-24 at 12.18.16 AM.png)
-![alt text](/Users/kis/Desktop/Screen Shot 2019-11-24 at 12.18.16 AM.png)
+![Screen Shot](Lend-MDB/description-images/Screen Shot 2019-11-24 at 12.15.13 AM.png)
