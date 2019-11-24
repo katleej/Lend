@@ -27,9 +27,11 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_marginLeft="20dp"
+                android:id="@+id/elephant"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:clickable="true"
                 app:srcCompat="@drawable/ele_white"></ImageView>
 
         </LinearLayout>

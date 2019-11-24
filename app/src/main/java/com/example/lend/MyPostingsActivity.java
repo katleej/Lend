@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
@@ -51,6 +52,7 @@ public class MyPostingsActivity extends AppCompatActivity {
     LendUser user;
     EditText searchbar;
     RecyclerView mList;
+    ImageView elephant;
     final CharSequence[] itemsChar = {"All", "Electronic Appliances", "Apparels", "Jewelery", "Toiletries",
             "Cosmetics", "Footwear", "Sportswear", "Women\'s Apparel", "Men\'s Apparel",
             "Kids", "Books", "CDs, DVDS", "Stationary", "Hobbies", "Other"};
@@ -83,6 +85,15 @@ public class MyPostingsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_listings);
         items = new ArrayList();
+        elephant = findViewById(R.id.elephant);
+        elephant = findViewById(R.id.elephant);
+        elephant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyPostingsActivity.this, DashboardActivity.class);
+                startActivity(intent);
+            }
+        });
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         fabAdd = findViewById(R.id.fabAdd);
