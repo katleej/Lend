@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,6 +46,8 @@ public class ViewProfileActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         profileName = findViewById(R.id.profile_name);
         profileImage = findViewById(R.id.profile_image);
+        Glide.with(getApplicationContext()).load(lendUser.getPhotoURL()).diskCacheStrategy(DiskCacheStrategy.ALL).into(profileImage);
+
         yearJoined = findViewById(R.id.profile_year_joined);
         profileDescription = findViewById(R.id.profile_description);
         profileLocation = findViewById(R.id.profile_location);

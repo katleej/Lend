@@ -174,7 +174,7 @@ public class SignupActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createAccount(etEmail.getText().toString(), etPassword.getText().toString());
+                createAccount();
             }
         });
 
@@ -203,19 +203,17 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    public void createAccount(String email, String password){
+    public void createAccount() {
         //validate whether or not they are emails and passwords
-        db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("users").document(etName.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-//                    for (QueryDocumentSnapshot document: task.getResult()) {
-//                        if (document.exists()) {
-//                            Toast.makeText(getApplicationContext(), "This username is already being used, please choose a different one!", Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
-//                    }
-                    firebaseMethod(etEmail.getText().toString(), etPassword.getText().toString());
+                   if (task.getResult().exists()) {
+                       Toast.makeText(getApplicationContext(), "This username is already being used, please choose a different one!", Toast.LENGTH_SHORT).show();
+                   } else {
+                       firebaseMethod(etEmail.getText().toString(), etPassword.getText().toString());
+                   }
                 }
             }
         });
