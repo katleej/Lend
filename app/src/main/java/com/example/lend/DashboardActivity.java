@@ -243,7 +243,7 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                                 double userLng = user.getLongitude();
                                 LatLng userLocation = new LatLng(userLat, userLng);
                                 mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location"));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 11));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 13));
                             }
                         }
                     }

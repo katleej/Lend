@@ -74,7 +74,6 @@ public class EditProfileActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         profileName = findViewById(R.id.edit_profile_name);
         profileImage = findViewById(R.id.edit_profile_image);
-//        image = findViewById(R.id.add_image);
         Glide.with(getApplicationContext()).load(lendUser.getPhotoURL()).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(profileImage);
         profileImage.setOnClickListener(new View.OnClickListener() {
@@ -161,12 +160,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 new CloudStorage().upload(imageUri, new OnSuccessListener<String>() {
                     @Override
                     public void onSuccess(String s) {
-//                        image.setImageBitmap(selectedImage);
                         Log.d("HHHHHHHHHHH", s);
                         uploadedImageURL = s;
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                         Glide.with(getApplicationContext()).load(uploadedImageURL).diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(profileImage);
+                        lendUser.setPhotoURL(uploadedImageURL);
                         db.collection("users").document(lendUser.getUsername()).set(lendUser);
                     }
                 }, new OnFailureListener() {
