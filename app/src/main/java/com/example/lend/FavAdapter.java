@@ -61,7 +61,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.CustomViewHolder
                         holder.usCity.setText(user.getCity());
                         holder.usName.setText(user.getUsername());
                         holder.numReviews.setText(Integer.toString(user.getNumReviews()) + " Reviews");
-                        holder.avgRating.setText("Average Rating:  " + Integer.toString(user.getRating()));
+                        holder.avgRating.setText("Average Rating:  " + Double.toString(user.getRating()));
                         Glide.with(holder.usPhoto.getContext())
                                 .load(user.getPhotoURL())
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)

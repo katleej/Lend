@@ -59,7 +59,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         profileDescription.setText(lendUser.getDescription());
         numReviews.setText(Integer.toString(lendUser.getNumReviews()));
-        ratingBar.setRating(lendUser.getRating());
+        ratingBar.setRating((float) lendUser.getRating());
         profileLocation.setText(lendUser.getCity());
     }
 }

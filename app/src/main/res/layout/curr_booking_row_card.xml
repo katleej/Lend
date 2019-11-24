@@ -62,7 +62,7 @@
         <Button
             android:id="@+id/btnReturn"
             android:layout_width="80dp"
-            android:layout_height="75dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="0dp"
             android:layout_alignParentRight="true"
             android:fontFamily="sans-serif-condensed-light"

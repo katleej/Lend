@@ -39,16 +39,13 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     LendUser user;
     Item item;
-    final Dialog rankDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
-    final RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
+    LendUser owner;
 
     public CurrBookingAdapter(Context context, ArrayList<Booking> bookings) {
         this.context = context;
         this.bookings = bookings;
         item = new Item();
         Log.d("ABC", "book" + bookings.toString());
-        rankDialog.setContentView(R.layout.rank_dialog);
-        rankDialog.setCancelable(true);
     }
 
     @NonNull
@@ -114,6 +111,10 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         holder.btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Dialog rankDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
+                rankDialog.setContentView(R.layout.rank_dialog);
+                rankDialog.setCancelable(true);
+                final RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
                 booking.setUserReturned(((Boolean) true).toString());
                 holder.btnReturn.setText("Pending Confirmation");
                 holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
@@ -124,7 +125,7 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                 updateButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int rating = ratingBar.getNumStars();
+                        float rating = ratingBar.getRating();
                         String lender = booking.getLenderID();
                         updateRating(rating , lender);
                         rankDialog.dismiss();
@@ -145,20 +146,21 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
         return bookings.size();
     }
 
-    public void updateRating(final int rating , String lenderID)  {
+    public void updateRating(final float rating , String lenderID)  {
         db.collection("users").whereEqualTo("id", lenderID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        LendUser temp = document.toObject(LendUser.class);
-                        int prevRatingSum = temp.getRating() * temp.getNumReviews();
-                        int numRating = temp.getNumReviews() + 1;
+                        owner = document.toObject(LendUser.class);
+                        double prevRatingSum = owner.getRating() * owner.getNumReviews();
+                        int numRating = owner.getNumReviews() + 1;
 
                         Map<String,Object> userMap = new HashMap<>();
                         userMap.put("numReviews", numRating);
                         userMap.put("rating", (prevRatingSum + rating) / numRating);
-                        db.collection("users").document(item.getLenderName()).update(userMap);
+                        String lendername = item.getLenderName();
+                        db.collection("users").document(owner.getUsername()).update(userMap);
                     }
                 }
             }
