@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".FavAdapter"></activity>
+        <activity android:name=".MyPostingsActivity"></activity>
+        <activity android:name=".FavAdapter" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

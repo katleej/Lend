@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -117,7 +118,7 @@ public class MainActivity extends Activity {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            Intent i = new Intent(MainActivity.this , ListingsActivity.class);
+                            Intent i = new Intent(MainActivity.this , DashboardActivity.class);
                             startActivityForResult(i , 1);
                         } else {
                             // If sign in fails, display a message to the user.

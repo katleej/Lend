@@ -39,12 +39,16 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     LendUser user;
     Item item;
+    final Dialog rankDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
+    final RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
 
     public CurrBookingAdapter(Context context, ArrayList<Booking> bookings) {
         this.context = context;
         this.bookings = bookings;
         item = new Item();
         Log.d("ABC", "book" + bookings.toString());
+        rankDialog.setContentView(R.layout.rank_dialog);
+        rankDialog.setCancelable(true);
     }
 
     @NonNull
@@ -107,7 +111,6 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                     }
                 });
 
-
         holder.btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,10 +118,6 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
                 holder.btnReturn.setText("Pending Confirmation");
                 holder.btnReturn.setBackgroundColor(context.getResources().getColor(R.color.themeBlue));
                 holder.btnReturn.setTextColor(context.getResources().getColor(R.color.white));
-                final Dialog rankDialog = new Dialog(context, R.style.Theme_AppCompat_Light_Dialog);
-                rankDialog.setContentView(R.layout.rank_dialog);
-                rankDialog.setCancelable(true);
-                final RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
                 ratingBar.setRating(0);
 
                 Button updateButton = (Button) rankDialog.findViewById(R.id.rank_dialog_button);
@@ -152,22 +151,14 @@ public class CurrBookingAdapter extends RecyclerView.Adapter<CurrBookingAdapter.
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Map<String, Object> userMap = document.getData();
-                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                        LendUser lendUser = new LendUser();
-                        lendUser.setUsername(userMap.get("username").toString());
-                        lendUser.setLat(userMap.get("lat").toString());
-                        lendUser.setLng(userMap.get("lng").toString());
-//                        lendUser.setmBorrowedItemList(userMap.get("mBorrowedItemList"));
-//                        lendUser.setmLendedItemList(userMap.get("mLendedItemList"));
-                        lendUser.setYearJoined(Integer.parseInt(userMap.get("yearJoined").toString()));
-                        lendUser.setDescription(userMap.get("description").toString());
-                        lendUser.setid(userMap.get("id").toString());
-                        lendUser.setNumReviews(Integer.parseInt(userMap.get("numReviews").toString()) + 1);
-                        lendUser.setRating(Integer.parseInt(userMap.get("rating").toString()) + (rating / lendUser.getNumReviews()));
-                        lendUser.setCity(userMap.get("city").toString());
-                        lendUser.setPhotoURL(userMap.get("photoURL").toString());
-                        db.collection("users").document(lendUser.getUsername()).set(lendUser);
+                        LendUser temp = document.toObject(LendUser.class);
+                        int prevRatingSum = temp.getRating() * temp.getNumReviews();
+                        int numRating = temp.getNumReviews() + 1;
+
+                        Map<String,Object> userMap = new HashMap<>();
+                        userMap.put("numReviews", numRating);
+                        userMap.put("rating", (prevRatingSum + rating) / numRating);
+                        db.collection("users").document(item.getLenderName()).update(userMap);
                     }
                 }
             }

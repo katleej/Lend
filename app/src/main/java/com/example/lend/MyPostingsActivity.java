@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,41 +17,28 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RatingBar;
 import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-import static com.example.lend.Utils.db;
+public class MyPostingsActivity extends AppCompatActivity {
 
-public class ListingsActivity extends AppCompatActivity {
     public ArrayList<Item> items;
     ArrayList<String> names;
     ItemAdapter adapter;
@@ -104,7 +89,7 @@ public class ListingsActivity extends AppCompatActivity {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListingsActivity.this, AddItemActivity.class);
+                Intent intent = new Intent(MyPostingsActivity.this, AddItemActivity.class);
                 startActivity(intent);
             }
         });
@@ -134,7 +119,7 @@ public class ListingsActivity extends AppCompatActivity {
                     showAdapter(q , 0);
                 } // This is used as if user erases the characters in the search field.
                 else {
-                     // name - the field for which you want to make search
+                    // name - the field for which you want to make search
                     showAdapter(reference.orderBy("Item Name").startAt(charSequence.toString().trim()).endAt(charSequence.toString().trim() + "\uf8ff") , 1);
                 }
 //                adapter.notifyDataSetChanged();
@@ -174,23 +159,23 @@ public class ListingsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.my_logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent3 = new Intent(ListingsActivity.this, MainActivity.class);
+                Intent intent3 = new Intent(MyPostingsActivity.this, MainActivity.class);
                 startActivity(intent3);
                 finish();
                 return true;
             case R.id.my_bookings_button:
-                Intent intent = new Intent(ListingsActivity.this, BookingsListActivity.class);
+                Intent intent = new Intent(MyPostingsActivity.this, BookingsListActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.my_settings:
                 //user sent to settings
-                Intent intent2 = new Intent(ListingsActivity.this, EditProfileActivity.class);
+                Intent intent2 = new Intent(MyPostingsActivity.this, EditProfileActivity.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent2.putExtra("user", Parcels.wrap(user));
                 startActivity(intent2);
                 return true;
             case R.id.my_postings:
-                Intent intent4 = new Intent(ListingsActivity.this, MyPostingsActivity.class);
+                Intent intent4 = new Intent(MyPostingsActivity.this, MyPostingsActivity.class);
                 startActivity(intent4);
 
             default:
@@ -203,7 +188,7 @@ public class ListingsActivity extends AppCompatActivity {
         if (i == 0)   {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
-                    .whereEqualTo("Booked", "false")
+                    .whereEqualTo("Lender Name", user.getUsername())
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -269,7 +254,7 @@ public class ListingsActivity extends AppCompatActivity {
     public ArrayList<Item> setUpRV() {
         final RecyclerView recList = (RecyclerView) findViewById(R.id.recyclerView);
         recList.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(ListingsActivity.this);
+        LinearLayoutManager llm = new LinearLayoutManager(MyPostingsActivity.this);
         llm.setReverseLayout(true);
         llm.setStackFromEnd(true);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -351,7 +336,7 @@ public class ListingsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         adapter.notifyDataSetChanged();
-        Intent intent = new Intent(ListingsActivity.this, DashboardActivity.class);
+        Intent intent = new Intent(MyPostingsActivity.this, DashboardActivity.class);
         startActivity(intent);
     }
 
@@ -365,8 +350,8 @@ public class ListingsActivity extends AppCompatActivity {
         dialogBuilder.setMultiChoiceItems(itemsChar, booleans, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                    CharSequence chosen = itemsChar[which];
-                    booleans[which] = isChecked;
+                CharSequence chosen = itemsChar[which];
+                booleans[which] = isChecked;
             }
         }).setPositiveButton("filter", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {

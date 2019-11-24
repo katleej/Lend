@@ -316,7 +316,7 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                 startActivity(intent2);
                 return true;
             case R.id.my_postings:
-                Intent intent4 = new Intent(DashboardActivity.this, DashboardActivity.class);
+                Intent intent4 = new Intent(DashboardActivity.this, MyPostingsActivity.class);
                 startActivity(intent4);
 
             default:

@@ -240,7 +240,7 @@ public class SignupActivity extends AppCompatActivity {
                             user.setNumReviews(0);
                             user.setCity(cityName + ", " + countryName);
                             Log.d("henlo69" , uploadedImageURL);
-                            user.setPhotoURL(uploadedImageURL);
+//                            user.setPhotoURL(uploadedImageURL);
 
 
 
@@ -260,7 +260,11 @@ public class SignupActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1046) {
+        Log.i("request code", Integer.toString(requestCode));
+        if (requestCode == 95957) {
+            Toast.makeText(this, "Your location has been successfully added", Toast.LENGTH_SHORT).show();
+        }
+        else if (requestCode == 1046) {
             try {
                 imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
@@ -268,7 +272,6 @@ public class SignupActivity extends AppCompatActivity {
                 new CloudStorage().upload(imageUri, new OnSuccessListener<String>() {
                     @Override
                     public void onSuccess(String s) {
-//                        image.setImageBitmap(selectedImage);
                         Log.d("HHHHHHHHHHH", s);
                         uploadedImageURL = s;
                     }
@@ -287,7 +290,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         else {
-            Toast.makeText(this, "Incorrect requestcode", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sorry, you must enter all required fields!", Toast.LENGTH_SHORT).show();
         }
     }
 
