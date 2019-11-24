@@ -40,7 +40,9 @@ import java.util.Map;
 public class DashboardActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     DashAdapter adapter;
+    FavAdapter fAdapter;
     public ArrayList<Item> items = new ArrayList();
+    public ArrayList<LendUser> users = new ArrayList();
     private GoogleMap mMap;
     LendUser user;
     Button viewFeaturedButton;
@@ -82,6 +84,7 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
 
         setButtons();
         filterCategory("All");
+        displayUsers();
         initMapsFragment();
     }
 
@@ -98,6 +101,51 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
         recList.setAdapter(adapter);
         Log.d("XYZ", ((Integer) items.size()).toString());
         return items;
+    }
+
+    public ArrayList<LendUser> setUpUserRV()    {
+        final RecyclerView recList = (RecyclerView) findViewById(R.id.recyclerview_dash_lenders);
+        fAdapter = new FavAdapter(getApplicationContext(), users);
+        Log.d("inside RV" , users.toString());
+        recList.setAdapter(fAdapter);
+        Log.d("XYZ", ((Integer) users.size()).toString());
+        return users;
+
+    }
+
+    public void displayUsers()  {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users")
+                .whereGreaterThan("rating" , 0)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("henlo", document.getId() + " => " + document.getData());
+                                Map<String, Object> userMap = document.getData();
+                                LendUser lendUser = new LendUser();
+                                lendUser.setUsername(userMap.get("username").toString());
+                                lendUser.setLat(userMap.get("lat").toString());
+                                lendUser.setLng(userMap.get("lng").toString());
+                                lendUser.setYearJoined(Integer.parseInt(userMap.get("yearJoined").toString()));
+                                lendUser.setDescription(userMap.get("description").toString());
+                                lendUser.setid(userMap.get("id").toString());
+                                lendUser.setNumReviews(Integer.parseInt(userMap.get("numReviews").toString()));
+                                lendUser.setRating(Integer.parseInt(userMap.get("rating").toString()));
+                                lendUser.setCity(userMap.get("city").toString());
+                                lendUser.setPhotoURL(userMap.get("photoURL").toString());
+                                users.add(lendUser);
+                            }
+                            Log.d("henlo", users.toString());
+                            setUpUserRV();
+                        }
+                        else {
+                            Log.d("henlo", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
     public void filterCategory(String slatt)    {
