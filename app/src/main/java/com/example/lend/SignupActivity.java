@@ -174,7 +174,7 @@ public class SignupActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createAccount(etEmail.getText().toString(), etPassword.getText().toString());
+                createAccount(etName.getText().toString());
             }
         });
 
@@ -203,18 +203,20 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    public void createAccount(String email, String password){
+    public void createAccount(final String name){
         //validate whether or not they are emails and passwords
         db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-//                    for (QueryDocumentSnapshot document: task.getResult()) {
-//                        if (document.exists()) {
-//                            Toast.makeText(getApplicationContext(), "This username is already being used, please choose a different one!", Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
-//                    }
+                    for (QueryDocumentSnapshot document: task.getResult()) {
+                        LendUser user = document.toObject(LendUser.class);
+                        if (user.getUsername().equals(name)) {
+                            Log.d("userNames" , user.getUsername() + " - " + name);
+                            Toast.makeText(getApplicationContext(), "This username is already being used, please choose a different one!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
                     firebaseMethod(etEmail.getText().toString(), etPassword.getText().toString());
                 }
             }
