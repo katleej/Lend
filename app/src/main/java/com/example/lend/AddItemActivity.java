@@ -121,8 +121,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     }
                     break;
                 case R.id.add_item_cancel:
-                    Intent i = new Intent(AddItemActivity.this, ListingsActivity.class);
-                    startActivityForResult(i , 1);
+                    finish();
                     break;
                 case R.id.add_item_post:
                     Item item = new Item();

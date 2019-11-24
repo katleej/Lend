@@ -6,6 +6,7 @@
     <string-array name="category">
         <item>Show All</item>
         <item>Electronic Appliances</item>
+        <item>Home</item>
         <item>Apparels</item>
         <item>Jewelery</item>
         <item>Toiletries</item>

@@ -1,5 +1,6 @@
 package com.example.lend;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -30,6 +31,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -250,7 +252,6 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                 });
         setOtherLocations();
     }
-
 
     public void setOtherLocations() {
         db.collection("users")

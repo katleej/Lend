@@ -68,10 +68,10 @@ public class ListingsActivity extends AppCompatActivity {
     EditText searchbar;
     RecyclerView mList;
     ImageView elephant;
-    final CharSequence[] itemsChar = {"All", "Electronic Appliances", "Apparels", "Jewelery", "Toiletries",
+    final CharSequence[] itemsChar = {"All", "Electronic Appliances", "Home", "Apparels", "Jewelery", "Toiletries",
             "Cosmetics", "Footwear", "Sportswear", "Women\'s Apparel", "Men\'s Apparel",
             "Kids", "Books", "CDs, DVDS", "Stationary", "Hobbies", "Other"};
-    final boolean[] booleans = {true, false, false, false, false, false, false, false, false, false,
+    final boolean[] booleans = {true, false, false, false, false, false, false, false, false, false, false,
             false, false, false, false};
     ArrayList<CharSequence> filteredCategories = new ArrayList<CharSequence>();
     SwipeRefreshLayout swipeContainer;
