@@ -7,6 +7,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -140,19 +141,7 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("henlo", document.getId() + " => " + document.getData());
-                                Map<String, Object> userMap = document.getData();
-                                LendUser lendUser = new LendUser();
-                                lendUser.setUsername(userMap.get("username").toString());
-                                lendUser.setLat(userMap.get("lat").toString());
-                                lendUser.setLng(userMap.get("lng").toString());
-                                lendUser.setYearJoined(Integer.parseInt(userMap.get("yearJoined").toString()));
-                                lendUser.setDescription(userMap.get("description").toString());
-                                lendUser.setid(userMap.get("id").toString());
-                                lendUser.setNumReviews(Integer.parseInt(userMap.get("numReviews").toString()));
-                                double numDouble = (double) userMap.get("rating");
-                                lendUser.setRating((float) numDouble);
-                                lendUser.setCity(userMap.get("city").toString());
-                                lendUser.setPhotoURL(userMap.get("photoURL").toString());
+                                LendUser lendUser = document.toObject(LendUser.class);
                                 users.add(lendUser);
                             }
                             Log.d("henlo", users.toString());
@@ -281,7 +270,9 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                 });
     }
 
-
+    public void onClickLogo(View view) {
+        Intent intent = new Intent(DashboardActivity.this, DashboardActivity.class);
+    }
 
     public void setButtons() {
         viewFeaturedButton = findViewById(R.id.viewMoreFeaturedButton);

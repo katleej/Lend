@@ -27,9 +27,11 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_marginLeft="20dp"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:onClick="onClickLogo"
+                android:clickable="true"
                 app:srcCompat="@drawable/ele_white"></ImageView>
 
         </LinearLayout>
@@ -59,13 +61,13 @@
                 android:background="@drawable/search_bar_shape"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:scaleType="centerCrop"
                     android:layout_marginLeft="8dp"
-                    android:src="@drawable/quantum_ic_search_grey600_24"></ImageView>
+                    android:src="@drawable/quantum_ic_search_grey600_24"></ImageButton>
 
                 <EditText
                     android:layout_weight="5"

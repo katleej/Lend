@@ -355,6 +355,10 @@ public class ListingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickLogo(View view) {
+        Intent intent = new Intent(ListingsActivity.this, DashboardActivity.class);
+        startActivity(intent);
+    }
 
     public void onClickFilter(View view) {
         items.clear();
