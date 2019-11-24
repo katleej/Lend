@@ -163,6 +163,9 @@ public class BorrowItemActivity extends AppCompatActivity {
                                 map.put("Booked", "true");
                                 rf.update(map);
                                 days.setClickable(false);
+
+                                Intent intent = new Intent(BorrowItemActivity.this, DashboardActivity.class);
+                                startActivity(intent);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

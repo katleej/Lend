@@ -11,7 +11,8 @@ public class LendUser {
     public String id, username, photoURL, city;
     public String latLocation;
     public String longLocation;
-    public int numberOfBookings, numReviews, rating, yearJoined;
+    public double rating;
+    public int numberOfBookings, numReviews, yearJoined;
     public HashMap<String, String> mLendedItemList, mBorrowedItemList;
     public String description = "No Description";
 
@@ -95,11 +96,11 @@ public class LendUser {
         this.numReviews = numReviews;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

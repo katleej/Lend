@@ -199,7 +199,7 @@ public class EditProfileActivity extends AppCompatActivity {
         yearJoined.setText(Integer.toString(lendUser.getYearJoined()));
         profileDescription.setText(lendUser.getDescription());
         numReviews.setText(Integer.toString(lendUser.getNumReviews()));
-        ratingBar.setRating(lendUser.getRating());
+        ratingBar.setRating((float) lendUser.getRating());
         profileLocation.setText(lendUser.getCity());
 
         saveButton = findViewById(R.id.saveButton);
