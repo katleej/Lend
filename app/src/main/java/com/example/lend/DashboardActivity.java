@@ -45,6 +45,7 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
     public ArrayList<LendUser> users = new ArrayList();
     private GoogleMap mMap;
     LendUser user;
+    LendUser myUser;
     Button viewFeaturedButton;
     Button viewLocationButton;
     FloatingActionButton mFab;
@@ -57,6 +58,21 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
         setContentView(R.layout.activity_dashboard);
         toolbar = (Toolbar) findViewById(R.id.my_dash_toolbar);
         setSupportActionBar(toolbar);
+
+        db.collection("users")
+                .whereEqualTo("id", FirebaseAuth.getInstance().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            Log.d("ABC", "user" + task.getResult().size());
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                myUser = document.toObject(LendUser.class);
+                            }
+                        }
+                    }
+                });
 
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.toolbar_layout);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
@@ -312,7 +328,7 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
                 //user sent to settings
                 Intent intent2 = new Intent(DashboardActivity.this, EditProfileActivity.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent2.putExtra("user", Parcels.wrap(user));
+                intent2.putExtra("user", Parcels.wrap(myUser));
                 startActivity(intent2);
                 return true;
             case R.id.my_postings:
