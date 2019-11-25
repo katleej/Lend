@@ -25,6 +25,7 @@ import com.google.firebase.storage.StorageReference;
 
 import org.parceler.Parcels;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +62,10 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.CustomViewHolder
                         holder.usCity.setText(user.getCity());
                         holder.usName.setText(user.getUsername());
                         holder.numReviews.setText(Integer.toString(user.getNumReviews()) + " Reviews");
-                        double rounded = Math.round(user.getRating() * 10)/10;
-                        holder.avgRating.setText("Average Rating:  " + Double.toString(rounded));
+                        double userRating = user.getRating();
+                        DecimalFormat decimalFormat = new DecimalFormat("0.##");
+                        String rounded = decimalFormat.format(userRating);
+                        holder.avgRating.setText("Average Rating:  " + rounded);
                         Glide.with(holder.usPhoto.getContext())
                                 .load(user.getPhotoURL())
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
