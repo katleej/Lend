@@ -112,7 +112,7 @@ public class EditProfileActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         profileName = findViewById(R.id.edit_profile_name);
         profileImage = findViewById(R.id.edit_profile_image);
-        editImage = findViewById(R.id.edit_profile_image);
+        editImage = findViewById(R.id.edit_image);
         Glide.with(getApplicationContext()).load(lendUser.getPhotoURL()).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(profileImage);
         editImage.setOnClickListener(new View.OnClickListener() {

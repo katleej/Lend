@@ -124,9 +124,9 @@
             android:layout_marginTop="8dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:background="@drawable/round_button"
+            android:background="@null"
             android:textStyle="bold"
-            android:textColor="@color/themeBlue"
+            android:textColor="@color/white"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="UPLOAD AN IMAGE"/>
 
