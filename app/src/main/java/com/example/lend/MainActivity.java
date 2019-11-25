@@ -16,10 +16,12 @@ import android.net.Uri;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -43,6 +45,7 @@ public class MainActivity extends Activity {
     private FusedLocationProviderClient fusedLocationClient;
     private final String TAG = "hello";
     private String m_Text = "";
+    private ViewFlipper viewFlipper;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Button myButton;
@@ -55,14 +58,42 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
+        viewFlipper.setFlipInterval(3000);
+        viewFlipper.setDisplayedChild(0);
+        viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
+            int count = 1;
+            public void onAnimationStart(Animation animation) {
+                if (count == 2) {
+                    viewFlipper.stopFlipping();
+                }
+            }
+            public void onAnimationRepeat(Animation animation) { }
+            public void onAnimationEnd(Animation animation) {
+                count++;
+            }
+        });
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (mAuth.getCurrentUser() != null) {
-            Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-            startActivity(intent);
-            finish();
+            viewFlipper.setDisplayedChild(0);
+            viewFlipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
+                int count = 1;
+                public void onAnimationStart(Animation animation) {
+                    if (count == 2) {
+                        viewFlipper.stopFlipping();
+                    }
+                }
+                public void onAnimationRepeat(Animation animation) { }
+                public void onAnimationEnd(Animation animation) {
+                    count++;
+                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
     }
 

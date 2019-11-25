@@ -2,121 +2,184 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:background="@color/themeBlue"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/logo_layout"
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:autoStart="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:inAnimation="@android:anim/fade_in"
+        android:outAnimation="@android:anim/fade_out"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/first_layout">
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="107dp"
+                android:layout_marginTop="172dp"
+                android:layout_marginEnd="107dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ele"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ele"></ImageView>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:src="@drawable/text_lend"></ImageView>
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="152dp"
+                android:layout_marginEnd="152dp"
+                android:src="@drawable/text_lend"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="16dp"
-            android:text="LENDING MADE EASY"></TextView>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="BORROWING MADE EASY."
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3"></TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/login_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/logo_layout"
-        android:layout_marginTop="64dp"
-        android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/themeBlue"
+            android:id="@+id/second_layout">
 
-        <TextView
-            android:id="@+id/welcome_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="WELCOME TO LEND"
-            android:textColor="@color/cardview_light_background"
-            android:layout_gravity="center"
-            android:textStyle="bold"/>
+            <LinearLayout
+                android:id="@+id/logo_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/emailField"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/white"
-            android:ems="10"
-            android:textColorHint="@color/cardview_light_background"
-            android:fontFamily="sans-serif-condensed-light"
-            android:hint=" type in email"
-            android:layout_gravity="center"
-            android:inputType="textEmailAddress"></EditText>
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ele"></ImageView>
 
-        <EditText
-            android:id="@+id/passwordField"
-            android:backgroundTint="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:ems="10"
-            android:layout_gravity="center"
-            android:textColorHint="@color/cardview_light_background"
-            android:fontFamily="sans-serif-condensed-light"
-            android:hint=" type in password"
-            android:inputType="textPassword" ></EditText>
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:src="@drawable/text_lend"></ImageView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/login_layout">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="16dp"
+                    android:text="LENDING MADE EASY"></TextView>
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/round_button"
-            android:textStyle="bold"
-            android:textColor="@color/themeBlue"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="LET'S BEGIN" />
+            <LinearLayout
+                android:id="@+id/login_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/logo_layout"
+                android:layout_marginTop="64dp"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/cab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-condensed-light"
-            android:background="@null"
-            android:textStyle="bold|italic"
-            android:textColor="@color/cardview_light_background"
-            android:text="Don't Have An Account? SIGN UP HERE!" />
+                <TextView
+                    android:id="@+id/welcome_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="WELCOME TO LEND"
+                    android:textColor="@color/cardview_light_background"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"/>
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/emailField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/white"
+                    android:ems="10"
+                    android:textColorHint="@color/cardview_light_background"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:hint=" type in email"
+                    android:layout_gravity="center"
+                    android:inputType="textEmailAddress"></EditText>
+
+                <EditText
+                    android:id="@+id/passwordField"
+                    android:backgroundTint="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:ems="10"
+                    android:layout_gravity="center"
+                    android:textColorHint="@color/cardview_light_background"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:hint=" type in password"
+                    android:inputType="textPassword" ></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/login_layout">
+
+                <Button
+                    android:id="@+id/loginButton"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_button"
+                    android:textStyle="bold"
+                    android:textColor="@color/themeBlue"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="LET'S BEGIN" />
+
+                <Button
+                    android:id="@+id/cab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:background="@null"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/cardview_light_background"
+                    android:text="Don't Have An Account? SIGN UP HERE!" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ViewFlipper>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
