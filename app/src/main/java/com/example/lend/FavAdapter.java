@@ -63,7 +63,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.CustomViewHolder
                         holder.usName.setText(user.getUsername());
                         holder.numReviews.setText(Integer.toString(user.getNumReviews()) + " Reviews");
                         double userRating = user.getRating();
-                        DecimalFormat decimalFormat = new DecimalFormat("0.##");
+                        DecimalFormat decimalFormat = new DecimalFormat("0.#");
                         String rounded = decimalFormat.format(userRating);
                         holder.avgRating.setText("Average Rating:  " + rounded);
                         Glide.with(holder.usPhoto.getContext())
