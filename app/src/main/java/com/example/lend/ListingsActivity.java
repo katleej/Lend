@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,28 +17,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -49,10 +36,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-import static com.example.lend.Utils.db;
 
 public class ListingsActivity extends AppCompatActivity {
     public ArrayList<Item> items;
@@ -118,15 +103,11 @@ public class ListingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        filterCategory("All");
+//        filterCategory("All");
 
-        Log.d("henlo2" , items.toString());
         searchbar = (EditText) findViewById(R.id.searchbar);
-        if (searchbar == null) {
-            Log.d("henlo3" , "null searchbar");
-        }
+        setSearchText();
         setUpRV();
-        Log.d("henlo2" , "outside textwatcher");
         CollectionReference q = db.collection("items");
         searchbar.addTextChangedListener(new TextWatcher() {
 
@@ -141,11 +122,13 @@ public class ListingsActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() == 0) {
                     Query q = db.collection("items").whereEqualTo("Booked", "false");
-                    showAdapter(q , 0);
+                    filterWithUserInput("");
                 } // This is used as if user erases the characters in the search field.
                 else {
                      // name - the field for which you want to make search
-                    showAdapter(reference.orderBy("Item Name").startAt(charSequence.toString().trim()).endAt(charSequence.toString().trim() + "\uf8ff") , 1);
+                    String input = charSequence.toString();
+                    String fixed = input.substring(0, 1).toUpperCase() + input.substring(1);
+                    filterWithUserInput(fixed);
                 }
 //                adapter.notifyDataSetChanged();
             }
@@ -167,7 +150,7 @@ public class ListingsActivity extends AppCompatActivity {
 
     public void fetchTimelineAsync(int page) {
         Query query = db.collection("items").whereEqualTo("Booked", "false");
-        showAdapter(query, 12);
+        filterWithUserInput("");
 
     }
 
@@ -208,9 +191,10 @@ public class ListingsActivity extends AppCompatActivity {
         }
     }
 
-    void showAdapter(Query q1 , final int i) {
-        Log.d("ABC", "im sad");
-        if (i == 0)   {
+
+    void filterWithUserInput(String input) {
+            items.clear();
+            final String inputVal = input;
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("items")
                     .whereEqualTo("Booked", "false")
@@ -223,14 +207,19 @@ public class ListingsActivity extends AppCompatActivity {
                                     Log.d("henlo", document.getId() + " => " + document.getData());
                                     Map<String, Object> itemMap = document.getData();
                                     Item temp = new Item();
-                                    temp.setCategory(itemMap.get("Item Category").toString());
-                                    temp.setItemDescription(itemMap.get("Item Description").toString());
-                                    temp.setItemName(itemMap.get("Item Name").toString());
-                                    temp.setPhotoURL(itemMap.get("Photo URL").toString());
-                                    temp.setLender(itemMap.get("Lender ID").toString());
-                                    temp.setPrice(itemMap.get("Item Price").toString());
-                                    temp.setid(itemMap.get("ID").toString());
-                                    items.add(temp);
+                                    CharSequence charSequence = inputVal;
+                                    if (itemMap.get("Item Name").toString().contains(charSequence)) {
+                                        temp.setCategory(itemMap.get("Item Category").toString());
+                                        temp.setItemDescription(itemMap.get("Item Description").toString());
+                                        temp.setItemName(itemMap.get("Item Name").toString());
+                                        temp.setPhotoURL(itemMap.get("Photo URL").toString());
+                                        temp.setLender(itemMap.get("Lender ID").toString());
+                                        temp.setPrice(itemMap.get("Item Price").toString());
+                                        temp.setid(itemMap.get("ID").toString());
+                                        items.add(temp);
+                                    } else {
+                                        continue;
+                                    }
                                 }
                                 Log.d("henlo" , items.toString());
                                 setUpRV();
@@ -239,41 +228,6 @@ public class ListingsActivity extends AppCompatActivity {
                             }
                         }
                     });
-
-        }
-        else {
-            Log.d("ABC", "inside");
-            q1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        items.clear();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("henlo", document.getId() + " => " + document.getData());
-                            Map<String, Object> itemMap = document.getData();
-                            Item temp = new Item();
-                            temp.setCategory(itemMap.get("Item Category").toString());
-                            temp.setItemDescription(itemMap.get("Item Description").toString());
-                            temp.setItemName(itemMap.get("Item Name").toString());
-                            temp.setPhotoURL(itemMap.get("Photo URL").toString());
-                            temp.setLender(itemMap.get("Lender ID").toString());
-                            temp.setPrice(itemMap.get("Item Price").toString());
-                            temp.setid(itemMap.get("ID").toString());
-                            items.add(temp);
-                        }
-                        Log.d("ABC" , items.toString());
-                        if (i == 12) {
-                            adapter = new ItemAdapter(getApplicationContext(), items);
-                            swipeContainer.setRefreshing(false);
-                            Log.d("ABC", ((Integer) items.size()).toString());
-                        }
-                        setUpRV();
-                    } else {
-                        Log.d("henlo", "Error getting documents: ", task.getException());
-                    }
-                }
-            });
-        }
     }
 
     public ArrayList<Item> setUpRV() {
@@ -357,6 +311,20 @@ public class ListingsActivity extends AppCompatActivity {
         }
     }
 
+
+    public void setSearchText() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            // Step 6: Get the data out of the Bundle
+            String searchInput = extras.getString("search input");
+            CharSequence converted = searchInput;
+            searchbar.setText(converted);
+            filterWithUserInput(searchInput);
+        } else {
+            filterCategory("All");
+        }
+
+    }
 
     @Override
     public void onBackPressed() {

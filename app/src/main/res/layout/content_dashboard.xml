@@ -6,12 +6,66 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DashboardActivity"
+    android:backgroundTint="@color/white"
     tools:showIn="@layout/activity_dashboard">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_marginBottom="8dp"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:text="Search" />
+
+    <LinearLayout
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_height="43dp"
+        android:background="@drawable/search_bar_dash_shape"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_toolbar">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/quantum_ic_search_grey600_24"></ImageView>
+
+            <EditText
+                android:layout_weight="5"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/searchContent"
+                android:layout_gravity="center_vertical"
+                android:layout_width="150dp"
+                android:background="@null"
+                android:layout_height="wrap_content"
+                android:hint="Keyword"></EditText>
+
+            <ImageButton
+                android:id="@+id/button_search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/arrow"
+                android:background="@null"
+                android:layout_gravity="center_vertical|right"></ImageButton>
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,8 +84,6 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:clickable="true"
-        android:onClick="onScrollStart"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

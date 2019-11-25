@@ -1,6 +1,7 @@
 package com.example.lend;
 
 import android.app.ActionBar;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -33,6 +34,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import org.parceler.Parcels;
@@ -52,6 +55,8 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
     Button viewFeaturedButton;
     Button viewLocationButton;
     FloatingActionButton mFab;
+    ImageButton arrow;
+    EditText searchBar;
     Toolbar toolbar;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -61,6 +66,22 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
         setContentView(R.layout.activity_dashboard);
         toolbar = (Toolbar) findViewById(R.id.my_dash_toolbar);
         setSupportActionBar(toolbar);
+        arrow = (ImageButton) findViewById(R.id.button_search);
+        searchBar = (EditText) findViewById(R.id.searchContent);
+        arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String initial = searchBar.getText().toString();
+                Intent intent = new Intent(DashboardActivity.this, ListingsActivity.class);
+                String searchInput = null;
+                if (initial != null) {
+                    searchInput = initial.substring(0, 1).toUpperCase() + initial.substring(1);
+                }
+                intent.putExtra("search input", searchInput);
+                startActivity(intent);
+            }
+        });
+
 
         db.collection("users")
                 .whereEqualTo("id", FirebaseAuth.getInstance().getUid())
