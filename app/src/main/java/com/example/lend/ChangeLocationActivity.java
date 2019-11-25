@@ -7,10 +7,19 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -18,6 +27,7 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -32,13 +42,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class ChangeLocationActivity extends AppCompatActivity {
+import static com.example.lend.Utils.itemWrite;
+
+public class ChangeLocationActivity extends AppCompatActivity implements OnMapReadyCallback {
     Place newPlace;
     String city;
     String state;
     LendUser user;
     FirebaseFirestore db;
     Map<String, String> states;
+    private GoogleMap mMap;
 
     Button btnCancel;
     Button btnUpdate;
@@ -50,6 +63,7 @@ public class ChangeLocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_change_location);
         user = (LendUser) Parcels.unwrap(getIntent().getParcelableExtra("user"));
         db = FirebaseFirestore.getInstance();
+        initMapsFragment();
 
         btnCancel = findViewById(R.id.btnCancel);
         btnUpdate = findViewById(R.id.btnUpdate);
@@ -141,10 +155,13 @@ public class ChangeLocationActivity extends AppCompatActivity {
                     List<Address> addresses = geo.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 1);
                     city = addresses.get(0).getLocality();
                     state = addresses.get(0).getAdminArea();
+                    mMap.addMarker(new MarkerOptions().position(newPlace.getLatLng()).title("User Location"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newPlace.getLatLng(), 13));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onError(@NonNull Status status) {
 
@@ -155,7 +172,6 @@ public class ChangeLocationActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(100);
                 finish();
             }
         });
@@ -185,8 +201,38 @@ public class ChangeLocationActivity extends AppCompatActivity {
             }
 
         });
-
     }
+
+    private void initMapsFragment() {
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        db.collection("users")
+                .whereEqualTo("id", FirebaseAuth.getInstance().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                user = document.toObject(LendUser.class);
+                                double userLat = user.getLatitude();
+                                double userLng = user.getLongitude();
+                                LatLng userLocation = new LatLng(userLat, userLng);
+                                mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location"));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 13));
+                            }
+                        }
+                    }
+                });
+    }
+
+
 }
 
 

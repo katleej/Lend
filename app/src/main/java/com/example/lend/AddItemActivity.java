@@ -92,11 +92,11 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.writing_menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.writing_menu, menu);
+//        return true;
+//    }
 
     @Override
     public void onClick(View view) {

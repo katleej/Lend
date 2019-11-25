@@ -73,6 +73,7 @@ public class EditProfileActivity extends AppCompatActivity {
     public Button saveButton;
     public EditText changeName;
     public EditText changeDescription;
+    public ImageView pencil;
     public ImageView editImage;
     public HashMap states;
     public String city;
@@ -114,6 +115,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+        pencil = findViewById(R.id.edit_location);
         profileDescription = findViewById(R.id.edit_profile_description);
         yearJoined = findViewById(R.id.profile_year_joined);
         changeName = findViewById(R.id.edit_profile_name);
@@ -153,6 +155,16 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         profileLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("ABC", "i have been clicked");
+                Intent intent = new Intent(EditProfileActivity.this, ChangeLocationActivity.class);
+                intent.putExtra("user", Parcels.wrap(lendUser));
+                startActivityForResult(intent, 1200);
+            }
+        });
+
+        pencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("ABC", "i have been clicked");
