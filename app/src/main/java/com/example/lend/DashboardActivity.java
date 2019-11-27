@@ -33,10 +33,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ViewFlipper;
 
 import org.parceler.Parcels;
 
@@ -58,12 +60,14 @@ public class DashboardActivity extends AppCompatActivity implements OnMapReadyCa
     ImageButton arrow;
     EditText searchBar;
     Toolbar toolbar;
+    ViewFlipper viewFlipper;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
         toolbar = (Toolbar) findViewById(R.id.my_dash_toolbar);
         setSupportActionBar(toolbar);
         arrow = (ImageButton) findViewById(R.id.button_search);
