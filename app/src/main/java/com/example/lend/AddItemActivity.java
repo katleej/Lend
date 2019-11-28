@@ -112,12 +112,15 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     break;
                 case R.id.add_item_post:
                     Item item = new Item();
-                    int price = Integer.parseInt(view_price.getText().toString().trim());
                     String name = view_name.getText().toString();
                     String description = view_description.getText().toString();
                     String category = view_category.getSelectedItem().toString();
-
                     String photoURL = uploadedImageURL;
+                    if (view_price.getText().toString() == null || name == null || description == null || category == null || photoURL == null) {
+                        Toast.makeText(getApplicationContext(), "Make sure to fill out all the fields!", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    int price = Integer.parseInt(view_price.getText().toString().trim());
                     //int start = 3 + photoURL.indexOf("%");
                     //int end = photoURL.indexOf("?");
                     //photoURL = uploadedImageURL.substring(start, end);
