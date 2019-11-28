@@ -296,6 +296,7 @@ public class SignupActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 });
+                image.setText("Photo Uploaded!");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
