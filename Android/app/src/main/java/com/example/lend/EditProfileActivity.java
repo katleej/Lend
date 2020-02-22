@@ -242,6 +242,9 @@ public class EditProfileActivity extends AppCompatActivity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
+            } catch (NullPointerException e) {
+                lendUser.setPhotoURL(lendUser.getPhotoURL());
+                db.collection("users").document(lendUser.getUsername()).set(lendUser);
             }
 
         }
@@ -250,7 +253,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         else {
-            Toast.makeText(this, "Incorrect requestcode", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Incorrect requestcode", Toast.LENGTH_SHORT).show();
         }
         Glide.with(getApplicationContext()).load(lendUser.getPhotoURL()).diskCacheStrategy(DiskCacheStrategy.ALL).into(profileImage);
     }

@@ -140,32 +140,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     Intent j = new Intent(AddItemActivity.this, ListingsActivity.class);
                     startActivityForResult(j , 1);
                     break;
-//                case R.id.add_item_post:
-//                    Item item = new Item();
-//                    int price = Integer.parseInt(view_price.getText().toString().trim());
-//                    String name = view_name.getText().toString();
-//                    String description = view_description.getText().toString();
-//                    String category = view_category.getSelectedItem().toString();
-//
-//                    String photoURL = uploadedImageURL;
-//                    //int start = 3 + photoURL.indexOf("%");
-//                    //int end = photoURL.indexOf("?");
-//                    //photoURL = uploadedImageURL.substring(start, end);
-//                    try {
-//                        item.setItemName(name);
-//                        item.setLenderName(currUser.getUsername());
-//                        item.setItemDescription(description);
-//                        item.setCategory(category);
-//                        item.setPrice(((Integer) price).toString());
-//                        item.setPhotoURL(photoURL);
-//                        itemWrite(user.getUid(), item.getLenderName(), item.getItemName() , item.getItemDescription(), item.getPrice(), item.getCategory(), item.getPhotoURL(), "false");
-//                    }
-//                    catch (NullPointerException e)  {
-//                        Log.d("henlo" , "some nullpointerexception");
-//                    }
-//                    Intent j = new Intent(AddItemActivity.this, ListingsActivity.class);
-//                    startActivityForResult(j , 1);
-//                    break;
             }
         }
 

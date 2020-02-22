@@ -253,8 +253,12 @@ public class SignupActivity extends AppCompatActivity {
                             user.setNumReviews(0);
                             user.setEmail(emailString);
                             user.setCity(cityName + ", " + countryName);
-                            Log.d("henlo69" , uploadedImageURL);
-                            user.setPhotoURL(uploadedImageURL);
+                            try {
+                                Log.d("henlo69", uploadedImageURL);
+                                user.setPhotoURL(uploadedImageURL);
+                            } catch(NullPointerException e) {
+                                user.setPhotoURL("https://i.imgur.com/5dMGTkj.png");
+                            }
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("users").document(user.getUsername()).set(user);
