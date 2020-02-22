@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="14c89c43-3be4-4e30-89c2-3b0f36d3371a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lend/AddItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lend/AddItemActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lend/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lend/SignupActivity.java" afterDir="false" />
+=======
+    <list default="true" id="fd7d0fc0-ed76-4e51-a5fc-55910ede3dbc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iOS/Lend/Lend.xcodeproj/project.xcworkspace/xcuserdata/matthewlacayo.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/../iOS/Lend/Lend.xcodeproj/project.xcworkspace/xcuserdata/matthewlacayo.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +21,11 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="Katniss_Phone" />
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_28" />
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -23,6 +33,7 @@
       </state>
     </system>
   </component>
+<<<<<<< HEAD
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
@@ -71,6 +82,11 @@
       </list>
     </option>
   </component>
+=======
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
   <component name="ProjectConfigurationFiles">
     <option name="files">
       <list>
@@ -187,9 +203,17 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="718" />
     <option name="height" value="900" />
+=======
+  <component name="ProjectFrameBounds">
+    <option name="x" value="20" />
+    <option name="y" value="43" />
+    <option name="width" value="1400" />
+    <option name="height" value="795" />
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -198,6 +222,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+<<<<<<< HEAD
       <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
@@ -237,6 +262,15 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+=======
+      <pane id="ProjectPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -319,40 +353,67 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="14c89c43-3be4-4e30-89c2-3b0f36d3371a" name="Default Changelist" comment="" />
       <created>1582397441171</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582397441171</updated>
+=======
+      <changelist id="fd7d0fc0-ed76-4e51-a5fc-55910ede3dbc" name="Default Changelist" comment="" />
+      <created>1582397776911</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582397776911</updated>
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="0" y="0" width="718" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" weight="0.55473375" />
+=======
+    <frame x="20" y="43" width="1400" height="795" extended-state="0" />
+    <layout>
+      <window_info id="Capture Tool" />
+      <window_info content_ui="combo" id="Project" visible="true" weight="0.3298969" />
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
       <window_info id="Structure" side_tool="true" />
       <window_info id="Build Variants" side_tool="true" />
       <window_info id="Image Layers" />
       <window_info id="Designer" />
       <window_info id="Resources Explorer" />
+<<<<<<< HEAD
       <window_info id="Capture Tool" />
+=======
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Run" />
       <window_info anchor="bottom" id="Logcat" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Version Control" />
+=======
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="Android Profiler" />
       <window_info anchor="bottom" id="Debug" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Build" visible="true" weight="0.0939759" />
+=======
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info active="true" anchor="bottom" id="Build" visible="true" weight="0.32859176" />
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
       <window_info anchor="right" id="Device File Explorer" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="right" id="Gradle" />
       <window_info anchor="right" id="Theme Preview" />
+<<<<<<< HEAD
       <window_info anchor="right" id="Palette&#9;" />
     </layout>
   </component>
@@ -387,4 +448,10 @@
       </provider>
     </entry>
   </component>
+=======
+      <window_info anchor="right" id="Assistant" weight="0.3298969" />
+      <window_info anchor="right" id="Palette&#9;" />
+    </layout>
+  </component>
+>>>>>>> 0427c062e782c0971c43105dfbf0186502c8afb8
 </project>
