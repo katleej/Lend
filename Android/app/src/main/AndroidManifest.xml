@@ -18,6 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".ChatActivity"
+            android:label="@string/title_activity_chat"
+            android:theme="@style/NoActionBar"></activity>
         <activity android:name=".ChangeLocationActivity" />
         <activity android:name=".MyPostingsActivity" />
         <activity android:name=".FavAdapter" />
