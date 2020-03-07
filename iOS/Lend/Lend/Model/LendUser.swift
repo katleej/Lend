@@ -4,7 +4,7 @@
 //
 //  Created by Matthew Lacayo on 3/6/20.
 //  Copyright © 2020 mdb. All rights reserved.
-//
+//  Converted from Java version.
 
 import Foundation
 
@@ -26,6 +26,20 @@ class LendUser {
         numberOfBookings = 0
         numReviews = 0
         yearJoined = 0
+    }
+    
+    init(id : String, username : String, photoURL : String, city : String, email : String, rating : Double, latitude : Double, longitude : Double, numberOfBooking : Int, numReviews : Int, yearsJoined : Int) {
+        self.id = "000"
+        self.username = "Default User"
+        self.photoURL = "default"
+        self.city = "Berkeley"
+        self.email = "default@user.com"
+        self.rating = 0.0
+        self.latitude = 0.0
+        self.longitude = 0.0
+        self.numberOfBookings = 0
+        self.numReviews = 0
+        self.yearJoined = 0
     }
 
     func getId() -> String {

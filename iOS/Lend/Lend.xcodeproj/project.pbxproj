@@ -27,6 +27,7 @@
 		C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F23B2413310B005D8158 /* HandleLogin.swift */; };
 		C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F23D24133282005D8158 /* PerformLogin.swift */; };
 		C0A4F242241388ED005D8158 /* LendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F241241388ED005D8158 /* LendUser.swift */; };
+		C0A4F24424138E21005D8158 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24324138E21005D8158 /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		C0A4F23B2413310B005D8158 /* HandleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleLogin.swift; sourceTree = "<group>"; };
 		C0A4F23D24133282005D8158 /* PerformLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformLogin.swift; sourceTree = "<group>"; };
 		C0A4F241241388ED005D8158 /* LendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LendUser.swift; sourceTree = "<group>"; };
+		C0A4F24324138E21005D8158 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DE62686D732EBEEC66E3EDE5 /* Pods-LendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LendTests.debug.xcconfig"; path = "Target Support Files/Pods-LendTests/Pods-LendTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,6 +207,7 @@
 			children = (
 				C0A4F23D24133282005D8158 /* PerformLogin.swift */,
 				C0A4F241241388ED005D8158 /* LendUser.swift */,
+				C0A4F24324138E21005D8158 /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0A4F24424138E21005D8158 /* Item.swift in Sources */,
 				C0A4F23624132893005D8158 /* UnderLineTextField.swift in Sources */,
 				C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */,
 				C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */,
