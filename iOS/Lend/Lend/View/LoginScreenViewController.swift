@@ -103,7 +103,7 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
      This function is handled via tags set on the text fields that were determined
      in the storyboard builder. The email text field has a tag of 0, while
      the password text field has a tag of 1.
-     */
+     */ 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        // Try to find next responder
        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {

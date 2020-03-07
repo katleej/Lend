@@ -26,6 +26,7 @@
 		C0A4F23A24132EAF005D8158 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F23924132EAF005D8158 /* GoogleService-Info.plist */; };
 		C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F23B2413310B005D8158 /* HandleLogin.swift */; };
 		C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F23D24133282005D8158 /* PerformLogin.swift */; };
+		C0A4F242241388ED005D8158 /* LendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F241241388ED005D8158 /* LendUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		C0A4F23924132EAF005D8158 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C0A4F23B2413310B005D8158 /* HandleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleLogin.swift; sourceTree = "<group>"; };
 		C0A4F23D24133282005D8158 /* PerformLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformLogin.swift; sourceTree = "<group>"; };
+		C0A4F241241388ED005D8158 /* LendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LendUser.swift; sourceTree = "<group>"; };
 		DE62686D732EBEEC66E3EDE5 /* Pods-LendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LendTests.debug.xcconfig"; path = "Target Support Files/Pods-LendTests/Pods-LendTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				C0A4F23D24133282005D8158 /* PerformLogin.swift */,
+				C0A4F241241388ED005D8158 /* LendUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				C0A4F23624132893005D8158 /* UnderLineTextField.swift in Sources */,
 				C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */,
 				C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */,
+				C0A4F242241388ED005D8158 /* LendUser.swift in Sources */,
 				C0A4F234241321D9005D8158 /* Colors.swift in Sources */,
 				C0A4F23824132AFA005D8158 /* Utils.swift in Sources */,
 				C08920632401B64D0019754B /* AppDelegate.swift in Sources */,
