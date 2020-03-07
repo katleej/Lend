@@ -15,7 +15,6 @@
 		C032841D2401D71A00C750D1 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */; };
 		C08920632401B64D0019754B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920622401B64D0019754B /* AppDelegate.swift */; };
 		C08920652401B64D0019754B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920642401B64D0019754B /* SceneDelegate.swift */; };
-		C08920672401B64D0019754B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920662401B64D0019754B /* ViewController.swift */; };
 		C089206A2401B64D0019754B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C08920682401B64D0019754B /* Main.storyboard */; };
 		C089206F2401B6520019754B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C089206D2401B6520019754B /* LaunchScreen.storyboard */; };
 		C089207A2401B6520019754B /* LendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920792401B6520019754B /* LendTests.swift */; };
@@ -27,6 +26,15 @@
 		C0A4F23A24132EAF005D8158 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F23924132EAF005D8158 /* GoogleService-Info.plist */; };
 		C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F23B2413310B005D8158 /* HandleLogin.swift */; };
 		C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F23D24133282005D8158 /* PerformLogin.swift */; };
+		C0A4F242241388ED005D8158 /* LendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F241241388ED005D8158 /* LendUser.swift */; };
+		C0A4F24424138E21005D8158 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24324138E21005D8158 /* Item.swift */; };
+		C0A4F246241393FD005D8158 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F245241393FD005D8158 /* DashboardViewController.swift */; };
+		C0A4F24824139871005D8158 /* CurrentUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24724139871005D8158 /* CurrentUserData.swift */; };
+		C0A4F24A24142439005D8158 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24924142439005D8158 /* SignupViewController.swift */; };
+		C0A4F24C2414343F005D8158 /* HandleSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24B2414343F005D8158 /* HandleSignup.swift */; };
+		C0A4F24E24143641005D8158 /* PerformSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24D24143641005D8158 /* PerformSignup.swift */; };
+		C0A4F25024145999005D8158 /* FirebaseLendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24F24145999005D8158 /* FirebaseLendUser.swift */; };
+		C0A4F2522414626E005D8158 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F2512414626E005D8158 /* APIKeys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +68,6 @@
 		C089205F2401B64D0019754B /* Lend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08920622401B64D0019754B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C08920642401B64D0019754B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C08920662401B64D0019754B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C08920692401B64D0019754B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C089206E2401B6520019754B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C08920702401B6520019754B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +84,15 @@
 		C0A4F23924132EAF005D8158 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C0A4F23B2413310B005D8158 /* HandleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleLogin.swift; sourceTree = "<group>"; };
 		C0A4F23D24133282005D8158 /* PerformLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformLogin.swift; sourceTree = "<group>"; };
+		C0A4F241241388ED005D8158 /* LendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LendUser.swift; sourceTree = "<group>"; };
+		C0A4F24324138E21005D8158 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		C0A4F245241393FD005D8158 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		C0A4F24724139871005D8158 /* CurrentUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserData.swift; sourceTree = "<group>"; };
+		C0A4F24924142439005D8158 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		C0A4F24B2414343F005D8158 /* HandleSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleSignup.swift; sourceTree = "<group>"; };
+		C0A4F24D24143641005D8158 /* PerformSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformSignup.swift; sourceTree = "<group>"; };
+		C0A4F24F24145999005D8158 /* FirebaseLendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLendUser.swift; sourceTree = "<group>"; };
+		C0A4F2512414626E005D8158 /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		DE62686D732EBEEC66E3EDE5 /* Pods-LendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LendTests.debug.xcconfig"; path = "Target Support Files/Pods-LendTests/Pods-LendTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,12 +189,12 @@
 				C08920922401C2200019754B /* Model */,
 				C08920622401B64D0019754B /* AppDelegate.swift */,
 				C08920642401B64D0019754B /* SceneDelegate.swift */,
-				C08920662401B64D0019754B /* ViewController.swift */,
 				C08920682401B64D0019754B /* Main.storyboard */,
 				C089206D2401B6520019754B /* LaunchScreen.storyboard */,
 				C0A4F23924132EAF005D8158 /* GoogleService-Info.plist */,
 				C08920702401B6520019754B /* Info.plist */,
 				C03284182401D38D00C750D1 /* Assets.xcassets */,
+				C0A4F2512414626E005D8158 /* APIKeys.plist */,
 			);
 			path = Lend;
 			sourceTree = "<group>";
@@ -205,6 +221,11 @@
 			isa = PBXGroup;
 			children = (
 				C0A4F23D24133282005D8158 /* PerformLogin.swift */,
+				C0A4F241241388ED005D8158 /* LendUser.swift */,
+				C0A4F24324138E21005D8158 /* Item.swift */,
+				C0A4F24724139871005D8158 /* CurrentUserData.swift */,
+				C0A4F24D24143641005D8158 /* PerformSignup.swift */,
+				C0A4F24F24145999005D8158 /* FirebaseLendUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				C0A4F23124131DE8005D8158 /* LoginScreenViewController.swift */,
+				C0A4F245241393FD005D8158 /* DashboardViewController.swift */,
+				C0A4F24924142439005D8158 /* SignupViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -221,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				C0A4F23B2413310B005D8158 /* HandleLogin.swift */,
+				C0A4F24B2414343F005D8158 /* HandleSignup.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -237,6 +261,7 @@
 				C089205C2401B64D0019754B /* Frameworks */,
 				C089205D2401B64D0019754B /* Resources */,
 				5381DB07A16ADE09E7C1B6A7 /* [CP] Embed Pods Frameworks */,
+				49B8426ED9F01134E2896B71 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -275,6 +300,7 @@
 				C089207D2401B6520019754B /* Frameworks */,
 				C089207E2401B6520019754B /* Resources */,
 				3FAD0AEA0E31B6E0C0A57169 /* [CP] Embed Pods Frameworks */,
+				C463F62C699AA7DEB96FA02A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -337,6 +363,7 @@
 				C0A4F23A24132EAF005D8158 /* GoogleService-Info.plist in Resources */,
 				C032841C2401D6F800C750D1 /* Microsoft Sans Serif.ttf in Resources */,
 				C089206F2401B6520019754B /* LaunchScreen.storyboard in Resources */,
+				C0A4F2522414626E005D8158 /* APIKeys.plist in Resources */,
 				C03284192401D38D00C750D1 /* Assets.xcassets in Resources */,
 				C089206A2401B64D0019754B /* Main.storyboard in Resources */,
 			);
@@ -397,6 +424,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lend-LendUITests/Pods-Lend-LendUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		49B8426ED9F01134E2896B71 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lend/Pods-Lend-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lend/Pods-Lend-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lend/Pods-Lend-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5381DB07A16ADE09E7C1B6A7 /* [CP] Embed Pods Frameworks */ = {
@@ -460,6 +504,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C463F62C699AA7DEB96FA02A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lend-LendUITests/Pods-Lend-LendUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lend-LendUITests/Pods-Lend-LendUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lend-LendUITests/Pods-Lend-LendUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -467,13 +528,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0A4F24424138E21005D8158 /* Item.swift in Sources */,
 				C0A4F23624132893005D8158 /* UnderLineTextField.swift in Sources */,
 				C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */,
 				C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */,
-				C08920672401B64D0019754B /* ViewController.swift in Sources */,
+				C0A4F25024145999005D8158 /* FirebaseLendUser.swift in Sources */,
+				C0A4F24E24143641005D8158 /* PerformSignup.swift in Sources */,
+				C0A4F24824139871005D8158 /* CurrentUserData.swift in Sources */,
+				C0A4F242241388ED005D8158 /* LendUser.swift in Sources */,
 				C0A4F234241321D9005D8158 /* Colors.swift in Sources */,
 				C0A4F23824132AFA005D8158 /* Utils.swift in Sources */,
 				C08920632401B64D0019754B /* AppDelegate.swift in Sources */,
+				C0A4F24A24142439005D8158 /* SignupViewController.swift in Sources */,
+				C0A4F246241393FD005D8158 /* DashboardViewController.swift in Sources */,
+				C0A4F24C2414343F005D8158 /* HandleSignup.swift in Sources */,
 				C0A4F23224131DE8005D8158 /* LoginScreenViewController.swift in Sources */,
 				C08920652401B64D0019754B /* SceneDelegate.swift in Sources */,
 			);

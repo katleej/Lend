@@ -21,9 +21,14 @@ class PerformLogin {
                        return
                    }
             UserDefaults.standard.set(true, forKey: "usersignedin")
+            loadCurrentUserData()
             loginViewController.goToDashboard()
         }
         
         
+    }
+    
+    static func loadCurrentUserData() {
+        CurrentUserData.initializeUser()
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GooglePlaces
 
 class Utils {
     static func makeButtonRounded(button : UIButton, cornerRadius : CGFloat, borderWidth : CGFloat, borderColor : UIColor, backgroundColor : UIColor, textColor: UIColor) {
@@ -24,6 +25,34 @@ class Utils {
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(defaultAction)
         controller.present(alert, animated: true, completion: nil)
+    }
+    
+    static func setupTextField(textField : UITextField, placeholderText : String, backgroundColor : UIColor) {
+        textField.backgroundColor = backgroundColor
+        textField.attributedPlaceholder = NSAttributedString(string: placeholderText,
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+    }
+    
+    /*
+     Function to extract the city name and country name from a given GMSPlace instance.
+     Returns RV, a dictionary mapping "City" to the city name, and "Country" to the country name.
+     */
+    static func extractCountryCityFromPlace(place : GMSPlace) -> [String : String] {
+        let attributes = place.addressComponents!
+        var rv = [String : String]()
+        for location in attributes {
+            if (location.types.contains("locality")) {
+                rv["City"] = location.name
+            } else if (location.types.contains("country")) {
+                rv["Country"] = location.name
+            }
+        }
+        assert(rv.count == 2, "Something went wrong extracting country and city from place")
+        return rv
+    }
+    
+    static func lendUserToFirebase(user : LendUser) -> FirebaseLendUser {
+        return FirebaseLendUser(id: user.getId(), username: user.getUsername(), photoURL: user.getPhotoURL(), city: user.getCity(), email: user.getEmail(), rating: user.getRating(), latitude: user.getLatitude(), longitude: user.getLongitude(), numberOfBookings: user.getNumberOfBookings(), numReviews: user.getNumReviews(), yearJoined: user.getYearJoined())
     }
     
 }

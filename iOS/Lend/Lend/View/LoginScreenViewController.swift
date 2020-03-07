@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginScreenViewController: UIViewController {
+class LoginScreenViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     
@@ -16,21 +16,46 @@ class LoginScreenViewController: UIViewController {
     
     @IBOutlet weak var submitButton: UIButton!
     
+    @IBOutlet weak var signupButton: UIButton!
+    
+    //Handling transitio to the sign up page
+    @IBAction func signupButtonClicked(_ sender: Any) {
+        performSegue(withIdentifier: "toSignup", sender: self)
+    }
+    
+    //Handling when the sign in button is clicked
     @IBAction func submitButtonClicked(_ sender: Any) {
         HandleLogin.attemptLogin(emailField: emailTextField, passwordField: passwordTextField, loginInstance : self)
     }
     
+    @IBAction func unwindToLogin(_ unwindSegue: UIStoryboardSegue) { }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTextField(textField: emailTextField, placeholderText: "Type in email", backgroundColor: Colors.BACKGROUND_COLOR)
-        setupTextField(textField: passwordTextField, placeholderText: "Type in password", backgroundColor: Colors.BACKGROUND_COLOR)
+
+        //Make email and text field underlined
+        Utils.setupTextField(textField: emailTextField, placeholderText: "Type in email", backgroundColor: Colors.BACKGROUND_COLOR)
+        Utils.setupTextField(textField: passwordTextField, placeholderText: "Type in password", backgroundColor: Colors.BACKGROUND_COLOR)
+        
+        //Make sign in button round
         Utils.makeButtonRounded(button: submitButton, cornerRadius: 10, borderWidth: 1, borderColor: UIColor.white, backgroundColor: UIColor.white, textColor: Colors.BACKGROUND_COLOR)
+        
+        //Tracker to lower keyboard when tapping around
         self.hideKeyboardWhenTappedAround()
         
+        //Necessary observers for raising/lowering keyboard
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
+        //Setting up the signup button
+        signupButton.setTitle("DON'T HAVE AN ACCOUNT? SIGN UP HERE!", for: .normal)
         
         // Do any additional setup after loading the view.
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         // Sets email and password field to blank upon returning to screen
@@ -53,11 +78,6 @@ class LoginScreenViewController: UIViewController {
         performSegue(withIdentifier: "toDashboard", sender: self)
     }
     
-    func setupTextField(textField : UITextField, placeholderText : String, backgroundColor : UIColor) {
-        textField.backgroundColor = backgroundColor
-        textField.attributedPlaceholder = NSAttributedString(string: placeholderText,
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-    }
     
     /*
      Makes a simple check to UserDefaults to see if the user has already
@@ -71,6 +91,24 @@ class LoginScreenViewController: UIViewController {
         }
     }
     
+    
+    /*
+     Functions to handle the appearance and dissapearance of the keyboard
+     */
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height - 150
+            }
+        }
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    
     /*
      Handles the pressing of return on the keyboard. If return is pressed
      while entering text into the email text field, then control is passed over
@@ -80,7 +118,7 @@ class LoginScreenViewController: UIViewController {
      This function is handled via tags set on the text fields that were determined
      in the storyboard builder. The email text field has a tag of 0, while
      the password text field has a tag of 1.
-     */
+     */ 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        // Try to find next responder
        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
@@ -92,7 +130,7 @@ class LoginScreenViewController: UIViewController {
        // Do not add a line break
        return false
     }
-    
+ 
     
     
 
