@@ -36,26 +36,42 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="bezel" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="87O-zV-h2F" userLabel="Email Text Field" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="110" y="499" width="194" height="40"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="bezel" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="87O-zV-h2F" userLabel="Email Text Field" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
+                                <rect key="frame" x="110" y="499" width="194" height="31"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="bezel" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="aWQ-9W-7xn" userLabel="Password Text Field" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="110" y="570" width="194" height="40"/>
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="bezel" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="aWQ-9W-7xn" userLabel="Password Text Field" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
+                                <rect key="frame" x="110" y="570" width="194" height="31"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mx5-v5-Mc7">
+                                <rect key="frame" x="60" y="701" width="294" height="29"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="14"/>
+                                <state key="normal" title="SIGNUP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="signupButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TdQ-oi-THg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WELCOME TO LEND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWO-6R-BAT">
+                                <rect key="frame" x="137.5" y="470" width="139" height="19"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JN4-UB-SXF">
                                 <rect key="frame" x="162" y="641" width="90" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="axL-NM-zMR"/>
                                     <constraint firstAttribute="height" constant="30" id="q55-l8-nlV"/>
-                                    <constraint firstAttribute="width" constant="90" id="xBJ-Op-je0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="13"/>
                                 <state key="normal" title="LET'S BEGIN">
@@ -68,16 +84,21 @@
                         </subviews>
                         <color key="backgroundColor" red="0.46666666666666667" green="0.76078431372549016" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="87O-zV-h2F" firstAttribute="top" secondItem="ZWO-6R-BAT" secondAttribute="bottom" constant="10" id="3xX-0W-UWM"/>
                             <constraint firstItem="JN4-UB-SXF" firstAttribute="top" secondItem="aWQ-9W-7xn" secondAttribute="bottom" constant="40" id="8hQ-JB-Grr"/>
                             <constraint firstItem="NII-cz-oGS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="Aiu-gs-Dnd"/>
                             <constraint firstItem="NII-cz-oGS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cvr-KX-L9j"/>
                             <constraint firstItem="Oew-5W-05g" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Hzb-ZW-uLP"/>
+                            <constraint firstItem="Mx5-v5-Mc7" firstAttribute="top" secondItem="JN4-UB-SXF" secondAttribute="bottom" constant="30" id="KgU-BG-2QN"/>
                             <constraint firstItem="87O-zV-h2F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="110" id="Laj-7i-M4O"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="87O-zV-h2F" secondAttribute="trailing" constant="110" id="N4y-f9-Rhv"/>
                             <constraint firstItem="sa3-1e-TZt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="105" id="Pzb-vT-gEV"/>
                             <constraint firstItem="JN4-UB-SXF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Qb2-bB-K3h"/>
                             <constraint firstItem="87O-zV-h2F" firstAttribute="top" secondItem="sa3-1e-TZt" secondAttribute="bottom" constant="80" id="RXw-83-UXq"/>
+                            <constraint firstItem="ZWO-6R-BAT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VqG-j9-miK"/>
                             <constraint firstItem="87O-zV-h2F" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xbm-Hj-K2N"/>
+                            <constraint firstItem="Mx5-v5-Mc7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="Yg8-7r-SL2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mx5-v5-Mc7" secondAttribute="trailing" constant="60" id="YmV-9X-hDJ"/>
                             <constraint firstItem="aWQ-9W-7xn" firstAttribute="width" secondItem="87O-zV-h2F" secondAttribute="width" id="a1a-U0-kqK"/>
                             <constraint firstItem="Oew-5W-05g" firstAttribute="top" secondItem="NII-cz-oGS" secondAttribute="bottom" constant="8" symbolic="YES" id="cNh-eN-YlZ"/>
                             <constraint firstItem="aWQ-9W-7xn" firstAttribute="top" secondItem="87O-zV-h2F" secondAttribute="bottom" constant="40" id="k74-ZF-1vp"/>
@@ -90,13 +111,222 @@
                     <connections>
                         <outlet property="emailTextField" destination="87O-zV-h2F" id="gB6-wU-Uw2"/>
                         <outlet property="passwordTextField" destination="aWQ-9W-7xn" id="wga-U6-xXe"/>
+                        <outlet property="signupButton" destination="Mx5-v5-Mc7" id="ZCm-Es-lJH"/>
                         <outlet property="submitButton" destination="JN4-UB-SXF" id="xcg-bo-ESq"/>
                         <segue destination="jFi-iI-c79" kind="show" identifier="toDashboard" id="gHe-b0-UK9"/>
+                        <segue destination="h5M-W6-F0s" kind="show" identifier="toSignup" id="Fer-U5-lXX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="547.82608695652175" y="-1.3392857142857142"/>
+        </scene>
+        <!--Signup View Controller-->
+        <scene sceneID="jzc-cF-f4i">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="h5M-W6-F0s" customClass="SignupViewController" customModule="Lend" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LvZ-fs-m7i">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rl4-eE-bDR">
+                                <rect key="frame" x="87" y="44" width="240" height="240"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="elephant_empty" translatesAutoresizingMaskIntoConstraints="NO" id="s8d-9P-YNO">
+                                        <rect key="frame" x="20" y="0.0" width="200" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="OIA-BF-TvG"/>
+                                            <constraint firstAttribute="height" constant="200" id="SDL-az-KyJ"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="J8m-4G-KYS"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_empty" translatesAutoresizingMaskIntoConstraints="NO" id="u2E-KI-lXS">
+                                        <rect key="frame" x="40" y="150" width="160" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="Hgn-AR-VwN"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="iIH-Ao-TTs"/>
+                                            <constraint firstAttribute="height" constant="90" id="jDO-mv-lxy"/>
+                                            <constraint firstAttribute="width" constant="160" id="tcL-WZ-UpY"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.46666666670000001" green="0.76078431369999999" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="u2E-KI-lXS" firstAttribute="centerX" secondItem="Rl4-eE-bDR" secondAttribute="centerX" id="6Oe-zf-8lI"/>
+                                    <constraint firstAttribute="bottom" secondItem="u2E-KI-lXS" secondAttribute="bottom" id="6i1-XD-GHi"/>
+                                    <constraint firstItem="s8d-9P-YNO" firstAttribute="top" secondItem="Rl4-eE-bDR" secondAttribute="top" id="LaA-ez-a6e"/>
+                                    <constraint firstAttribute="height" constant="240" id="MYo-fX-UAX"/>
+                                    <constraint firstAttribute="width" constant="240" id="XWO-fN-jhb"/>
+                                    <constraint firstItem="s8d-9P-YNO" firstAttribute="centerX" secondItem="Rl4-eE-bDR" secondAttribute="centerX" id="dfe-2o-5DU"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9g-dl-fyH">
+                                <rect key="frame" x="20" y="44" width="90" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="Otu-Qe-9IY"/>
+                                    <constraint firstAttribute="height" constant="50" id="RHC-oA-v4C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backButtonClicked:" destination="h5M-W6-F0s" eventType="touchUpInside" id="Zk9-a7-GcT"/>
+                                    <segue destination="KU5-Mx-OB8" kind="unwind" unwindAction="unwindToLogin:" id="rBP-ag-tfs"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATE NEW ACCOUNT" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lz-sY-tw1">
+                                <rect key="frame" x="119.5" y="294" width="175" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="328-9O-da3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pzU-0G-X74" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
+                                <rect key="frame" x="85" y="350" width="244" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" textContentType="username"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cWD-oU-iIe" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
+                                <rect key="frame" x="85" y="413" width="244" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPk-Mg-3gb" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
+                                <rect key="frame" x="85" y="481" width="244" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Buo-g1-3v1" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
+                                <rect key="frame" x="85" y="549" width="244" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W33-tB-tjx">
+                                <rect key="frame" x="169" y="441" width="0.0" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9FU-s0-fUc">
+                                <rect key="frame" x="162" y="680" width="90" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="h2B-IO-pwL"/>
+                                    <constraint firstAttribute="height" constant="40" id="zi6-zQ-zh1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="15"/>
+                                <state key="normal" title="CREATE">
+                                    <color key="titleColor" red="0.46666666670000001" green="0.76078431369999999" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="createButtonClick:" destination="h5M-W6-F0s" eventType="touchUpInside" id="f9l-nU-Oel"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d7F-5m-xDa" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
+                                <rect key="frame" x="85" y="617" width="244" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="beginEditLocationTextField:" destination="h5M-W6-F0s" eventType="editingDidBegin" id="oci-Kz-2pe"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.46666666670000001" green="0.76078431369999999" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="d7F-5m-xDa" firstAttribute="centerX" secondItem="LvZ-fs-m7i" secondAttribute="centerX" id="04Z-bF-hIu"/>
+                            <constraint firstItem="Buo-g1-3v1" firstAttribute="top" secondItem="EPk-Mg-3gb" secondAttribute="bottom" constant="35" id="6w8-hj-9xd"/>
+                            <constraint firstItem="9FU-s0-fUc" firstAttribute="top" secondItem="d7F-5m-xDa" secondAttribute="bottom" constant="30" id="D5p-Mk-xCx"/>
+                            <constraint firstItem="bRl-y0-ZEF" firstAttribute="trailing" secondItem="cWD-oU-iIe" secondAttribute="trailing" constant="85" id="DCG-a1-RK3"/>
+                            <constraint firstItem="f9g-dl-fyH" firstAttribute="top" secondItem="bRl-y0-ZEF" secondAttribute="top" id="Gsy-Ca-rXq"/>
+                            <constraint firstItem="bRl-y0-ZEF" firstAttribute="trailing" secondItem="pzU-0G-X74" secondAttribute="trailing" constant="85" id="JP6-u6-pQb"/>
+                            <constraint firstItem="pzU-0G-X74" firstAttribute="leading" secondItem="bRl-y0-ZEF" secondAttribute="leading" constant="85" id="LVJ-Nt-kFq"/>
+                            <constraint firstItem="bRl-y0-ZEF" firstAttribute="trailing" secondItem="Buo-g1-3v1" secondAttribute="trailing" constant="85" id="Q0P-BO-k90"/>
+                            <constraint firstItem="d7F-5m-xDa" firstAttribute="leading" secondItem="bRl-y0-ZEF" secondAttribute="leading" constant="85" id="QDK-5r-5qN"/>
+                            <constraint firstItem="Buo-g1-3v1" firstAttribute="leading" secondItem="bRl-y0-ZEF" secondAttribute="leading" constant="85" id="QwQ-ys-KgR"/>
+                            <constraint firstItem="EPk-Mg-3gb" firstAttribute="top" secondItem="cWD-oU-iIe" secondAttribute="bottom" constant="35" id="S3p-MP-akO"/>
+                            <constraint firstItem="6lz-sY-tw1" firstAttribute="top" secondItem="Rl4-eE-bDR" secondAttribute="bottom" constant="10" id="Viw-Rz-3Ik"/>
+                            <constraint firstItem="bRl-y0-ZEF" firstAttribute="trailing" secondItem="EPk-Mg-3gb" secondAttribute="trailing" constant="85" id="X2g-7C-zEQ"/>
+                            <constraint firstItem="6lz-sY-tw1" firstAttribute="centerX" secondItem="LvZ-fs-m7i" secondAttribute="centerX" id="XHT-ad-ets"/>
+                            <constraint firstItem="f9g-dl-fyH" firstAttribute="leading" secondItem="bRl-y0-ZEF" secondAttribute="leading" constant="20" id="Xuv-Qq-Dl5"/>
+                            <constraint firstItem="Rl4-eE-bDR" firstAttribute="top" secondItem="bRl-y0-ZEF" secondAttribute="top" id="anu-v1-6lD"/>
+                            <constraint firstItem="pzU-0G-X74" firstAttribute="centerX" secondItem="LvZ-fs-m7i" secondAttribute="centerX" id="bHl-Ua-RcC"/>
+                            <constraint firstItem="cWD-oU-iIe" firstAttribute="top" secondItem="pzU-0G-X74" secondAttribute="bottom" constant="30" id="bi0-cM-dRM"/>
+                            <constraint firstItem="9FU-s0-fUc" firstAttribute="centerX" secondItem="LvZ-fs-m7i" secondAttribute="centerX" id="pTk-o8-tv6"/>
+                            <constraint firstItem="d7F-5m-xDa" firstAttribute="top" secondItem="Buo-g1-3v1" secondAttribute="bottom" constant="35" id="qRf-In-9ye"/>
+                            <constraint firstItem="Rl4-eE-bDR" firstAttribute="centerX" secondItem="LvZ-fs-m7i" secondAttribute="centerX" id="qVd-Fp-gUf"/>
+                            <constraint firstItem="cWD-oU-iIe" firstAttribute="leading" secondItem="bRl-y0-ZEF" secondAttribute="leading" constant="85" id="qw2-hV-Eir"/>
+                            <constraint firstItem="bRl-y0-ZEF" firstAttribute="trailing" secondItem="d7F-5m-xDa" secondAttribute="trailing" constant="85" id="sLo-fr-2DL"/>
+                            <constraint firstItem="pzU-0G-X74" firstAttribute="top" secondItem="6lz-sY-tw1" secondAttribute="bottom" constant="10" id="xUj-tQ-BgD"/>
+                            <constraint firstItem="EPk-Mg-3gb" firstAttribute="leading" secondItem="bRl-y0-ZEF" secondAttribute="leading" constant="85" id="xtZ-ib-Ya3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bRl-y0-ZEF"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="6Za-i5-2VB"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="Buo-g1-3v1" id="5dx-a9-eMs"/>
+                        <outlet property="createButton" destination="9FU-s0-fUc" id="qhR-In-elf"/>
+                        <outlet property="emailTextField" destination="cWD-oU-iIe" id="fsf-nH-7i6"/>
+                        <outlet property="locationTextField" destination="d7F-5m-xDa" id="phY-7G-xUb"/>
+                        <outlet property="passwordTextField" destination="EPk-Mg-3gb" id="ukr-mF-EFK"/>
+                        <outlet property="usernameTextField" destination="pzU-0G-X74" id="ilS-nl-R52"/>
+                        <segue destination="jFi-iI-c79" kind="show" identifier="toDashboard" id="atF-rZ-Pol"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rtw-3g-cXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="KU5-Mx-OB8" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="547.82608695652175" y="878.57142857142856"/>
         </scene>
         <!--Dashboard View Controller-->
         <scene sceneID="Jmx-hH-VgQ">
@@ -112,11 +342,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6V-Gn-KeH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1305" y="-1"/>
+            <point key="canvasLocation" x="2107" y="-1"/>
         </scene>
     </scenes>
     <resources>
         <image name="elephant_empty" width="320" height="320"/>
         <image name="logo_empty" width="320" height="320"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="atF-rZ-Pol"/>
+    </inferredMetricsTieBreakers>
 </document>

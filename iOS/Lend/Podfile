@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+# platform :ios, '13.2'
 
 target 'Lend' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -11,6 +11,11 @@ target 'Lend' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Database'
+  pod 'FirebaseFirestoreSwift'
+  
+  #pods for google maps
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
   target 'LendTests' do
     inherit! :search_paths

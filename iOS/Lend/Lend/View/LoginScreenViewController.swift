@@ -16,25 +16,42 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var submitButton: UIButton!
     
+    @IBOutlet weak var signupButton: UIButton!
     
+    //Handling transitio to the sign up page
+    @IBAction func signupButtonClicked(_ sender: Any) {
+        performSegue(withIdentifier: "toSignup", sender: self)
+    }
     
-    
+    //Handling when the sign in button is clicked
     @IBAction func submitButtonClicked(_ sender: Any) {
         HandleLogin.attemptLogin(emailField: emailTextField, passwordField: passwordTextField, loginInstance : self)
     }
     
+    @IBAction func unwindToLogin(_ unwindSegue: UIStoryboardSegue) { }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTextField(textField: emailTextField, placeholderText: "Type in email", backgroundColor: Colors.BACKGROUND_COLOR)
-        setupTextField(textField: passwordTextField, placeholderText: "Type in password", backgroundColor: Colors.BACKGROUND_COLOR)
+
+        //Make email and text field underlined
+        Utils.setupTextField(textField: emailTextField, placeholderText: "Type in email", backgroundColor: Colors.BACKGROUND_COLOR)
+        Utils.setupTextField(textField: passwordTextField, placeholderText: "Type in password", backgroundColor: Colors.BACKGROUND_COLOR)
+        
+        //Make sign in button round
         Utils.makeButtonRounded(button: submitButton, cornerRadius: 10, borderWidth: 1, borderColor: UIColor.white, backgroundColor: UIColor.white, textColor: Colors.BACKGROUND_COLOR)
+        
+        //Tracker to lower keyboard when tapping around
         self.hideKeyboardWhenTappedAround()
+        
+        //Necessary observers for raising/lowering keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        
+        //Setting up the signup button
+        signupButton.setTitle("DON'T HAVE AN ACCOUNT? SIGN UP HERE!", for: .normal)
         
         // Do any additional setup after loading the view.
     }
@@ -61,11 +78,6 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "toDashboard", sender: self)
     }
     
-    func setupTextField(textField : UITextField, placeholderText : String, backgroundColor : UIColor) {
-        textField.backgroundColor = backgroundColor
-        textField.attributedPlaceholder = NSAttributedString(string: placeholderText,
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-    }
     
     /*
      Makes a simple check to UserDefaults to see if the user has already
@@ -80,6 +92,9 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    /*
+     Functions to handle the appearance and dissapearance of the keyboard
+     */
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
@@ -87,12 +102,12 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
     }
+    
     
     /*
      Handles the pressing of return on the keyboard. If return is pressed
