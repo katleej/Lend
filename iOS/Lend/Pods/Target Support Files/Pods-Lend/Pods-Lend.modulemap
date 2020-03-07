@@ -1,0 +1,6 @@
+framework module Pods_Lend {
+  umbrella header "Pods-Lend-umbrella.h"
+
+  export *
+  module * { export * }
+}
