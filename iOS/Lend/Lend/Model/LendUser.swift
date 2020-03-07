@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LendUser {
+public class LendUser {
     var id, username, photoURL, city, email : String
     var rating, latitude, longitude: Double
     var numberOfBookings, numReviews, yearJoined: Int

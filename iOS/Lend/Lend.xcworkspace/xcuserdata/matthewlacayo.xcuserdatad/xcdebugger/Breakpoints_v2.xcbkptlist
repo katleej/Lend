@@ -18,6 +18,38 @@
             endingLineNumber = "30"
             landmarkName = "LendUser"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "D4BD4A8D-9D70-4778-A416-FF405EC88C10 - c6b4997ced796bf1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Lend.LendUser.__allocating_init(id: Swift.String, username: Swift.String, photoURL: Swift.String, city: Swift.String, email: Swift.String, rating: Swift.Double, latitude: Swift.Double, longitude: Swift.Double, numberOfBooking: Swift.Int, numReviews: Swift.Int, yearsJoined: Swift.Int) -&gt; Lend.LendUser"
+                  moduleName = "Lend"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthewlacayo/Lend/iOS/Lend/Lend/Model/LendUser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "55">
+               </Location>
+               <Location
+                  uuid = "D4BD4A8D-9D70-4778-A416-FF405EC88C10 - 90e009ce27508bf5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Lend.LendUser.init(id: Swift.String, username: Swift.String, photoURL: Swift.String, city: Swift.String, email: Swift.String, rating: Swift.Double, latitude: Swift.Double, longitude: Swift.Double, numberOfBooking: Swift.Int, numReviews: Swift.Int, yearsJoined: Swift.Int) -&gt; Lend.LendUser"
+                  moduleName = "Lend"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthewlacayo/Lend/iOS/Lend/Lend/Model/LendUser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "226">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

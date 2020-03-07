@@ -98,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="547.82608695652175" y="-1.3392857142857142"/>
         </scene>
-        <!--View Controller-->
+        <!--Dashboard View Controller-->
         <scene sceneID="Jmx-hH-VgQ">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="jFi-iI-c79" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="jFi-iI-c79" customClass="DashboardViewController" customModule="Lend" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5IC-sr-jkc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -7,7 +7,7 @@
 //  Converted from Java version.
 
 import Foundation
-class Item {
+public class Item {
 
 
     /*
