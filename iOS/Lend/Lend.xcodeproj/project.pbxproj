@@ -34,6 +34,7 @@
 		C0A4F24C2414343F005D8158 /* HandleSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24B2414343F005D8158 /* HandleSignup.swift */; };
 		C0A4F24E24143641005D8158 /* PerformSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24D24143641005D8158 /* PerformSignup.swift */; };
 		C0A4F25024145999005D8158 /* FirebaseLendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24F24145999005D8158 /* FirebaseLendUser.swift */; };
+		C0A4F2522414626E005D8158 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F2512414626E005D8158 /* APIKeys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		C0A4F24B2414343F005D8158 /* HandleSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleSignup.swift; sourceTree = "<group>"; };
 		C0A4F24D24143641005D8158 /* PerformSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformSignup.swift; sourceTree = "<group>"; };
 		C0A4F24F24145999005D8158 /* FirebaseLendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLendUser.swift; sourceTree = "<group>"; };
+		C0A4F2512414626E005D8158 /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		DE62686D732EBEEC66E3EDE5 /* Pods-LendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LendTests.debug.xcconfig"; path = "Target Support Files/Pods-LendTests/Pods-LendTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +194,7 @@
 				C0A4F23924132EAF005D8158 /* GoogleService-Info.plist */,
 				C08920702401B6520019754B /* Info.plist */,
 				C03284182401D38D00C750D1 /* Assets.xcassets */,
+				C0A4F2512414626E005D8158 /* APIKeys.plist */,
 			);
 			path = Lend;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				C0A4F23A24132EAF005D8158 /* GoogleService-Info.plist in Resources */,
 				C032841C2401D6F800C750D1 /* Microsoft Sans Serif.ttf in Resources */,
 				C089206F2401B6520019754B /* LaunchScreen.storyboard in Resources */,
+				C0A4F2522414626E005D8158 /* APIKeys.plist in Resources */,
 				C03284192401D38D00C750D1 /* Assets.xcassets in Resources */,
 				C089206A2401B64D0019754B /* Main.storyboard in Resources */,
 			);

@@ -19,8 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        GMSServices.provideAPIKey("AIzaSyDsIieVHkshBMh5vQEHCSMqQlaJsa0IIWo")
-        GMSPlacesClient.provideAPIKey("AIzaSyAcLpdIvtn0xtj9jO14DRIAzQF8NzeAcoE")
+        
+        var keys: NSDictionary?
+        if let path = Bundle.main.path(forResource: "APIKeys", ofType: "plist") {
+            keys = NSDictionary(contentsOfFile: path)
+        }
+        if let dict = keys {
+            let mapsKey = dict["GMapsKey"] as? String
+            let placesKey = dict["GPlacesKey"] as? String
+            GMSServices.provideAPIKey(mapsKey!)
+            GMSPlacesClient.provideAPIKey(placesKey!)
+        }
         return true
     }
 
