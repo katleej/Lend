@@ -8,13 +8,16 @@
 
 import UIKit
 
-class LoginScreenViewController: UIViewController {
+class LoginScreenViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var submitButton: UIButton!
+    
+    
+    
     
     @IBAction func submitButtonClicked(_ sender: Any) {
         HandleLogin.attemptLogin(emailField: emailTextField, passwordField: passwordTextField, loginInstance : self)
@@ -27,10 +30,15 @@ class LoginScreenViewController: UIViewController {
         setupTextField(textField: passwordTextField, placeholderText: "Type in password", backgroundColor: Colors.BACKGROUND_COLOR)
         Utils.makeButtonRounded(button: submitButton, cornerRadius: 10, borderWidth: 1, borderColor: UIColor.white, backgroundColor: UIColor.white, textColor: Colors.BACKGROUND_COLOR)
         self.hideKeyboardWhenTappedAround()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         
         // Do any additional setup after loading the view.
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         // Sets email and password field to blank upon returning to screen
@@ -71,6 +79,21 @@ class LoginScreenViewController: UIViewController {
         }
     }
     
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height - 150
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     /*
      Handles the pressing of return on the keyboard. If return is pressed
      while entering text into the email text field, then control is passed over
@@ -92,7 +115,7 @@ class LoginScreenViewController: UIViewController {
        // Do not add a line break
        return false
     }
-    
+ 
     
     
 
