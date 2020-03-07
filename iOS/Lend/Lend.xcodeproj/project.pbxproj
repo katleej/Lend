@@ -29,6 +29,7 @@
 		C0A4F242241388ED005D8158 /* LendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F241241388ED005D8158 /* LendUser.swift */; };
 		C0A4F24424138E21005D8158 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24324138E21005D8158 /* Item.swift */; };
 		C0A4F246241393FD005D8158 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F245241393FD005D8158 /* DashboardViewController.swift */; };
+		C0A4F24824139871005D8158 /* CurrentUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F24724139871005D8158 /* CurrentUserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		C0A4F241241388ED005D8158 /* LendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LendUser.swift; sourceTree = "<group>"; };
 		C0A4F24324138E21005D8158 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		C0A4F245241393FD005D8158 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		C0A4F24724139871005D8158 /* CurrentUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserData.swift; sourceTree = "<group>"; };
 		DE62686D732EBEEC66E3EDE5 /* Pods-LendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LendTests.debug.xcconfig"; path = "Target Support Files/Pods-LendTests/Pods-LendTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +212,7 @@
 				C0A4F23D24133282005D8158 /* PerformLogin.swift */,
 				C0A4F241241388ED005D8158 /* LendUser.swift */,
 				C0A4F24324138E21005D8158 /* Item.swift */,
+				C0A4F24724139871005D8158 /* CurrentUserData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				C0A4F23624132893005D8158 /* UnderLineTextField.swift in Sources */,
 				C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */,
 				C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */,
+				C0A4F24824139871005D8158 /* CurrentUserData.swift in Sources */,
 				C0A4F242241388ED005D8158 /* LendUser.swift in Sources */,
 				C0A4F234241321D9005D8158 /* Colors.swift in Sources */,
 				C0A4F23824132AFA005D8158 /* Utils.swift in Sources */,
