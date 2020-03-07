@@ -7,5 +7,5 @@
 5. Clean design: easily navigate and manage your bookings & listings for a smooth user experience
 6. Featured items/ lenders: find top-rated items and lenders near you
 
-![Image Description](https://github.com/katleej/Lend/blob/master/description-images/one.png)
-![Image Description](https://github.com/katleej/Lend/blob/master/description-images/five.png)
+![Image Description](https://github.com/katleej/Lend/blob/master/Android/description-images/one.png)
+![Image Description](https://github.com/katleej/Lend/blob/master/Android/description-images/five.png)
