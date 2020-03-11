@@ -12,10 +12,12 @@ target 'Lend' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Database'
   pod 'FirebaseFirestoreSwift'
+  pod 'CodableFirebase'
   
   #pods for google maps
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  
 
   target 'LendTests' do
     inherit! :search_paths

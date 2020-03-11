@@ -8,13 +8,29 @@
 
 import UIKit
 
+
 class DashboardViewController: UIViewController {
 
+    @IBOutlet weak var mainTV: UITableView!
+    
+    var dataSource : DashboardTableData?
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource = DashboardTableData()
+        mainTV.dataSource = dataSource!
+        mainTV.delegate = dataSource!
+        mainTV.separatorStyle = UITableViewCell.SeparatorStyle.none
 
-        // Do any additional setup after loading the view.
+        
+        
     }
+    
+    
+    
     
 
     /*

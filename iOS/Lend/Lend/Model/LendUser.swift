@@ -1,140 +1,36 @@
 //
-//  LendUser.swift
+//  FirebaseLendUser.swift
 //  Lend
 //
-//  Created by Matthew Lacayo on 3/6/20.
+//  Created by Matthew Lacayo on 3/7/20.
 //  Copyright © 2020 mdb. All rights reserved.
-//  Converted from Java version.
+//
 
 import Foundation
+import Firebase
 
-public class LendUser {
-    var id, username, photoURL, city, email : String
-    var rating, latitude, longitude: Double
-    var numberOfBookings, numReviews, yearJoined: Int
-    var description = "No Description"
-
-    init() {
-        id = "000"
-        username = "Default User"
-        photoURL = "default"
-        city = "Berkeley"
-        email = "default@user.com"
-        rating = 0.0
-        latitude = 0.0
-        longitude = 0.0
-        numberOfBookings = 0
-        numReviews = 0
-        yearJoined = 0
-    }
+public struct LendUser : Codable {
     
-    init(id : String, username : String, photoURL : String, city : String, email : String, rating : Double, latitude : Double, longitude : Double, numberOfBooking : Int, numReviews : Int, yearsJoined : Int) {
-        self.id = "000"
-        self.username = "Default User"
-        self.photoURL = "default"
-        self.city = "Berkeley"
-        self.email = "default@user.com"
-        self.rating = 0.0
-        self.latitude = 0.0
-        self.longitude = 0.0
-        self.numberOfBookings = 0
-        self.numReviews = 0
-        self.yearJoined = 0
+    static let defaultPhotoURL = "https://firebasestorage.googleapis.com/v0/b/lend-7958f.appspot.com/o/pictures%2Fprofiles%2Felephant_white.png?alt=media&token=465fdaa4-448b-45ef-814f-985a572e5d86"
+
+    let id, username, photoURL, city, email, description : String?
+    let rating, latitude, longitude: Double?
+    let numberOfBookings, numReviews, yearJoined: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case username
+        case photoURL
+        case city
+        case email
+        case rating
+        case latitude
+        case longitude
+        case numberOfBookings
+        case numReviews
+        case yearJoined
+        case description
     }
 
-    func getId() -> String {
-        return id;
-    }
-
-    func setId(id : String)  {
-        self.id = id;
-    }
-
-    func getUsername() -> String {
-        return username;
-    }
-
-    func setUsername(username : String) {
-        self.username = username;
-    }
-
-    func getPhotoURL() -> String {
-        return photoURL;
-    }
-
-    func setPhotoURL(photoURL : String)  {
-        self.photoURL = photoURL;
-    }
-
-    func getCity() -> String {
-        return city;
-    }
-
-    func setCity(city : String)  {
-        self.city = city;
-    }
-
-    func getEmail() -> String {
-        return email;
-    }
-
-    func setEmail(email : String)  {
-        self.email = email;
-    }
-
-    func getRating() -> Double {
-        return rating;
-    }
-
-    func setRating(rating : Double)  {
-        self.rating = rating;
-    }
-
-    func getLatitude() -> Double {
-        return latitude;
-    }
-
-    func setLatitude(latitude : Double)  {
-        self.latitude = latitude;
-    }
-
-    func getLongitude() -> Double{
-        return longitude;
-    }
-
-    func setLongitude(longitude : Double)  {
-        self.longitude = longitude;
-    }
-
-    func getNumberOfBookings() -> Int {
-        return numberOfBookings;
-    }
-
-    func setNumberOfBookings(numberOfBookings : Int)  {
-        self.numberOfBookings = numberOfBookings;
-    }
-
-    func getNumReviews() -> Int {
-        return numReviews;
-    }
-
-    func setNumReviews(numReviews : Int)  {
-        self.numReviews = numReviews;
-    }
-
-    func getYearJoined() -> Int {
-        return yearJoined;
-    }
-
-    func setYearJoined(yearJoined : Int)  {
-        self.yearJoined = yearJoined;
-    }
-
-    func getDescription() -> String{
-        return description;
-    }
-
-    func setDescription(description : String)  {
-        self.description = description;
-    }
 }
+

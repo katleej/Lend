@@ -65,17 +65,14 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
        }
        
        override func viewDidAppear(_ animated: Bool) {
-        
-           //checkIfSignedIn()
+           checkIfSignedIn()
        }
     
     /*
-            Function that takes in a text field, a placeholder string, and a background color, and properly sets the textfield to have a white line underneath it.
+            Function that intializes the current user data, and then transitions views to dashboard.
      */
-    
-    
     func goToDashboard() {
-        performSegue(withIdentifier: "toDashboard", sender: self)
+        CurrentUserData.currentUser.initializeUser(vc : self)
     }
     
     
@@ -87,7 +84,7 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
     func checkIfSignedIn() {
         let hasSignedIn = UserDefaults.standard.bool(forKey: "usersignedin")
         if(hasSignedIn==true){
-            self.performSegue(withIdentifier: "toDashboard", sender: self)
+            goToDashboard()
         }
     }
     

@@ -22,26 +22,16 @@ class PerformSignup {
                 Utils.displayAlert(title: "Error", message: "No user", controller : view)
                 return
             }
+            
             //SETUP LENDUSER INSTANCE
-            let user = LendUser();
-            user.setUsername(username: username);
-            user.setLatitude( latitude: place.coordinate.latitude);
-            user.setLongitude(longitude: place.coordinate.longitude);
             let date = Date()
             let calendar = Calendar.current
-            user.setYearJoined(yearJoined: calendar.component(.year, from: date))
-            user.setDescription(description: "No description ")
-            user.setId(id: Auth.auth().currentUser!.uid)
-            user.setRating(rating: 0)
-            user.setNumReviews(numReviews: 0)
-            user.setEmail(email: email)
             let placeInfo = Utils.extractCountryCityFromPlace(place: place)
-            user.setCity(city: placeInfo["City"]! + ", " + placeInfo["Country"]!)
+            let user = LendUser(id: Auth.auth().currentUser!.uid, username: username, photoURL: LendUser.defaultPhotoURL, city: placeInfo["City"]! + ", " + placeInfo["Country"]!, email: email, description : "No Description ", rating: 0, latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, numberOfBookings: 0, numReviews: 0, yearJoined: calendar.component(.year, from: date))
 
-            let fbUser = Utils.lendUserToFirebase(user: user)
             let db = Firestore.firestore()
             do {
-                try db.collection("users").document(user.getUsername()).setData(from : fbUser)
+                try db.collection("users").document(user.username!).setData(from : user)
             } catch let error {
                 print("Error writing city to Firestore: \(error)")
             }

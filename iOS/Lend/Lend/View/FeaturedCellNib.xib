@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeaturedCollectionViewCell" customModule="Lend" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="featuredCellNibId" id="RCK-M3-XLI" customClass="FeaturedCollectionViewCell" customModule="Lend" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="185" height="300"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7SR-4A-q2J" customClass="FeaturedCollectionViewCell" customModule="Lend" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="185" height="300"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="739" verticalCompressionResistancePriority="739" translatesAutoresizingMaskIntoConstraints="NO" id="j1c-Ij-5Nv">
+                        <rect key="frame" x="0.0" y="0.0" width="185" height="140"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Secondary Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bYw-tf-GTh">
+                        <rect key="frame" x="20" y="148" width="145" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primary Text" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pi7-hL-siG">
+                        <rect key="frame" x="20" y="170.5" width="145" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tertiary Text" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fte-Bq-reg">
+                        <rect key="frame" x="42.5" y="190" width="70.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fourth Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6GK-hp-0iA">
+                        <rect key="frame" x="20" y="212.5" width="55.5" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="747" verticalCompressionResistancePriority="747" translatesAutoresizingMaskIntoConstraints="NO" id="Jf3-g9-tGR">
+                        <rect key="frame" x="20" y="190" width="14.5" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Jf3-g9-tGR" secondAttribute="height" multiplier="1:1" id="hDV-pS-n5T"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="6GK-hp-0iA" firstAttribute="leading" secondItem="7SR-4A-q2J" secondAttribute="leading" constant="20" symbolic="YES" id="1tt-D5-xR6"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6GK-hp-0iA" secondAttribute="trailing" constant="20" symbolic="YES" id="4Wn-GC-iiH"/>
+                    <constraint firstItem="bYw-tf-GTh" firstAttribute="leading" secondItem="7SR-4A-q2J" secondAttribute="leading" constant="20" symbolic="YES" id="4eT-ej-gsv"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6GK-hp-0iA" secondAttribute="bottom" constant="20" symbolic="YES" id="9fj-Xm-jmt"/>
+                    <constraint firstItem="Pi7-hL-siG" firstAttribute="leading" secondItem="7SR-4A-q2J" secondAttribute="leading" constant="20" symbolic="YES" id="DgY-t7-ArL"/>
+                    <constraint firstItem="j1c-Ij-5Nv" firstAttribute="top" secondItem="7SR-4A-q2J" secondAttribute="top" id="JwN-Bz-diO"/>
+                    <constraint firstItem="fte-Bq-reg" firstAttribute="leading" secondItem="Jf3-g9-tGR" secondAttribute="trailing" priority="500" constant="8" symbolic="YES" id="K0W-CL-h3w"/>
+                    <constraint firstItem="Jf3-g9-tGR" firstAttribute="leading" secondItem="7SR-4A-q2J" secondAttribute="leading" constant="20" symbolic="YES" id="LF5-E5-BOp"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fte-Bq-reg" secondAttribute="trailing" constant="20" symbolic="YES" id="Lup-f2-iOG"/>
+                    <constraint firstItem="6GK-hp-0iA" firstAttribute="top" secondItem="fte-Bq-reg" secondAttribute="bottom" priority="999" constant="8" symbolic="YES" id="Rye-aw-D9x"/>
+                    <constraint firstAttribute="trailing" secondItem="Pi7-hL-siG" secondAttribute="trailing" constant="20" symbolic="YES" id="SOy-du-gpl"/>
+                    <constraint firstItem="fte-Bq-reg" firstAttribute="height" secondItem="bYw-tf-GTh" secondAttribute="height" priority="50" id="VGe-HX-k2s"/>
+                    <constraint firstItem="fte-Bq-reg" firstAttribute="top" secondItem="Pi7-hL-siG" secondAttribute="bottom" priority="850" id="Xty-oD-X5Y"/>
+                    <constraint firstAttribute="trailing" secondItem="j1c-Ij-5Nv" secondAttribute="trailing" id="afg-d2-53C"/>
+                    <constraint firstItem="j1c-Ij-5Nv" firstAttribute="leading" secondItem="7SR-4A-q2J" secondAttribute="leading" id="eR0-X8-Dsu"/>
+                    <constraint firstItem="Jf3-g9-tGR" firstAttribute="top" secondItem="fte-Bq-reg" secondAttribute="top" id="gBB-qG-W8h"/>
+                    <constraint firstAttribute="trailing" secondItem="bYw-tf-GTh" secondAttribute="trailing" constant="20" symbolic="YES" id="iJ3-iR-EdE"/>
+                    <constraint firstItem="Pi7-hL-siG" firstAttribute="top" secondItem="bYw-tf-GTh" secondAttribute="bottom" constant="8" symbolic="YES" id="l6A-qw-5IE"/>
+                    <constraint firstItem="Jf3-g9-tGR" firstAttribute="height" secondItem="fte-Bq-reg" secondAttribute="height" id="mgZ-uw-b95"/>
+                    <constraint firstItem="bYw-tf-GTh" firstAttribute="top" secondItem="j1c-Ij-5Nv" secondAttribute="bottom" constant="8" symbolic="YES" id="sAY-oC-mAB"/>
+                    <constraint firstItem="Jf3-g9-tGR" firstAttribute="bottom" secondItem="fte-Bq-reg" secondAttribute="bottom" id="twv-lF-JCa"/>
+                    <constraint firstAttribute="bottom" secondItem="j1c-Ij-5Nv" secondAttribute="bottom" multiplier="2" constant="20" symbolic="YES" id="wMW-2K-YgC"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <size key="customSize" width="410" height="409"/>
+            <connections>
+                <outlet property="fourthLabel" destination="6GK-hp-0iA" id="9Ll-P5-b6O"/>
+                <outlet property="primaryImage" destination="j1c-Ij-5Nv" id="cVe-ft-XQk"/>
+                <outlet property="primaryLabel" destination="Pi7-hL-siG" id="mCk-Lx-g2I"/>
+                <outlet property="secondaryImage" destination="Jf3-g9-tGR" id="dh6-Ob-b4v"/>
+                <outlet property="secondaryLabel" destination="bYw-tf-GTh" id="fXI-za-b9o"/>
+                <outlet property="tertiaryLabel" destination="fte-Bq-reg" id="yeQ-O4-oii"/>
+            </connections>
+            <point key="canvasLocation" x="-432.60869565217394" y="111.83035714285714"/>
+        </collectionViewCell>
+    </objects>
+</document>

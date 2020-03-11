@@ -51,8 +51,4 @@ class Utils {
         return rv
     }
     
-    static func lendUserToFirebase(user : LendUser) -> FirebaseLendUser {
-        return FirebaseLendUser(id: user.getId(), username: user.getUsername(), photoURL: user.getPhotoURL(), city: user.getCity(), email: user.getEmail(), rating: user.getRating(), latitude: user.getLatitude(), longitude: user.getLongitude(), numberOfBookings: user.getNumberOfBookings(), numReviews: user.getNumReviews(), yearJoined: user.getYearJoined())
-    }
-    
 }
