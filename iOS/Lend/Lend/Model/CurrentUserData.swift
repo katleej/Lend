@@ -8,21 +8,26 @@
 
 import Foundation
 import Firebase
+import CodableFirebase
 
 class CurrentUserData {
-    var currentUser : LendUser!
+    static let currentUser = CurrentUserData()
+    var data : LendUser?
     
-    static func initializeUser() {
+    
+    /*
+     Initializes user data into singleton instance currentUser.
+     Also transitions from the signup/login VC to the DashboardVC.
+     */
+    func initializeUser(vc : LoginScreenViewController) {
         let db = Firestore.firestore()
         guard Auth.auth().currentUser != nil else {
           print("Exception occured - user does not exist.")
             return
         }
-        print("HELLO")
-        let currentUser = Auth.auth().currentUser!
-        print(currentUser.uid)
-        db.collection("users").whereField("id", isEqualTo: currentUser.uid)
-            .getDocuments() { (querySnapshot, err) in
+        let cUser = Auth.auth().currentUser!
+        print(cUser.uid)
+        db.collection("users").whereField("id", isEqualTo: cUser.uid).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -31,9 +36,10 @@ class CurrentUserData {
                     for document in querySnapshot!.documents {
                         userDocument = document
                     }
-                    print("\(userDocument.documentID) => \(userDocument.data())")
+                    let model = try! FirestoreDecoder().decode(LendUser.self, from: userDocument.data())
+                    self.data = model
+                    vc.performSegue(withIdentifier: "toDashboard", sender: vc)
                 }
         }
-
     }
 }

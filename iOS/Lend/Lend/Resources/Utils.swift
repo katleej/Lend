@@ -11,6 +11,9 @@ import UIKit
 import GooglePlaces
 
 class Utils {
+    
+    static let trophyImage = "🏆".image()
+    
     static func makeButtonRounded(button : UIButton, cornerRadius : CGFloat, borderWidth : CGFloat, borderColor : UIColor, backgroundColor : UIColor, textColor: UIColor) {
         button.backgroundColor = backgroundColor
         button.layer.cornerRadius = cornerRadius
@@ -49,10 +52,6 @@ class Utils {
         }
         assert(rv.count == 2, "Something went wrong extracting country and city from place")
         return rv
-    }
-    
-    static func lendUserToFirebase(user : LendUser) -> FirebaseLendUser {
-        return FirebaseLendUser(id: user.getId(), username: user.getUsername(), photoURL: user.getPhotoURL(), city: user.getCity(), email: user.getEmail(), rating: user.getRating(), latitude: user.getLatitude(), longitude: user.getLongitude(), numberOfBookings: user.getNumberOfBookings(), numReviews: user.getNumReviews(), yearJoined: user.getYearJoined())
     }
     
 }
