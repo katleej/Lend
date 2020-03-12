@@ -12,5 +12,6 @@ import UIKit
 class SearchBarCell : UITableViewCell{
     
     @IBOutlet weak var searchBar: UISearchBar!
+    static let CELL_SIZE : CGFloat = 100.0
     
 }

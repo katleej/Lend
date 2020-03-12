@@ -12,8 +12,53 @@ import GoogleMaps
 class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     var featuredItems : [Item]!
+    
+    /*
+     Map View for items near me.
+     */
     var itemsNearMe : GMSMapView!
-    let trophyImage = "🏆".image()
+    
+    /*
+     Keeps track of the image header's original height. Used as reference
+     due to the height of the header changing over time.
+     */
+    var headerImageHeight : CGFloat!
+    
+    /*
+     Stretchy header image at top of UI
+     */
+    var headerImage : UIImageView!
+    
+    /*
+     Var to keep track of whether or not the header is currently set to alpha=0 or alpha=1.
+     */
+    var imageIsHidden : Bool!
+    
+    /*
+     Number of cells that are displayed.
+     */
+    let NUM_CELLS = 4
+    
+    /*
+    Number of FeaturedLenderCollectionViewCells that are displayed.
+    */
+    let NUM_FEATURED_LENDERS = 10
+    
+    /*
+    Number of FeaturedItemCollectionViewCells that are displayed.
+    */
+    let NUM_FEATURED_ITEMS = 10
+    
+    /*
+     A dictionary mapping table view cell names to their corresponding indices
+     within the view. Used throughout file to get index for cell type.
+     */
+    let cellRowMapping : [String : Int] = [
+        "SearchBarCell" : 0,
+        "FeaturedItemsCell" : 1,
+        "MapViewCell" : 2,
+        "FeaturedLendersCell" : 3
+        ]
     
     func numberOfSections(in tableView: UITableView) -> Int {
             return 1
@@ -21,96 +66,110 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return NUM_CELLS
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let index = indexPath.row
+        
         var cellFinal : UITableViewCell!
-        if (index == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "headerId", for: indexPath) as! HeaderImageCell
-            cellFinal = setupHeaderCell(cell: cell)
-        } else if (index == 1) {
+        
+        switch(indexPath.row) {
+        case cellRowMapping["SearchBarCell"]:
             let cell = tableView.dequeueReusableCell(withIdentifier: "searchCellId", for: indexPath) as! SearchBarCell
             cellFinal = setupSearchBarCell(cell: cell)
-        } else if (index == 2) {
+        case cellRowMapping["FeaturedItemsCell"]:
             let cell = tableView.dequeueReusableCell(withIdentifier: "featuredItemsId", for: indexPath) as! FeaturedItemsCell
             cellFinal = setupFeaturedItemsCell(cell: cell)
-        } else  if (index == 3){
+        case cellRowMapping["MapViewCell"]:
             let cell = tableView.dequeueReusableCell(withIdentifier: "mapViewCellId", for: indexPath) as! MapViewCell
             cellFinal = setupMapViewCell(cell: cell)
-        } else  if (index == 4){
+        case cellRowMapping["FeaturedLendersCell"]:
             let cell = tableView.dequeueReusableCell(withIdentifier: "featuredLendersId", for: indexPath) as! FeaturedLendersTableViewCell
             cellFinal = setupFeaturedLendersCell(cell: cell)
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
-            cellFinal = cell
+        default:
+            break
         }
         cellFinal.selectionStyle = .none
         return cellFinal
         
     }
     
+    
+    /*
+    Setup function for SearchBarCell.
+    */
+    func setupSearchBarCell(cell : SearchBarCell) -> SearchBarCell {
+        return cell
+    }
+    
+    
+    /*
+     Setup function for FeaturedLendersTableViewCell.
+     */
     func setupFeaturedLendersCell(cell : FeaturedLendersTableViewCell) -> FeaturedLendersTableViewCell {
         cell.viewMoreButton.setTitle("View More >", for: .normal)
         return cell
     }
     
+    /*
+    Setup function for MapViewCell.
+    */
     func setupMapViewCell(cell : MapViewCell) -> MapViewCell {
         cell.viewMoreButton.setTitle("View More >", for: .normal)
         return cell
     }
     
+    /*
+    Setup function for FeaturedItemsCell.
+    */
     func setupFeaturedItemsCell(cell : FeaturedItemsCell) -> FeaturedItemsCell {
         cell.viewMoreButton.setTitle("View More >", for: .normal)
         return cell
     }
     
-    func setupHeaderCell(cell : HeaderImageCell) -> HeaderImageCell {
-        let peopleView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.headerContentView.frame.width, height: cell.headerContentView.frame.height))
-        peopleView.image = UIImage(named: "people")
-        cell.headerContentView.addSubview(peopleView)
-        return cell
-    }
     
-    func setupSearchBarCell(cell : SearchBarCell) -> SearchBarCell {
-        return cell
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let index = indexPath.row
-        if (index == 0) {
-            return 210.0
-        } else if (index == 1) {
-            return 100.0
-        } else if (index == 2) {
-            return 300.0
-        } else if (index == 3){
-            return 300.0
-        } else if (index == 4){
-            return 300.0
-        } else {
+        switch(indexPath.row) {
+        case cellRowMapping["SearchBarCell"]:
+            return SearchBarCell.CELL_SIZE
+        case cellRowMapping["FeaturedLendersCell"]:
+            return FeaturedLendersTableViewCell.CELL_SIZE
+        case cellRowMapping["MapViewCell"]:
+            return MapViewCell.CELL_SIZE
+        case cellRowMapping["FeaturedItemsCell"]:
+            return FeaturedItemsCell.CELL_SIZE
+        default:
             return 0
         }
     }
     
+    
+    /*
+     Required function to set the collection view delegates, or update the map location.
+     */
     func tableView(_ tableView: UITableView,
                     willDisplay cell: UITableViewCell,
                         forRowAt indexPath: IndexPath) {
-        if (indexPath.row == 2) {
-            print("Sup")
+        switch (indexPath.row) {
+        case cellRowMapping["FeaturedItemsCell"]:
             guard let tableViewCell = cell as? FeaturedItemsCell else { return }
             tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
-        } else if (indexPath.row == 3) {
+        case cellRowMapping["MapViewCell"]:
             guard let tableViewCell = cell as? MapViewCell else { return }
             tableViewCell.showCurrentLocationOnMap()
-        } else if (indexPath.row == 4) {
+        case cellRowMapping["FeaturedLendersCell"]:
             guard let tableViewCell = cell as? FeaturedLendersTableViewCell else { return }
             tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+        default:
+            break
         }
+
     }
     
-    
+    /*
+    Setup function for FeaturedItemCollectionViewCell.
+    */
     func setupFeaturedItemCollectionCell(cell : FeaturedCollectionViewCell) -> FeaturedCollectionViewCell {
         cell.primaryImage.image = UIImage(named: "shrek")
         cell.secondaryLabel.text = "Category"
@@ -124,11 +183,14 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
+    /*
+    Setup function for FeaturedLenderCollectionViewCell.
+    */
     func setupFeaturedLenderCollectionCell(cell : FeaturedCollectionViewCell) -> FeaturedCollectionViewCell {
         cell.primaryImage.image = UIImage(named: "shrek")
         cell.secondaryLabel.text = "Berkeley, CA"
         cell.primaryLabel.text = "Bob the Builder"
-        cell.secondaryImage.image = trophyImage!
+        cell.secondaryImage.image = Utils.trophyImage!
         cell.fourthLabel.text = "Average Rating \(Int.random(in: 1...4)).\(Int.random(in: 0...9))"
         cell.tertiaryLabel.text = "\(Int.random(in: 1...999)) Ratings"
         cell.layer.borderColor = Colors.BACKGROUND_COLOR.cgColor
@@ -136,9 +198,58 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         cell.layer.cornerRadius = 8
         return cell
     }
+    
+    /*
+     Function to initialize required variables for the header image.
+     */
+    func initializeHeaderImageHeight(header : UIImageView) {
+        headerImageHeight = header.frame.height
+        headerImage = header
+        imageIsHidden = false
+    }
+    
+    
+}
+
+extension DashboardTableData : UIScrollViewDelegate {
+    /*
+     Handles the updating of the header image, as well as making it stretchy.
+     */
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let y = -scrollView.contentOffset.y
+        let height = min(max(y, 0), headerImageHeight + 200)
+        animateImage(newHeight: height)
+        headerImage.frame = CGRect(x: 0, y: 0, width: headerImage.frame.width, height: height)
+    }
+    
+    /*
+     Function to animate the header image in/out depending on where the user
+     is in the scroll process. The animation lasts for ANIMATION_DURATION, and is triggered
+     when the height passes CUTOFF_HEIGHT.
+     */
+    func animateImage(newHeight height : CGFloat) {
+        let ANIMATION_DURATION = 0.7
+        let CUTOFF_HEIGHT = (headerImageHeight / 2) + 10
+        if (CUTOFF_HEIGHT > height
+            && headerImage.frame.height > height
+            && !imageIsHidden) {
+            self.imageIsHidden = true
+            UIView.animate(withDuration: ANIMATION_DURATION, animations: {
+                self.headerImage.alpha = 0.0
+            })
+        } else if (CUTOFF_HEIGHT < height
+            && headerImage.frame.height < height
+            && imageIsHidden){
+            self.imageIsHidden = false
+            UIView.animate(withDuration: ANIMATION_DURATION, animations: {
+                self.headerImage.alpha = 1.0
+            })
+        }
+    }
 }
 
 extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (collectionView is FeaturedItemCollectionView) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuredCellNibId",
@@ -149,15 +260,24 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
                                                           for: indexPath as IndexPath) as! FeaturedCollectionViewCell
             return setupFeaturedLenderCollectionCell(cell: cell)
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "potato",
-                                                          for: indexPath as IndexPath) as! FeaturedLenderCollectionViewCell
-            return setupFeaturedLenderCollectionCell(cell: cell)
+            /*
+             If this code is ever run, an error has occured. CollectionView should have
+            type of FeaturedItemCollectionView or FeaturedLenderCollectionView.
+            */
+            return UICollectionViewCell()
         }
-        
     }
+    
+    
     func collectionView(_ collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
-        return 10
+        if (collectionView is FeaturedItemCollectionView) {
+            return NUM_FEATURED_ITEMS
+        } else if (collectionView is FeaturedLenderCollectionView){
+            return NUM_FEATURED_LENDERS
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

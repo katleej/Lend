@@ -11,6 +11,9 @@ import UIKit
 import GooglePlaces
 
 class Utils {
+    
+    static let trophyImage = "🏆".image()
+    
     static func makeButtonRounded(button : UIButton, cornerRadius : CGFloat, borderWidth : CGFloat, borderColor : UIColor, backgroundColor : UIColor, textColor: UIColor) {
         button.backgroundColor = backgroundColor
         button.layer.cornerRadius = cornerRadius

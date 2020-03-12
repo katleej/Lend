@@ -15,6 +15,8 @@ class MapViewCell : UITableViewCell, GMSMapViewDelegate, CLLocationManagerDelega
     
     @IBOutlet weak var viewMoreButton: UIButton!
     
+    static let CELL_SIZE : CGFloat = 300.0
+    
     var camera = GMSCameraPosition()
     func showCurrentLocationOnMap() {
         let camera = GMSCameraPosition.camera(withLatitude: (CurrentUserData.currentUser.data!.latitude)!, longitude: (CurrentUserData.currentUser.data!.longitude)!, zoom: 15)
