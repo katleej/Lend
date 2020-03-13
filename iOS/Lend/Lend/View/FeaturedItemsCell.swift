@@ -11,7 +11,7 @@ import UIKit
 
 class FeaturedItemsCell : UITableViewCell {
     
-    @IBOutlet private weak var collectionView: FeaturedItemCollectionView!
+    @IBOutlet weak var collectionView: FeaturedItemCollectionView!
     @IBOutlet weak var viewMoreButton: UIButton!
     static let CELL_SIZE : CGFloat = 300.0
     

@@ -326,7 +326,7 @@
             </objects>
             <point key="canvasLocation" x="547.82608695652175" y="878.57142857142856"/>
         </scene>
-        <!--Main-->
+        <!--Dashboard View Controller-->
         <scene sceneID="Jmx-hH-VgQ">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="jFi-iI-c79" customClass="DashboardViewController" customModule="Lend" customModuleProvider="target" sceneMemberID="viewController">
@@ -535,16 +535,96 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mld-65-uE5"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Main" image="doc.text.fill" catalog="system" selectedImage="doc.text.fill" id="EKc-hn-0FO"/>
                     <navigationItem key="navigationItem" id="7iU-3j-kdg"/>
                     <connections>
                         <outlet property="headerImage" destination="JjL-fF-2G3" id="tVf-n7-cnF"/>
                         <outlet property="mainTV" destination="9AZ-rJ-42F" id="BxB-Fz-Fl9"/>
+                        <segue destination="a4h-Q1-x09" kind="show" identifier="toBookingFromMap" id="UOh-4i-e8m"/>
+                        <segue destination="a4h-Q1-x09" kind="show" identifier="toBookingFromFeatured" id="mk3-Qz-dpH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6V-Gn-KeH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3535" y="-451"/>
+            <point key="canvasLocation" x="4669.5652173913049" y="-451.33928571428567"/>
+        </scene>
+        <!--Booking View Controller-->
+        <scene sceneID="Jog-zb-rn1">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="a4h-Q1-x09" customClass="BookingViewController" customModule="Lend" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pnD-H3-cZT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="upa-71-Z8V">
+                                <rect key="frame" x="0.0" y="56" width="414" height="225"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MmC-7D-imN">
+                                <rect key="frame" x="20" y="338" width="82" height="82"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="MmC-7D-imN" secondAttribute="height" multiplier="1:1" id="XXx-4e-24n"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lender Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oau-Z1-SQi">
+                                <rect key="frame" x="110" y="348" width="117" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lender Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGJ-Nf-Xlk">
+                                <rect key="frame" x="110" y="377" width="123" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fee-nb-2jH">
+                                <rect key="frame" x="20" y="289" width="158" height="41"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="MmC-7D-imN" firstAttribute="top" secondItem="fee-nb-2jH" secondAttribute="bottom" constant="8" symbolic="YES" id="0zI-OC-W2P"/>
+                            <constraint firstItem="SGJ-Nf-Xlk" firstAttribute="leading" secondItem="MmC-7D-imN" secondAttribute="trailing" constant="8" id="2Ys-ab-bLl"/>
+                            <constraint firstItem="fee-nb-2jH" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ugK-j8-Q9R" secondAttribute="trailing" symbolic="YES" id="Cxz-IJ-TQq"/>
+                            <constraint firstItem="upa-71-Z8V" firstAttribute="leading" secondItem="pnD-H3-cZT" secondAttribute="leading" id="Gkj-MF-KEq"/>
+                            <constraint firstItem="MmC-7D-imN" firstAttribute="width" secondItem="upa-71-Z8V" secondAttribute="height" multiplier="4:11" id="JjT-tR-AVu"/>
+                            <constraint firstItem="MmC-7D-imN" firstAttribute="leading" secondItem="ugK-j8-Q9R" secondAttribute="leading" constant="20" id="MKs-rG-xPl"/>
+                            <constraint firstItem="ugK-j8-Q9R" firstAttribute="bottom" secondItem="upa-71-Z8V" secondAttribute="bottom" multiplier="2.7" id="Mi8-X7-agh"/>
+                            <constraint firstItem="ugK-j8-Q9R" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oau-Z1-SQi" secondAttribute="trailing" symbolic="YES" id="VNx-J9-2Bd"/>
+                            <constraint firstItem="ugK-j8-Q9R" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SGJ-Nf-Xlk" secondAttribute="trailing" symbolic="YES" id="YDd-vU-aD1"/>
+                            <constraint firstItem="upa-71-Z8V" firstAttribute="trailing" secondItem="pnD-H3-cZT" secondAttribute="trailing" id="gyf-c0-UjJ"/>
+                            <constraint firstItem="oau-Z1-SQi" firstAttribute="leading" secondItem="MmC-7D-imN" secondAttribute="trailing" constant="8" symbolic="YES" id="hQ2-Ks-lPl"/>
+                            <constraint firstItem="upa-71-Z8V" firstAttribute="top" secondItem="ugK-j8-Q9R" secondAttribute="top" id="hvT-Mk-Ejj"/>
+                            <constraint firstItem="fee-nb-2jH" firstAttribute="leading" secondItem="ugK-j8-Q9R" secondAttribute="leading" constant="20" id="rPK-oW-lb4"/>
+                            <constraint firstItem="SGJ-Nf-Xlk" firstAttribute="top" secondItem="oau-Z1-SQi" secondAttribute="bottom" constant="5" id="uKE-oP-C3T"/>
+                            <constraint firstItem="fee-nb-2jH" firstAttribute="top" secondItem="upa-71-Z8V" secondAttribute="bottom" constant="8" symbolic="YES" id="ygu-3b-sMq"/>
+                            <constraint firstItem="oau-Z1-SQi" firstAttribute="top" secondItem="MmC-7D-imN" secondAttribute="top" constant="10" id="zmb-hv-Yjr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ugK-j8-Q9R"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="MRm-ef-SXX" appends="YES" id="Fiv-6L-a9e"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="VrQ-zO-Kdw"/>
+                    <connections>
+                        <outlet property="itemImageView" destination="upa-71-Z8V" id="P0C-57-pfP"/>
+                        <outlet property="itemNameLabel" destination="fee-nb-2jH" id="9MU-fT-Asj"/>
+                        <outlet property="lenderLocationLabel" destination="SGJ-Nf-Xlk" id="DTK-BZ-4YZ"/>
+                        <outlet property="lenderNameLabel" destination="oau-Z1-SQi" id="vdC-Dc-05P"/>
+                        <outlet property="lenderProfileImageView" destination="MmC-7D-imN" id="shi-jQ-OBq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V9L-Wf-LRa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="MRm-ef-SXX">
+                    <connections>
+                        <action selector="swipeRight:" destination="a4h-Q1-x09" id="OZ3-9m-VPw"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="5700" y="-451.33928571428567"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hHe-rM-2uX">
@@ -559,7 +639,7 @@
                         <color key="selectedImageTintColor" red="0.46666666670000001" green="0.76078431369999999" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="jFi-iI-c79" kind="relationship" relationship="viewControllers" id="mWk-yf-Onv"/>
+                        <segue destination="NKs-yK-MUf" kind="relationship" relationship="viewControllers" id="mWk-yf-Onv"/>
                         <segue destination="Jf2-zs-vNf" kind="relationship" relationship="viewControllers" id="aVu-oO-3et"/>
                     </connections>
                 </tabBarController>
@@ -579,13 +659,13 @@
                                 <color key="backgroundColor" red="0.46666666670000001" green="0.76078431369999999" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shrek" translatesAutoresizingMaskIntoConstraints="NO" id="0Ij-cf-mYQ">
-                                <rect key="frame" x="103" y="164" width="209" height="209"/>
+                                <rect key="frame" x="102.5" y="164.5" width="209" height="209"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0Ij-cf-mYQ" secondAttribute="height" multiplier="1:1" id="LFp-f9-p1y"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03q-bS-6Zz">
-                                <rect key="frame" x="174" y="381" width="66" height="34"/>
+                                <rect key="frame" x="174" y="381.5" width="66" height="34"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -653,9 +733,29 @@
             </objects>
             <point key="canvasLocation" x="3534.7826086956525" y="505.58035714285711"/>
         </scene>
+        <!--Main-->
+        <scene sceneID="V2G-PN-wMc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="NKs-yK-MUf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Main" image="doc.text.fill" catalog="system" selectedImage="doc.text.fill" id="EKc-hn-0FO"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RFu-Wq-0TE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jFi-iI-c79" kind="relationship" relationship="rootViewController" id="dT9-nM-Kdf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GnH-9Z-98R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3757.971014492754" y="-451.33928571428567"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="gHe-b0-UK9"/>
+        <segue reference="UOh-4i-e8m"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="book.fill" catalog="system" width="128" height="100"/>

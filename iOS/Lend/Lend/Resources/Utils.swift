@@ -59,4 +59,20 @@ class Utils {
         return rv
     }
     
+    /*
+     DEBUG FUNCTION
+     */
+    static func addNewAttributeToAllItems(field : String, item : Item) {
+        FirebaseQueries.getPropertyFromName(lenderName: item.lenderName!, property: field) { property in
+            switch (field) {
+            case "city":
+                var newItem = item
+                newItem.location = property
+                FirebaseQueries.pushItemData(item: newItem)
+            default:
+                break
+            }
+        }
+    }
+    
 }

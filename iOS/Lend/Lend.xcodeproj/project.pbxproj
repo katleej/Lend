@@ -17,6 +17,7 @@
 		C03108DF241B007D00C68CAE /* ImageResizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108DE241B007D00C68CAE /* ImageResizeExtension.swift */; };
 		C03108E1241B11D500C68CAE /* TextViewCheckUsernameExists.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108E0241B11D500C68CAE /* TextViewCheckUsernameExists.swift */; };
 		C03108E3241B545C00C68CAE /* ProfilePageNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = C03108E2241B545B00C68CAE /* ProfilePageNib.xib */; };
+		C03108E5241B71C100C68CAE /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108E4241B71C100C68CAE /* BookingViewController.swift */; };
 		C03284192401D38D00C750D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C03284182401D38D00C750D1 /* Assets.xcassets */; };
 		C032841C2401D6F800C750D1 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */; };
 		C032841D2401D71A00C750D1 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */; };
@@ -96,6 +97,7 @@
 		C03108DE241B007D00C68CAE /* ImageResizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizeExtension.swift; sourceTree = "<group>"; };
 		C03108E0241B11D500C68CAE /* TextViewCheckUsernameExists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCheckUsernameExists.swift; sourceTree = "<group>"; };
 		C03108E2241B545B00C68CAE /* ProfilePageNib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePageNib.xib; sourceTree = "<group>"; };
+		C03108E4241B71C100C68CAE /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		C03284182401D38D00C750D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Microsoft Sans Serif.ttf"; sourceTree = "<group>"; };
 		C03A476E2416F190006E3A30 /* FeaturedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionView.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				C0A4F24924142439005D8158 /* SignupViewController.swift */,
 				C0A4F253241494F4005D8158 /* DashboardTableData.swift */,
 				C07960D92419C87400BD246A /* ProfileViewController.swift */,
+				C03108E4241B71C100C68CAE /* BookingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0A4F24424138E21005D8158 /* Item.swift in Sources */,
+				C03108E5241B71C100C68CAE /* BookingViewController.swift in Sources */,
 				C0A4F23624132893005D8158 /* UnderLineTextField.swift in Sources */,
 				C03108DD241AEEA100C68CAE /* UIImageViewCacher.swift in Sources */,
 				C03A477924178286006E3A30 /* FeaturedItemCollectionView.swift in Sources */,
@@ -820,6 +824,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9914572021AB1A7A915BFDFB /* Pods-Lend.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VRFM9SVCZM;
 				INFOPLIST_FILE = Lend/Info.plist;
@@ -838,6 +843,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 32B1CCFAFA9C0895EBABD0F9 /* Pods-Lend.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VRFM9SVCZM;
 				INFOPLIST_FILE = Lend/Info.plist;

@@ -148,10 +148,16 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
         if (segue.identifier == "toDashboard") {
                 let dashboardController = segue.destination as! UITabBarController
                 for viewController in dashboardController.viewControllers! {
-                    if (viewController.isKind(of: DashboardViewController.self) == true) {
-                        (viewController as! DashboardViewController).dataSource = dashboardData
-                        print(dashboardData!.nearbyItems)
-                        break
+                    if (viewController.isKind(of: UINavigationController.self) == true) {
+                        let nextViews = (viewController as! UINavigationController).viewControllers
+                        for next in nextViews{
+                            if (next.isKind(of: DashboardViewController.self) == true) {
+                                (next as! DashboardViewController).dataSource = dashboardData
+                                print("hehe")
+                                break
+                            }
+                        }
+                            
                     }
                 }
         }

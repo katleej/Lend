@@ -15,15 +15,41 @@ class DashboardViewController: UIViewController {
     
     var dataSource : DashboardTableData?
     
+    /*
+     Tracks the user selected map marker
+     */
+    var markerSelected : String?
+    
+    var featuredItemSelected : Item?
+    
     @IBOutlet weak var headerImage: UIImageView!
     
     @IBOutlet weak var headerInitialHeightConstraint: NSLayoutConstraint!
     
+    /*
+     Used to return to dashboard after selecting an item
+     */
+    @IBAction func unwindToDashboard(_ unwindSegue: UIStoryboardSegue) {
+
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource!.containerView = self
+        if (dataSource!.DEBUG) {
+            debug()
+        }
         setupHeader()
         setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     func setupHeader() {
@@ -32,6 +58,7 @@ class DashboardViewController: UIViewController {
         headerImage.translatesAutoresizingMaskIntoConstraints = true
         dataSource!.initializeHeaderImageHeight(header: headerImage)
     }
+
     
     func setupTableView() {
         mainTV.dataSource = dataSource!
@@ -39,6 +66,22 @@ class DashboardViewController: UIViewController {
         mainTV.separatorStyle = UITableViewCell.SeparatorStyle.none
         mainTV.contentInset = UIEdgeInsets(top: headerImage.frame.size.height, left: 0, bottom: 0, right: 0)
         mainTV.frame = view.frame
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toBookingFromMap") {
+            let destinationVC = segue.destination as! BookingViewController
+            destinationVC.item = dataSource?.nearbyItems[Int(self.markerSelected!)!]
+        } else if (segue.identifier == "toBookingFromFeatured") {
+            let destinationVC = segue.destination as! BookingViewController
+            destinationVC.item = featuredItemSelected!
+        }
+    }
+    
+    func debug() {
+        for item in dataSource!.featuredItems {
+            Utils.addNewAttributeToAllItems(field: "city", item : item)
+        }
     }
     
     

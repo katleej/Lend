@@ -39,7 +39,6 @@ extension UIImageView {
             with: url,
             placeholder: UIImage(named: "elephant_green"),
             options: [
-                .scaleFactor(UIScreen.main.scale),
                 .transition(.fade(1)),
                 .cacheOriginalImage
             ])

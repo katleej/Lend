@@ -51,7 +51,12 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     */
     let NUM_FEATURED_ITEMS = 8
     
+    var containerView : DashboardViewController?
     
+    /*
+     Variable to run the debug method in view did load.
+     */
+    let DEBUG = false
     
     /*
      A dictionary mapping table view cell names to their corresponding indices
@@ -120,12 +125,16 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     */
     func setupMapViewCell(cell : MapViewCell) -> MapViewCell {
         cell.viewMoreButton.setTitle("View More >", for: .normal)
+        cell.containerView = self.containerView! as! DashboardViewController
+        var counter = 0
         for item in nearbyItems {
             let position = CLLocationCoordinate2D(latitude: item.lat!, longitude: item.lng!)
             let marker = GMSMarker(position: position)
             marker.title = item.itemName!
             marker.snippet = "$\(item.price!)"
             marker.map = cell.googleMapsView
+            marker.accessibilityLabel = String(counter)
+            counter += 1
         }
         return cell
     }
@@ -173,6 +182,7 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         case cellRowMapping["FeaturedItemsCell"]:
             guard let tableViewCell = cell as? FeaturedItemsCell else { return }
             tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+            tableViewCell.bringSubviewToFront(tableViewCell.collectionView)
         case cellRowMapping["MapViewCell"]:
             guard let tableViewCell = cell as? MapViewCell else { return }
             tableViewCell.showCurrentLocationOnMap()
@@ -189,6 +199,7 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     Setup function for FeaturedItemCollectionViewCell.
     */
     func setupFeaturedItemCollectionCell(cell : FeaturedCollectionViewCell, col : Int) -> FeaturedCollectionViewCell {
+        cell.contentView.isUserInteractionEnabled = false
         cell.primaryImage.loadImage(url: featuredItems[col].photoURL!)
         cell.secondaryLabel.text = featuredItems[col].category!
         cell.primaryLabel.text = featuredItems[col].itemName!
@@ -208,6 +219,7 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     Setup function for FeaturedLenderCollectionViewCell.
     */
     func setupFeaturedLenderCollectionCell(cell : FeaturedCollectionViewCell) -> FeaturedCollectionViewCell {
+        cell.contentView.isUserInteractionEnabled = false
         cell.primaryImage.image = UIImage(named: "shrek")
         cell.secondaryLabel.text = "Berkeley, CA"
         cell.primaryLabel.text = "Bob the Builder"
@@ -305,5 +317,13 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 160, height: collectionView.frame.size.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (collectionView is FeaturedItemCollectionView) {
+            containerView!.featuredItemSelected = featuredItems[indexPath.row]
+            containerView!.performSegue(withIdentifier: "toBookingFromFeatured", sender: self)
+        }
+        
     }
 }
