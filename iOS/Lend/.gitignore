@@ -35,6 +35,7 @@ DerivedData/
 
 ### Xcode Patch ###
 **/xcshareddata/WorkspaceSettings.xcsettings
+Pods/Pods.xcodeproj/xcuserdata/matthewlacayo.xcuserdatad/xcschemes/xcschememanagement.plist
 
 Lend/APIKeys.plist
 /Lend.xcworkspace/xcuserdata/matthewlacayo.xcuserdatad/UserInterfaceState.xcuserstate
