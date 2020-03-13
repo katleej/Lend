@@ -11,6 +11,8 @@ target 'Lend' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  pod 'FirebaseUI/Storage', '~> 8.0'
   pod 'FirebaseFirestoreSwift'
   pod 'CodableFirebase'
   
@@ -18,6 +20,8 @@ target 'Lend' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   
+  #pod for image downloading and caching
+  pod 'Kingfisher', '~> 5.0'
 
   target 'LendTests' do
     inherit! :search_paths

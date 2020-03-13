@@ -10,6 +10,13 @@
 		5E52B6F47869F9AFFF51C4EA /* Pods_LendTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85316B9188D6C663C6EA39CF /* Pods_LendTests.framework */; };
 		601B68099A4C4363D7D1DFA5 /* Pods_Lend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5BA7394375940A6F265522 /* Pods_Lend.framework */; };
 		B0B81C7E575F3ADB530A5143 /* Pods_Lend_LendUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2C9A05C96D605E1DC1C33A /* Pods_Lend_LendUITests.framework */; };
+		C03108D7241A09B800C68CAE /* MakeImageRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108D6241A09B800C68CAE /* MakeImageRounded.swift */; };
+		C03108D9241A0A0500C68CAE /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108D8241A0A0500C68CAE /* Profile.swift */; };
+		C03108DB241A12ED00C68CAE /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108DA241A12ED00C68CAE /* FirebaseStorageManager.swift */; };
+		C03108DD241AEEA100C68CAE /* UIImageViewCacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108DC241AEEA100C68CAE /* UIImageViewCacher.swift */; };
+		C03108DF241B007D00C68CAE /* ImageResizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108DE241B007D00C68CAE /* ImageResizeExtension.swift */; };
+		C03108E1241B11D500C68CAE /* TextViewCheckUsernameExists.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108E0241B11D500C68CAE /* TextViewCheckUsernameExists.swift */; };
+		C03108E3241B545C00C68CAE /* ProfilePageNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = C03108E2241B545B00C68CAE /* ProfilePageNib.xib */; };
 		C03284192401D38D00C750D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C03284182401D38D00C750D1 /* Assets.xcassets */; };
 		C032841C2401D6F800C750D1 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */; };
 		C032841D2401D71A00C750D1 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */; };
@@ -25,6 +32,9 @@
 		C03A478524180078006E3A30 /* FeaturedCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = C03A478424180078006E3A30 /* FeaturedCellNib.xib */; };
 		C07338AE2415FE8100CDB0E7 /* FeaturedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07338AD2415FE8100CDB0E7 /* FeaturedCollectionViewCell.swift */; };
 		C07960D824186DDD00BD246A /* FirebaseQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960D724186DDD00BD246A /* FirebaseQueries.swift */; };
+		C07960DA2419C87400BD246A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960D92419C87400BD246A /* ProfileViewController.swift */; };
+		C07960DC2419D24000BD246A /* AuthInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960DB2419D24000BD246A /* AuthInstance.swift */; };
+		C07960DE2419D65400BD246A /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960DD2419D65400BD246A /* LoadingIndicator.swift */; };
 		C08920632401B64D0019754B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920622401B64D0019754B /* AppDelegate.swift */; };
 		C08920652401B64D0019754B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920642401B64D0019754B /* SceneDelegate.swift */; };
 		C089206A2401B64D0019754B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C08920682401B64D0019754B /* Main.storyboard */; };
@@ -79,6 +89,13 @@
 		9914572021AB1A7A915BFDFB /* Pods-Lend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lend.debug.xcconfig"; path = "Target Support Files/Pods-Lend/Pods-Lend.debug.xcconfig"; sourceTree = "<group>"; };
 		9D2C9A05C96D605E1DC1C33A /* Pods_Lend_LendUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lend_LendUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5ECD131F3D0DF78937920E /* Pods-LendTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LendTests.release.xcconfig"; path = "Target Support Files/Pods-LendTests/Pods-LendTests.release.xcconfig"; sourceTree = "<group>"; };
+		C03108D6241A09B800C68CAE /* MakeImageRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeImageRounded.swift; sourceTree = "<group>"; };
+		C03108D8241A0A0500C68CAE /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		C03108DA241A12ED00C68CAE /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
+		C03108DC241AEEA100C68CAE /* UIImageViewCacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewCacher.swift; sourceTree = "<group>"; };
+		C03108DE241B007D00C68CAE /* ImageResizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizeExtension.swift; sourceTree = "<group>"; };
+		C03108E0241B11D500C68CAE /* TextViewCheckUsernameExists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCheckUsernameExists.swift; sourceTree = "<group>"; };
+		C03108E2241B545B00C68CAE /* ProfilePageNib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePageNib.xib; sourceTree = "<group>"; };
 		C03284182401D38D00C750D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Microsoft Sans Serif.ttf"; sourceTree = "<group>"; };
 		C03A476E2416F190006E3A30 /* FeaturedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionView.swift; sourceTree = "<group>"; };
@@ -93,6 +110,9 @@
 		C03A478424180078006E3A30 /* FeaturedCellNib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedCellNib.xib; sourceTree = "<group>"; };
 		C07338AD2415FE8100CDB0E7 /* FeaturedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionViewCell.swift; sourceTree = "<group>"; };
 		C07960D724186DDD00BD246A /* FirebaseQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseQueries.swift; sourceTree = "<group>"; };
+		C07960D92419C87400BD246A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C07960DB2419D24000BD246A /* AuthInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInstance.swift; sourceTree = "<group>"; };
+		C07960DD2419D65400BD246A /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		C089205F2401B64D0019754B /* Lend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08920622401B64D0019754B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C08920642401B64D0019754B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +206,7 @@
 				C0A4F233241321D9005D8158 /* Colors.swift */,
 				C0A4F23724132AFA005D8158 /* Utils.swift */,
 				C03A477624177F7E006E3A30 /* EmojiStringToImage.swift */,
+				C07960DD2419D65400BD246A /* LoadingIndicator.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -255,12 +276,15 @@
 				C0A4F23B2413310B005D8158 /* HandleLogin.swift */,
 				C0A4F24B2414343F005D8158 /* HandleSignup.swift */,
 				C0A4F255241496CC005D8158 /* InitializeDashboardData.swift */,
-				C0A4F23D24133282005D8158 /* PerformLogin.swift */,
 				C0A4F24324138E21005D8158 /* Item.swift */,
-				C0A4F24724139871005D8158 /* CurrentUserData.swift */,
-				C0A4F24D24143641005D8158 /* PerformSignup.swift */,
 				C0A4F24F24145999005D8158 /* LendUser.swift */,
 				C07960D724186DDD00BD246A /* FirebaseQueries.swift */,
+				C0A4F24724139871005D8158 /* CurrentUserData.swift */,
+				C0A4F23D24133282005D8158 /* PerformLogin.swift */,
+				C0A4F24D24143641005D8158 /* PerformSignup.swift */,
+				C07960DB2419D24000BD246A /* AuthInstance.swift */,
+				C03108D8241A0A0500C68CAE /* Profile.swift */,
+				C03108DA241A12ED00C68CAE /* FirebaseStorageManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,6 +306,11 @@
 				C03A477C24178520006E3A30 /* FeaturedItemCollectionViewCell.swift */,
 				C03A477E24178545006E3A30 /* FeaturedLenderCollectionViewCell.swift */,
 				C03A478424180078006E3A30 /* FeaturedCellNib.xib */,
+				C03108D6241A09B800C68CAE /* MakeImageRounded.swift */,
+				C03108DC241AEEA100C68CAE /* UIImageViewCacher.swift */,
+				C03108DE241B007D00C68CAE /* ImageResizeExtension.swift */,
+				C03108E0241B11D500C68CAE /* TextViewCheckUsernameExists.swift */,
+				C03108E2241B545B00C68CAE /* ProfilePageNib.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,6 +322,7 @@
 				C0A4F245241393FD005D8158 /* DashboardViewController.swift */,
 				C0A4F24924142439005D8158 /* SignupViewController.swift */,
 				C0A4F253241494F4005D8158 /* DashboardTableData.swift */,
+				C07960D92419C87400BD246A /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -410,6 +440,7 @@
 			files = (
 				C0A4F23A24132EAF005D8158 /* GoogleService-Info.plist in Resources */,
 				C032841C2401D6F800C750D1 /* Microsoft Sans Serif.ttf in Resources */,
+				C03108E3241B545C00C68CAE /* ProfilePageNib.xib in Resources */,
 				C089206F2401B6520019754B /* LaunchScreen.storyboard in Resources */,
 				C0A4F2522414626E005D8158 /* APIKeys.plist in Resources */,
 				C03A478524180078006E3A30 /* FeaturedCellNib.xib in Resources */,
@@ -579,16 +610,21 @@
 			files = (
 				C0A4F24424138E21005D8158 /* Item.swift in Sources */,
 				C0A4F23624132893005D8158 /* UnderLineTextField.swift in Sources */,
+				C03108DD241AEEA100C68CAE /* UIImageViewCacher.swift in Sources */,
 				C03A477924178286006E3A30 /* FeaturedItemCollectionView.swift in Sources */,
 				C0A4F25824149A11005D8158 /* MapViewCell.swift in Sources */,
 				C0A4F25A2414CC15005D8158 /* SearchBarCell.swift in Sources */,
+				C03108E1241B11D500C68CAE /* TextViewCheckUsernameExists.swift in Sources */,
 				C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */,
+				C03108DB241A12ED00C68CAE /* FirebaseStorageManager.swift in Sources */,
+				C07960DA2419C87400BD246A /* ProfileViewController.swift in Sources */,
 				C03A477D24178520006E3A30 /* FeaturedItemCollectionViewCell.swift in Sources */,
 				C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */,
 				C0A4F25024145999005D8158 /* LendUser.swift in Sources */,
 				C0A4F254241494F4005D8158 /* DashboardTableData.swift in Sources */,
 				C03A476F2416F190006E3A30 /* FeaturedCollectionView.swift in Sources */,
 				C0A4F25C2414D59C005D8158 /* FeaturedItemsCell.swift in Sources */,
+				C03108D7241A09B800C68CAE /* MakeImageRounded.swift in Sources */,
 				C0A4F24E24143641005D8158 /* PerformSignup.swift in Sources */,
 				C0A4F24824139871005D8158 /* CurrentUserData.swift in Sources */,
 				C0A4F234241321D9005D8158 /* Colors.swift in Sources */,
@@ -600,9 +636,13 @@
 				C03A47732417016F006E3A30 /* MapView.swift in Sources */,
 				C0A4F256241496CC005D8158 /* InitializeDashboardData.swift in Sources */,
 				C0A4F24A24142439005D8158 /* SignupViewController.swift in Sources */,
+				C03108DF241B007D00C68CAE /* ImageResizeExtension.swift in Sources */,
+				C03108D9241A0A0500C68CAE /* Profile.swift in Sources */,
 				C07960D824186DDD00BD246A /* FirebaseQueries.swift in Sources */,
+				C07960DE2419D65400BD246A /* LoadingIndicator.swift in Sources */,
 				C0A4F246241393FD005D8158 /* DashboardViewController.swift in Sources */,
 				C03A477524170265006E3A30 /* DashboardTableView.swift in Sources */,
+				C07960DC2419D24000BD246A /* AuthInstance.swift in Sources */,
 				C0A4F24C2414343F005D8158 /* HandleSignup.swift in Sources */,
 				C03A47712416F7A0006E3A30 /* FeaturedLendersTableViewCell.swift in Sources */,
 				C0A4F23224131DE8005D8158 /* LoginScreenViewController.swift in Sources */,

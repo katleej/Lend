@@ -11,7 +11,7 @@ import Firebase
 
 class PerformLogin {
     static func performLogin(email: String, password: String, loginViewController : LoginScreenViewController) {
-        Auth.auth().signIn(withEmail: email, password: password) { (signedInUser, signInError) in
+        AuthInstance.instance.auth!.signIn(withEmail: email, password: password) { (signedInUser, signInError) in
                    guard signInError == nil else {
                     Utils.displayAlert(title: "Error", message: "Invalid credentials", controller : loginViewController)
                        return

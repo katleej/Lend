@@ -52,7 +52,20 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func createButtonClick(_ sender: Any) {
-        HandleSignup.attemptSignup(usernameField: usernameTextField, emailField: emailTextField, passwordField: passwordTextField, confirmPasswordField: confirmPasswordTextField, place: selectedPlace, view: self)
+        LoadingIndicator.show(self.view)
+        if usernameTextField.text?.isEmpty == false {
+            usernameTextField.checkUsername(field: usernameTextField.text!) { (success) in
+                if success == true {
+                    print("Username is taken")
+                    Utils.displayAlert(title: "Invalid Username", message: "Username is taken. Please enter a new username.", controller: self)
+                } else {
+                    print("Username is not taken")
+                    HandleSignup.attemptSignup(usernameField: self.usernameTextField, emailField: self.emailTextField, passwordField: self.passwordTextField, confirmPasswordField: self.confirmPasswordTextField, place: self.selectedPlace, view: self)
+                }
+            }
+        } else {
+            Utils.displayAlert(title: "Invalid Username", message: "Username field is empty. Please a new username.", controller: self)
+        }
     }
     
     
@@ -88,6 +101,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     
     func transitionToDashboard() {
+        LoadingIndicator.hide()
         self.performSegue(withIdentifier: "toDashboard", sender: self)
     }
     
@@ -104,6 +118,25 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
        }
        // Do not add a line break
        return false
+    }
+    
+    /*
+     Check if username is taken.
+     */
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag == usernameTextField.tag {
+            if textField.text?.isEmpty == false {
+                textField.checkUsername(field: textField.text!) { (success) in
+                    if success == true {
+                        print("Username is taken")
+                        Utils.displayAlert(title: "Invalid Username", message: "Username is taken. Please enter a new username.", controller: self)
+                    } else {
+                        print("Username is not taken")
+                    }
+                }
+            }
+        }
+
     }
     
 

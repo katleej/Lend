@@ -7,119 +7,29 @@
 //  Converted from Java version.
 
 import Foundation
-public class Item {
+public struct Item : Codable {
 
 
     /*
      id : The item id number
      category: The category of item being lended
      */
-    var id, lenderId, lenderName, itemName, itemDescription, price, lat, lng, photoURL, category : String
+    let id : Int!
+    var booked, lenderId, lenderName, itemName, itemDescription, price, photoURL, category : String?
+    var lat, lng : Double?
     
-
-    init() {
-        id = "000"
-        lenderId = "000"
-        lenderName = "Default"
-        itemName = "Default Item"
-        itemDescription = "Default Description"
-        price = "0"
-        lat = "0"
-        lng = "0"
-        photoURL = "default"
-        category = "Default Category"
+    enum CodingKeys: String, CodingKey {
+        case id = "ID"
+        case booked = "Booked"
+        case lenderId = "Lender ID"
+        case lenderName = "Lender Name"
+        case itemName = "Item Name"
+        case itemDescription = "Item Description"
+        case price = "Item Price"
+        case lat = "Latitude"
+        case lng = "Longitude"
+        case photoURL = "Photo URL"
+        case category = "Item Category"
     }
     
-    init(id : String, lenderId : String, lenderName : String, itemName : String, itemDescription : String, price : String, lat : String, lng : String, photoURL : String, category : String) {
-        self.id = id
-        self.lenderId = lenderId
-        self.lenderName = lenderName
-        self.itemName = itemName
-        self.itemDescription = itemDescription
-        self.price = price
-        self.lat = lat
-        self.lng = lng
-        self.photoURL = photoURL
-        self.category = category
-    }
-
-    func getLenderName() -> String {
-        return lenderName;
-    }
-
-    func setLenderName(lenderName : String) {
-        self.lenderName = lenderName;
-    }
-
-    func getid() -> String{
-        return id;
-    }
-
-    func setid(ID : String) {
-        self.id = ID;
-    }
-
-    func getLender() -> String {
-        return lenderId;
-    }
-
-    func setLender(lenderId : String) {
-        self.lenderId = lenderId;
-    }
-
-    func getItemName() -> String {
-        return itemName;
-    }
-
-    func setItemName(itemName : String) {
-        self.itemName = itemName;
-    }
-
-    func getItemDescription() -> String {
-        return itemDescription;
-    }
-
-    func setItemDescription(itemDescription : String) {
-        self.itemDescription = itemDescription;
-    }
-
-    func getPrice() -> String {
-        return price;
-    }
-
-    func setPrice(price : String) {
-        self.price = price;
-    }
-
-    func getLat() -> String {
-        return lat;
-    }
-
-    func setLat(lat : String) {
-        self.lat = lat;
-    }
-
-    func getLng() -> String {
-        return lng;
-    }
-
-    func setLng(lng : String) {
-        self.lng = lng;
-    }
-
-    func getPhotoURL() -> String {
-        return photoURL;
-    }
-
-    func setPhotoURL(photoURL : String) {
-        self.photoURL = photoURL;
-    }
-
-    func getCategory() -> String{
-        return category;
-    }
-
-    func setCategory(category : String) {
-        self.category = category;
-    }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16095" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16084.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,21 +36,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="bezel" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="87O-zV-h2F" userLabel="Email Text Field" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="110" y="499" width="194" height="31"/>
+                                <rect key="frame" x="110" y="499" width="194" height="32"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="bezel" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="aWQ-9W-7xn" userLabel="Password Text Field" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="110" y="570" width="194" height="31"/>
+                                <rect key="frame" x="110" y="571" width="194" height="31"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mx5-v5-Mc7">
-                                <rect key="frame" x="60" y="701" width="294" height="29"/>
+                                <rect key="frame" x="60" y="702" width="294" height="29"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="14"/>
                                 <state key="normal" title="SIGNUP">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -66,7 +66,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JN4-UB-SXF">
-                                <rect key="frame" x="162" y="641" width="90" height="30"/>
+                                <rect key="frame" x="162" y="642" width="90" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="axL-NM-zMR"/>
@@ -112,7 +112,7 @@
                         <outlet property="passwordTextField" destination="aWQ-9W-7xn" id="wga-U6-xXe"/>
                         <outlet property="signupButton" destination="Mx5-v5-Mc7" id="ZCm-Es-lJH"/>
                         <outlet property="submitButton" destination="JN4-UB-SXF" id="xcg-bo-ESq"/>
-                        <segue destination="jFi-iI-c79" kind="show" identifier="toDashboard" id="gHe-b0-UK9"/>
+                        <segue destination="AjY-vI-qX3" kind="show" identifier="toDashboard" id="gHe-b0-UK9"/>
                         <segue destination="h5M-W6-F0s" kind="show" identifier="toSignup" id="Fer-U5-lXX"/>
                     </connections>
                 </viewController>
@@ -181,7 +181,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pzU-0G-X74" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="85" y="350" width="244" height="33"/>
+                                <rect key="frame" x="85" y="350" width="244" height="34.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
@@ -196,7 +196,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cWD-oU-iIe" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="85" y="413" width="244" height="33"/>
+                                <rect key="frame" x="85" y="414.5" width="244" height="34.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
@@ -211,7 +211,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPk-Mg-3gb" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="85" y="481" width="244" height="33"/>
+                                <rect key="frame" x="85" y="484" width="244" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
@@ -226,7 +226,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Buo-g1-3v1" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="85" y="549" width="244" height="33"/>
+                                <rect key="frame" x="85" y="552" width="244" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
@@ -247,7 +247,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9FU-s0-fUc">
-                                <rect key="frame" x="162" y="680" width="90" height="40"/>
+                                <rect key="frame" x="162" y="684.5" width="90" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="h2B-IO-pwL"/>
@@ -262,7 +262,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d7F-5m-xDa" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="85" y="617" width="244" height="33"/>
+                                <rect key="frame" x="85" y="620" width="244" height="34.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="17"/>
@@ -318,7 +318,7 @@
                         <outlet property="locationTextField" destination="d7F-5m-xDa" id="phY-7G-xUb"/>
                         <outlet property="passwordTextField" destination="EPk-Mg-3gb" id="ukr-mF-EFK"/>
                         <outlet property="usernameTextField" destination="pzU-0G-X74" id="ilS-nl-R52"/>
-                        <segue destination="jFi-iI-c79" kind="show" identifier="toDashboard" id="atF-rZ-Pol"/>
+                        <segue destination="AjY-vI-qX3" kind="show" identifier="toDashboard" id="atF-rZ-Pol"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rtw-3g-cXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -326,16 +326,16 @@
             </objects>
             <point key="canvasLocation" x="547.82608695652175" y="878.57142857142856"/>
         </scene>
-        <!--Dashboard View Controller-->
+        <!--Main-->
         <scene sceneID="Jmx-hH-VgQ">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="jFi-iI-c79" customClass="DashboardViewController" customModule="Lend" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5IC-sr-jkc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="730" verticalCompressionResistancePriority="730" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9AZ-rJ-42F" customClass="DashboardTableView" customModule="Lend" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="414" height="842"/>
+                            <tableView clipsSubviews="YES" tag="5" contentMode="scaleToFill" horizontalCompressionResistancePriority="730" verticalCompressionResistancePriority="730" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9AZ-rJ-42F" customClass="DashboardTableView" customModule="Lend" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="414" height="739"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerId" rowHeight="191" id="sdp-Ba-3FZ" customClass="HeaderImageCell" customModule="Lend" customModuleProvider="target">
@@ -535,6 +535,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mld-65-uE5"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Main" image="doc.text.fill" catalog="system" selectedImage="doc.text.fill" id="EKc-hn-0FO"/>
                     <navigationItem key="navigationItem" id="7iU-3j-kdg"/>
                     <connections>
                         <outlet property="headerImage" destination="JjL-fF-2G3" id="tVf-n7-cnF"/>
@@ -543,15 +544,125 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6V-Gn-KeH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2105.7971014492755" y="-1.3392857142857142"/>
+            <point key="canvasLocation" x="3535" y="-451"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="hHe-rM-2uX">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="AjY-vI-qX3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="FKk-n7-5x7"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lbZ-xr-Jz1">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.46666666670000001" green="0.76078431369999999" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="jFi-iI-c79" kind="relationship" relationship="viewControllers" id="mWk-yf-Onv"/>
+                        <segue destination="Jf2-zs-vNf" kind="relationship" relationship="viewControllers" id="aVu-oO-3et"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HAh-Yu-dDz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2778" y="-1"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="IAW-ft-rcK">
+            <objects>
+                <viewController id="Jf2-zs-vNf" customClass="ProfileViewController" customModule="Lend" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JxZ-2i-dTG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <subviews>
+                            <view autoresizesSubviews="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HNT-Rt-14W">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="269"/>
+                                <color key="backgroundColor" red="0.46666666670000001" green="0.76078431369999999" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shrek" translatesAutoresizingMaskIntoConstraints="NO" id="0Ij-cf-mYQ">
+                                <rect key="frame" x="103" y="164" width="209" height="209"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="0Ij-cf-mYQ" secondAttribute="height" multiplier="1:1" id="LFp-f9-p1y"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03q-bS-6Zz">
+                                <rect key="frame" x="174" y="381" width="66" height="34"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTp-3C-Bnm">
+                                <rect key="frame" x="169.5" y="423.5" width="75" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Description" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZGm-8c-nYD" customClass="UnderLineTextField" customModule="Lend" customModuleProvider="target">
+                                <rect key="frame" x="156" y="452.5" width="102" height="28.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKx-Il-c04">
+                                <rect key="frame" x="102.5" y="164.5" width="209" height="209"/>
+                                <state key="normal" title="Edit Image"/>
+                                <connections>
+                                    <action selector="editImageButtonClicked:" destination="Jf2-zs-vNf" eventType="touchUpInside" id="ArF-wp-wsR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="YKx-Il-c04" firstAttribute="bottom" secondItem="0Ij-cf-mYQ" secondAttribute="bottom" id="6ht-QB-CvE"/>
+                            <constraint firstItem="HNT-Rt-14W" firstAttribute="bottom" secondItem="JxZ-2i-dTG" secondAttribute="centerY" multiplier="0.6" id="7UX-Wo-hbF"/>
+                            <constraint firstItem="YKx-Il-c04" firstAttribute="top" secondItem="0Ij-cf-mYQ" secondAttribute="top" id="8ZE-lO-frx"/>
+                            <constraint firstItem="YKx-Il-c04" firstAttribute="centerX" secondItem="JxZ-2i-dTG" secondAttribute="centerX" id="BYZ-Zm-5Ah"/>
+                            <constraint firstItem="lTp-3C-Bnm" firstAttribute="top" secondItem="03q-bS-6Zz" secondAttribute="bottom" constant="8" symbolic="YES" id="Hzy-uv-VCM"/>
+                            <constraint firstItem="0Ij-cf-mYQ" firstAttribute="width" secondItem="HNT-Rt-14W" secondAttribute="height" multiplier="7:9" id="Ir4-by-Aza"/>
+                            <constraint firstItem="ZGm-8c-nYD" firstAttribute="top" secondItem="lTp-3C-Bnm" secondAttribute="bottom" constant="8" symbolic="YES" id="L4U-jP-j3K"/>
+                            <constraint firstItem="YKx-Il-c04" firstAttribute="height" secondItem="0Ij-cf-mYQ" secondAttribute="height" id="LcH-CB-XXt"/>
+                            <constraint firstItem="HNT-Rt-14W" firstAttribute="leading" secondItem="6Qe-cj-fDT" secondAttribute="leading" id="NPr-Ie-OwL"/>
+                            <constraint firstItem="0Ij-cf-mYQ" firstAttribute="centerY" secondItem="HNT-Rt-14W" secondAttribute="bottom" id="TdU-uO-ELk"/>
+                            <constraint firstItem="HNT-Rt-14W" firstAttribute="top" secondItem="JxZ-2i-dTG" secondAttribute="top" id="Wvl-tU-Mps"/>
+                            <constraint firstItem="03q-bS-6Zz" firstAttribute="centerX" secondItem="JxZ-2i-dTG" secondAttribute="centerX" id="cCM-K8-pf9"/>
+                            <constraint firstItem="YKx-Il-c04" firstAttribute="width" secondItem="0Ij-cf-mYQ" secondAttribute="width" id="cHX-Lf-dlU"/>
+                            <constraint firstItem="0Ij-cf-mYQ" firstAttribute="centerX" secondItem="JxZ-2i-dTG" secondAttribute="centerX" id="fay-rd-blA"/>
+                            <constraint firstItem="03q-bS-6Zz" firstAttribute="top" secondItem="0Ij-cf-mYQ" secondAttribute="bottom" constant="8" symbolic="YES" id="mhF-ES-aC2"/>
+                            <constraint firstItem="0Ij-cf-mYQ" firstAttribute="centerX" secondItem="JxZ-2i-dTG" secondAttribute="centerX" id="qgi-Lm-FiR"/>
+                            <constraint firstItem="lTp-3C-Bnm" firstAttribute="centerX" secondItem="JxZ-2i-dTG" secondAttribute="centerX" id="r3J-ZG-zf4"/>
+                            <constraint firstItem="ZGm-8c-nYD" firstAttribute="centerX" secondItem="JxZ-2i-dTG" secondAttribute="centerX" id="rCP-0b-gsF"/>
+                            <constraint firstItem="HNT-Rt-14W" firstAttribute="trailing" secondItem="6Qe-cj-fDT" secondAttribute="trailing" id="ush-ao-Ypd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Qe-cj-fDT"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="book.fill" catalog="system" selectedImage="book.fill" id="HZi-HD-JKE"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="JJE-UR-pkE"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="descriptionTextField" destination="ZGm-8c-nYD" id="udS-kL-Llt"/>
+                        <outlet property="editImageButton" destination="YKx-Il-c04" id="knr-eR-R7B"/>
+                        <outlet property="profilePicImageView" destination="0Ij-cf-mYQ" id="GIM-gV-FmT"/>
+                        <outlet property="usernameLabel" destination="03q-bS-6Zz" id="6Dz-A9-eKi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dKJ-uK-xsn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3534.7826086956525" y="505.58035714285711"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="elephant_empty" width="320" height="320"/>
-        <image name="logo_empty" width="320" height="320"/>
-        <image name="people" width="686" height="390"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gHe-b0-UK9"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="book.fill" catalog="system" width="128" height="100"/>
+        <image name="doc.text.fill" catalog="system" width="115" height="128"/>
+        <image name="elephant_empty" width="320" height="320"/>
+        <image name="logo_empty" width="320" height="320"/>
+        <image name="people" width="686" height="390"/>
+        <image name="shrek" width="1280" height="720"/>
+    </resources>
 </document>

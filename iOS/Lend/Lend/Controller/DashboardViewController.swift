@@ -22,22 +22,26 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupHeader()
+        setupTableView()
+    }
+    
+    func setupHeader() {
         headerImage.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.25 * view.frame.size.height)
         headerImage.bounds = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.25 * view.frame.size.height)
         headerImage.translatesAutoresizingMaskIntoConstraints = true
-        dataSource = DashboardTableData()
-    dataSource!.initializeHeaderImageHeight(header: headerImage)
+        dataSource!.initializeHeaderImageHeight(header: headerImage)
+    }
+    
+    func setupTableView() {
         mainTV.dataSource = dataSource!
         mainTV.delegate = dataSource!
         mainTV.separatorStyle = UITableViewCell.SeparatorStyle.none
         mainTV.contentInset = UIEdgeInsets(top: headerImage.frame.size.height, left: 0, bottom: 0, right: 0)
         mainTV.frame = view.frame
-        
-        
-
-        
-        
     }
+    
+    
     
     
     

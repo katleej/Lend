@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import CodableFirebase
+import FirebaseStorage
 
 class CurrentUserData {
     static let currentUser = CurrentUserData()
@@ -26,7 +27,6 @@ class CurrentUserData {
             return
         }
         let cUser = Auth.auth().currentUser!
-        print(cUser.uid)
         db.collection("users").whereField("id", isEqualTo: cUser.uid).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -38,8 +38,39 @@ class CurrentUserData {
                     }
                     let model = try! FirestoreDecoder().decode(LendUser.self, from: userDocument.data())
                     self.data = model
-                    vc.performSegue(withIdentifier: "toDashboard", sender: vc)
+                    FirebaseQueries.getItemsNearCurrentUser() { items in
+                        LoadingIndicator.hide()
+                        vc.dashboardData!.nearbyItems = items
+                        vc.performSegue(withIdentifier: "toDashboard", sender: vc)
+                    }
+                    
                 }
+        }
+    }
+    
+    static func updateURL(newURL : String) {
+        let profileRef = Storage.storage().reference(forURL: newURL)
+        profileRef.downloadURL { url, error in
+          if let error = error {
+            // Handle any errors
+            print("Error unable to find current profile photo: \(error.localizedDescription)")
+          } else {
+            // Get the download URL
+            CurrentUserData.currentUser.data!.setProfileURL(url: url!.absoluteString)
+            CurrentUserData.pushNewUserData()
+          }
+        }
+    }
+    
+    /*
+     Pushes current user data to firebase.
+     */
+    static func pushNewUserData() {
+        let db = Firestore.firestore()
+        do {
+            try db.collection("users").document("\(CurrentUserData.currentUser.data!.username!)").setData(from: CurrentUserData.currentUser.data!)
+        } catch let error {
+            print("Error writing city to Firestore: \(error)")
         }
     }
 }

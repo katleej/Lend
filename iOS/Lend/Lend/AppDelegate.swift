@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GMSServices.provideAPIKey(mapsKey!)
             GMSPlacesClient.provideAPIKey(placesKey!)
         }
+        AuthInstance.initializeAuth()
         return true
     }
 

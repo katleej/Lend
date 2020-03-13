@@ -49,6 +49,11 @@ class HandleSignup {
             Utils.displayAlert(title: "Error", message: "Password does not match confirmed password.", controller: view)
             return false
         }
+        
         return true
+    }
+    
+    private func checkIfUsernameTaken (usernameTextField textField: UITextField) {
+        
     }
 }

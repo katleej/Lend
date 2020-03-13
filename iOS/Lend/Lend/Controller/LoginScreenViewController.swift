@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginScreenViewController: UIViewController, UITextFieldDelegate {
+    
+    /*
+     Var to initialize DashboardTableData in before performing segue to next view
+     */
+    var dashboardData : DashboardTableData?
     
     @IBOutlet weak var emailTextField: UITextField!
     
@@ -25,10 +31,18 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
     
     //Handling when the sign in button is clicked
     @IBAction func submitButtonClicked(_ sender: Any) {
+        LoadingIndicator.show(self.view)
         HandleLogin.attemptLogin(emailField: emailTextField, passwordField: passwordTextField, loginInstance : self)
     }
     
-    @IBAction func unwindToLogin(_ unwindSegue: UIStoryboardSegue) { }
+    @IBAction func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
+        do{
+            try AuthInstance.instance.auth!.signOut()
+        }
+        catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -52,7 +66,6 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
         
         //Setting up the signup button
         signupButton.setTitle("DON'T HAVE AN ACCOUNT? SIGN UP HERE!", for: .normal)
-        
         // Do any additional setup after loading the view.
     }
     
@@ -72,7 +85,10 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
             Function that intializes the current user data, and then transitions views to dashboard.
      */
     func goToDashboard() {
-        CurrentUserData.currentUser.initializeUser(vc : self)
+        dashboardData = DashboardTableData()
+        dashboardData!.initFeaturedItemsArray() {
+            CurrentUserData.currentUser.initializeUser(vc : self)
+        }
     }
     
     
@@ -82,8 +98,8 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
      dashboard without requiring further authentication.
      */
     func checkIfSignedIn() {
-        let hasSignedIn = UserDefaults.standard.bool(forKey: "usersignedin")
-        if(hasSignedIn==true){
+        if (AuthInstance.instance.auth!.currentUser != nil) {
+            LoadingIndicator.show(self.view)
             goToDashboard()
         }
     }
@@ -126,6 +142,19 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
        }
        // Do not add a line break
        return false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toDashboard") {
+                let dashboardController = segue.destination as! UITabBarController
+                for viewController in dashboardController.viewControllers! {
+                    if (viewController.isKind(of: DashboardViewController.self) == true) {
+                        (viewController as! DashboardViewController).dataSource = dashboardData
+                        print(dashboardData!.nearbyItems)
+                        break
+                    }
+                }
+        }
     }
  
     
