@@ -8,14 +8,16 @@
 
 import UIKit
 import Firebase
+import GrowingTextView
 
-class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, GrowingTextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var profilePicImageView: UIImageView!
     
-    @IBOutlet weak var descriptionTextView: UITextView!
+
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     
     @IBOutlet weak var editImageButton: UIButton!
@@ -40,6 +42,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         profilePicImageView.loadImage(url: currentUser.photoURL!)
         imagePicker.delegate = self
         setupViews()
+        currentActiveProfile = CurrentUserData.currentUser.data!
         // Do any additional setup after loading the view.
     }
     
@@ -62,6 +65,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         if !(parent?.isEqual(self.parent) ?? false) {
             print("Entered")
             currentActiveProfile = CurrentUserData.currentUser.data!
+            self.tabBarController?.tabBar.isHidden = false
         }
         super.didMove(toParent: parent)
     }
@@ -69,15 +73,21 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     func setupViews() {
         profilePicImageView.makeRounded()
-        usernameLabel.text = currentUser.username
-        descriptionTextView.text = currentUser.description!
+        
+        setupLabels()
         if (currentUser.id == CurrentUserData.currentUser.data!.id!) {
             editImageButton.alpha = 0.02
             editImageButton.layer.cornerRadius = 0.5 * editImageButton.bounds.size.width
         } else {
             editImageButton.alpha = 0.0
+            //self.tabBarController?.tabBar.isHidden = true
         }
         
+    }
+    
+    private func setupLabels() {
+        usernameLabel.text = currentUser.username
+        descriptionLabel.text = currentUser.description!
     }
     
     func getCurrentUser() {

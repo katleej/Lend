@@ -52,6 +52,10 @@ class BookingViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func setupImages() {
         self.itemImageView.loadSmallImage(url: item.photoURL!)
         self.lenderProfileImageView.image = UIImage(named: "elephant_green")

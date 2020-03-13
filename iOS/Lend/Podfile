@@ -22,6 +22,10 @@ target 'Lend' do
   
   #pod for image downloading and caching
   pod 'Kingfisher', '~> 5.0'
+  
+  #pod for review stars
+  pod 'Cosmos', '~> 21.0'
+  
 
   target 'LendTests' do
     inherit! :search_paths
