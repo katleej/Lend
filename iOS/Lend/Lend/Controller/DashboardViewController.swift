@@ -37,6 +37,7 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource!.containerView = self
+        currentActiveProfile = CurrentUserData.currentUser.data!
         if (dataSource!.DEBUG) {
             debug()
         }

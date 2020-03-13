@@ -15,11 +15,13 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     @IBOutlet weak var profilePicImageView: UIImageView!
     
-    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
     
     @IBOutlet weak var editImageButton: UIButton!
 
     let imagePicker = UIImagePickerController()
+    
     
     
     @IBAction func editImageButtonClicked(_ sender: Any) {
@@ -34,10 +36,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentUser = CurrentUserData.currentUser.data!
-        print(currentUser.photoURL!)
+        getCurrentUser()
         profilePicImageView.loadImage(url: currentUser.photoURL!)
-        descriptionTextField.delegate = self
         imagePicker.delegate = self
         setupViews()
         // Do any additional setup after loading the view.
@@ -55,14 +55,33 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         }
     }
     
+    /*
+     Handles the return to a past view. Reassigns currentActiveUser to the current user.
+     */
+    override func didMove(toParent parent: UIViewController?) {
+        if !(parent?.isEqual(self.parent) ?? false) {
+            print("Entered")
+            currentActiveProfile = CurrentUserData.currentUser.data!
+        }
+        super.didMove(toParent: parent)
+    }
+    
     
     func setupViews() {
         profilePicImageView.makeRounded()
         usernameLabel.text = currentUser.username
-        editImageButton.alpha = 0.02
-        editImageButton.layer.cornerRadius = 0.5 * editImageButton.bounds.size.width
-        Utils.setupTextField(textField: descriptionTextField, placeholderText: "None", backgroundColor: UIColor.white)
-        descriptionTextField.text = currentUser.description
+        descriptionTextView.text = currentUser.description!
+        if (currentUser.id == CurrentUserData.currentUser.data!.id!) {
+            editImageButton.alpha = 0.02
+            editImageButton.layer.cornerRadius = 0.5 * editImageButton.bounds.size.width
+        } else {
+            editImageButton.alpha = 0.0
+        }
+        
+    }
+    
+    func getCurrentUser() {
+        self.currentUser = currentActiveProfile
     }
 
     

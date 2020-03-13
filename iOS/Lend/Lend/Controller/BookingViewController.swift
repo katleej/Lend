@@ -23,15 +23,30 @@ class BookingViewController: UIViewController {
     
     @IBOutlet weak var navbar: UINavigationBar!
     
-    var item : Item!
-    
-    @IBAction func swipeRight(_ sender: Any) {
-        
+    @IBAction func goToProfileClicked(_ sender: Any) {
+        LoadingIndicator.show(self.view)
+        FirebaseQueries.getLenderFromName(lenderName: lenderNameLabel.text!) { user in
+            guard user != nil else {
+                print("Error: User does not exist")
+                return
+            }
+            currentActiveProfile = user!
+            LoadingIndicator.hide()
+            self.performSegue(withIdentifier: "toProfile", sender: self)
+        }
     }
+    
+    @IBOutlet weak var goToProfileButton: UIButton!
+    
+    
+    
+    var item : Item!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImages()
         setupLabels()
+        setupProfileButton()
         print(itemImageView.bounds)
         print(itemImageView.frame)
         // Do any additional setup after loading the view.
@@ -50,6 +65,10 @@ class BookingViewController: UIViewController {
         self.lenderNameLabel.text = item.lenderName!
         self.lenderLocationLabel.text = item.location!
         self.itemNameLabel.text = item.itemName!
+    }
+    
+    func setupProfileButton() {
+        goToProfileButton.alpha = 0.02
     }
     
 

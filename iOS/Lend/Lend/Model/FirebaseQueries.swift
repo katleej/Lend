@@ -85,6 +85,19 @@ class FirebaseQueries {
         }
     }
     
+    static func getLenderFromName(lenderName : String, closure : @escaping (LendUser?) -> ()) {
+        let db = Firestore.firestore()
+        db.collection("users").document(lenderName).getDocument() { (document, error) in
+                if let document = document, document.exists {
+                    let model = try! FirestoreDecoder().decode(LendUser.self, from: document.data()!)
+                    closure(model)
+                } else {
+                    print("Found no user with that username.")
+                    closure(nil)
+                }
+        }
+    }
+    
     static func getItemsNearCurrentUser(closure : @escaping ([Item]) -> ()) {
         let db = Firestore.firestore()
         db.collection("items").whereField("Latitude", isGreaterThan: CurrentUserData.currentUser.data!.latitude! - 2).whereField("Latitude", isLessThan: CurrentUserData.currentUser.data!.latitude!).getDocuments() { (querySnapshot, err) in

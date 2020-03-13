@@ -18,6 +18,7 @@
 		C03108E1241B11D500C68CAE /* TextViewCheckUsernameExists.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108E0241B11D500C68CAE /* TextViewCheckUsernameExists.swift */; };
 		C03108E3241B545C00C68CAE /* ProfilePageNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = C03108E2241B545B00C68CAE /* ProfilePageNib.xib */; };
 		C03108E5241B71C100C68CAE /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108E4241B71C100C68CAE /* BookingViewController.swift */; };
+		C03108E7241BFE2D00C68CAE /* CurrentActiveProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108E6241BFE2D00C68CAE /* CurrentActiveProfile.swift */; };
 		C03284192401D38D00C750D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C03284182401D38D00C750D1 /* Assets.xcassets */; };
 		C032841C2401D6F800C750D1 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */; };
 		C032841D2401D71A00C750D1 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */; };
@@ -98,6 +99,7 @@
 		C03108E0241B11D500C68CAE /* TextViewCheckUsernameExists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCheckUsernameExists.swift; sourceTree = "<group>"; };
 		C03108E2241B545B00C68CAE /* ProfilePageNib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePageNib.xib; sourceTree = "<group>"; };
 		C03108E4241B71C100C68CAE /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
+		C03108E6241BFE2D00C68CAE /* CurrentActiveProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentActiveProfile.swift; sourceTree = "<group>"; };
 		C03284182401D38D00C750D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Microsoft Sans Serif.ttf"; sourceTree = "<group>"; };
 		C03A476E2416F190006E3A30 /* FeaturedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionView.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				C07960DB2419D24000BD246A /* AuthInstance.swift */,
 				C03108D8241A0A0500C68CAE /* Profile.swift */,
 				C03108DA241A12ED00C68CAE /* FirebaseStorageManager.swift */,
+				C03108E6241BFE2D00C68CAE /* CurrentActiveProfile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,8 +327,8 @@
 				C0A4F245241393FD005D8158 /* DashboardViewController.swift */,
 				C0A4F24924142439005D8158 /* SignupViewController.swift */,
 				C0A4F253241494F4005D8158 /* DashboardTableData.swift */,
-				C07960D92419C87400BD246A /* ProfileViewController.swift */,
 				C03108E4241B71C100C68CAE /* BookingViewController.swift */,
+				C07960D92419C87400BD246A /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -618,6 +621,7 @@
 				C03A477924178286006E3A30 /* FeaturedItemCollectionView.swift in Sources */,
 				C0A4F25824149A11005D8158 /* MapViewCell.swift in Sources */,
 				C0A4F25A2414CC15005D8158 /* SearchBarCell.swift in Sources */,
+				C03108E7241BFE2D00C68CAE /* CurrentActiveProfile.swift in Sources */,
 				C03108E1241B11D500C68CAE /* TextViewCheckUsernameExists.swift in Sources */,
 				C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */,
 				C03108DB241A12ED00C68CAE /* FirebaseStorageManager.swift in Sources */,
