@@ -11,7 +11,9 @@ import GoogleMaps
 
 class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewDelegate{
     
-    var featuredItems : [Item]!
+    var featuredItems : [Item] = [Item]()
+    
+    var nearbyItems : [Item] = [Item]()
     
     /*
      Map View for items near me.
@@ -47,7 +49,9 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     /*
     Number of FeaturedItemCollectionViewCells that are displayed.
     */
-    let NUM_FEATURED_ITEMS = 10
+    let NUM_FEATURED_ITEMS = 8
+    
+    
     
     /*
      A dictionary mapping table view cell names to their corresponding indices
@@ -116,6 +120,13 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     */
     func setupMapViewCell(cell : MapViewCell) -> MapViewCell {
         cell.viewMoreButton.setTitle("View More >", for: .normal)
+        for item in nearbyItems {
+            let position = CLLocationCoordinate2D(latitude: item.lat!, longitude: item.lng!)
+            let marker = GMSMarker(position: position)
+            marker.title = item.itemName!
+            marker.snippet = "$\(item.price!)"
+            marker.map = cell.googleMapsView
+        }
         return cell
     }
     
@@ -125,6 +136,13 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     func setupFeaturedItemsCell(cell : FeaturedItemsCell) -> FeaturedItemsCell {
         cell.viewMoreButton.setTitle("View More >", for: .normal)
         return cell
+    }
+    
+    func initFeaturedItemsArray(closure : @escaping () -> ()) {
+        FirebaseQueries.getItemsDebug() { itemArr in
+            self.featuredItems = itemArr
+            closure()
+        }
     }
     
     
@@ -170,13 +188,16 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     /*
     Setup function for FeaturedItemCollectionViewCell.
     */
-    func setupFeaturedItemCollectionCell(cell : FeaturedCollectionViewCell) -> FeaturedCollectionViewCell {
-        cell.primaryImage.image = UIImage(named: "shrek")
-        cell.secondaryLabel.text = "Category"
-        cell.primaryLabel.text = "Item Name"
-        cell.secondaryImage.image = UIImage(named: "elephant_green")
-        cell.fourthLabel.text = "$\(Int.random(in: 5...250))"
-        cell.tertiaryLabel.text = "Shrek the Great"
+    func setupFeaturedItemCollectionCell(cell : FeaturedCollectionViewCell, col : Int) -> FeaturedCollectionViewCell {
+        cell.primaryImage.loadImage(url: featuredItems[col].photoURL!)
+        cell.secondaryLabel.text = featuredItems[col].category!
+        cell.primaryLabel.text = featuredItems[col].itemName!
+        FirebaseQueries.getPropertyFromName(lenderName: featuredItems[col].lenderName!, property: "photoURL") { url in
+            cell.secondaryImage.loadSmallImage(url: url)
+        }
+        cell.secondaryImage.makeRounded()
+        cell.fourthLabel.text = "$\(featuredItems[col].price!)"
+        cell.tertiaryLabel.text = featuredItems[col].lenderName!
         cell.layer.borderColor = Colors.BACKGROUND_COLOR.cgColor
         cell.layer.borderWidth = 3
         cell.layer.cornerRadius = 8
@@ -216,10 +237,12 @@ extension DashboardTableData : UIScrollViewDelegate {
      Handles the updating of the header image, as well as making it stretchy.
      */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let y = -scrollView.contentOffset.y
-        let height = min(max(y, 0), headerImageHeight + 200)
-        animateImage(newHeight: height)
-        headerImage.frame = CGRect(x: 0, y: 0, width: headerImage.frame.width, height: height)
+        if (scrollView.tag == 5) {
+            let y = -scrollView.contentOffset.y
+            let height = min(max(y, 0), headerImageHeight + 200)
+            animateImage(newHeight: height)
+            headerImage.frame = CGRect(x: 0, y: 0, width: headerImage.frame.width, height: height)
+        }
     }
     
     /*
@@ -254,7 +277,7 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
         if (collectionView is FeaturedItemCollectionView) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuredCellNibId",
                                                           for: indexPath as IndexPath) as! FeaturedCollectionViewCell
-            return setupFeaturedItemCollectionCell(cell: cell)
+            return setupFeaturedItemCollectionCell(cell: cell, col: indexPath.row)
         } else if (collectionView is FeaturedLenderCollectionView){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuredCellNibId",
                                                           for: indexPath as IndexPath) as! FeaturedCollectionViewCell

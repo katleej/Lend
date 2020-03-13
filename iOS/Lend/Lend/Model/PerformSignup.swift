@@ -13,7 +13,7 @@ import GooglePlaces
 
 class PerformSignup {
     static func performSignup(username : String, email : String, password: String, place : GMSPlace, view : SignupViewController, completion: @escaping () -> ()){
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+        AuthInstance.instance.auth!.createUser(withEmail: email, password: password) { authResult, error in
             guard error == nil else {
                 Utils.displayAlert(title: "Error", message: error!.localizedDescription, controller : view)
                 return
@@ -27,13 +27,13 @@ class PerformSignup {
             let date = Date()
             let calendar = Calendar.current
             let placeInfo = Utils.extractCountryCityFromPlace(place: place)
-            let user = LendUser(id: Auth.auth().currentUser!.uid, username: username, photoURL: LendUser.defaultPhotoURL, city: placeInfo["City"]! + ", " + placeInfo["Country"]!, email: email, description : "No Description ", rating: 0, latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, numberOfBookings: 0, numReviews: 0, yearJoined: calendar.component(.year, from: date))
+            let user = LendUser(id: AuthInstance.instance.auth!.currentUser!.uid, username: username, photoURL: LendUser.defaultPhotoURL, city: placeInfo["City"]! + ", " + placeInfo["Country"]!, email: email, description : "No Description ", rating: 0, latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, numberOfBookings: 0, numReviews: 0, yearJoined: calendar.component(.year, from: date))
 
             let db = Firestore.firestore()
             do {
                 try db.collection("users").document(user.username!).setData(from : user)
             } catch let error {
-                print("Error writing city to Firestore: \(error)")
+                print("Error writing data to Firestore: \(error)")
             }
             view.transitionToDashboard()
         }

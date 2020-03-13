@@ -14,6 +14,11 @@ class Utils {
     
     static let trophyImage = "🏆".image()
     
+    /*
+     Constant that is used to determine the downscaling of user uploaded images.
+     */
+    static let REDUCED_IMAGE_SIZE = 300.0
+    
     static func makeButtonRounded(button : UIButton, cornerRadius : CGFloat, borderWidth : CGFloat, borderColor : UIColor, backgroundColor : UIColor, textColor: UIColor) {
         button.backgroundColor = backgroundColor
         button.layer.cornerRadius = cornerRadius
