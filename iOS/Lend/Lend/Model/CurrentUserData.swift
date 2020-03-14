@@ -39,9 +39,12 @@ class CurrentUserData {
                     let model = try! FirestoreDecoder().decode(LendUser.self, from: userDocument.data())
                     self.data = model
                     FirebaseQueries.getItemsNearCurrentUser() { items in
-                        LoadingIndicator.hide()
-                        vc.dashboardData!.nearbyItems = items
-                        vc.performSegue(withIdentifier: "toDashboard", sender: vc)
+                        FirebaseQueries.getFeaturedLenders() { lenders in
+                            LoadingIndicator.hide()
+                            vc.dashboardData!.nearbyItems = items
+                            vc.dashboardData!.featuredLenders = lenders
+                            vc.performSegue(withIdentifier: "toDashboard", sender: vc)
+                        }
                     }
                     
                 }

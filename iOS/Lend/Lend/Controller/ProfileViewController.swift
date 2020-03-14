@@ -8,9 +8,9 @@
 
 import UIKit
 import Firebase
-import GrowingTextView
+import Cosmos
 
-class ProfileViewController: UIViewController, GrowingTextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -21,7 +21,19 @@ class ProfileViewController: UIViewController, GrowingTextViewDelegate, UIImageP
     
     
     @IBOutlet weak var editImageButton: UIButton!
-
+    
+    @IBOutlet weak var memberSinceLabel: UILabel!
+    
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    @IBOutlet weak var numReviewsLabel: UILabel!
+    
+    @IBOutlet weak var starsView: CosmosView!
+    
+    @IBOutlet weak var editProfileButton: UIButton!
+    
+    
+    
     let imagePicker = UIImagePickerController()
     
     
@@ -33,14 +45,17 @@ class ProfileViewController: UIViewController, GrowingTextViewDelegate, UIImageP
         present(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func editProfileButtonClicked(_ sender: Any) {
+        Utils.displayAlert(title: "Sorry!", message: "This feature is still in development. Please check back soon.", controller: self)
+    }
+    
+    
     
     var currentUser : LendUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getCurrentUser()
-        profilePicImageView.loadImage(url: currentUser.photoURL!)
-        imagePicker.delegate = self
         setupViews()
         currentActiveProfile = CurrentUserData.currentUser.data!
         // Do any additional setup after loading the view.
@@ -72,26 +87,46 @@ class ProfileViewController: UIViewController, GrowingTextViewDelegate, UIImageP
     
     
     func setupViews() {
-        profilePicImageView.makeRounded()
         
+        setupProfile()
         setupLabels()
-        if (currentUser.id == CurrentUserData.currentUser.data!.id!) {
-            editImageButton.alpha = 0.02
-            editImageButton.layer.cornerRadius = 0.5 * editImageButton.bounds.size.width
-        } else {
-            editImageButton.alpha = 0.0
-            //self.tabBarController?.tabBar.isHidden = true
-        }
+        setupEditProfileButton()
+        setupStars()
         
     }
     
     private func setupLabels() {
         usernameLabel.text = currentUser.username
         descriptionLabel.text = currentUser.description!
+        locationLabel.text = currentUser.city!
+        numReviewsLabel.text = String(currentUser.numReviews!)
+        memberSinceLabel.text = "member since  \(currentUser.yearJoined!)"
     }
     
     func getCurrentUser() {
         self.currentUser = currentActiveProfile
+    }
+    
+    func setupEditProfileButton() {
+        if (currentUser.id == CurrentUserData.currentUser.data!.id!) {
+            editImageButton.alpha = 0.02
+            editImageButton.layer.cornerRadius = 0.5 * editImageButton.bounds.size.width
+            editProfileButton.layer.cornerRadius = 5
+        } else {
+            editImageButton.alpha = 0.0
+            editProfileButton.alpha = 0.0
+            //self.tabBarController?.tabBar.isHidden = true
+        }
+    }
+    
+    func setupProfile() {
+        profilePicImageView.loadImage(url: currentUser.photoURL!)
+        imagePicker.delegate = self
+        profilePicImageView.makeRounded()
+    }
+    
+    func setupStars() {
+        starsView.rating = currentUser.rating!
     }
 
     

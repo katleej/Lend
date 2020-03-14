@@ -15,6 +15,8 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     
     var nearbyItems : [Item] = [Item]()
     
+    var featuredLenders : [LendUser] = [LendUser]()
+    
     /*
      Map View for items near me.
      */
@@ -44,7 +46,7 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     /*
     Number of FeaturedLenderCollectionViewCells that are displayed.
     */
-    let NUM_FEATURED_LENDERS = 10
+    let NUM_FEATURED_LENDERS = 4
     
     /*
     Number of FeaturedItemCollectionViewCells that are displayed.
@@ -206,7 +208,7 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         FirebaseQueries.getPropertyFromName(lenderName: featuredItems[col].lenderName!, property: "photoURL") { url in
             cell.secondaryImage.loadSmallImage(url: url)
         }
-        cell.secondaryImage.makeRounded()
+        cell.secondaryImage.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
         cell.fourthLabel.text = "$\(featuredItems[col].price!)"
         cell.tertiaryLabel.text = featuredItems[col].lenderName!
         cell.layer.borderColor = Colors.BACKGROUND_COLOR.cgColor
@@ -218,14 +220,14 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     /*
     Setup function for FeaturedLenderCollectionViewCell.
     */
-    func setupFeaturedLenderCollectionCell(cell : FeaturedCollectionViewCell) -> FeaturedCollectionViewCell {
+    func setupFeaturedLenderCollectionCell(cell : FeaturedCollectionViewCell, row : Int) -> FeaturedCollectionViewCell {
         cell.contentView.isUserInteractionEnabled = false
-        cell.primaryImage.image = UIImage(named: "shrek")
-        cell.secondaryLabel.text = "Berkeley, CA"
-        cell.primaryLabel.text = "Bob the Builder"
+        cell.primaryImage.loadImage(url: featuredLenders[row].photoURL!)
+        cell.secondaryLabel.text = featuredLenders[row].city!
+        cell.primaryLabel.text = featuredLenders[row].username!
         cell.secondaryImage.image = Utils.trophyImage!
-        cell.fourthLabel.text = "Average Rating \(Int.random(in: 1...4)).\(Int.random(in: 0...9))"
-        cell.tertiaryLabel.text = "\(Int.random(in: 1...999)) Ratings"
+        cell.fourthLabel.text = "Average Rating \(featuredLenders[row].rating!.truncate(places : 2))"
+        cell.tertiaryLabel.text = "\(featuredLenders[row].numReviews!) Ratings"
         cell.layer.borderColor = Colors.BACKGROUND_COLOR.cgColor
         cell.layer.borderWidth = 3
         cell.layer.cornerRadius = 8
@@ -293,7 +295,7 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
         } else if (collectionView is FeaturedLenderCollectionView){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuredCellNibId",
                                                           for: indexPath as IndexPath) as! FeaturedCollectionViewCell
-            return setupFeaturedLenderCollectionCell(cell: cell)
+            return setupFeaturedLenderCollectionCell(cell: cell, row: indexPath.row)
         } else {
             /*
              If this code is ever run, an error has occured. CollectionView should have

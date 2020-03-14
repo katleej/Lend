@@ -114,6 +114,22 @@ class FirebaseQueries {
         }
     }
     
+    static func getFeaturedLenders(closure : @escaping ([LendUser]) -> ()) {
+        let db = Firestore.firestore()
+        db.collection("users").whereField("rating", isGreaterThan: 4).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error performing queries: \(err)")
+                } else {
+                    var foundItems = [LendUser]()
+                    for document in querySnapshot!.documents {
+                        let found = try! FirestoreDecoder().decode(LendUser.self, from: document.data())
+                        foundItems.append(found)
+                    }
+                    closure(foundItems)
+                }
+        }
+    }
+    
     private static func filterByLongitude(items : [Item]) -> [Item] {
         var finalItems = [Item]()
         let currentUser = CurrentUserData.currentUser.data!

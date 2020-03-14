@@ -153,7 +153,6 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
                         for next in nextViews{
                             if (next.isKind(of: DashboardViewController.self) == true) {
                                 (next as! DashboardViewController).dataSource = dashboardData
-                                print("hehe")
                                 break
                             }
                         }
