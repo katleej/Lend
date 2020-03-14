@@ -47,6 +47,7 @@ class DashboardViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        filterFeaturedItems()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,6 +59,15 @@ class DashboardViewController: UIViewController {
         headerImage.bounds = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.25 * view.frame.size.height)
         headerImage.translatesAutoresizingMaskIntoConstraints = true
         dataSource!.initializeHeaderImageHeight(header: headerImage)
+    }
+    
+    func filterFeaturedItems() {
+        let originalArray = dataSource?.featuredItems
+        let filteredArray = originalArray?.filter({ item in
+            return item.booked! == "false"
+            }
+        )
+        dataSource?.featuredItems = filteredArray!
     }
 
     

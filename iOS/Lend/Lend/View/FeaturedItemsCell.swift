@@ -13,7 +13,7 @@ class FeaturedItemsCell : UITableViewCell {
     
     @IBOutlet weak var collectionView: FeaturedItemCollectionView!
     @IBOutlet weak var viewMoreButton: UIButton!
-    static let CELL_SIZE : CGFloat = 300.0
+    static let CELL_SIZE : CGFloat = 320.0
     
     @IBAction func viewMoreButtonClicked(_ sender: Any) {
     }

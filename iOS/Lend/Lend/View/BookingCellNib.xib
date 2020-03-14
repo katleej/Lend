@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16095" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16084.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookingCell" customModule="Lend" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="center" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookingCellId" id="sQ3-pu-czl" customClass="BookingCell" customModule="Lend" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="346" height="262"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sQ3-pu-czl" id="hMb-or-wio" customClass="BookingCell" customModule="Lend" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="346" height="262"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shrek" translatesAutoresizingMaskIntoConstraints="NO" id="wNh-jr-4hI">
+                        <rect key="frame" x="0.0" y="0.0" width="346" height="262"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="wNh-jr-4hI" secondAttribute="bottom" id="2Ag-3F-hSv"/>
+                    <constraint firstAttribute="trailing" secondItem="wNh-jr-4hI" secondAttribute="trailing" id="QZS-Oe-x2X"/>
+                    <constraint firstItem="wNh-jr-4hI" firstAttribute="height" secondItem="hMb-or-wio" secondAttribute="height" id="X31-0Z-fwL"/>
+                    <constraint firstItem="wNh-jr-4hI" firstAttribute="leading" secondItem="hMb-or-wio" secondAttribute="leading" id="bwH-t5-YmE"/>
+                    <constraint firstItem="wNh-jr-4hI" firstAttribute="top" secondItem="hMb-or-wio" secondAttribute="top" id="hcU-EL-oJd"/>
+                    <constraint firstItem="wNh-jr-4hI" firstAttribute="width" secondItem="hMb-or-wio" secondAttribute="width" id="qNP-28-bNO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="95.652173913043484" y="68.303571428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="shrek" width="1280" height="720"/>
+    </resources>
+</document>

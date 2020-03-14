@@ -51,7 +51,7 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     /*
     Number of FeaturedItemCollectionViewCells that are displayed.
     */
-    let NUM_FEATURED_ITEMS = 8
+    let NUM_FEATURED_ITEMS = 6
     
     var containerView : DashboardViewController?
     
@@ -130,12 +130,15 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         cell.containerView = self.containerView! as! DashboardViewController
         var counter = 0
         for item in nearbyItems {
-            let position = CLLocationCoordinate2D(latitude: item.lat!, longitude: item.lng!)
-            let marker = GMSMarker(position: position)
-            marker.title = item.itemName!
-            marker.snippet = "$\(item.price!)"
-            marker.map = cell.googleMapsView
-            marker.accessibilityLabel = String(counter)
+            if (item.booked! == "false") {
+                let position = CLLocationCoordinate2D(latitude: item.lat!, longitude: item.lng!)
+                let marker = GMSMarker(position: position)
+                marker.title = item.itemName!
+                marker.snippet = "$\(item.price!)"
+                marker.map = cell.googleMapsView
+                marker.accessibilityLabel = String(counter)
+                
+            }
             counter += 1
         }
         return cell
@@ -325,6 +328,14 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
         if (collectionView is FeaturedItemCollectionView) {
             containerView!.featuredItemSelected = featuredItems[indexPath.row]
             containerView!.performSegue(withIdentifier: "toBookingFromFeatured", sender: self)
+        } else if (collectionView is FeaturedLenderCollectionView) {
+            currentActiveProfile = featuredLenders[indexPath.row]
+            //If user selected themselves, sends to their tab for profile.
+            if (CurrentUserData.currentUser.data!.id! == currentActiveProfile.id!) {
+                containerView!.tabBarController!.selectedIndex = ProfileViewController.TAB_VIEW_INDEX
+            } else {
+                containerView!.performSegue(withIdentifier: "toProfile", sender: self)
+            }
         }
         
     }

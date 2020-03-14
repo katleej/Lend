@@ -32,7 +32,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBOutlet weak var editProfileButton: UIButton!
     
+    @IBOutlet weak var signOutButton: UIButton!
     
+    
+    static let TAB_VIEW_INDEX = 2
     
     let imagePicker = UIImagePickerController()
     
@@ -48,6 +51,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func editProfileButtonClicked(_ sender: Any) {
         Utils.displayAlert(title: "Sorry!", message: "This feature is still in development. Please check back soon.", controller: self)
     }
+    
     
     
     
@@ -114,7 +118,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             editProfileButton.layer.cornerRadius = 5
         } else {
             editImageButton.alpha = 0.0
-            editProfileButton.alpha = 0.0
+            editProfileButton.setTitle("View Postings", for: .normal)
+            editProfileButton.layer.cornerRadius = 5
+            signOutButton.alpha = 0.0
             //self.tabBarController?.tabBar.isHidden = true
         }
     }
