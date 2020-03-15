@@ -387,8 +387,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="275"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Featured Items" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeC-Nm-6gA">
-                                                    <rect key="frame" x="20" y="20" width="191.5" height="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Featured Lendables" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeC-Nm-6gA">
+                                                    <rect key="frame" x="20" y="20" width="254" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -437,8 +437,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Items Near Me" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUO-y1-KtU">
-                                                    <rect key="frame" x="20" y="20" width="187" height="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lendables Near Me" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUO-y1-KtU">
+                                                    <rect key="frame" x="20" y="20" width="250" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -553,23 +553,23 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="a4h-Q1-x09" customClass="BookingViewController" customModule="Lend" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pnD-H3-cZT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="644"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbp-M3-Q6i">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="644"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="thp-hW-WHd">
-                                        <rect key="frame" x="0.0" y="20" width="414.5" height="354"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414.5" height="453"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="upa-71-Z8V">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="161"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="210.5"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zUA-KR-LsL">
-                                                <rect key="frame" x="0.0" y="193" width="414.5" height="161"/>
+                                                <rect key="frame" x="0.0" y="242.5" width="414.5" height="210.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lsh-hv-FOY">
-                                                        <rect key="frame" x="20" y="20" width="373" height="121"/>
+                                                        <rect key="frame" x="20" y="20" width="373" height="170.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fee-nb-2jH">
                                                                 <rect key="frame" x="0.0" y="0.0" width="158" height="41"/>
@@ -578,16 +578,16 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="o7R-LX-2zB">
-                                                                <rect key="frame" x="0.0" y="49" width="190.5" height="72"/>
+                                                                <rect key="frame" x="0.0" y="49" width="216.5" height="121.5"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MmC-7D-imN">
-                                                                        <rect key="frame" x="0.0" y="5.5" width="61.5" height="61"/>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MmC-7D-imN" customClass="ProfileImage" customModule="Lend" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="17" width="87.5" height="87.5"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="MmC-7D-imN" secondAttribute="height" multiplier="1:1" id="XXx-4e-24n"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OBd-pa-rpq">
-                                                                        <rect key="frame" x="67.5" y="11.5" width="123" height="49.5"/>
+                                                                        <rect key="frame" x="93.5" y="36" width="123" height="49.5"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lender Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oau-Z1-SQi">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="123" height="24"/>
@@ -606,9 +606,12 @@
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="MmC-7D-imN" firstAttribute="width" secondItem="lsh-hv-FOY" secondAttribute="height" multiplier="62:121" id="bcv-OF-MuR"/>
+                                                        </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oru-Mj-xn1">
-                                                        <rect key="frame" x="20" y="20" width="373" height="121"/>
+                                                        <rect key="frame" x="20" y="20" width="373" height="170.5"/>
                                                         <state key="normal" title="Go To Profile"/>
                                                         <connections>
                                                             <action selector="goToProfileClicked:" destination="a4h-Q1-x09" eventType="touchUpInside" id="ZEf-Yb-USY"/>
@@ -631,7 +634,6 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="MmC-7D-imN" firstAttribute="width" secondItem="upa-71-Z8V" secondAttribute="height" multiplier="8:21" id="FOh-2L-7Vz"/>
                                             <constraint firstItem="zUA-KR-LsL" firstAttribute="height" secondItem="upa-71-Z8V" secondAttribute="height" id="Pd4-7K-Q7Z"/>
                                         </constraints>
                                     </stackView>
@@ -639,7 +641,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="thp-hW-WHd" secondAttribute="trailing" constant="20" symbolic="YES" id="4h3-x2-xj9"/>
                                     <constraint firstItem="thp-hW-WHd" firstAttribute="leading" secondItem="7aF-tm-xkN" secondAttribute="leading" id="6vj-0Z-FLi"/>
-                                    <constraint firstItem="thp-hW-WHd" firstAttribute="top" secondItem="Kbp-M3-Q6i" secondAttribute="top" constant="20" symbolic="YES" id="YnZ-O0-t6C"/>
+                                    <constraint firstItem="thp-hW-WHd" firstAttribute="top" secondItem="Xve-Ef-rCG" secondAttribute="top" constant="20" symbolic="YES" id="YnZ-O0-t6C"/>
                                     <constraint firstAttribute="bottom" secondItem="thp-hW-WHd" secondAttribute="bottom" constant="272.5" id="qEj-yc-8Ng"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="Xve-Ef-rCG"/>
@@ -771,7 +773,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6T3-Se-Wea">
-                                        <rect key="frame" x="319" y="52" width="67" height="30"/>
+                                        <rect key="frame" x="319" y="96" width="67" height="30"/>
                                         <state key="normal" title="Sign Out?"/>
                                         <connections>
                                             <segue destination="U50-dV-K2e" kind="unwind" unwindAction="unwindToLogin:" id="viW-rO-gnm"/>
@@ -785,7 +787,7 @@
                                     <constraint firstAttribute="trailing" secondItem="03q-bS-6Zz" secondAttribute="trailing" constant="20" id="Rrh-aR-C4a"/>
                                 </constraints>
                             </view>
-                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shrek" translatesAutoresizingMaskIntoConstraints="NO" id="0Ij-cf-mYQ">
+                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shrek" translatesAutoresizingMaskIntoConstraints="NO" id="0Ij-cf-mYQ" customClass="ProfileImage" customModule="Lend" customModuleProvider="target">
                                 <rect key="frame" x="36.5" y="201.5" width="134" height="134.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0Ij-cf-mYQ" secondAttribute="height" multiplier="1:1" id="LFp-f9-p1y"/>
@@ -1080,8 +1082,8 @@
         <image name="shrek" width="1280" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aVu-oO-3et"/>
+        <segue reference="AtM-WQ-OGR"/>
         <segue reference="gHe-b0-UK9"/>
-        <segue reference="ml2-vw-ku4"/>
+        <segue reference="mk3-Qz-dpH"/>
     </inferredMetricsTieBreakers>
 </document>

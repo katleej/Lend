@@ -14,10 +14,12 @@ class PerformLogin {
         AuthInstance.instance.auth!.signIn(withEmail: email, password: password) { (signedInUser, signInError) in
                    guard signInError == nil else {
                     Utils.displayAlert(title: "Error", message: "Invalid credentials", controller : loginViewController)
+                    LoadingIndicator.hide()
                        return
                    }
             guard signedInUser != nil else {
                 Utils.displayAlert(title: "Error", message: "No account found", controller : loginViewController)
+                LoadingIndicator.hide()
                        return
                    }
             UserDefaults.standard.set(true, forKey: "usersignedin")

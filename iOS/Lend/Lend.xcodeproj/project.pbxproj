@@ -36,6 +36,8 @@
 		C0781136241D780900897A28 /* PostingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781134241D780900897A28 /* PostingTableViewCell.swift */; };
 		C0781137241D780900897A28 /* PostingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0781135241D780900897A28 /* PostingTableViewCell.xib */; };
 		C0781139241D846F00897A28 /* MyPostingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781138241D846F00897A28 /* MyPostingsViewController.swift */; };
+		C078113B241DD8F100897A28 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078113A241DD8F100897A28 /* ProfileImage.swift */; };
+		C078113D241DFE4D00897A28 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078113C241DFE4D00897A28 /* Booking.swift */; };
 		C07960D824186DDD00BD246A /* FirebaseQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960D724186DDD00BD246A /* FirebaseQueries.swift */; };
 		C07960DA2419C87400BD246A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960D92419C87400BD246A /* ProfileViewController.swift */; };
 		C07960DC2419D24000BD246A /* AuthInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960DB2419D24000BD246A /* AuthInstance.swift */; };
@@ -119,6 +121,8 @@
 		C0781134241D780900897A28 /* PostingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingTableViewCell.swift; sourceTree = "<group>"; };
 		C0781135241D780900897A28 /* PostingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostingTableViewCell.xib; sourceTree = "<group>"; };
 		C0781138241D846F00897A28 /* MyPostingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostingsViewController.swift; sourceTree = "<group>"; };
+		C078113A241DD8F100897A28 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
+		C078113C241DFE4D00897A28 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
 		C07960D724186DDD00BD246A /* FirebaseQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseQueries.swift; sourceTree = "<group>"; };
 		C07960D92419C87400BD246A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C07960DB2419D24000BD246A /* AuthInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInstance.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 				C03108D8241A0A0500C68CAE /* Profile.swift */,
 				C03108DA241A12ED00C68CAE /* FirebaseStorageManager.swift */,
 				C03108E6241BFE2D00C68CAE /* CurrentActiveProfile.swift */,
+				C078113C241DFE4D00897A28 /* Booking.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 				C03108E0241B11D500C68CAE /* TextViewCheckUsernameExists.swift */,
 				C0781134241D780900897A28 /* PostingTableViewCell.swift */,
 				C0781135241D780900897A28 /* PostingTableViewCell.xib */,
+				C078113A241DD8F100897A28 /* ProfileImage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -638,6 +644,7 @@
 				C07960DA2419C87400BD246A /* ProfileViewController.swift in Sources */,
 				C03A477D24178520006E3A30 /* FeaturedItemCollectionViewCell.swift in Sources */,
 				C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */,
+				C078113D241DFE4D00897A28 /* Booking.swift in Sources */,
 				C0A4F25024145999005D8158 /* LendUser.swift in Sources */,
 				C0A4F254241494F4005D8158 /* DashboardTableData.swift in Sources */,
 				C03A476F2416F190006E3A30 /* FeaturedCollectionView.swift in Sources */,
@@ -664,6 +671,7 @@
 				C07960DC2419D24000BD246A /* AuthInstance.swift in Sources */,
 				C0A4F24C2414343F005D8158 /* HandleSignup.swift in Sources */,
 				C03A47712416F7A0006E3A30 /* FeaturedLendersTableViewCell.swift in Sources */,
+				C078113B241DD8F100897A28 /* ProfileImage.swift in Sources */,
 				C0A4F23224131DE8005D8158 /* LoginScreenViewController.swift in Sources */,
 				C07338AE2415FE8100CDB0E7 /* FeaturedCollectionViewCell.swift in Sources */,
 				C08920652401B64D0019754B /* SceneDelegate.swift in Sources */,

@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBOutlet weak var usernameLabel: UILabel!
     
-    @IBOutlet weak var profilePicImageView: UIImageView!
+    @IBOutlet weak var profilePicImageView: ProfileImage!
     
 
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -128,7 +128,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func setupProfile() {
         profilePicImageView.loadImage(url: currentUser.photoURL!)
         imagePicker.delegate = self
-        profilePicImageView.makeRounded()
     }
     
     func setupStars() {

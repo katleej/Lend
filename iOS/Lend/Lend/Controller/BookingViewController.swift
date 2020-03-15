@@ -13,7 +13,7 @@ class BookingViewController: UIViewController {
     
     @IBOutlet weak var itemImageView: UIImageView!
     
-    @IBOutlet weak var lenderProfileImageView: UIImageView!
+    @IBOutlet weak var lenderProfileImageView: ProfileImage!
     
     @IBOutlet weak var lenderNameLabel: UILabel!
     
@@ -57,11 +57,7 @@ class BookingViewController: UIViewController {
     
     func setupImages() {
         self.itemImageView.loadSmallImage(url: item.photoURL!)
-        self.lenderProfileImageView.image = UIImage(named: "elephant_green")
-        self.lenderProfileImageView.makeRounded()
-        FirebaseQueries.getPropertyFromName(lenderName: item.lenderName!, property: "photoURL") { property in
-            self.lenderProfileImageView.loadImage(url: property)
-        }
+        self.lenderProfileImageView.loadImage(url: item.lenderPhotoURL!)
     }
     
     func setupLabels() {

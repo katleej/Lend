@@ -15,6 +15,7 @@ class HandleLogin {
             PerformLogin.performLogin(email: emailField.text!, password: passwordField.text!, loginViewController: loginInstance)
         } else{
             Utils.displayAlert(title: "Error", message: "Please fill in all text fields, and try again.", controller : loginInstance)
+            LoadingIndicator.hide()
         }
     }
     
