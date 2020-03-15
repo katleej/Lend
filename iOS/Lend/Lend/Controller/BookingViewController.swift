@@ -24,6 +24,7 @@ class BookingViewController: UIViewController {
     @IBOutlet weak var navbar: UINavigationBar!
     
     @IBAction func goToProfileClicked(_ sender: Any) {
+        print("Going to Profile <3")
         LoadingIndicator.show(self.view)
         FirebaseQueries.getLenderFromName(lenderName: lenderNameLabel.text!) { user in
             guard user != nil else {
@@ -32,7 +33,7 @@ class BookingViewController: UIViewController {
             }
             currentActiveProfile = user!
             LoadingIndicator.hide()
-            self.performSegue(withIdentifier: "toProfile", sender: self)
+            Utils.segueToProfile(sender: self)
         }
     }
     
@@ -47,8 +48,6 @@ class BookingViewController: UIViewController {
         setupImages()
         setupLabels()
         setupProfileButton()
-        print(itemImageView.bounds)
-        print(itemImageView.frame)
         // Do any additional setup after loading the view.
     }
     

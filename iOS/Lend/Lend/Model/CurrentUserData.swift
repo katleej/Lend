@@ -38,14 +38,26 @@ class CurrentUserData {
                     }
                     let model = try! FirestoreDecoder().decode(LendUser.self, from: userDocument.data())
                     self.data = model
-                    FirebaseQueries.getItemsNearCurrentUser() { items in
-                        FirebaseQueries.getFeaturedLenders() { lenders in
-                            LoadingIndicator.hide()
-                            vc.dashboardData!.nearbyItems = items
-                            vc.dashboardData!.featuredLenders = lenders
-                            vc.performSegue(withIdentifier: "toDashboard", sender: vc)
+                    if (Utils.DEBUG) {
+                        FirebaseQueries.getItemsDebug() { items in
+                            FirebaseQueries.getFeaturedLenders() { lenders in
+                                LoadingIndicator.hide()
+                                vc.dashboardData!.nearbyItems = items
+                                vc.dashboardData!.featuredLenders = lenders
+                                vc.performSegue(withIdentifier: "toDashboard", sender: vc)
+                            }
+                        }
+                    } else {
+                        FirebaseQueries.getItemsNearCurrentUser() { items in
+                            FirebaseQueries.getFeaturedLenders() { lenders in
+                                LoadingIndicator.hide()
+                                vc.dashboardData!.nearbyItems = items
+                                vc.dashboardData!.featuredLenders = lenders
+                                vc.performSegue(withIdentifier: "toDashboard", sender: vc)
+                            }
                         }
                     }
+                    
                     
                 }
         }

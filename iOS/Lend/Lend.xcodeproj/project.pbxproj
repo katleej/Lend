@@ -19,7 +19,6 @@
 		C03108E5241B71C100C68CAE /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108E4241B71C100C68CAE /* BookingViewController.swift */; };
 		C03108E7241BFE2D00C68CAE /* CurrentActiveProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108E6241BFE2D00C68CAE /* CurrentActiveProfile.swift */; };
 		C03108E9241C7FB000C68CAE /* UserListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108E8241C7FB000C68CAE /* UserListingsViewController.swift */; };
-		C03108EB241C831800C68CAE /* BookingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03108EA241C831800C68CAE /* BookingCell.swift */; };
 		C03284192401D38D00C750D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C03284182401D38D00C750D1 /* Assets.xcassets */; };
 		C032841C2401D6F800C750D1 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */; };
 		C032841D2401D71A00C750D1 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */; };
@@ -34,6 +33,9 @@
 		C03A477F24178545006E3A30 /* FeaturedLenderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A477E24178545006E3A30 /* FeaturedLenderCollectionViewCell.swift */; };
 		C03A478524180078006E3A30 /* FeaturedCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = C03A478424180078006E3A30 /* FeaturedCellNib.xib */; };
 		C07338AE2415FE8100CDB0E7 /* FeaturedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07338AD2415FE8100CDB0E7 /* FeaturedCollectionViewCell.swift */; };
+		C0781136241D780900897A28 /* PostingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781134241D780900897A28 /* PostingTableViewCell.swift */; };
+		C0781137241D780900897A28 /* PostingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0781135241D780900897A28 /* PostingTableViewCell.xib */; };
+		C0781139241D846F00897A28 /* MyPostingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781138241D846F00897A28 /* MyPostingsViewController.swift */; };
 		C07960D824186DDD00BD246A /* FirebaseQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960D724186DDD00BD246A /* FirebaseQueries.swift */; };
 		C07960DA2419C87400BD246A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960D92419C87400BD246A /* ProfileViewController.swift */; };
 		C07960DC2419D24000BD246A /* AuthInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960DB2419D24000BD246A /* AuthInstance.swift */; };
@@ -101,7 +103,6 @@
 		C03108E4241B71C100C68CAE /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		C03108E6241BFE2D00C68CAE /* CurrentActiveProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentActiveProfile.swift; sourceTree = "<group>"; };
 		C03108E8241C7FB000C68CAE /* UserListingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListingsViewController.swift; sourceTree = "<group>"; };
-		C03108EA241C831800C68CAE /* BookingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingCell.swift; sourceTree = "<group>"; };
 		C03284182401D38D00C750D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C032841B2401D6F800C750D1 /* Microsoft Sans Serif.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Microsoft Sans Serif.ttf"; sourceTree = "<group>"; };
 		C03A476E2416F190006E3A30 /* FeaturedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionView.swift; sourceTree = "<group>"; };
@@ -115,6 +116,9 @@
 		C03A477E24178545006E3A30 /* FeaturedLenderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedLenderCollectionViewCell.swift; sourceTree = "<group>"; };
 		C03A478424180078006E3A30 /* FeaturedCellNib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedCellNib.xib; sourceTree = "<group>"; };
 		C07338AD2415FE8100CDB0E7 /* FeaturedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCollectionViewCell.swift; sourceTree = "<group>"; };
+		C0781134241D780900897A28 /* PostingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingTableViewCell.swift; sourceTree = "<group>"; };
+		C0781135241D780900897A28 /* PostingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostingTableViewCell.xib; sourceTree = "<group>"; };
+		C0781138241D846F00897A28 /* MyPostingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostingsViewController.swift; sourceTree = "<group>"; };
 		C07960D724186DDD00BD246A /* FirebaseQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseQueries.swift; sourceTree = "<group>"; };
 		C07960D92419C87400BD246A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C07960DB2419D24000BD246A /* AuthInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInstance.swift; sourceTree = "<group>"; };
@@ -317,7 +321,8 @@
 				C03108DC241AEEA100C68CAE /* UIImageViewCacher.swift */,
 				C03108DE241B007D00C68CAE /* ImageResizeExtension.swift */,
 				C03108E0241B11D500C68CAE /* TextViewCheckUsernameExists.swift */,
-				C03108EA241C831800C68CAE /* BookingCell.swift */,
+				C0781134241D780900897A28 /* PostingTableViewCell.swift */,
+				C0781135241D780900897A28 /* PostingTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 				C03108E4241B71C100C68CAE /* BookingViewController.swift */,
 				C07960D92419C87400BD246A /* ProfileViewController.swift */,
 				C03108E8241C7FB000C68CAE /* UserListingsViewController.swift */,
+				C0781138241D846F00897A28 /* MyPostingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 				C089206F2401B6520019754B /* LaunchScreen.storyboard in Resources */,
 				C0A4F2522414626E005D8158 /* APIKeys.plist in Resources */,
 				C03A478524180078006E3A30 /* FeaturedCellNib.xib in Resources */,
+				C0781137241D780900897A28 /* PostingTableViewCell.xib in Resources */,
 				C03284192401D38D00C750D1 /* Assets.xcassets in Resources */,
 				C089206A2401B64D0019754B /* Main.storyboard in Resources */,
 			);
@@ -621,6 +628,7 @@
 				C0A4F23624132893005D8158 /* UnderLineTextField.swift in Sources */,
 				C03108DD241AEEA100C68CAE /* UIImageViewCacher.swift in Sources */,
 				C03A477924178286006E3A30 /* FeaturedItemCollectionView.swift in Sources */,
+				C0781139241D846F00897A28 /* MyPostingsViewController.swift in Sources */,
 				C0A4F25824149A11005D8158 /* MapViewCell.swift in Sources */,
 				C0A4F25A2414CC15005D8158 /* SearchBarCell.swift in Sources */,
 				C03108E7241BFE2D00C68CAE /* CurrentActiveProfile.swift in Sources */,
@@ -641,6 +649,7 @@
 				C03A477B241782AD006E3A30 /* FeaturedLenderCollectionView.swift in Sources */,
 				C03A477F24178545006E3A30 /* FeaturedLenderCollectionViewCell.swift in Sources */,
 				C0A4F23824132AFA005D8158 /* Utils.swift in Sources */,
+				C0781136241D780900897A28 /* PostingTableViewCell.swift in Sources */,
 				C03A477724177F7E006E3A30 /* EmojiStringToImage.swift in Sources */,
 				C08920632401B64D0019754B /* AppDelegate.swift in Sources */,
 				C03A47732417016F006E3A30 /* MapView.swift in Sources */,
@@ -654,7 +663,6 @@
 				C03A477524170265006E3A30 /* DashboardTableView.swift in Sources */,
 				C07960DC2419D24000BD246A /* AuthInstance.swift in Sources */,
 				C0A4F24C2414343F005D8158 /* HandleSignup.swift in Sources */,
-				C03108EB241C831800C68CAE /* BookingCell.swift in Sources */,
 				C03A47712416F7A0006E3A30 /* FeaturedLendersTableViewCell.swift in Sources */,
 				C0A4F23224131DE8005D8158 /* LoginScreenViewController.swift in Sources */,
 				C07338AE2415FE8100CDB0E7 /* FeaturedCollectionViewCell.swift in Sources */,

@@ -38,16 +38,21 @@ class DashboardViewController: UIViewController {
         super.viewDidLoad()
         dataSource!.containerView = self
         currentActiveProfile = CurrentUserData.currentUser.data!
-        if (dataSource!.DEBUG) {
+        if (Utils.DEBUG) {
             debug()
+        } else {
+            setupHeader()
+            setupTableView()
         }
-        setupHeader()
-        setupTableView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        filterFeaturedItems()
+        //If in debug mode, we wants to update attributes of all items, so we do not filter.
+        if (!Utils.DEBUG) {
+            filterFeaturedItems()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,12 +67,8 @@ class DashboardViewController: UIViewController {
     }
     
     func filterFeaturedItems() {
-        let originalArray = dataSource?.featuredItems
-        let filteredArray = originalArray?.filter({ item in
-            return item.booked! == "false"
-            }
-        )
-        dataSource?.featuredItems = filteredArray!
+        
+        dataSource?.featuredItems = Utils.filterFeaturedItems(items: dataSource!.featuredItems)
     }
 
     
@@ -91,7 +92,7 @@ class DashboardViewController: UIViewController {
     
     func debug() {
         for item in dataSource!.featuredItems {
-            Utils.addNewAttributeToAllItems(field: "city", item : item)
+            Utils.addNewAttributeToAllItems(field: "all", item : item)
         }
     }
     

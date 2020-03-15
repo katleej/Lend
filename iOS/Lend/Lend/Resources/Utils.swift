@@ -15,6 +15,11 @@ class Utils {
     static let trophyImage = "🏆".image()
     
     /*
+    Variable to run the debug mode.
+    */
+    static let DEBUG = false
+    
+    /*
      Constant that is used to determine the downscaling of user uploaded images.
      */
     static let REDUCED_IMAGE_SIZE = 300.0
@@ -63,15 +68,57 @@ class Utils {
      DEBUG FUNCTION
      */
     static func addNewAttributeToAllItems(field : String, item : Item) {
-        FirebaseQueries.getPropertyFromName(lenderName: item.lenderName!, property: field) { property in
-            switch (field) {
-            case "city":
+        switch (field) {
+        case "city":
+            FirebaseQueries.getPropertyFromName(lenderName: item.lenderName!, property: field) { property in
                 var newItem = item
                 newItem.location = property
                 FirebaseQueries.pushItemData(item: newItem)
-            default:
-                break
             }
+        case "location":
+            print("UPDATING LOCATION FOR \(item)")
+            FirebaseQueries.getLatLngFromName(lenderName: item.lenderName!) { (latitude, longitude) in
+                var newItem = item
+                newItem.lat = latitude
+                newItem.lng = longitude
+                FirebaseQueries.pushItemData(item: newItem)
+            }
+        case "photoURL":
+            FirebaseQueries.getPropertyFromName(lenderName: item.lenderName!, property: field) { property in
+                var newItem = item
+                newItem.lenderPhotoURL = property
+                FirebaseQueries.pushItemData(item: newItem)
+            }
+        case "all":
+            FirebaseQueries.getLenderFromName(lenderName: item.lenderName!) { user in
+                var newItem = item
+                newItem.lenderPhotoURL = user?.photoURL
+                newItem.lng = user?.longitude
+                newItem.lat = user?.latitude
+                newItem.location = user?.city!
+                FirebaseQueries.pushItemData(item: newItem)
+            }
+        default:
+            break
+        }
+        
+    }
+    
+    static func filterFeaturedItems(items : [Item]) -> [Item] {
+        let originalArray = items
+        let filteredArray = originalArray.filter({ item in
+            return item.booked! == "false"
+            }
+        )
+        return filteredArray
+    }
+    
+    static func segueToProfile(sender : UIViewController) {
+        //If user selected themselves, sends to their tab for profile.
+        if (CurrentUserData.currentUser.data!.id! == currentActiveProfile.id!) {
+            sender.tabBarController!.selectedIndex = ProfileViewController.TAB_VIEW_INDEX
+        } else {
+            sender.performSegue(withIdentifier: "toProfile", sender: self)
         }
     }
     

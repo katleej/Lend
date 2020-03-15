@@ -55,10 +55,7 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     
     var containerView : DashboardViewController?
     
-    /*
-     Variable to run the debug method in view did load.
-     */
-    let DEBUG = false
+
     
     /*
      A dictionary mapping table view cell names to their corresponding indices
@@ -210,6 +207,7 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         cell.primaryLabel.text = featuredItems[col].itemName!
         FirebaseQueries.getPropertyFromName(lenderName: featuredItems[col].lenderName!, property: "photoURL") { url in
             cell.secondaryImage.loadSmallImage(url: url)
+            cell.secondaryImage.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
         }
         cell.secondaryImage.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
         cell.fourthLabel.text = "$\(featuredItems[col].price!)"
@@ -330,12 +328,7 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
             containerView!.performSegue(withIdentifier: "toBookingFromFeatured", sender: self)
         } else if (collectionView is FeaturedLenderCollectionView) {
             currentActiveProfile = featuredLenders[indexPath.row]
-            //If user selected themselves, sends to their tab for profile.
-            if (CurrentUserData.currentUser.data!.id! == currentActiveProfile.id!) {
-                containerView!.tabBarController!.selectedIndex = ProfileViewController.TAB_VIEW_INDEX
-            } else {
-                containerView!.performSegue(withIdentifier: "toProfile", sender: self)
-            }
+            Utils.segueToProfile(sender: containerView!)
         }
         
     }

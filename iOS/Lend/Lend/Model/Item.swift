@@ -15,7 +15,7 @@ public struct Item : Codable {
      category: The category of item being lended
      */
     let id : Int!
-    var booked, location, lenderId, lenderName, itemName, itemDescription, price, photoURL, category : String?
+    var booked, location, lenderId, lenderName, itemName, itemDescription, price, photoURL, category, lenderPhotoURL : String?
     var lat, lng : Double?
     
     enum CodingKeys: String, CodingKey {
@@ -31,5 +31,6 @@ public struct Item : Codable {
         case lng = "Longitude"
         case photoURL = "Photo URL"
         case category = "Item Category"
+        case lenderPhotoURL = "Lender Photo URL"
     }
 }

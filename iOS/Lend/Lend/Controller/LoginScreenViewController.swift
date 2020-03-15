@@ -153,7 +153,10 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
                         for next in nextViews{
                             if (next.isKind(of: DashboardViewController.self) == true) {
                                 (next as! DashboardViewController).dataSource = dashboardData
-                                break
+                            } else if (next.isKind(of: UserListingsViewController.self) == true) {
+                                (next as! UserListingsViewController).myPostings = dashboardData?.featuredItems.filter({ item in
+                                    return item.lenderId == CurrentUserData.currentUser.data!.id
+                                })
                             }
                         }
                             

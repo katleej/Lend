@@ -8,42 +8,52 @@
 
 import UIKit
 
-class UserListingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UserListingsViewController: UIViewController {
     
     
-
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var pageSegmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var postingsContainerView: UIView!
+    
+    @IBOutlet weak var bookingsContainerView: UIView!
+    
+    var myPostings : [Item]!
+    var myBookings : [Item]!
+    
+    
+    @IBAction func segmentSelectedAction(sender: AnyObject) {
+        switch sender.selectedSegmentIndex {
+        case 0 :
+            bookingsContainerView.isHidden = false
+            postingsContainerView.isHidden = true
+        case 1:
+            bookingsContainerView.isHidden = true
+            postingsContainerView.isHidden = false
+        default:
+            break
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
-        
-
+        bookingsContainerView.isHidden = false
+        postingsContainerView.isHidden = true
         // Do any additional setup after loading the view.
     }
     
-    func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toMyPostings") {
+            let destinationVC = segue.destination as! MyPostingsViewController
+            destinationVC.postings = self.myPostings
+        }
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BookingCell", for: indexPath) as! BookingCell
-        return cell
-    }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
+    
+    
 
     /*
     // MARK: - Navigation

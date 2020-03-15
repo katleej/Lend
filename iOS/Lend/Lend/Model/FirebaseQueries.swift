@@ -34,13 +34,11 @@ class FirebaseQueries {
         let db = Firestore.firestore()
         var itemArray : [Item] = [Item]()
         let itemsRef = db.collection("items")
-        var numtoFind : Int!
         itemsRef.getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                     closure(itemArray)
                 } else {
-                    numtoFind = querySnapshot!.documents.count
                     for document in querySnapshot!.documents {
                         let model = try! FirestoreDecoder().decode(Item.self, from: document.data())
                         itemArray.append(model)
