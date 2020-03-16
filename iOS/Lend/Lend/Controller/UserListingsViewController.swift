@@ -17,8 +17,6 @@ class UserListingsViewController: UIViewController {
     
     @IBOutlet weak var bookingsContainerView: UIView!
     
-    var myPostings : [Item]!
-    var myBookings : [Item]!
     
     
     @IBAction func segmentSelectedAction(sender: AnyObject) {
@@ -42,12 +40,6 @@ class UserListingsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "toMyPostings") {
-            let destinationVC = segue.destination as! MyPostingsViewController
-            destinationVC.postings = self.myPostings
-        }
-    }
     
     
     

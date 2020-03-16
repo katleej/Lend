@@ -85,9 +85,10 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
             Function that intializes the current user data, and then transitions views to dashboard.
      */
     func goToDashboard() {
+        LoadingIndicator.show(self.view)
         dashboardData = DashboardTableData()
-        dashboardData!.initFeaturedItemsArray() {
-            CurrentUserData.currentUser.initializeUser(vc : self)
+        CurrentUserData.currentUser.initializeUser {
+            self.performSegue(withIdentifier: "toDashboard", sender: self)
         }
     }
     
@@ -99,7 +100,6 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
      */
     func checkIfSignedIn() {
         if (AuthInstance.instance.auth!.currentUser != nil) {
-            LoadingIndicator.show(self.view)
             goToDashboard()
         }
     }
@@ -142,27 +142,6 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
        }
        // Do not add a line break
        return false
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "toDashboard") {
-                let dashboardController = segue.destination as! UITabBarController
-                for viewController in dashboardController.viewControllers! {
-                    if (viewController.isKind(of: UINavigationController.self) == true) {
-                        let nextViews = (viewController as! UINavigationController).viewControllers
-                        for next in nextViews{
-                            if (next.isKind(of: DashboardViewController.self) == true) {
-                                (next as! DashboardViewController).dataSource = dashboardData
-                            } else if (next.isKind(of: UserListingsViewController.self) == true) {
-                                (next as! UserListingsViewController).myPostings = dashboardData?.featuredItems.filter({ item in
-                                    return item.lenderId == CurrentUserData.currentUser.data!.id
-                                })
-                            }
-                        }
-                            
-                    }
-                }
-        }
     }
  
     

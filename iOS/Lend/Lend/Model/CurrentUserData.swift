@@ -14,20 +14,19 @@ import FirebaseStorage
 class CurrentUserData {
     static let currentUser = CurrentUserData()
     var data : LendUser?
+    var postings : [Item]?
+    var bookings : [Booking]?
     
     
-    /*
-     Initializes user data into singleton instance currentUser.
-     Also transitions from the signup/login VC to the DashboardVC.
-     */
-    func initializeUser(vc : LoginScreenViewController) {
+
+    func initializeUser(closure : @escaping () -> Void) {
         let db = Firestore.firestore()
         guard Auth.auth().currentUser != nil else {
           print("Exception occured - user does not exist.")
             return
         }
         let cUser = Auth.auth().currentUser!
-        db.collection("users").whereField("id", isEqualTo: cUser.uid).getDocuments() { (querySnapshot, err) in
+        db.collection("users").whereField("id", isEqualTo: cUser.uid).addSnapshotListener() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -38,30 +37,13 @@ class CurrentUserData {
                     }
                     let model = try! FirestoreDecoder().decode(LendUser.self, from: userDocument.data())
                     self.data = model
-                    if (Utils.DEBUG) {
-                        FirebaseQueries.getItemsDebug() { items in
-                            FirebaseQueries.getFeaturedLenders() { lenders in
-                                LoadingIndicator.hide()
-                                vc.dashboardData!.nearbyItems = items
-                                vc.dashboardData!.featuredLenders = lenders
-                                vc.performSegue(withIdentifier: "toDashboard", sender: vc)
-                            }
-                        }
-                    } else {
-                        FirebaseQueries.getItemsNearCurrentUser() { items in
-                            FirebaseQueries.getFeaturedLenders() { lenders in
-                                LoadingIndicator.hide()
-                                vc.dashboardData!.nearbyItems = items
-                                vc.dashboardData!.featuredLenders = lenders
-                                vc.performSegue(withIdentifier: "toDashboard", sender: vc)
-                            }
-                        }
-                    }
-                    
-                    
-                }
+                    closure()
+            }
         }
     }
+    
+    
+    
     
     static func updateURL(newURL : String) {
         let profileRef = Storage.storage().reference(forURL: newURL)

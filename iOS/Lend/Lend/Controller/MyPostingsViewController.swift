@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import Firebase
+import CodableFirebase
 
 class MyPostingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     @IBOutlet weak var tableView: UITableView!
     
-    var postings : [Item]!
+    var postings : [Item] = [Item]()
     
     var selectedRow : Int?
+    
+    let dispatchGroup = DispatchGroup()
     
     
     override func viewDidLoad() {
@@ -26,9 +30,13 @@ class MyPostingsViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "PostingTableViewCell", bundle: nil), forCellReuseIdentifier: "PostingCell")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(UINib(nibName: "PostingTableViewCell", bundle: nil), forCellReuseIdentifier: "PostingCell")
+        initializePostings()
+        dispatchGroup.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -58,13 +66,12 @@ class MyPostingsViewController: UIViewController, UITableViewDataSource, UITable
         cell.itemName.text = postings[row].itemName
         cell.itemCategory.text = postings[row].category
         cell.itemPrice.text = "$\(postings[row].price!)"
+        cell.itemImage.layer.cornerRadius = 10
         cell.itemImage.loadImage(url: postings[row].photoURL!)
-        FirebaseQueries.getPropertyFromName(lenderName: postings[row].lenderName!, property: "photoURL") { url in
-            cell.lenderPhoto.loadSmallImage(url: url)
-            cell.lenderPhoto.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
-        }
+        cell.returnButton.isHidden = true
+        cell.lenderPhoto.loadSmallImage(url: postings[row].lender.photoURL!)
         cell.lenderPhoto.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
-        cell.lenderName.text = postings[row].lenderName!
+        cell.lenderName.text = postings[row].lender.username!
         cell.selectionStyle = .none
         return cell
     }
@@ -91,4 +98,28 @@ class MyPostingsViewController: UIViewController, UITableViewDataSource, UITable
     }
     */
 
+}
+
+/*
+ Data updating.
+ */
+extension MyPostingsViewController {
+    func initializePostings() {
+        self.dispatchGroup.enter()
+        let db = Firestore.firestore()
+        db.collection("items").whereField("Lender ID", isEqualTo: Auth.auth().currentUser!.uid).addSnapshotListener() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error performing queries: \(err)")
+                } else {
+                    var foundItems = [Item]()
+                    for document in querySnapshot!.documents {
+                        let found = try! FirestoreDecoder().decode(Item.self, from: document.data())
+                        foundItems.append(found)
+                    }
+                    self.postings = foundItems
+                    self.tableView.reloadData()
+                    self.dispatchGroup.leave()
+                }
+        }
+    }
 }

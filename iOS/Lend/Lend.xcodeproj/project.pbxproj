@@ -38,6 +38,7 @@
 		C0781139241D846F00897A28 /* MyPostingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781138241D846F00897A28 /* MyPostingsViewController.swift */; };
 		C078113B241DD8F100897A28 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078113A241DD8F100897A28 /* ProfileImage.swift */; };
 		C078113D241DFE4D00897A28 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078113C241DFE4D00897A28 /* Booking.swift */; };
+		C078113F241ED38400897A28 /* MyBookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078113E241ED38400897A28 /* MyBookingsViewController.swift */; };
 		C07960D824186DDD00BD246A /* FirebaseQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960D724186DDD00BD246A /* FirebaseQueries.swift */; };
 		C07960DA2419C87400BD246A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960D92419C87400BD246A /* ProfileViewController.swift */; };
 		C07960DC2419D24000BD246A /* AuthInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960DB2419D24000BD246A /* AuthInstance.swift */; };
@@ -123,6 +124,7 @@
 		C0781138241D846F00897A28 /* MyPostingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostingsViewController.swift; sourceTree = "<group>"; };
 		C078113A241DD8F100897A28 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		C078113C241DFE4D00897A28 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
+		C078113E241ED38400897A28 /* MyBookingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookingsViewController.swift; sourceTree = "<group>"; };
 		C07960D724186DDD00BD246A /* FirebaseQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseQueries.swift; sourceTree = "<group>"; };
 		C07960D92419C87400BD246A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C07960DB2419D24000BD246A /* AuthInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInstance.swift; sourceTree = "<group>"; };
@@ -337,13 +339,14 @@
 			isa = PBXGroup;
 			children = (
 				C0A4F23124131DE8005D8158 /* LoginScreenViewController.swift */,
-				C0A4F245241393FD005D8158 /* DashboardViewController.swift */,
 				C0A4F24924142439005D8158 /* SignupViewController.swift */,
+				C0A4F245241393FD005D8158 /* DashboardViewController.swift */,
 				C0A4F253241494F4005D8158 /* DashboardTableData.swift */,
 				C03108E4241B71C100C68CAE /* BookingViewController.swift */,
 				C07960D92419C87400BD246A /* ProfileViewController.swift */,
 				C03108E8241C7FB000C68CAE /* UserListingsViewController.swift */,
 				C0781138241D846F00897A28 /* MyPostingsViewController.swift */,
+				C078113E241ED38400897A28 /* MyBookingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				C0A4F234241321D9005D8158 /* Colors.swift in Sources */,
 				C03A477B241782AD006E3A30 /* FeaturedLenderCollectionView.swift in Sources */,
 				C03A477F24178545006E3A30 /* FeaturedLenderCollectionViewCell.swift in Sources */,
+				C078113F241ED38400897A28 /* MyBookingsViewController.swift in Sources */,
 				C0A4F23824132AFA005D8158 /* Utils.swift in Sources */,
 				C0781136241D780900897A28 /* PostingTableViewCell.swift in Sources */,
 				C03A477724177F7E006E3A30 /* EmojiStringToImage.swift in Sources */,

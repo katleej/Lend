@@ -9,20 +9,21 @@
 import Foundation
 
 public struct Booking : Codable {
-    let id : Int!
+    let id : String!
     var active, userReturned : Bool!
-    let lenderId, itemId: String!
     var bookingDays : Int?
-    var borrowerId : String?
+    var lender : LendUser!
+    var borrower : LendUser?
+    var item : Item!
     
     enum CodingKeys : String, CodingKey {
         case id = "ID"
         case active = "Active"
         case userReturned = "User Returned"
-        case lenderId = "Lender ID"
-        case itemId = "Item ID"
         case bookingDays = "Booking Days"
-        case borrowerId = "Borrower ID"
+        case lender = "Lender"
+        case borrower = "Borrower"
+        case item = "Item"
     }
     
 }

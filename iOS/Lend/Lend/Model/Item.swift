@@ -14,23 +14,40 @@ public struct Item : Codable {
      id : The item id number
      category: The category of item being lended
      */
-    let id : Int!
-    var booked, location, lenderId, lenderName, itemName, itemDescription, price, photoURL, category, lenderPhotoURL : String?
-    var lat, lng : Double?
+    let id : String!
+    
+    var location, lenderId, itemName, itemDescription, price, photoURL, category : String?
+    
+    var booked : Bool!
+    
+    var latitude, longitude : Double!
+    
+    var lender : LendUser!
+    
+    var formattedPrice : String {
+        get {
+            return "$\(price!)"
+        }
+    }
+    
+    var priceAsDouble : Double {
+        get {
+            return Double(price!)!
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "ID"
         case booked = "Booked"
         case location = "Location"
         case lenderId = "Lender ID"
-        case lenderName = "Lender Name"
         case itemName = "Item Name"
         case itemDescription = "Item Description"
         case price = "Item Price"
-        case lat = "Latitude"
-        case lng = "Longitude"
         case photoURL = "Photo URL"
         case category = "Item Category"
-        case lenderPhotoURL = "Lender Photo URL"
+        case lender = "Lender"
+        case latitude = "Latitude"
+        case longitude = "Longitude"
     }
 }

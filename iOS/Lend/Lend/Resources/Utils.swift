@@ -40,6 +40,7 @@ class Utils {
         controller.present(alert, animated: true, completion: nil)
     }
     
+    
     static func setupTextField(textField : UITextField, placeholderText : String, backgroundColor : UIColor) {
         textField.backgroundColor = backgroundColor
         textField.attributedPlaceholder = NSAttributedString(string: placeholderText,
@@ -70,27 +71,29 @@ class Utils {
     static func addNewAttributeToAllItems(field : String, item : Item) {
         switch (field) {
         case "city":
-            FirebaseQueries.getPropertyFromName(lenderName: item.lenderName!, property: field) { property in
+            FirebaseQueries.getPropertyFromName(lenderName: item.lender.username!, property: field) { property in
                 var newItem = item
                 newItem.location = property
                 FirebaseQueries.pushItemData(item: newItem)
             }
+        
         case "location":
             print("UPDATING LOCATION FOR \(item)")
-            FirebaseQueries.getLatLngFromName(lenderName: item.lenderName!) { (latitude, longitude) in
+            FirebaseQueries.getLatLngFromName(lenderName: item.lender.username!) { (latitude, longitude) in
                 var newItem = item
-                newItem.lat = latitude
-                newItem.lng = longitude
+                newItem.latitude = latitude
+                newItem.longitude = longitude
                 FirebaseQueries.pushItemData(item: newItem)
             }
+            /*
         case "photoURL":
-            FirebaseQueries.getPropertyFromName(lenderName: item.lenderName!, property: field) { property in
+            FirebaseQueries.getPropertyFromName(lenderName: item.lender.username!, property: field) { property in
                 var newItem = item
                 newItem.lenderPhotoURL = property
                 FirebaseQueries.pushItemData(item: newItem)
             }
         case "all":
-            FirebaseQueries.getLenderFromName(lenderName: item.lenderName!) { user in
+            FirebaseQueries.getLenderFromName(lenderName: item.lender.username!) { user in
                 var newItem = item
                 newItem.lenderPhotoURL = user?.photoURL
                 newItem.lng = user?.longitude
@@ -98,16 +101,74 @@ class Utils {
                 newItem.location = user?.city!
                 FirebaseQueries.pushItemData(item: newItem)
             }
+        */
+        case "lender":
+            FirebaseQueries.getLenderFromId(lenderId: item.lenderId!) { user in
+                var newItem = item
+                newItem.lender = user!
+                FirebaseQueries.pushItemData(item: newItem)
+            }
+        /*
+        case "booked":
+            var trueBooked = false
+            if (item.booked == "true") {
+                trueBooked = true
+            }
+            FirebaseQueries.updateItem(item: item, updates: ["Booked" : trueBooked])
+        */
         default:
             break
         }
         
     }
     
+    static func addNewAttributeToAllBookings(field : String, booking : Booking) {
+        switch (field) {
+        case "lender":
+            FirebaseQueries.getBookings(from : String(booking.id!)) { booking in
+                var newBooking = booking
+                FirebaseQueries.getLenderFromId(lenderId: booking.lender.id) { user in
+                    newBooking.lender = user
+                    FirebaseQueries.pushBookingData(booking: newBooking)
+                }
+            }
+        case "all" :
+            FirebaseQueries.getBookings(from : String(booking.id!)) { booking in
+                var newBooking = booking
+                FirebaseQueries.getLenderFromId(lenderId: booking.lender.id) { lender in
+                    FirebaseQueries.getLenderFromId(lenderId: booking.borrower!.id!) { borrower in
+                        FirebaseQueries.getItemFromId(itemId: booking.item.id) { item in
+                            newBooking.lender = lender
+                            newBooking.borrower = borrower
+                            newBooking.item = item
+                            FirebaseQueries.pushBookingData(booking: newBooking)
+                        }
+                    }
+                }
+            }
+        case "item" :
+            FirebaseQueries.getBookings(from : String(booking.id!)) { booking in
+                var newBooking = booking
+                FirebaseQueries.getItemFromId(itemId: booking.item.id) { item in
+                    newBooking.item = item
+                    FirebaseQueries.pushBookingData(booking: newBooking)
+                }
+            }
+        default:
+            break
+        }
+        
+    }
+    
+    static func convertItemBookedStringToBool(item : Item) {
+        
+    }
+    
+    
     static func filterFeaturedItems(items : [Item]) -> [Item] {
         let originalArray = items
         let filteredArray = originalArray.filter({ item in
-            return item.booked! == "false"
+            return item.booked! == false
             }
         )
         return filteredArray
@@ -133,3 +194,28 @@ extension Double
         return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
     }
 }
+
+/*
+ Used to display confirmation alerts to the user.
+ */
+extension UIViewController {
+    func displayConfirmationAlert(title : String, message : String, okHandler : @escaping (UIAlertAction) -> (), cancelHandler : @escaping (UIAlertAction) -> ()) {
+        let confirmAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        confirmAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: okHandler))
+
+        confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: cancelHandler))
+
+        present(confirmAlert, animated: true, completion: nil)
+    }
+    
+    func displayAlertAndPop(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { (alert: UIAlertAction!) in
+            self.navigationController?.popViewController(animated: true)
+        })
+        alert.addAction(defaultAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+

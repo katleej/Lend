@@ -73,10 +73,16 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         }
     
 
+    /*
+     Number of cells in row.
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return NUM_CELLS
     }
 
+    /*
+     Cell for row at.
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cellFinal : UITableViewCell!
@@ -127,8 +133,8 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         cell.containerView = self.containerView! as! DashboardViewController
         var counter = 0
         for item in nearbyItems {
-            if (item.booked! == "false") {
-                let position = CLLocationCoordinate2D(latitude: item.lat!, longitude: item.lng!)
+            if (item.booked! == false) {
+                let position = CLLocationCoordinate2D(latitude: item.lender.latitude!, longitude: item.lender.longitude!)
                 let marker = GMSMarker(position: position)
                 marker.title = item.itemName!
                 marker.snippet = "$\(item.price!)"
@@ -205,13 +211,13 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         cell.primaryImage.loadImage(url: featuredItems[col].photoURL!)
         cell.secondaryLabel.text = featuredItems[col].category!
         cell.primaryLabel.text = featuredItems[col].itemName!
-        FirebaseQueries.getPropertyFromName(lenderName: featuredItems[col].lenderName!, property: "photoURL") { url in
+        FirebaseQueries.getPropertyFromName(lenderName: featuredItems[col].lender.username!, property: "photoURL") { url in
             cell.secondaryImage.loadSmallImage(url: url)
             cell.secondaryImage.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
         }
         cell.secondaryImage.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
         cell.fourthLabel.text = "$\(featuredItems[col].price!)"
-        cell.tertiaryLabel.text = featuredItems[col].lenderName!
+        cell.tertiaryLabel.text = featuredItems[col].lender.username!
         cell.layer.borderColor = Colors.BACKGROUND_COLOR.cgColor
         cell.layer.borderWidth = 3
         cell.layer.cornerRadius = 8
@@ -310,9 +316,9 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
         if (collectionView is FeaturedItemCollectionView) {
-            return NUM_FEATURED_ITEMS
+            return featuredItems.count
         } else if (collectionView is FeaturedLenderCollectionView){
-            return NUM_FEATURED_LENDERS
+            return featuredLenders.count
         } else {
             return 0
         }
@@ -333,3 +339,4 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
         
     }
 }
+
