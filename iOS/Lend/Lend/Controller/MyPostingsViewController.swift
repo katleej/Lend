@@ -34,6 +34,7 @@ class MyPostingsViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "PostingTableViewCell", bundle: nil), forCellReuseIdentifier: "PostingCell")
         initializePostings()
+        updatePostings()
         dispatchGroup.notify(queue: .main) {
             self.tableView.reloadData()
         }
@@ -107,7 +108,7 @@ extension MyPostingsViewController {
     func initializePostings() {
         self.dispatchGroup.enter()
         let db = Firestore.firestore()
-        db.collection("items").whereField("Lender ID", isEqualTo: Auth.auth().currentUser!.uid).addSnapshotListener() { (querySnapshot, err) in
+        db.collection("items").whereField("Lender ID", isEqualTo: Auth.auth().currentUser!.uid).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error performing queries: \(err)")
                 } else {
@@ -119,6 +120,23 @@ extension MyPostingsViewController {
                     self.postings = foundItems
                     self.tableView.reloadData()
                     self.dispatchGroup.leave()
+                }
+        }
+    }
+    
+    func updatePostings() {
+        let db = Firestore.firestore()
+        db.collection("items").whereField("Lender ID", isEqualTo: Auth.auth().currentUser!.uid).addSnapshotListener() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error performing queries: \(err)")
+                } else {
+                    var foundItems = [Item]()
+                    for document in querySnapshot!.documents {
+                        let found = try! FirestoreDecoder().decode(Item.self, from: document.data())
+                        foundItems.append(found)
+                    }
+                    self.postings = foundItems
+                    self.tableView.reloadData()
                 }
         }
     }
