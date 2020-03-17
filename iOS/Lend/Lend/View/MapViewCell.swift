@@ -15,11 +15,19 @@ class MapViewCell : UITableViewCell, GMSMapViewDelegate, CLLocationManagerDelega
     
     @IBOutlet weak var viewMoreButton: UIButton!
     
-    static let CELL_SIZE : CGFloat = 300.0
+    static let CELL_SIZE : CGFloat = Utils.MAIN_CELL_HEIGHT + 30.0
     /*
      Contains DashboardViewController
      */
     var containerView : DashboardViewController?
+    
+    var viewMoreClickedAction : ((MapViewCell) -> Void)?
+    
+    
+    @IBAction func viewMoreButtonClicked(_ sender: Any) {
+        viewMoreClickedAction?(self)
+    }
+    
     
     
     var camera = GMSCameraPosition()

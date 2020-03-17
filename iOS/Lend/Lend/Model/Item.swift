@@ -16,7 +16,7 @@ public struct Item : Codable {
      */
     let id : String!
     
-    var location, lenderId, itemName, itemDescription, price, photoURL, category : String?
+    var type, deliveryMethod, location, lenderId, itemName, itemDescription, price, photoURL, category : String?
     
     var booked : Bool!
     
@@ -26,7 +26,7 @@ public struct Item : Codable {
     
     var formattedPrice : String {
         get {
-            return "$\(price!)"
+            return String(format: "$%.02f /day", Double(price!)!)
         }
     }
     
@@ -49,5 +49,23 @@ public struct Item : Codable {
         case lender = "Lender"
         case latitude = "Latitude"
         case longitude = "Longitude"
+        case type = "Type"
+        case deliveryMethod = "Delivery Method"
+    }
+    
+    static var serviceCategories : [String] {
+        get {
+            var temp = ["Haircut", "Makeup", "Tutoring"].sorted()
+            temp.append("Other")
+            return temp
+        }
+    }
+    
+    static var lendableCategories : [String] {
+        get {
+            var temp = ["Mens Apparel", "Outdoor", "Home", "Electronic Appliances", "Jewlery", "Womens Apparel", "Hobbies"].sorted()
+            temp.append("Other")
+            return temp
+        }
     }
 }

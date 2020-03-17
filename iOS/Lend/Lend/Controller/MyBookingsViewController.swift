@@ -25,6 +25,7 @@ class MyBookingsViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        print(Utils.screenSize)
         // Do any additional setup after loading the view.
     }
     
@@ -40,7 +41,13 @@ class MyBookingsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if (bookings.count > 0) {
+            tableView.backgroundView = nil
+            return 1
+        } else {
+            tableView.EmptyMessage(message: "You haven't made any bookings yet. When you've booked something you like, it will appear here.")
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -52,7 +59,7 @@ class MyBookingsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return Utils.MAIN_CELL_HEIGHT / 2 + 10
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -68,11 +75,10 @@ class MyBookingsViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.booking = bookings[row]
         cell.itemName.text = bookings[row].item.itemName!
         cell.itemCategory.text = bookings[row].item.category!
-        cell.itemPrice.text = "$\(bookings[row].item.price!)"
+        cell.itemPrice.text = bookings[row].item.formattedPrice
         cell.itemImage.layer.cornerRadius = 10
         cell.itemImage.loadImage(url: bookings[row].item.photoURL!)
         cell.returnButton.isHidden = false
-        cell.returnButton.setTitle("Return", for: .normal)
         cell.returnButton.layer.cornerRadius = 10
         cell.lenderPhoto.loadSmallImage(url: bookings[row].lender.photoURL!)
         cell.lenderPhoto.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
@@ -110,6 +116,17 @@ class MyBookingsViewController: UIViewController, UITableViewDelegate, UITableVi
             destinationVC.item = bookings[selectedRow!].item
         }
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.05 * Double(indexPath.row),
+            animations: {
+                cell.alpha = 1
+        })
+    }
+    
 
     /*
     // MARK: - Navigation

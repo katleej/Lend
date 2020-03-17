@@ -42,7 +42,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     @IBAction func editImageButtonClicked(_ sender: Any) {
-        print("PUSHED")
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
@@ -139,7 +138,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let reducedImage = pickedImage.resized(toWidth: CGFloat(Utils.REDUCED_IMAGE_SIZE))
             profilePicImageView.image = reducedImage!
-            FirebaseQueries.postImage(image: reducedImage!)
+            FirebaseQueries.postProfileImage(image: reducedImage!)
         }
         
         dismiss(animated: true, completion: nil)

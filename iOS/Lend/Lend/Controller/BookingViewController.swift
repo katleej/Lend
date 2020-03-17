@@ -54,7 +54,7 @@ class BookingViewController: UIViewController, UIScrollViewDelegate, UITextField
         let cancellation = { (alert : UIAlertAction!) in
             return
         }
-        displayConfirmationAlert(title: "Please Confirm", message: "Would you like to book \(item.itemName!) for \(numDays!) days at a total price of $\((Double(numDays!) * item.priceAsDouble).truncate(places: 2))", okHandler: confirmation, cancelHandler: cancellation)
+        displayConfirmationAlert(title: "Please Confirm", message: "Would you like to book \(item.itemName!) for \(numDays!) days at a total price of \(String(format: "$%.02f", (Double(numDays!) * item.priceAsDouble).truncate(places: 2)))", okHandler: confirmation, cancelHandler: cancellation)
     }
     
     
@@ -94,7 +94,7 @@ class BookingViewController: UIViewController, UIScrollViewDelegate, UITextField
                 bookingLengthTextField.text = "\(self.numDays!) days"
             }
             calculationLabel.text = "\(item.formattedPrice) * \(self.numDays!) = \(product)"
-            yourPriceLabel.text = "Your Total Price: $\(product)"
+            yourPriceLabel.text = "Your Total Price: \(String(format: "$%.02f", product))"
         }
     }
 

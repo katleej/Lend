@@ -43,6 +43,11 @@
 		C07960DA2419C87400BD246A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960D92419C87400BD246A /* ProfileViewController.swift */; };
 		C07960DC2419D24000BD246A /* AuthInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960DB2419D24000BD246A /* AuthInstance.swift */; };
 		C07960DE2419D65400BD246A /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07960DD2419D65400BD246A /* LoadingIndicator.swift */; };
+		C07FD834242048B2003F42FA /* PostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD833242048B2003F42FA /* PostingViewController.swift */; };
+		C07FD83724205688003F42FA /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD83524205686003F42FA /* ImagePickerController.swift */; };
+		C07FD83824205688003F42FA /* ImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD83624205688003F42FA /* ImageRow.swift */; };
+		C07FD83A242075BB003F42FA /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD839242075BB003F42FA /* SearchPageViewController.swift */; };
+		C07FD83C24208C1B003F42FA /* EmptyTableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD83B24208C1B003F42FA /* EmptyTableViewHelper.swift */; };
 		C08920632401B64D0019754B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920622401B64D0019754B /* AppDelegate.swift */; };
 		C08920652401B64D0019754B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920642401B64D0019754B /* SceneDelegate.swift */; };
 		C089206A2401B64D0019754B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C08920682401B64D0019754B /* Main.storyboard */; };
@@ -129,6 +134,11 @@
 		C07960D92419C87400BD246A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C07960DB2419D24000BD246A /* AuthInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInstance.swift; sourceTree = "<group>"; };
 		C07960DD2419D65400BD246A /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		C07FD833242048B2003F42FA /* PostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingViewController.swift; sourceTree = "<group>"; };
+		C07FD83524205686003F42FA /* ImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
+		C07FD83624205688003F42FA /* ImageRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRow.swift; sourceTree = "<group>"; };
+		C07FD839242075BB003F42FA /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
+		C07FD83B24208C1B003F42FA /* EmptyTableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewHelper.swift; sourceTree = "<group>"; };
 		C089205F2401B64D0019754B /* Lend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08920622401B64D0019754B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C08920642401B64D0019754B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -331,6 +341,9 @@
 				C0781134241D780900897A28 /* PostingTableViewCell.swift */,
 				C0781135241D780900897A28 /* PostingTableViewCell.xib */,
 				C078113A241DD8F100897A28 /* ProfileImage.swift */,
+				C07FD83524205686003F42FA /* ImagePickerController.swift */,
+				C07FD83624205688003F42FA /* ImageRow.swift */,
+				C07FD83B24208C1B003F42FA /* EmptyTableViewHelper.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -347,6 +360,8 @@
 				C03108E8241C7FB000C68CAE /* UserListingsViewController.swift */,
 				C0781138241D846F00897A28 /* MyPostingsViewController.swift */,
 				C078113E241ED38400897A28 /* MyBookingsViewController.swift */,
+				C07FD833242048B2003F42FA /* PostingViewController.swift */,
+				C07FD839242075BB003F42FA /* SearchPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -639,17 +654,21 @@
 				C03A477924178286006E3A30 /* FeaturedItemCollectionView.swift in Sources */,
 				C0781139241D846F00897A28 /* MyPostingsViewController.swift in Sources */,
 				C0A4F25824149A11005D8158 /* MapViewCell.swift in Sources */,
+				C07FD83724205688003F42FA /* ImagePickerController.swift in Sources */,
 				C0A4F25A2414CC15005D8158 /* SearchBarCell.swift in Sources */,
 				C03108E7241BFE2D00C68CAE /* CurrentActiveProfile.swift in Sources */,
 				C03108E1241B11D500C68CAE /* TextViewCheckUsernameExists.swift in Sources */,
+				C07FD83824205688003F42FA /* ImageRow.swift in Sources */,
 				C0A4F23C2413310B005D8158 /* HandleLogin.swift in Sources */,
 				C03108DB241A12ED00C68CAE /* FirebaseStorageManager.swift in Sources */,
 				C07960DA2419C87400BD246A /* ProfileViewController.swift in Sources */,
 				C03A477D24178520006E3A30 /* FeaturedItemCollectionViewCell.swift in Sources */,
 				C0A4F23E24133282005D8158 /* PerformLogin.swift in Sources */,
+				C07FD834242048B2003F42FA /* PostingViewController.swift in Sources */,
 				C078113D241DFE4D00897A28 /* Booking.swift in Sources */,
 				C0A4F25024145999005D8158 /* LendUser.swift in Sources */,
 				C0A4F254241494F4005D8158 /* DashboardTableData.swift in Sources */,
+				C07FD83C24208C1B003F42FA /* EmptyTableViewHelper.swift in Sources */,
 				C03A476F2416F190006E3A30 /* FeaturedCollectionView.swift in Sources */,
 				C0A4F25C2414D59C005D8158 /* FeaturedItemsCell.swift in Sources */,
 				C03108D7241A09B800C68CAE /* MakeImageRounded.swift in Sources */,
@@ -676,6 +695,7 @@
 				C0A4F24C2414343F005D8158 /* HandleSignup.swift in Sources */,
 				C03A47712416F7A0006E3A30 /* FeaturedLendersTableViewCell.swift in Sources */,
 				C078113B241DD8F100897A28 /* ProfileImage.swift in Sources */,
+				C07FD83A242075BB003F42FA /* SearchPageViewController.swift in Sources */,
 				C0A4F23224131DE8005D8158 /* LoginScreenViewController.swift in Sources */,
 				C07338AE2415FE8100CDB0E7 /* FeaturedCollectionViewCell.swift in Sources */,
 				C08920652401B64D0019754B /* SceneDelegate.swift in Sources */,
@@ -856,6 +876,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VRFM9SVCZM;
 				INFOPLIST_FILE = Lend/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -875,6 +896,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VRFM9SVCZM;
 				INFOPLIST_FILE = Lend/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

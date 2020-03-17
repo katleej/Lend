@@ -20,9 +20,18 @@ class Utils {
     static let DEBUG = false
     
     /*
+     Allows accounts to sign in without email confirmation
+     */
+    static let DEVELOPMENT_MODE = false
+    
+    /*
      Constant that is used to determine the downscaling of user uploaded images.
      */
     static let REDUCED_IMAGE_SIZE = 300.0
+    
+    static let screenSize: CGRect = UIScreen.main.bounds
+    static let MAIN_CELL_WIDTH = Utils.screenSize.width * (160.0 / 414.0) + 10.0
+    static let MAIN_CELL_HEIGHT = Utils.MAIN_CELL_WIDTH * (320.0 / 160.0)
     
     static func makeButtonRounded(button : UIButton, cornerRadius : CGFloat, borderWidth : CGFloat, borderColor : UIColor, backgroundColor : UIColor, textColor: UIColor) {
         button.backgroundColor = backgroundColor
@@ -51,17 +60,17 @@ class Utils {
      Function to extract the city name and country name from a given GMSPlace instance.
      Returns RV, a dictionary mapping "City" to the city name, and "Country" to the country name.
      */
-    static func extractCountryCityFromPlace(place : GMSPlace) -> [String : String] {
+    static func extractStateCityFromPlace(place : GMSPlace) -> [String : String] {
         let attributes = place.addressComponents!
         var rv = [String : String]()
         for location in attributes {
             if (location.types.contains("locality")) {
                 rv["City"] = location.name
-            } else if (location.types.contains("country")) {
-                rv["Country"] = location.name
+            } else if (location.types.contains("administrativeArea")) {
+                rv["State"] = location.name
             }
         }
-        assert(rv.count == 2, "Something went wrong extracting country and city from place")
+        assert(rv.count == 2, "Something went wrong extracting state and city from place")
         return rv
     }
     
@@ -108,6 +117,8 @@ class Utils {
                 newItem.lender = user!
                 FirebaseQueries.pushItemData(item: newItem)
             }
+        case "type":
+            FirebaseQueries.updateItem(itemId: item.id, updates: ["Type" : "Item"])
         /*
         case "booked":
             var trueBooked = false

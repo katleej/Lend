@@ -13,10 +13,14 @@ class FeaturedItemsCell : UITableViewCell {
     
     @IBOutlet weak var collectionView: FeaturedItemCollectionView!
     @IBOutlet weak var viewMoreButton: UIButton!
-    static let CELL_SIZE : CGFloat = 320.0
+    static let CELL_SIZE : CGFloat = Utils.MAIN_CELL_HEIGHT + 30.0
+    
+    var viewMoreClickedAction : ((FeaturedItemsCell) -> Void)?
     
     @IBAction func viewMoreButtonClicked(_ sender: Any) {
+        viewMoreClickedAction?(self)
     }
+    
     
     func setCollectionViewDataSourceDelegate(dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate, forRow row: Int) {
         let featuredCell = UINib(nibName: "FeaturedCellNib", bundle: nil)

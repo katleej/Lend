@@ -16,6 +16,12 @@ public struct Booking : Codable {
     var borrower : LendUser?
     var item : Item!
     
+    var totalPrice : Double {
+        get {
+            return Double(Int(item.price!)!) * Double(bookingDays!)
+        }
+    }
+    
     enum CodingKeys : String, CodingKey {
         case id = "ID"
         case active = "Active"

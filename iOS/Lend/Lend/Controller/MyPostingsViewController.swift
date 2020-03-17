@@ -41,7 +41,13 @@ class MyPostingsViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if (postings.count > 0) {
+            tableView.backgroundView = nil
+            return 1
+        } else {
+            tableView.EmptyMessage(message: "You haven't made any postings yet. Have anything you want to offer up? Go make some money off of it today!")
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,7 +59,7 @@ class MyPostingsViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return Utils.MAIN_CELL_HEIGHT / 2 + 10
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -66,7 +72,7 @@ class MyPostingsViewController: UIViewController, UITableViewDataSource, UITable
         let row = indexPath.row
         cell.itemName.text = postings[row].itemName
         cell.itemCategory.text = postings[row].category
-        cell.itemPrice.text = "$\(postings[row].price!)"
+        cell.itemPrice.text = postings[row].formattedPrice
         cell.itemImage.layer.cornerRadius = 10
         cell.itemImage.loadImage(url: postings[row].photoURL!)
         cell.returnButton.isHidden = true
@@ -86,6 +92,16 @@ class MyPostingsViewController: UIViewController, UITableViewDataSource, UITable
             let destinationVC = segue.destination as! BookingViewController
             destinationVC.item = postings[selectedRow!]
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.05 * Double(indexPath.row),
+            animations: {
+                cell.alpha = 1
+        })
     }
     
 

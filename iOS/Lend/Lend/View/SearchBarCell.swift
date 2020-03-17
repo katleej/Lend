@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
-class SearchBarCell : UITableViewCell{
+class SearchBarCell : UITableViewCell, UISearchBarDelegate{
     
     @IBOutlet weak var searchBar: UISearchBar!
     static let CELL_SIZE : CGFloat = 100.0
+    
+    var returnClickedAction : ((SearchBarCell) -> Void)?
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        returnClickedAction?(self)
+    }
     
 }

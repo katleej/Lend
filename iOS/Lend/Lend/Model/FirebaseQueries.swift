@@ -15,7 +15,7 @@ import UIKit
 
 class FirebaseQueries {
     
-    static func postImage(image : UIImage) {
+    static func postProfileImage(image : UIImage) {
         let user = CurrentUserData.currentUser.data!
         if let data = image.pngData() { // convert your UIImage into Data object using png representation
             FirebaseStorageManager().uploadImageData(data: data, serverFileName: user.id!) { (isSuccess, url) in
@@ -26,6 +26,20 @@ class FirebaseQueries {
             }
         }
     }
+    
+    static func postItemImage(itemId: String, image : UIImage, closure : @escaping (String) -> ()) {
+        let reducedImage = image.resized(toWidth: CGFloat(Utils.REDUCED_IMAGE_SIZE))
+        if let data = reducedImage!.pngData() { // convert your UIImage into Data object using png representation
+            FirebaseStorageManager().uploadImageData(data: data, serverFileName: itemId) { (isSuccess, url) in
+                print("uploadImageData: \(isSuccess), \(url)")
+                if (isSuccess) {
+                    closure(url!)
+                }
+            }
+        }
+    }
+    
+    
     
     /*
      Debug Method that gets ALL items from DB
@@ -419,6 +433,12 @@ class FirebaseQueries {
             }
         }
         return finalItems
+    }
+    
+    static func getNewItemId() -> String {
+        let db = Firestore.firestore()
+        let docRef = db.collection("items").document()
+        return docRef.documentID
     }
     
 }

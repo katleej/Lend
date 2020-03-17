@@ -25,6 +25,9 @@ target 'Lend' do
   
   #pod for review stars
   pod 'Cosmos', '~> 21.0'
+  
+  #pod for building forms
+  pod 'Eureka'
 
 
   target 'LendTests' do

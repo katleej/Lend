@@ -15,7 +15,7 @@ class FeaturedLendersTableViewCell: UITableViewCell {
     
     @IBOutlet weak var viewMoreButton: UIButton!
     
-    static let CELL_SIZE : CGFloat = 300.0
+    static let CELL_SIZE : CGFloat = Utils.MAIN_CELL_HEIGHT + 20.0
     
     
     override func awakeFromNib() {

@@ -166,6 +166,7 @@ PODS:
   - BoringSSL-GRPC/Interface (0.0.3)
   - CodableFirebase (0.2.1)
   - Cosmos (21.0.0)
+  - Eureka (5.2.0)
   - Firebase/Analytics (6.18.0):
     - Firebase/Core
   - Firebase/Auth (6.18.0):
@@ -312,6 +313,7 @@ PODS:
 DEPENDENCIES:
   - CodableFirebase
   - Cosmos (~> 21.0)
+  - Eureka
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Database
@@ -329,6 +331,7 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - CodableFirebase
     - Cosmos
+    - Eureka
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -362,6 +365,7 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   CodableFirebase: 0bf201991eeec35eb9fcd987d271ea463cf34a80
   Cosmos: 3dfb6e4ba48bd48b8c9aa2a77048ae11ed114f96
+  Eureka: 820a761c700f6eaab3b60758f138e0d9b99072b3
   Firebase: 0490eca762a72e4f1582319539153897f1508dee
   FirebaseAnalytics: 058d71e714a1a6804d9e0f25e3bb18e377a51579
   FirebaseAuth: 5ce2b03a3d7fe56b7a6e4c5ec7ff1522890b1d6f
@@ -390,6 +394,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SDWebImage: 21b19f56b4226cdfe3aefe4e6848dc43ed129a86
 
-PODFILE CHECKSUM: de12bd75854c8253c8a752561d041b3309e35cf8
+PODFILE CHECKSUM: 6c2a76b5f204d0503109107b6935b950b1db2acd
 
 COCOAPODS: 1.9.0

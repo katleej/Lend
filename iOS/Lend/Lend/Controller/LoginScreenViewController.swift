@@ -99,8 +99,17 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
      dashboard without requiring further authentication.
      */
     func checkIfSignedIn() {
-        if (AuthInstance.instance.auth!.currentUser != nil) {
-            goToDashboard()
+        if (Auth.auth().currentUser != nil) {
+            if (!Utils.DEVELOPMENT_MODE) {
+                Auth.auth().currentUser!.reload(){ (error) in
+                    if (Auth.auth().currentUser!.isEmailVerified) {
+                        self.goToDashboard()
+                    }
+                }
+            } else {
+                self.goToDashboard()
+            }
+            
         }
     }
     

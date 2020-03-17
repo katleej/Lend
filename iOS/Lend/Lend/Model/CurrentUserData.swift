@@ -37,6 +37,7 @@ class CurrentUserData {
                     }
                     let model = try! FirestoreDecoder().decode(LendUser.self, from: userDocument.data())
                     self.data = model
+                    FirebaseQueries.updateBookingsArrays(user: model)
                     closure()
             }
         }
