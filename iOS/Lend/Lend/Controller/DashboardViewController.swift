@@ -153,6 +153,9 @@ class DashboardViewController: UIViewController {
         }
          */
         
+        
+        FirebaseQueries.initializeLenderToBookingsArray()
+        
          
         
         //FirebaseQueries.updateItemIds()

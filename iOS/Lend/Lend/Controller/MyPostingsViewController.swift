@@ -76,6 +76,7 @@ class MyPostingsViewController: UIViewController, UITableViewDataSource, UITable
         cell.itemImage.layer.cornerRadius = 10
         cell.itemImage.loadImage(url: postings[row].photoURL!)
         cell.returnButton.isHidden = true
+        cell.messageButton.isHidden = true
         cell.lenderPhoto.loadSmallImage(url: postings[row].lender.photoURL!)
         cell.lenderPhoto.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
         cell.lenderName.text = postings[row].lender.username!
@@ -142,7 +143,7 @@ extension MyPostingsViewController {
     
     func updatePostings() {
         let db = Firestore.firestore()
-        db.collection("items").whereField("Lender ID", isEqualTo: Auth.auth().currentUser!.uid).addSnapshotListener() { (querySnapshot, err) in
+        db.collection("items").whereField("Lender ID", isEqualTo: Auth.auth().currentUser!.uid).whereField("Booked", isEqualTo: false).addSnapshotListener() { (querySnapshot, err) in
                 if let err = err {
                     print("Error performing queries: \(err)")
                 } else {

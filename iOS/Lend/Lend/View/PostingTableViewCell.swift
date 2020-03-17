@@ -19,13 +19,22 @@ class PostingTableViewCell: UITableViewCell {
     @IBOutlet weak var lenderName : UILabel!
     @IBOutlet weak var itemPrice : UILabel!
     @IBOutlet weak var returnButton : UIButton!
+    @IBOutlet weak var messageButton: UIButton!
+    
+    @IBOutlet weak var postedByLabel : UILabel!
     
     @IBAction func returnButtonClicked(_ sender: Any) {
         returnClickedAction?(self)
     }
     
+    @IBAction func messageButtonClicked(_ sender: Any) {
+        messageClickedAction?(self)
+    }
+    
     
     var returnClickedAction : ((PostingTableViewCell) -> Void)?
+    
+    var messageClickedAction : ((PostingTableViewCell) -> Void)?
     
     
     override func awakeFromNib() {

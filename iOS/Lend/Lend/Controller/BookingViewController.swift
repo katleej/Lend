@@ -44,10 +44,13 @@ class BookingViewController: UIViewController, UIScrollViewDelegate, UITextField
         let confirmation = { (alert : UIAlertAction!) in
             var newItem = self.item
             newItem!.booked = true
-            FirebaseQueries.getBookings(for: CurrentUserData.currentUser.data!) { bookings in
-                FirebaseQueries.makeBookingForItem(item: newItem!, bookingDays: self.numDays!, pastBookings: bookings)
-                FirebaseQueries.pushItemData(item: newItem!)
-                self.displayAlertAndPop(title: "Success", message: "Successfully booked \(self.item.itemName!)")
+            FirebaseQueries.getBookings(for: CurrentUserData.currentUser.data!) { borrowerBookings in
+                FirebaseQueries.getBookingsForLender(lender: newItem!.lender) { lenderBookings in
+                    FirebaseQueries.makeBookingForItem(item: newItem!, bookingDays: self.numDays!, pastBookingsBorrower: borrowerBookings, pastBookingsLender: lenderBookings)
+                    FirebaseQueries.pushItemData(item: newItem!)
+                    self.displayAlertAndPop(title: "Success", message: "Successfully booked \(self.item.itemName!)")
+                }
+                
             }
             
         }

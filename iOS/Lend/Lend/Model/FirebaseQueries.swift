@@ -215,16 +215,64 @@ class FirebaseQueries {
     }
     
     
-    static func makeBookingForItem(item : Item, bookingDays : Int, pastBookings : [Booking]) {
+    static func makeBookingForItem(item : Item, bookingDays : Int, pastBookingsBorrower : [Booking], pastBookingsLender : [Booking]) {
         let db = Firestore.firestore()
         let doc = db.collection("bookings").document()
         let booking = Booking(id: doc.documentID, active: true, userReturned: false, bookingDays: bookingDays, lender: item.lender, borrower: CurrentUserData.currentUser.data!, item: item)
         FirebaseQueries.pushBookingData(booking: booking)
-        var newBookings = pastBookings
-        newBookings.append(booking)
-        FirebaseQueries.pushBorrowerToBookingsArray(user: booking.borrower!, bookings: newBookings)
+        var newBookingsBorrower = pastBookingsBorrower
+        var newBookingsLender = pastBookingsLender
+        newBookingsBorrower.append(booking)
+        newBookingsLender.append(booking)
+        FirebaseQueries.pushBorrowerToBookingsArray(user: booking.borrower!, bookings: newBookingsBorrower)
+        FirebaseQueries.pushLenderToBookingsArray(userId: booking.lender.id, bookings: newBookingsLender)
+    }
+    
+    static func pushLenderToBookingsArray(userId: String, bookings: [Booking]) {
+        let db = Firestore.firestore()
+        do {
+            try db.collection("lenderToBookings").document(String(userId)).setData(from: ["Bookings" : bookings], merge: true)
+        } catch let error {
+            print("Error writing item to Firestore: \(error)")
+        }
     }
      
+    
+    static func getBookingsForLender(lender: LendUser, closure : @escaping ([Booking]) -> ()) {
+        let db = Firestore.firestore()
+        db.collection("lenderToBookings").document(lender.id).getDocument() { (document, error) in
+            var allBookings : [Booking] = [Booking]()
+            if let document = document, document.exists {
+                let bookings = document.get("Bookings") as! [[String : Any]]
+                for b in bookings {
+                    let model = try! FirestoreDecoder().decode(Booking.self, from: b)
+                    allBookings.append(model)
+                }
+                closure(allBookings)
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
+    static func initializeLenderToBookingsArray() {
+        var allBookings : [String : [Booking]] = [String : [Booking]]()
+        FirebaseQueries.getAllLenders() { users in
+            for user in users {
+                allBookings[user.id] = [Booking]()
+            }
+            FirebaseQueries.getBookings() { bookings in
+                for booking in bookings {
+                    var currentArr = allBookings[booking.lender.id]
+                    currentArr!.append(booking)
+                    allBookings[booking.lender.id] = currentArr!
+                }
+                for user in users {
+                    FirebaseQueries.pushLenderToBookingsArray(userId: user.id, bookings: allBookings[user.id]!)
+                }
+            }
+        }
+    }
     
     static func getBookings(for user: LendUser, closure : @escaping ([Booking]) -> ()) {
         let db = Firestore.firestore()
@@ -315,7 +363,9 @@ class FirebaseQueries {
         }
     }
     
-    static func updateBookingsArrays(user : LendUser?) {
+    
+    
+    static func updateBookingsArraysBorrower(user : LendUser?) {
         guard user != nil else {
             return
         }
@@ -327,6 +377,21 @@ class FirebaseQueries {
                 }
             }
             FirebaseQueries.pushBorrowerToBookingsArray(user: user, bookings: bookingsArray)
+        }
+    }
+    
+    static func updateBookingsArraysLender(user: LendUser?) {
+        guard user != nil else {
+            return
+        }
+        var bookingsArrayLenders : [Booking] = [Booking]()
+        FirebaseQueries.getBookings() { bookings in
+            for booking in bookings {
+                if (booking.lender?.id == user!.id && booking.active) {
+                    bookingsArrayLenders.append(booking)
+                }
+            }
+            FirebaseQueries.pushLenderToBookingsArray(userId: user!.id, bookings: bookingsArrayLenders)
         }
     }
     

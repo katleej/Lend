@@ -48,6 +48,8 @@
 		C07FD83824205688003F42FA /* ImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD83624205688003F42FA /* ImageRow.swift */; };
 		C07FD83A242075BB003F42FA /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD839242075BB003F42FA /* SearchPageViewController.swift */; };
 		C07FD83C24208C1B003F42FA /* EmptyTableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD83B24208C1B003F42FA /* EmptyTableViewHelper.swift */; };
+		C07FD8402420DBFA003F42FA /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD83F2420DBFA003F42FA /* EditProfileViewController.swift */; };
+		C07FD8422420DC72003F42FA /* LocationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FD8412420DC72003F42FA /* LocationRow.swift */; };
 		C08920632401B64D0019754B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920622401B64D0019754B /* AppDelegate.swift */; };
 		C08920652401B64D0019754B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08920642401B64D0019754B /* SceneDelegate.swift */; };
 		C089206A2401B64D0019754B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C08920682401B64D0019754B /* Main.storyboard */; };
@@ -139,6 +141,8 @@
 		C07FD83624205688003F42FA /* ImageRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRow.swift; sourceTree = "<group>"; };
 		C07FD839242075BB003F42FA /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
 		C07FD83B24208C1B003F42FA /* EmptyTableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewHelper.swift; sourceTree = "<group>"; };
+		C07FD83F2420DBFA003F42FA /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		C07FD8412420DC72003F42FA /* LocationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRow.swift; sourceTree = "<group>"; };
 		C089205F2401B64D0019754B /* Lend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08920622401B64D0019754B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C08920642401B64D0019754B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -344,6 +348,7 @@
 				C07FD83524205686003F42FA /* ImagePickerController.swift */,
 				C07FD83624205688003F42FA /* ImageRow.swift */,
 				C07FD83B24208C1B003F42FA /* EmptyTableViewHelper.swift */,
+				C07FD8412420DC72003F42FA /* LocationRow.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				C078113E241ED38400897A28 /* MyBookingsViewController.swift */,
 				C07FD833242048B2003F42FA /* PostingViewController.swift */,
 				C07FD839242075BB003F42FA /* SearchPageViewController.swift */,
+				C07FD83F2420DBFA003F42FA /* EditProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -673,6 +679,7 @@
 				C0A4F25C2414D59C005D8158 /* FeaturedItemsCell.swift in Sources */,
 				C03108D7241A09B800C68CAE /* MakeImageRounded.swift in Sources */,
 				C0A4F24E24143641005D8158 /* PerformSignup.swift in Sources */,
+				C07FD8402420DBFA003F42FA /* EditProfileViewController.swift in Sources */,
 				C0A4F24824139871005D8158 /* CurrentUserData.swift in Sources */,
 				C0A4F234241321D9005D8158 /* Colors.swift in Sources */,
 				C03A477B241782AD006E3A30 /* FeaturedLenderCollectionView.swift in Sources */,
@@ -683,6 +690,7 @@
 				C03A477724177F7E006E3A30 /* EmojiStringToImage.swift in Sources */,
 				C08920632401B64D0019754B /* AppDelegate.swift in Sources */,
 				C03A47732417016F006E3A30 /* MapView.swift in Sources */,
+				C07FD8422420DC72003F42FA /* LocationRow.swift in Sources */,
 				C0A4F256241496CC005D8158 /* InitializeDashboardData.swift in Sources */,
 				C0A4F24A24142439005D8158 /* SignupViewController.swift in Sources */,
 				C03108DF241B007D00C68CAE /* ImageResizeExtension.swift in Sources */,

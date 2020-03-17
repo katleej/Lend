@@ -48,7 +48,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func editProfileButtonClicked(_ sender: Any) {
-        Utils.displayAlert(title: "Sorry!", message: "This feature is still in development. Please check back soon.", controller: self)
+        self.performSegue(withIdentifier: "toEditProfile", sender: self)
+    }
+    
+    @IBAction func unwindToProfile(_ unwindSegue: UIStoryboardSegue) {
     }
     
     
@@ -62,6 +65,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         setupViews()
         currentActiveProfile = CurrentUserData.currentUser.data!
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getCurrentUser()
+        setupViews()
     }
     
 

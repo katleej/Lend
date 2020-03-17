@@ -26,6 +26,7 @@ class CurrentUserData {
             return
         }
         let cUser = Auth.auth().currentUser!
+        var customToken = Auth.auth()
         db.collection("users").whereField("id", isEqualTo: cUser.uid).addSnapshotListener() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -37,7 +38,8 @@ class CurrentUserData {
                     }
                     let model = try! FirestoreDecoder().decode(LendUser.self, from: userDocument.data())
                     self.data = model
-                    FirebaseQueries.updateBookingsArrays(user: model)
+                    FirebaseQueries.updateBookingsArraysBorrower(user: model)
+                    FirebaseQueries.updateBookingsArraysLender(user: model)
                     closure()
             }
         }
@@ -67,6 +69,16 @@ class CurrentUserData {
         let db = Firestore.firestore()
         do {
             try db.collection("users").document("\(CurrentUserData.currentUser.data!.username!)").setData(from: CurrentUserData.currentUser.data!)
+        } catch let error {
+            print("Error writing city to Firestore: \(error)")
+        }
+    }
+    
+    static func pushNewUserData(closure: @escaping () -> ()) {
+        let db = Firestore.firestore()
+        do {
+            try db.collection("users").document("\(CurrentUserData.currentUser.data!.username!)").setData(from: CurrentUserData.currentUser.data!)
+                closure()
         } catch let error {
             print("Error writing city to Firestore: \(error)")
         }
