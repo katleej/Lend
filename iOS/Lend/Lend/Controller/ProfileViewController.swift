@@ -52,6 +52,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func unwindToProfile(_ unwindSegue: UIStoryboardSegue) {
+        getCurrentUser()
+        setupViews()
     }
     
     
@@ -68,7 +70,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getCurrentUser()
         setupViews()
     }
     
