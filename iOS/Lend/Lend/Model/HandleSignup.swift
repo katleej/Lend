@@ -16,6 +16,8 @@ class HandleSignup {
             PerformSignup.performSignup(username : usernameField.text!, email: emailField.text!, password : passwordField.text!, place: place!, view: view) {
                 view.performSegue(withIdentifier: "toDashboard", sender: view)
             }
+        } else {
+            LoadingIndicator.hide()
         }
         
     }
@@ -53,7 +55,4 @@ class HandleSignup {
         return true
     }
     
-    private func checkIfUsernameTaken (usernameTextField textField: UITextField) {
-        
-    }
 }

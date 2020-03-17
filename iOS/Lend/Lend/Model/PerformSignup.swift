@@ -38,6 +38,7 @@ class PerformSignup {
             }
             Auth.auth().currentUser!.sendEmailVerification() { (error) in
                 guard let error = error else {
+                    LoadingIndicator.hide()
                     Utils.displayAlert(title: "Success", message: "Please check your email and verify it is correct. Then, you may login to your account.", controller: view)
                     view.performSegue(withIdentifier: "unwindToLogin", sender: view)
                     return

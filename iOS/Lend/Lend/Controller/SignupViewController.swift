@@ -57,6 +57,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             usernameTextField.checkUsername(field: usernameTextField.text!) { (success) in
                 if success == true {
                     print("Username is taken")
+                    LoadingIndicator.hide()
                     Utils.displayAlert(title: "Invalid Username", message: "Username is taken. Please enter a new username.", controller: self)
                 } else {
                     print("Username is not taken")
@@ -64,6 +65,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         } else {
+            LoadingIndicator.hide()
             Utils.displayAlert(title: "Invalid Username", message: "Username field is empty. Please a new username.", controller: self)
         }
     }
@@ -86,7 +88,8 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         //Make create button round
         Utils.makeButtonRounded(button: createButton, cornerRadius: 10, borderWidth: 1, borderColor: UIColor.white, backgroundColor: UIColor.white, textColor: Colors.BACKGROUND_COLOR)
         
-        
+        //Make tapping around lower the keyboard
+        self.hideKeyboardWhenTappedAround()
 
         // Do any additional setup after loading the view.
     }
