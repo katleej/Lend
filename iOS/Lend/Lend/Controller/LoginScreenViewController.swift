@@ -85,9 +85,10 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
             Function that intializes the current user data, and then transitions views to dashboard.
      */
     func goToDashboard() {
+        LoadingIndicator.show(self.view)
         dashboardData = DashboardTableData()
-        dashboardData!.initFeaturedItemsArray() {
-            CurrentUserData.currentUser.initializeUser(vc : self)
+        CurrentUserData.currentUser.initializeUser {
+            self.performSegue(withIdentifier: "toDashboard", sender: self)
         }
     }
     
@@ -98,9 +99,17 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
      dashboard without requiring further authentication.
      */
     func checkIfSignedIn() {
-        if (AuthInstance.instance.auth!.currentUser != nil) {
-            LoadingIndicator.show(self.view)
-            goToDashboard()
+        if (Auth.auth().currentUser != nil) {
+            if (!Utils.DEVELOPMENT_MODE) {
+                Auth.auth().currentUser!.reload(){ (error) in
+                    if (Auth.auth().currentUser!.isEmailVerified) {
+                        self.goToDashboard()
+                    }
+                }
+            } else {
+                self.goToDashboard()
+            }
+            
         }
     }
     
@@ -142,19 +151,6 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
        }
        // Do not add a line break
        return false
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "toDashboard") {
-                let dashboardController = segue.destination as! UITabBarController
-                for viewController in dashboardController.viewControllers! {
-                    if (viewController.isKind(of: DashboardViewController.self) == true) {
-                        (viewController as! DashboardViewController).dataSource = dashboardData
-                        print(dashboardData!.nearbyItems)
-                        break
-                    }
-                }
-        }
     }
  
     

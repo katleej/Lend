@@ -15,6 +15,8 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     
     var nearbyItems : [Item] = [Item]()
     
+    var featuredLenders : [LendUser] = [LendUser]()
+    
     /*
      Map View for items near me.
      */
@@ -31,6 +33,8 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
      */
     var headerImage : UIImageView!
     
+    var headerView : UIView!
+    
     /*
      Var to keep track of whether or not the header is currently set to alpha=0 or alpha=1.
      */
@@ -44,14 +48,21 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     /*
     Number of FeaturedLenderCollectionViewCells that are displayed.
     */
-    let NUM_FEATURED_LENDERS = 10
+    let NUM_FEATURED_LENDERS = 4
     
     /*
     Number of FeaturedItemCollectionViewCells that are displayed.
     */
-    let NUM_FEATURED_ITEMS = 8
+    let NUM_FEATURED_ITEMS = 6
     
     
+    var searchBarFunc : ((SearchBarCell) -> Void)!
+    var mapViewFunc : ((MapViewCell) -> Void)!
+    var featuredItemsFunc : ((FeaturedItemsCell) -> Void)!
+    
+    var containerView : DashboardViewController?
+    
+
     
     /*
      A dictionary mapping table view cell names to their corresponding indices
@@ -69,10 +80,16 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
         }
     
 
+    /*
+     Number of cells in row.
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return NUM_CELLS
     }
 
+    /*
+     Cell for row at.
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cellFinal : UITableViewCell!
@@ -103,6 +120,8 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     Setup function for SearchBarCell.
     */
     func setupSearchBarCell(cell : SearchBarCell) -> SearchBarCell {
+        cell.returnClickedAction = searchBarFunc
+        cell.searchBar.delegate = cell
         return cell
     }
     
@@ -111,7 +130,6 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
      Setup function for FeaturedLendersTableViewCell.
      */
     func setupFeaturedLendersCell(cell : FeaturedLendersTableViewCell) -> FeaturedLendersTableViewCell {
-        cell.viewMoreButton.setTitle("View More >", for: .normal)
         return cell
     }
     
@@ -120,13 +138,18 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     */
     func setupMapViewCell(cell : MapViewCell) -> MapViewCell {
         cell.viewMoreButton.setTitle("View More >", for: .normal)
+        cell.containerView = self.containerView! as! DashboardViewController
+        var counter = 0
         for item in nearbyItems {
-            let position = CLLocationCoordinate2D(latitude: item.lat!, longitude: item.lng!)
+            let position = CLLocationCoordinate2D(latitude: item.lender.latitude!, longitude: item.lender.longitude!)
             let marker = GMSMarker(position: position)
             marker.title = item.itemName!
-            marker.snippet = "$\(item.price!)"
+            marker.snippet = item.formattedPrice
             marker.map = cell.googleMapsView
+            marker.accessibilityLabel = String(counter)
+            counter += 1
         }
+        cell.viewMoreClickedAction = mapViewFunc
         return cell
     }
     
@@ -135,6 +158,7 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     */
     func setupFeaturedItemsCell(cell : FeaturedItemsCell) -> FeaturedItemsCell {
         cell.viewMoreButton.setTitle("View More >", for: .normal)
+        cell.viewMoreClickedAction = featuredItemsFunc
         return cell
     }
     
@@ -169,10 +193,18 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView,
                     willDisplay cell: UITableViewCell,
                         forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.05 * Double(indexPath.row),
+            animations: {
+                cell.alpha = 1
+        })
         switch (indexPath.row) {
         case cellRowMapping["FeaturedItemsCell"]:
             guard let tableViewCell = cell as? FeaturedItemsCell else { return }
             tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+            tableViewCell.bringSubviewToFront(tableViewCell.collectionView)
         case cellRowMapping["MapViewCell"]:
             guard let tableViewCell = cell as? MapViewCell else { return }
             tableViewCell.showCurrentLocationOnMap()
@@ -189,15 +221,17 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     Setup function for FeaturedItemCollectionViewCell.
     */
     func setupFeaturedItemCollectionCell(cell : FeaturedCollectionViewCell, col : Int) -> FeaturedCollectionViewCell {
+        cell.contentView.isUserInteractionEnabled = false
         cell.primaryImage.loadImage(url: featuredItems[col].photoURL!)
         cell.secondaryLabel.text = featuredItems[col].category!
         cell.primaryLabel.text = featuredItems[col].itemName!
-        FirebaseQueries.getPropertyFromName(lenderName: featuredItems[col].lenderName!, property: "photoURL") { url in
+        FirebaseQueries.getPropertyFromName(lenderName: featuredItems[col].lender.username!, property: "photoURL") { url in
             cell.secondaryImage.loadSmallImage(url: url)
+            cell.secondaryImage.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
         }
-        cell.secondaryImage.makeRounded()
-        cell.fourthLabel.text = "$\(featuredItems[col].price!)"
-        cell.tertiaryLabel.text = featuredItems[col].lenderName!
+        cell.secondaryImage.makeRounded(borderWidth : 0.0, borderColor : UIColor.white.cgColor)
+        cell.fourthLabel.text = featuredItems[col].formattedPrice
+        cell.tertiaryLabel.text = featuredItems[col].lender.username!
         cell.layer.borderColor = Colors.BACKGROUND_COLOR.cgColor
         cell.layer.borderWidth = 3
         cell.layer.cornerRadius = 8
@@ -207,13 +241,14 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     /*
     Setup function for FeaturedLenderCollectionViewCell.
     */
-    func setupFeaturedLenderCollectionCell(cell : FeaturedCollectionViewCell) -> FeaturedCollectionViewCell {
-        cell.primaryImage.image = UIImage(named: "shrek")
-        cell.secondaryLabel.text = "Berkeley, CA"
-        cell.primaryLabel.text = "Bob the Builder"
+    func setupFeaturedLenderCollectionCell(cell : FeaturedCollectionViewCell, row : Int) -> FeaturedCollectionViewCell {
+        cell.contentView.isUserInteractionEnabled = false
+        cell.primaryImage.loadImage(url: featuredLenders[row].photoURL!)
+        cell.secondaryLabel.text = featuredLenders[row].city!
+        cell.primaryLabel.text = featuredLenders[row].username!
         cell.secondaryImage.image = Utils.trophyImage!
-        cell.fourthLabel.text = "Average Rating \(Int.random(in: 1...4)).\(Int.random(in: 0...9))"
-        cell.tertiaryLabel.text = "\(Int.random(in: 1...999)) Ratings"
+        cell.fourthLabel.text = "Average Rating \(featuredLenders[row].rating!.truncate(places : 2))"
+        cell.tertiaryLabel.text = "\(featuredLenders[row].numReviews!) Ratings"
         cell.layer.borderColor = Colors.BACKGROUND_COLOR.cgColor
         cell.layer.borderWidth = 3
         cell.layer.cornerRadius = 8
@@ -223,9 +258,9 @@ class DashboardTableData : UIViewController, UITableViewDataSource, UITableViewD
     /*
      Function to initialize required variables for the header image.
      */
-    func initializeHeaderImageHeight(header : UIImageView) {
+    func initializeHeaderImageHeight(header : UIView) {
         headerImageHeight = header.frame.height
-        headerImage = header
+        headerView = header
         imageIsHidden = false
     }
     
@@ -241,7 +276,7 @@ extension DashboardTableData : UIScrollViewDelegate {
             let y = -scrollView.contentOffset.y
             let height = min(max(y, 0), headerImageHeight + 200)
             animateImage(newHeight: height)
-            headerImage.frame = CGRect(x: 0, y: 0, width: headerImage.frame.width, height: height)
+            headerView.frame = CGRect(x: 0, y: 0, width: headerView.frame.width, height: height)
         }
     }
     
@@ -254,18 +289,18 @@ extension DashboardTableData : UIScrollViewDelegate {
         let ANIMATION_DURATION = 0.7
         let CUTOFF_HEIGHT = (headerImageHeight / 2) + 10
         if (CUTOFF_HEIGHT > height
-            && headerImage.frame.height > height
+            && headerView.frame.height > height
             && !imageIsHidden) {
             self.imageIsHidden = true
             UIView.animate(withDuration: ANIMATION_DURATION, animations: {
-                self.headerImage.alpha = 0.0
+                self.headerView.alpha = 0.0
             })
         } else if (CUTOFF_HEIGHT < height
-            && headerImage.frame.height < height
+            && headerView.frame.height < height
             && imageIsHidden){
             self.imageIsHidden = false
             UIView.animate(withDuration: ANIMATION_DURATION, animations: {
-                self.headerImage.alpha = 1.0
+                self.headerView.alpha = 1.0
             })
         }
     }
@@ -281,7 +316,7 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
         } else if (collectionView is FeaturedLenderCollectionView){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "featuredCellNibId",
                                                           for: indexPath as IndexPath) as! FeaturedCollectionViewCell
-            return setupFeaturedLenderCollectionCell(cell: cell)
+            return setupFeaturedLenderCollectionCell(cell: cell, row: indexPath.row)
         } else {
             /*
              If this code is ever run, an error has occured. CollectionView should have
@@ -295,15 +330,27 @@ extension DashboardTableData: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
         if (collectionView is FeaturedItemCollectionView) {
-            return NUM_FEATURED_ITEMS
+            return featuredItems.count
         } else if (collectionView is FeaturedLenderCollectionView){
-            return NUM_FEATURED_LENDERS
+            return featuredLenders.count
         } else {
             return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 160, height: collectionView.frame.size.height)
+        return CGSize(width: Utils.MAIN_CELL_WIDTH, height: collectionView.frame.size.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (collectionView is FeaturedItemCollectionView) {
+            containerView!.featuredItemSelected = featuredItems[indexPath.row]
+            containerView!.performSegue(withIdentifier: "toBookingFromFeatured", sender: self)
+        } else if (collectionView is FeaturedLenderCollectionView) {
+            currentActiveProfile = featuredLenders[indexPath.row]
+            Utils.segueToProfile(sender: containerView!)
+        }
+        
     }
 }
+
