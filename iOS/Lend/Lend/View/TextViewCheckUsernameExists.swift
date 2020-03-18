@@ -13,6 +13,7 @@ extension UITextField {
         collectionRef.whereField("username", isEqualTo: field).getDocuments { (snapshot, err) in
             if let err = err {
                 print("Error getting document: \(err)")
+                completion(true)
             } else if (snapshot?.isEmpty)! {
                 completion(false)
             } else {

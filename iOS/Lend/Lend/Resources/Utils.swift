@@ -49,6 +49,15 @@ class Utils {
         controller.present(alert, animated: true, completion: nil)
     }
     
+    static func displayAlert(title: String, message: String, controller : UIViewController, closure: @escaping () -> ()) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { (alert: UIAlertAction!) in
+            closure()
+        })
+        alert.addAction(defaultAction)
+        controller.present(alert, animated: true, completion: nil)
+    }
+    
     
     static func setupTextField(textField : UITextField, placeholderText : String, backgroundColor : UIColor) {
         textField.backgroundColor = backgroundColor
@@ -60,17 +69,26 @@ class Utils {
      Function to extract the city name and country name from a given GMSPlace instance.
      Returns RV, a dictionary mapping "City" to the city name, and "Country" to the country name.
      */
-    static func extractStateCityFromPlace(place : GMSPlace) -> [String : String] {
+    static func extractStateCityFromPlace(place : GMSPlace, vc : UIViewController) -> [String : String]? {
         let attributes = place.addressComponents!
         var rv = [String : String]()
+        print(attributes)
         for location in attributes {
             if (location.types.contains("locality")) {
                 rv["City"] = location.name
-            } else if (location.types.contains("administrativeArea")) {
-                rv["State"] = location.name
+            } else if (location.types.contains("administrative_area_level_1")) {
+                guard let state = STATE_TO_CODE[location.name] else {
+                    LoadingIndicator.hide()
+                    Utils.displayAlert(title: "Error", message: "Invalid location selected. Please pick another location.", controller: vc)
+                    return nil
+                }
+                rv["State"] = state
             }
         }
-        assert(rv.count == 2, "Something went wrong extracting state and city from place")
+        if (rv.count != 2) {
+            Utils.displayAlert(title: "Error", message: "Invalid location selected. Please pick another location.", controller: vc)
+            return nil
+        }
         return rv
     }
     

@@ -134,7 +134,7 @@
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="backButtonClicked:" destination="h5M-W6-F0s" eventType="touchUpInside" id="Zk9-a7-GcT"/>
-                                    <segue destination="KU5-Mx-OB8" kind="unwind" unwindAction="unwindToLogin:" id="rBP-ag-tfs"/>
+                                    <segue destination="KU5-Mx-OB8" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLogin:" id="rBP-ag-tfs"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Hmf-jI-J1o">
@@ -1017,7 +1017,7 @@
                                 <rect key="frame" x="20" y="249.66666666666666" width="374" height="345.33333333333337"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qAn-dp-jQN">
-                                        <rect key="frame" x="20" y="20.000000000000028" width="354" height="195"/>
+                                        <rect key="frame" x="20" y="20.000000000000028" width="354" height="225"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Vuk-71-xjZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="265" height="59.333333333333336"/>
@@ -1068,7 +1068,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="cNf-S1-iPl">
-                                                <rect key="frame" x="0.0" y="120.33333333333331" width="201" height="74.666666666666686"/>
+                                                <rect key="frame" x="0.0" y="120.33333333333331" width="201" height="104.66666666666669"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lend Points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvR-p4-TX4">
                                                         <rect key="frame" x="0.0" y="0.0" width="93.333333333333329" height="20.333333333333332"/>
@@ -1100,7 +1100,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f66-iO-Qmy" customClass="CosmosView" customModule="Cosmos">
-                                                        <rect key="frame" x="0.0" y="54.666666666666686" width="120" height="20"/>
+                                                        <rect key="frame" x="0.0" y="54.666666666666686" width="120" height="50"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
