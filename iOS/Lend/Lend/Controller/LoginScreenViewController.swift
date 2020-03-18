@@ -100,17 +100,18 @@ class LoginScreenViewController: UIViewController, UITextFieldDelegate {
      */
     func checkIfSignedIn() {
         if (Auth.auth().currentUser != nil) {
-            if (!Utils.DEVELOPMENT_MODE) {
-                Auth.auth().currentUser!.reload(){ (error) in
-                    if (Auth.auth().currentUser!.isEmailVerified) {
+            Auth.auth().currentUser!.reload(){ (error) in
+                if (Auth.auth().currentUser != nil) {
+                    if (!Utils.DEVELOPMENT_MODE) {
+                            if (Auth.auth().currentUser!.isEmailVerified) {
+                                self.goToDashboard()
+                            }
+                        }
+                    } else {
                         self.goToDashboard()
                     }
                 }
-            } else {
-                self.goToDashboard()
             }
-            
-        }
     }
     
     
